@@ -1,21 +1,15 @@
 $(document).ready(function() {
-    $("#registrar_but").click(function(event) {
+    $("#sesion_init").click(function(event) {
         event.preventDefault();
-        registrar();
+        iniciar();
     });
 });
 
-function registrar() {
-    var nombre = $("#name").val();
-    var apellido = $("#last_name").val();
-    var telefono = $("#phone").val();
+function iniciar() {
     var correo = $("#email").val();
     var contraseña = $("#pass").val();
 
     let datos = {
-        name: nombre,
-        last_name: apellido,
-        phone: telefono,
         email: correo,
         pass: contraseña
     }
@@ -23,14 +17,14 @@ function registrar() {
     console.log(datos);
 
     $.ajax({
-        url: 'ajax/registro.php',
+        url: 'ajax/sesion.php',
         data: datos,
         type: 'POST',
         success: function(respuesta) {
             console.log(respuesta);
         },
         error: function(er) {
-
+            
             var json_mensaje = JSON.parse(er.responseText);
             console.log(json_mensaje);
 
@@ -38,12 +32,8 @@ function registrar() {
                 icon: 'error',
                 title: 'Oops...',
                 text: json_mensaje.mensaje
-              }) 
+              })
         }
     });
+
 }
-
-
-    
-
-
