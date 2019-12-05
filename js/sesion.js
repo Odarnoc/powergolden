@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    $("#sesion_init").click(function(event) {
-        event.preventDefault();
+    $('#form-login').on('submit', function(e){  
+        e.preventDefault();
         iniciar();
     });
-});
+  });
 
 function iniciar() {
     var correo = $("#email").val();
@@ -22,6 +22,7 @@ function iniciar() {
         type: 'POST',
         success: function(respuesta) {
             console.log(respuesta);
+            location.href="index.html";
         },
         error: function(er) {
             

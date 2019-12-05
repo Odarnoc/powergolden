@@ -2,10 +2,37 @@
 require '../bd/conexion.php';
 require '../utils/error.php';
 
-$response['data'] = null;
-$response['mensaje'] = "Error en el servidor";
+$response['mensaje'] = "Exito al crear usuario.";
 
-if(isset($_POST['name'])&&isset($_POST['last_name'])&&isset($_POST['phone'])&&isset($_POST['email'])&&isset($_POST['pass'])){
+if(!isset($_POST['name'])&&!isset($_POST['last_name'])&&!isset($_POST['phone'])&&!isset($_POST['email'])&&!isset($_POST['pass'])){
+    error_mensaje("Completar todos los campos.");
+    return;
+}
+
+if(empty($_POST['name'])){
+    error_mensaje('Llenar el campo nombre.');
+    return;
+}
+
+if(empty($_POST['last_name'])){
+    error_mensaje('Llenar el campo apellido.');
+    return;
+}
+
+if(empty($_POST['phone'])){
+    error_mensaje('Llenar el campo teléfono.');
+    return;
+}
+
+if(empty($_POST['email'])){
+    error_mensaje('Llenar el campo correo.');
+    return;
+}
+
+if(empty($_POST['pass'])){
+    error_mensaje('Llenar el campo contraseña.');
+    return;
+}
 
     $nombre = $_POST['name'];
     $apellido = $_POST['last_name'];
@@ -18,7 +45,7 @@ if(isset($_POST['name'])&&isset($_POST['last_name'])&&isset($_POST['phone'])&&is
     $registros_in=R::getAll($query);
 
     if(sizeof($registros_in) == 0){
-            var_dump("Se agrego correctamente");
+        if(strlen($contrasena) >= 8){
         
             $registro = R::dispense('usuarios');
 
@@ -29,13 +56,16 @@ if(isset($_POST['name'])&&isset($_POST['last_name'])&&isset($_POST['phone'])&&is
             $registro->apellidos = $apellido;
 
             $id = R::store($registro);
+
+            if(empty($id)){
+                error_mensaje("Error al crear el usuario.");
+            }else{
+                echo json_encode($response);
+            }
+        }else{
+            error_mensaje("La contraseña es muy pequeña (Debe contener mas de 8 carácteres).");
+        }
     }else{
-        error_mensaje("El correo ya esta registrado");
+        error_mensaje("El correo ya esta registrado.");
     }  
-}else{
-    error_mensaje("");
-}
-
-
-
 ?>

@@ -19,7 +19,7 @@ function registrar() {
         email: correo,
         pass: contraseña
     }
-
+    
     console.log(datos);
 
     $.ajax({
@@ -27,8 +27,23 @@ function registrar() {
         data: datos,
         type: 'POST',
         success: function(respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
             console.log(respuesta);
+            setTimeout(function(){
+                location.href="iniciar-sesion.html"
+            }, 5000);
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: json_mensaje.mensaje
+              }) 
+              .then((ok) => {
+                if (ok) {
+                    location.href="iniciar-sesion.html"
+                }
+            });
         },
+
         error: function(er) {
 
             var json_mensaje = JSON.parse(er.responseText);
@@ -38,11 +53,10 @@ function registrar() {
                 icon: 'error',
                 title: 'Oops...',
                 text: json_mensaje.mensaje
-              }) 
+            }); 
         }
     });
 }
-
 
     
 
