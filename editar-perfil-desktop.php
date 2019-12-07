@@ -1,3 +1,14 @@
+<?php
+    require 'bd/conexion.php';
+
+    $query = 'SELECT * FROM `usuarios` WHERE id= "26"';
+
+    $information  = R::findOne( 'usuarios', ' id = 26 ');
+
+
+?>
+
+
 <!doctype html>
 <html lang="es">
 
@@ -113,7 +124,7 @@
 
                             <div class="col-lg-2 col-md-2">
                                 <div class="d-btn-editar-perfil">
-                                    <a class="btn btn-editar-perfil" href="#0" role="button">Editar</a>
+                                    <a class="btn btn-editar-perfil" id="edit_button" href="#0" role="button">Editar</a>
                                 </div>
                             </div>
                         </div>
@@ -130,28 +141,35 @@
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="Brayam Omar Morando Pérez" type="text" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Nombre completo</label>
+                                                        <input value="<?php echo $information->nombre; ?>" type="text" id="nombre" class="form-control input-form-underline" disabled/>
+                                                        <label class="floating-label-underline">Nombre </label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="brayamdesign@gmail.com" type="text" class="form-control input-form-underline" required disabled/>
+                                                        <input value="<?php echo $information->apellidos; ?>" type="text" id="apellido" class="form-control input-form-underline" disabled/>
+                                                        <label class="floating-label-underline">Apellidos</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <input value="<?php echo $information->correo; ?>" type="text" id="correo" class="form-control input-form-underline" disabled/>
                                                         <label class="floating-label-underline">Correo electrónico</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="3322692108" type="text" class="form-control input-form-underline" required disabled/>
+                                                        <input value="<?php echo $information->telefono; ?>" type="text" id="telefono" class="form-control input-form-underline" disabled/>
                                                         <label class="floating-label-underline">Teléfono</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="30/11/1995" type="text" class="form-control input-form-underline" required disabled/>
+                                                        <input value="<?php echo $information->nacimiento; ?>" type="date" id="nacimiento" class="form-control input-form-underline" required disabled/>
                                                         <label class="floating-label-underline">Fecha de nacimiento</label>
                                                     </div>
                                                 </div>
@@ -166,28 +184,28 @@
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="Mesa Vista 357" type="text" class="form-control input-form-underline" required disabled/>
+                                                        <input value="<?php echo $information->direccion; ?>" type="text" id="direccion" class="form-control input-form-underline" required disabled/>
                                                         <label class="floating-label-underline">Dirección</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="Jalisco" type="text" class="form-control input-form-underline" required disabled/>
+                                                        <input value="<?php echo $information->estado; ?>" type="text" id="estado" class="form-control input-form-underline" required disabled/>
                                                         <label class="floating-label-underline">Estado</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="Chapala" type="text" class="form-control input-form-underline" required disabled/>
+                                                        <input value="<?php echo $information->ciudad; ?>" type="text" id="ciudad" class="form-control input-form-underline" required disabled/>
                                                         <label class="floating-label-underline">Ciudad</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="45900" type="text" class="form-control input-form-underline" required disabled/>
+                                                        <input value="<?php echo $information->codigop; ?>" type="text" id="cp" class="form-control input-form-underline" required disabled/>
                                                         <label class="floating-label-underline">Código postal</label>
                                                     </div>
                                                 </div>
@@ -255,5 +273,11 @@
     <script src="js/main-perfil.js"></script>
 
     <script src="js/scripts.js"></script>
+
+    <!-- perfil scripts -->
+    <script src="js/perfil.js"></script>
+
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
 </body></html>

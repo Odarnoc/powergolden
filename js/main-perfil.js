@@ -1,16 +1,17 @@
-$(".btn-editar-perfil").click(function () {
+var statusedit = true;
 
-  var input = $(".form-perfil .form-group .input-form-underline"),
-    btn = $("#btn-guardar-perfil");
+$("#edit_button").click(function () {
 
-  if (input.attr("disabled")) {
-    input.prop('disabled', false);
-    btn.prop('disabled', false);
+  statusedit = !statusedit;
 
-  } else {
-    input.prop('disabled', true);
-    btn.prop('disabled', true);
-  }
-  
+  $("#nombre").prop('disabled',statusedit);
+  $("#apellido").prop('disabled',statusedit);
+  $("#telefono").prop('disabled',statusedit);
+  $("#nacimiento").prop('disabled',statusedit);
+  $("#direccion").prop('disabled',statusedit);
+  $("#estado").prop('disabled',statusedit);
+  $("#ciudad").prop('disabled',statusedit);
+  $("#cp").prop('disabled',statusedit);
+  $("#btn-guardar-perfil").prop('disabled',statusedit);
 
 });

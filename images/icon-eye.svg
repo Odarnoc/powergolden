@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="215" height="215" viewBox="0 0 215 215">
+  <g id="icon-eye" transform="translate(-16 -14)">
+    <circle id="Elipse_25" data-name="Elipse 25" cx="107.5" cy="107.5" r="107.5" transform="translate(16 14)" fill="#49b7f3" opacity="0.15"/>
+    <g id="Page-1" transform="translate(86 84)">
+      <g id="eye">
+        <g id="Group-5">
+          <path id="Fill-4" d="M38,61.75A23.75,23.75,0,1,1,61.75,38,23.75,23.75,0,0,1,38,61.75ZM38,0A38,38,0,1,0,76,38,38,38,0,0,0,38,0Z" fill="#49b7f3" fill-rule="evenodd"/>
+        </g>
+        <path id="Fill-6" d="M39,34.25a4.75,4.75,0,1,1-4.75-4.75,4.673,4.673,0,0,1,1.376.227,2.363,2.363,0,0,1,3.147,3.147A4.673,4.673,0,0,1,39,34.25Zm4.75-4.75a4.75,4.75,0,0,1-3.368-8.1A14.292,14.292,0,1,0,47.1,28.118,4.733,4.733,0,0,1,43.75,29.5Z" transform="translate(3.75 3.75)" fill="#49b7f3" fill-rule="evenodd"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -12,8 +12,8 @@
     .d-info-header {
         text-align: center;
     }
-    
-    .btn-bag{
+
+    .btn-bag {
         padding: 0px;
         margin: 0px;
 
@@ -109,79 +109,82 @@
     .sec-white {
         padding-top: 140px;
     }
-    
-    .form-white .t2{
+
+    .form-white .t2 {
         text-align: center;
     }
-    
-    .d-menu-left{
+
+    .d-menu-left {
         padding-top: 120px;
         padding-bottom: 50px;
-        
+
     }
-    
-    .d-img-name{
+
+    .d-img-name {
         padding-bottom: 40px;
     }
-    
-    .d-cont-right{
+
+    .d-cont-right {
         padding-top: 50px;
     }
-    
-    .d-btn-editar-perfil{
+
+    .d-btn-editar-perfil {
         text-align: left;
     }
-    
-    .small-text-cuenta{
+
+    .small-text-cuenta {
         padding-top: 10px;
     }
-    
-    .d-cont-right{
+
+    .d-cont-right {
         padding-left: 0px;
     }
-    
-    .row-breadcrumb{
+
+    .row-breadcrumb {
         margin-top: 40px;
     }
-    
-    .d-pro-ind{
+
+    .d-pro-ind {
         padding-left: 20px;
         padding-right: 20px;
     }
-    
-    .d-info-pro-ind{
+
+    .d-info-pro-ind {
         padding-top: 20px;
     }
-    
-    .price-pro-ind{
+
+    .price-pro-ind {
         text-align: left;
         padding-top: 10px;
         margin-bottom: 0px;
     }
-    
-    .btn-add-car{
+
+    .btn-add-car {
         margin-top: 20px;
     }
-    
-    
-    .input-search{
+
+
+    .input-search {
         padding-left: 20px;
         padding-right: 20px;
         font-size: 12px;
         height: 50px;
         width: 95%;
     }
-    
-    .btn-search{
+
+    .btn-search {
         width: 50px;
         height: 50px;
         padding-top: 10px;
 
     }
-    
-    .btn-search>img{
+
+    .btn-search > img {
         width: 20px;
     }
-    
+
+    .d-info-carrito .t1 {
+        padding-top: 10px;
+    }
 
 }
