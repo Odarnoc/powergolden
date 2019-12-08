@@ -1436,10 +1436,11 @@ textarea:not(:focus):valid ~ .floating-label-underline {
   padding-bottom: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
+  transition: .4s;
 }
 
 .d-item-num:hover{
-  
+  transform: translateY(-4px);
 }
 
 .d-item-num > img {
@@ -1460,4 +1461,23 @@ textarea:not(:focus):valid ~ .floating-label-underline {
   font-size: 13px;
   color: rgba(0, 0, 0, .5);
   margin-bottom: 0px;
+}
+
+.d-grafica-ventas{
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.d-grafica-ventas .t1{
+  font-size: 20px;
+  font-family: "Poppins";
+  padding-bottom: 20px;
+}
+
+#myChart {
+    width: 100%;
 }
