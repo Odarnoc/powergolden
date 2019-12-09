@@ -88,7 +88,7 @@
 
               <div style="margin-bottom: 1rem;" class="form-group">
                 <div class="floating-label-group">
-                  <input type="text" class="form-control input-form" required />
+                  <input type="text" id="email" class="form-control input-form" required />
                   <label class="floating-label">Correo electrónico</label>
                 </div>
               </div>
@@ -96,7 +96,7 @@
               <p class="t2">Enviaremos un código a tu correo electrónico para restablecer tu contraseña</p>
 
 
-              <button type="submit" class="btn btn-lg-blue mt-50">Continuar</button>
+              <button type="submit" id="cambiar-pass" class="btn btn-lg-blue mt-50">Continuar</button>
 
             </form>
 
@@ -151,5 +151,11 @@
 
   <!-- custom scripts -->
   <script src="js/scripts.js"></script>
+
+  <!-- custom scripts -->
+  <script src="js/recuperar-contrasena.js"></script>
+
+  <!-- sweetalert scripts -->
+  <script src="js/sweetalert2.js"></script>
 
 </body></html>

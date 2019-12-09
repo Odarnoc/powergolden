@@ -88,19 +88,19 @@
 
                             <div class="form-group">
                                 <div class="floating-label-group">
-                                    <input type="password" class="form-control input-form" required />
+                                    <input id="pass1" type="password" class="form-control input-form" required />
                                     <label class="floating-label">Nueva contraseña</label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="floating-label-group">
-                                    <input type="password" class="form-control input-form" required />
+                                    <input id="pass2" type="password" class="form-control input-form" required />
                                     <label class="floating-label">Confirmar contraseña</label>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-lg-blue mt-30">Continuar</button>
+                            <button type="submit" id="enviar" class="btn btn-lg-blue mt-30">Continuar</button>
 
                         </form>
 

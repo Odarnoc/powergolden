@@ -88,12 +88,12 @@
 
                             <div style="margin-bottom: 1rem;" class="form-group">
                                 <div class="floating-label-group">
-                                    <input type="text" class="form-control input-form" required />
+                                    <input type="text" id="pin-in" class="form-control input-form" required />
                                     <label class="floating-label">PIN</label>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-lg-blue mt-40">Continuar</button>
+                            <button type="submit" id="confirmar" class="btn btn-lg-blue mt-40">Continuar</button>
 
                         </form>
 
@@ -148,5 +148,11 @@
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
+
+    <!-- custom scripts -->
+    <script src="js/pin.js"></script>
+
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
 </body></html>
