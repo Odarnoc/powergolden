@@ -1,3 +1,7 @@
+<?php
+    require 'bd/conexion.php';
+    $lineas = R::find('lineas');
+?>
 <!doctype html>
 <html lang="es">
 
@@ -133,48 +137,48 @@
 
                                 <div class="d-form-registro-productos">
 
-                                    <form action="" class="form-registro-productos">
+                                    <form id="form-producto" class="form-registro-productos" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <div class="image-upload" style="background-image: url(images/bg-image-upload.jpg);">
                                                 <label for="file-input">
                                                     <i class="fas fa-plus"></i> Subir foto
                                                 </label>
-                                                <input id="file-input" type="file" onchange="readURL(this);" />
+                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required />
 
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input type="text" class="form-control input-form-underline" required />
+                                                <input name="nombre" type="text" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Nombre del producto *</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input type="text" class="form-control input-form-underline" required />
+                                                <input name="descripcion" type="text" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Descripción *</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <textarea class="form-control input-form-underline" rows="3" required></textarea>
+                                                <textarea name="ingredientes" class="form-control input-form-underline" rows="3" required></textarea>
                                                 <label class="floating-label-underline">Ingredientes *</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <textarea class="form-control input-form-underline" rows="3" required></textarea>
+                                                <textarea name="uso" class="form-control input-form-underline" rows="3" required></textarea>
                                                 <label class="floating-label-underline">Modo de uso *</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input type="text" class="form-control input-form-underline" required />
+                                                <input name="inventario" type="text" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Inventario *</label>
                                             </div>
                                         </div>
@@ -184,15 +188,15 @@
                                             <div class="floating-label-group">
 
                                                 <label class="label-select">Categoria *</label>
-                                                <select class="form-control input-form-underline">
+                                                <select name="categoria" class="form-control input-form-underline">
                                                     <option hidden>Seleccionar la categoria</option>
-                                                    <option>Línea Café</option>
-                                                    <option>Línea Amarilla</option>
-                                                    <option>Línea Rosa</option>
-                                                    <option>Línea Tinta</option>
-                                                    <option>Línea Verde</option>
-                                                    <option>Línea Yin Yang</option>
-                                                    <option>Línea Estrella</option>
+                                                        <?php
+                                                        foreach ($lineas as $valor) {
+                                                        ?>
+                                                            <option value="<?php echo $valor->id; ?>">Línea <?php echo $valor->nombre; ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                 </select>
                                             </div>
 
@@ -200,7 +204,7 @@
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input type="text" class="form-control input-form-underline" required />
+                                                <input name="precio" type="text" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Precio *</label>
                                             </div>
                                         </div>
@@ -267,5 +271,34 @@
     <script src="js/main-perfil.js"></script>
 
     <script src="js/scripts.js"></script>
+
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
+
+    <script>
+        $("#form-producto").submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            formData.append('accionproducto','guardar')
+            $.ajax({
+                url: 'ajax/guardarproducto.php',
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    if (data) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Éxito',
+                            text: "El producto ha sido registrado!"
+                        });
+                    }
+                    $('#form-producto').trigger("reset");
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+    </script>
 
 </body></html>
