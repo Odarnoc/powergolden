@@ -8,12 +8,16 @@ $(document).ready(function() {
 function recupera() {
     var contra1 = $("#pass1").val();
     var contra2 = $("#pass2").val();
+    
+
+    var pins = localStorage.getItem("pin");
 
     if(contra1 == contra2){
 
         
         let datos = {
-            pass: contra1
+            pass: contra1,
+            pin: pins
         }
 
         $.ajax({
@@ -47,5 +51,11 @@ function recupera() {
                 }); 
             }
         });
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Las contraseñas no coinciden"
+        }); 
     }
 }
