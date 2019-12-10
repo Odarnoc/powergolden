@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION["user_id"])){
+    header("Location: iniciar-sesion.php");
+}
+$key=$_SESSION["token"];
+?>
+
 <!doctype html>
 <html lang="es">
 
