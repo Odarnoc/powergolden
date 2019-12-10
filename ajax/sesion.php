@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -29,7 +30,8 @@ if(empty($_POST['pass'])){
     if(sizeof($login_in) == 0){
         error_mensaje('Usuario o contraseña invalido');
     }else{
-        var_dump(json_encode($login_in[0]));
+        $_SESSION["user_id"] = $login_in[0]['id'];
+        var_dump(json_encode($login_in[0]['id']));
     }
 
 ?>

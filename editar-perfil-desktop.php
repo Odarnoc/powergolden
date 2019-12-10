@@ -1,9 +1,15 @@
 <?php
+
+    session_start();
+    if(!isset($_SESSION["user_id"])){
+        header("Location: iniciar-sesion.php");
+    }
+
     require 'bd/conexion.php';
 
     $query = 'SELECT * FROM `usuarios` WHERE id= "26"';
 
-    $information  = R::findOne( 'usuarios', ' id = 26 ');
+    $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
 
 
 ?>
@@ -76,8 +82,8 @@
                     <div class="d-menu-left">
                         <div class="clearfix d-img-name">
                             <img src="images/profile-brayam-morando.png" alt="">
-                            <p class="t1 one-line">Brayam Morando</p>
-                            <p class="t2 one-line">brayamdesign@gmail.com</p>
+                            <p class="t1 one-line"><?php echo $information->nombre." ".$information->apellidos; ?></p>
+                            <p class="t2 one-line"><?php echo $information->correo; ?></p>
                         </div>
 
                         <div class="d-list-menu">

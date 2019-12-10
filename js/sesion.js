@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    $('#form-login').on('submit', function(e){  
+    $('#form-login').on('submit', function(e) {
         e.preventDefault();
         iniciar();
     });
-  });
+});
 
 function iniciar() {
     var correo = $("#email").val();
@@ -22,10 +22,10 @@ function iniciar() {
         type: 'POST',
         success: function(respuesta) {
             console.log(respuesta);
-            location.href="index.html";
+            location.href = "index.php";
         },
         error: function(er) {
-            
+
             var json_mensaje = JSON.parse(er.responseText);
             console.log(json_mensaje);
 
@@ -33,7 +33,7 @@ function iniciar() {
                 icon: 'error',
                 title: 'Oops...',
                 text: json_mensaje.mensaje
-              })
+            })
         }
     });
 

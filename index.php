@@ -3,7 +3,6 @@ session_start();
 if(!isset($_SESSION["user_id"])){
     header("Location: iniciar-sesion.php");
 }
-$key=$_SESSION["token"];
 ?>
 
 <!doctype html>
@@ -66,6 +65,12 @@ $key=$_SESSION["token"];
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Sucursales</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="editar-perfil-desktop.php">Perfil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ajax/cerrar_sesion.php">Cerrar sesión</a>
           </li>
           <li class="nav-item">
             <a class="nav-link btn-socios" href="#">Socios</a>
