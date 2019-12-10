@@ -70,11 +70,11 @@ if(isset($_SESSION["user_id"])){
               <div class="d-footer-form">
                 <div class="row row-links-form">
                   <div class="col-lg-6 col-md-6">
-                    <p class="t3"><a href="recuperar-contrasena.html" class="btn-link">Olvidé mi contraseña</a></p>
+                    <p class="t3"><a href="recuperar-contrasena.php" class="btn-link">Olvidé mi contraseña</a></p>
 
                   </div>
                   <div class="col-lg-6 col-md-6">
-                    <p class="t4"><a href="registro.html" class="btn-link">Registrarme como socio</a></p>
+                    <p class="t4"><a href="registro.php" class="btn-link">Registrarme como socio</a></p>
 
                   </div>
                 </div>

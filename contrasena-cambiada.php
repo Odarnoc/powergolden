@@ -81,7 +81,7 @@
                         <img src="images/icon-check.svg" alt="">
                         <p class="t1">¡Listo!</p>
                         <p class="t2">Su contraseña se ha cambiado correctamente</p>
-                        <a class="btn btn-lg-link mt-40" href="iniciar-sesion.html" role="button">Iniciar sesión</a>
+                        <a class="btn btn-lg-link mt-40" href="iniciar-sesion.php" role="button">Iniciar sesión</a>
                     </div>
                 </div>
             </div>
