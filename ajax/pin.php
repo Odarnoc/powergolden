@@ -10,7 +10,7 @@ if(!isset($_POST['pin'])){
 }
 
 $pin = $_POST['pin'];
-$query = 'SELECT * FROM `usuarios` WHERE pin= "'.$pin.'"'; 
+$query = 'SELECT * FROM `usuarios` WHERE pin= "'.$pin.'"';
 
 $registros_in=R::getAll($query);
 

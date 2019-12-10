@@ -7,6 +7,7 @@ $(document).ready(function() {
 
 function enviarPin() {
     var pinIn = $("#pin-in").val();
+    localStorage.setItem("pin",pinIn);
     let datos = {
         pin: pinIn
     }

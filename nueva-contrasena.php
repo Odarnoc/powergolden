@@ -156,4 +156,10 @@
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
 
+    <!-- custom scripts -->
+    <script src="js/nueva-contrasena.js"></script>
+
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
+
 </body></html>
