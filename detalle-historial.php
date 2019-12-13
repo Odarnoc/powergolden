@@ -77,30 +77,69 @@
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
+                <div class="col-lg-4 col-md-4 bg-white">
+                    <div class="d-menu-left">
+                        <div class="clearfix d-img-name">
+                            <img src="images/profile-brayam-morando.png" alt="">
+                            <p class="t1 one-line">Brayam Morando</p>
+                            <p class="t2 one-line">brayamdesign@gmail.com</p>
+                        </div>
 
-            <!-- Admin Menu -->
-            <?php include("menus/menu_general_admin.php"); ?>
-            <!-- End Admin Menu -->
+                        <div class="d-list-menu">
+                            <ul>
+                                <li><a href="dashboard.html">Dashboard</a></li>
+                                <li><a href="clientes.html">Clientes</a></li>
+                                <li><a href="ventas.html">Ventas</a></li>
+                                <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Productos
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="registro-productos.html">Agregar producto</a>
+                                            <a class="dropdown-item" href="listado-productos.html">Listado de productos</a>
+                                            <a class="dropdown-item" href="carrito.html">Carrito de compras</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="billetera.html">Billetera</a></li>
+                                <li><a href="bonos.html">Bonos</a></li>
+                                <li><a href="reportes.html">Reportes</a></li>
+                                <li><a href="matriz.html">Matriz de clientes</a></li>
+                                <li><a class="logout" href="iniciar-sesion.html">Cerrar sesión<i class="fas fa-sign-out-alt"></i></a></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
                 <div class="col-lg-8 col-md-8 bg-gray" >
                     <div class="d-cont-right">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Historial de pedidos</p>
-                                    <p class="small-text-cuenta">Numero de pedido realizados <b>(4)</b></p>
+                                    <p class="title-cuenta">Detalle de pedido</p>
+                                    <div class="row small-text-cuenta">
+                                        <div class="col">
+                                            <p class="small-text-cuenta" style="margin-bottom: 0px; padding-top: 10px">Numero de productos <b>(4)</b></p> 
+                                        </div>
+                                        <div style="text-align: right; padding-top: 10px" class="col">
+                                            <p>Fecha de pedido: <a>16/06/2020</a></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <table class="table" style="text-align:center">
                             <thead class="thead-dark">
                                 <tr>
-                                <th scope="col">Numero</th>
-                                <th scope="col">Fecha</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio unitario</th>
                                 <th scope="col">Total</th>
-                                <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -108,17 +147,23 @@
                                 <td>Mark</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
-                                <td><a href="detalle-historial.php"><i class="fas fa-eye"></i>  </a> </td>
+                                <td><a>$</a><a>199</a><sup>.00</sup></td>
                                 </tr> 
 
                                 <tr>
                                 <td>Mark</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
-                                <td><a href="detalle-historial.php"><i class="fas fa-eye"></i>  </a> </td>
+                                <td><a>$</a><a>199</a><sup>.00</sup></td>
                                 </tr>    
                             </tbody>
                         </table>
+                    </div>
+                    <div style="text-align: right; font-family: Poppins; font-size: 22px; margin-bottom: 50px ">
+                    <span>Total del pedido: <a>$</a><a>199</a><sup>.00</sup></span>
+                    </div>
+                    <div style="margin-left: 100px; margin-right: 100px; margin-bottom: 50px">
+                        <a class="btn btn-lg-blue mt-30" href="historial.php" style="padding-top: 18px">Atras</a>
                     </div>
                 </div>
             </div>

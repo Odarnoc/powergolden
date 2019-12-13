@@ -30,7 +30,7 @@ function registrar() {
             var json_mensaje = JSON.parse(respuesta);
             console.log(respuesta);
             setTimeout(function(){
-                location.href="iniciar-sesion.html"
+                location.href="iniciar-sesion.php"
             }, 5000);
             Swal.fire({
                 icon: 'success',
@@ -39,7 +39,7 @@ function registrar() {
               }) 
               .then((ok) => {
                 if (ok) {
-                    location.href="iniciar-sesion.html"
+                    location.href="iniciar-sesion.php"
                 }
             });
         },
