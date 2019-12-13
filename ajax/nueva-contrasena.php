@@ -23,12 +23,14 @@ $query = 'SELECT id FROM `usuarios` WHERE pin= "'.$pin.'"';
 
     if(strlen($contra) >= 8){
         $registro->pass = $contra;
+        $registro->pin = "0000";
         $id = R::store($registro);
 
             if(empty($id)){
                 error_mensaje("Error al cambiar la contraseña.");
             }else{
                 echo json_encode($response);
+
                 }
     }else{
        error_mensaje("La contraseña es muy pequeña (Debe contener mas de 8 carácteres).");

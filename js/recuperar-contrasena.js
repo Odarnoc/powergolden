@@ -19,7 +19,7 @@ function recupera() {
             var json_mensaje = JSON.parse(respuesta);
             console.log(respuesta);
             setTimeout(function(){
-                location.href="ingresar-pin.php"
+               location.href="ingresar-pin.php"
             }, 5000);
             Swal.fire({
                 icon: 'success',
@@ -28,7 +28,7 @@ function recupera() {
               }) 
               .then((ok) => {
                 if (ok) {
-                    location.href="ingresar-pin.php"
+                   location.href="ingresar-pin.php"
                 }
             });
         },

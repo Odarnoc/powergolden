@@ -11,7 +11,7 @@ require '../phpMailer/Exception.php';
 require '../phpMailer/PHPMailer.php';
 require '../phpMailer/SMTP.php';
 
-
+$contador = true;
 
 if(!isset($_POST['email'])){
     error_mensaje("Completa el campo correo.");
@@ -19,11 +19,16 @@ if(!isset($_POST['email'])){
 }
 
 $correo = $_POST['email'];
-$query = 'SELECT correo FROM `usuarios` WHERE correo= "'.$correo.'"'; 
+
+$query = 'SELECT * FROM `usuarios` WHERE correo= "'.$correo.'"'; 
 
 $registros_in=R::getAll($query);
 
 $pinIn =  $randomNumber = rand(1000,9999);
+
+//$queryPin = R::findOne('usuarios','pin = '.$pinIn.''); 
+
+
 
 $user_id = 26;
 
@@ -32,13 +37,13 @@ $user_id = 26;
         $registro = R::load('usuarios',$user_id);
         $registro->pin = $pinIn;    
 
-     /*   $mail = new PHPMailer(true);
+        $mail = new PHPMailer(true);
 
                 try {
                     //Server settings
-                $mail->SMTPDebug = 2;                      // Enable verbose debug output
+                    $mail->SMTPDebug = 0;                      // Enable verbose debug output
                     $mail->isSMTP();                                            // Send using SMTP
-                    $mail->Host       = 'smtp1.gmail.com';                    // Set the SMTP server to send through
+                    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
                     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
                     $mail->Username   = 'ejemploberras@gmail.com';                     // SMTP username
                     $mail->Password   = 'berras12345';                               // SMTP password
@@ -47,25 +52,20 @@ $user_id = 26;
 
                     //Recipients
                     $mail->setFrom('ejemploberras@gmail.com', 'Carlos Berra');
-                    $mail->addAddress('jcberra@outlook.com', 'Berra');     // Add a recipient
+                    $mail->addAddress( $correo, $registros_in[0]['nombre'].' '.$registros_in[0]['apellidos']);     // Add a recipient
 
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML
-                    $mail->Subject = 'Prueba';
-                    $mail->Body    = 'Correo de Prueba';
+                    $mail->Subject = 'Soporte PowerGolden';
+                    $mail->Body    = 'PIN de recuperacion: '.$pinIn;
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                     $mail->send();
-                    echo 'El correo se envio con exito';
                 } catch (Exception $e) {
                     echo "No se pudo enviar el correo: {$mail->ErrorInfo}";
-                }*/
+               
+                }
 
-          /*  if(empty($id)){
-                error_mensaje("Error al enviar correo de recuperación");
-            }else{
-                echo json_encode($response);
-            }*/
             $id = R::store($registro);
 
             if(empty($id)){
@@ -76,5 +76,6 @@ $user_id = 26;
     }else{
         error_mensaje("El correo no esta registrado.");
     }  
+
 
 ?>
