@@ -1,8 +1,15 @@
 <?php
+require 'bd/conexion.php';
+
 session_start();
-if(!isset($_SESSION["user_id"])){
-    header("Location: iniciar-sesion.php");
+$user_id=-1;
+if(isset($_SESSION["user_id"])){
+  $user_id=$_SESSION["user_id"];
 }
+
+$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id LIMIT 6';
+
+$prods=R::getAll($query);
 ?>
 
 <!doctype html>
@@ -201,197 +208,33 @@ if(!isset($_SESSION["user_id"])){
               <p class="title-sec mb-20">Populares</p>
             </div>
 
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-verde/foreverY.png" alt="">
+            
+            <?php foreach ($prods as $item) { ?>
+              <div class="col-lg-6 d-all-item-pro">
+                <div class="d-item-pro h-100">
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4 col-4">
+                      <div class="d-img-pro">
+                        <img src="productos_img/<?php echo $item['imagen'] ?>" alt="">
 
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 verde">Línea Verde</p>
-                      <p class="t2">Forever Y</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
+                    <div class="col-lg-8 col-md-8 col-8">
+                      <div class="d-info-pro">
+                        <p class="t1" style="color:<?php echo $item['color'] ?>">Línea <?php echo $item['linea'] ?></p>
+                        <p class="t2"><?php echo $item['nombre'] ?></p>
+                        <p class="t3"><?php echo $item['descripcion'] ?></p>
+                        <p class="t4 two-lines"><?php echo $item['ingredientes'] ?></p>
+                        <a class="btn btn-blue mt-3" href="producto-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver producto</a>
+                      </div>
                     </div>
-                  </div>
 
+                  </div>
                 </div>
               </div>
-            </div>
+            <?php } ?>
 
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-verde/collagen.png" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 verde">Línea Verde</p>
-                      <p class="t2">Collagen</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-yin-yang/vgr.jpg" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 ying-yang">Línea Yin Yang</p>
-                      <p class="t2">VGR</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-yin-yang/zuleyka.jpg" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 ying-yang">Línea Yin Yang</p>
-                      <p class="t2">Zuleyka</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-estrella/night-grass.jpg" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 estrella">Línea Estrella</p>
-                      <p class="t2">Night Grass</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-estrella/obslim.jpg" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 estrella">Línea Estrella</p>
-                      <p class="t2">Obslim</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-amarilla/agn.jpg" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 amarilla">Línea Amarilla</p>
-                      <p class="t2">AGN</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-amarilla/pmo.jpg" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 amarilla">Línea Amarilla</p>
-                      <p class="t2">PMO</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
 
 
           </div>
