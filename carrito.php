@@ -121,7 +121,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Carrito</p>
-                                    <p class="small-text-cuenta">Productos en tu carrito de compras <b>(4)</b></p>
+                                    <p class="small-text-cuenta">Productos en tu carrito de compras <b id="cantProds" ></b></p>
                                 </div>
                             </div>
 
@@ -131,128 +131,19 @@
 
                             <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
 
-                                <div class="d-item-carrito">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-4">
-                                            <div class="d-img-carrito">
-                                                <img src="images/productos/linea-verde/foreverY.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-8">
-                                            <div class="d-info-carrito">
-                                                <p class="t1 one-line">Forever Y</p>
-                                                <p class="t2 one-line">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam adipisci voluptas officia nihil tempora tempore! Temporibus blanditiis, expedita quidem maxime!</p>
-                                                <p class="t3">$199.00</p>
-
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-6 col-8">
-                                                        <input type="number" class="cant-number-white" value="1" min="1" max="500" step="1" />
-                                                    </div>
-                                                </div>
-
-                                                <a class="btn btn-link-carrito" href="#" role="button">Eliminar producto</a>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
+                                <div id="lista-productos">
                                 </div>
 
-                                <div class="d-item-carrito">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-4">
-                                            <div class="d-img-carrito">
-                                                <img src="images/productos/linea-tinta/vr-less.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-8">
-                                            <div class="d-info-carrito">
-                                                <p class="t1 one-line">VR-Less</p>
-                                                <p class="t2 one-line">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam adipisci voluptas officia nihil tempora tempore! Temporibus blanditiis, expedita quidem maxime!</p>
-                                                <p class="t3">$249.00</p>
-
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-6 col-8">
-                                                        <input type="number" class="cant-number-white" value="1" min="1" max="500" step="1" />
-                                                    </div>
-                                                </div>
-
-                                                <a class="btn btn-link-carrito" href="#" role="button">Eliminar producto</a>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="d-item-carrito">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-4">
-                                            <div class="d-img-carrito">
-                                                <img src="images/productos/linea-yin-yang/zuleyka.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-8">
-                                            <div class="d-info-carrito">
-                                                <p class="t1 one-line">Zuleyka</p>
-                                                <p class="t2 one-line">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam adipisci voluptas officia nihil tempora tempore! Temporibus blanditiis, expedita quidem maxime!</p>
-                                                <p class="t3">$300.00</p>
-
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-6 col-8">
-                                                        <input type="number" class="cant-number-white" value="1" min="1" max="500" step="1" />
-                                                    </div>
-                                                </div>
-
-                                                <a class="btn btn-link-carrito" href="#" role="button">Eliminar producto</a>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="d-item-carrito">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 col-4">
-                                            <div class="d-img-carrito">
-                                                <img src="images/productos/linea-estrella/night-grass.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 col-md-8 col-8">
-                                            <div class="d-info-carrito">
-                                                <p class="t1 one-line">Night Grass</p>
-                                                <p class="t2 one-line">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam adipisci voluptas officia nihil tempora tempore! Temporibus blanditiis, expedita quidem maxime!</p>
-                                                <p class="t3">$199.00</p>
-
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6 col-8">
-                                                        <input type="number" class="cant-number-white" value="1" min="1" max="500" step="1" />
-                                                    </div>
-                                                </div>
-
-                                                <a class="btn btn-link-carrito" href="#" role="button">Eliminar producto</a>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
 
                                 <div class="d-btn-carrito">
                                     <div class="row">
 
                                         <div class="col-lg-6 col-md-6 col-6">
                                             <p class="t1">TOTAL:</p>
-                                            <p class="t2">$947.<sup>00</sup></p>
+                                            <p class="t2" id="total"></p>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-6">
-                                            <a class="btn btn-lg-link" href="#" role="button">Continuar</a>
+                                            <button class="btn btn-lg-link" onclick="confirmarCompra()" role="button">Continuar</button>
                                         </div>
                                     </div>
 
@@ -315,9 +206,13 @@
 
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap-input-spinner.js"></script>
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
     <script>
         $("input[type='number']").inputSpinner()
     </script>
+
+    <script src="js/carrito.js"></script>
 
 </body></html>

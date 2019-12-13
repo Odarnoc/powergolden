@@ -1,3 +1,21 @@
+<?php
+require 'bd/conexion.php';
+
+$id_prod = $_GET['key'];
+
+session_start();
+$user_id=-1;
+if(isset($_SESSION["user_id"])){
+  $user_id=$_SESSION["user_id"];
+}
+$query1='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id LIMIT 1';
+$res=R::getAll($query1);
+$prodIndividual = $res[0];
+
+$query2='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id where p.id='.$prodIndividual['id'].' and p.categoria='.$prodIndividual['categoria'].' ORDER BY RAND() LIMIT 2';
+$prodsRelacionados=R::getAll($query2);
+
+?>
 <!doctype html>
 <html lang="es">
 
@@ -174,7 +192,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4">
                                         <div class="d-img-pro-ind ">
-                                            <img src="images/productos/linea-verde/foreverY-ind.jpg" alt="">
+                                            <img src="productos_img/<?php echo $prodIndividual['imagen'] ?>" alt="">
                                         </div>
 
                                     </div>
@@ -184,20 +202,20 @@
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8">
                                                     <span class="badge badge-disponible">Disponible</span>
-                                                    <p class="title-pro-ind one-line">Forever Y</p>
-                                                    <p class="sub-title-pro-ind one-line">Frasco con 30 cápsulas</p>
+                                                    <p class="title-pro-ind one-line"><?php echo $prodIndividual['nombre'] ?></p>
+                                                    <p class="sub-title-pro-ind one-line"><?php echo $prodIndividual['descripcion'] ?></p>
                                                 </div>
 
                                                 <div class="col-lg-4 col-md-4">
-                                                    <p class="price-pro-ind">$199.<sup>00</sup></p>
+                                                    <p class="price-pro-ind">$<?php echo $prodIndividual['precio'] ?></p>
                                                 </div>
                                             </div>
 
                                             <div class="row row-info-pro-ind">
                                                 <div class="col-lg-12 col-md-12">
-                                                    <p class="t1"><b>Ingredientes:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae obcaecati aut alias consect.</p>
+                                                    <p class="t1"><b>Ingredientes:</b> <?php echo $prodIndividual['ingredientes'] ?></p>
 
-                                                    <p class="t2"><b>Modo de uso:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae obcaecati aut alias consectetur officiis blanditiis, eius necessitatibus similique vitae corporis, incidunt maxime. </p>
+                                                    <p class="t2"><b>Modo de uso:</b> <?php echo $prodIndividual['uso'] ?></p>
                                                 </div>
                                             </div>
 
@@ -208,10 +226,10 @@
                                                        <p class="t1"><b>Cantidad</b></p>
                                                         <div class="form-row">
                                                             <div class="form-group col-lg-4 col-md-4">
-                                                                <input type="number" class="cant-number" value="1" min="1" max="500" step="1" />
+                                                                <input id="cantidad" type="number" class="cant-number" value="1" min="1" max="500" step="1" />
                                                             </div>
                                                             <div class="form-group col-lg-4 col-md-4">
-                                                                <button type="button" class="btn btn-add-car">Agregar al carrito</button>
+                                                                <button type="button" class="btn btn-add-car" onclick="agregar()">Agregar al carrito</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -235,53 +253,34 @@
                             <p class="title-sec mb-20">Relacionados</p>
                         </div>
 
-                        <div class="col-lg-6 d-all-item-pro">
-                            <div class="d-item-pro h-100">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-4">
-                                        <div class="d-img-pro">
-                                            <img src="images/productos/linea-verde/foreverY.png" alt="">
 
+                        
+                        <?php foreach ($prodsRelacionados as $item) { ?>
+                            <div class="col-lg-6 d-all-item-pro">
+                                <div class="d-item-pro h-100">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-4">
+                                            <div class="d-img-pro">
+                                                <img src="productos_img/<?php echo $item['imagen'] ?>" alt="">
+
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-8 col-md-8 col-8">
-                                        <div class="d-info-pro">
-                                            <p class="t1 verde">Línea Verde</p>
-                                            <p class="t2">Strong K</p>
-                                            <p class="t3">Frasco con 30 cápsulas</p>
-                                            <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                                            <a class="btn btn-blue mt-3" href="#0" role="button">Ver producto</a>
+                                        <div class="col-lg-8 col-md-8 col-8">
+                                            <div class="d-info-pro">
+                                                <p class="t1" style="color:<?php echo $item['color'] ?>">Línea <?php echo $item['linea'] ?></p>
+                                                <p class="t2"><?php echo $item['nombre'] ?></p>
+                                                <p class="t3"><?php echo $item['descripcion'] ?></p>
+                                                <p class="t4 two-lines"><?php echo $item['ingredientes'] ?></p>
+                                                <a class="btn btn-blue mt-3" href="producto-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver producto</a>
+                                            </div>
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-lg-6 d-all-item-pro">
-                            <div class="d-item-pro h-100">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-4">
-                                        <div class="d-img-pro">
-                                            <img src="images/productos/linea-verde/collagen.png" alt="">
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-8 col-md-8 col-8">
-                                        <div class="d-info-pro">
-                                            <p class="t1 verde">Línea Verde</p>
-                                            <p class="t2">Collagen</p>
-                                            <p class="t3">Frasco con 30 cápsulas</p>
-                                            <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                                            <a class="btn btn-blue mt-3" href="#0" role="button">Ver producto</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
+                        
 
 
                     </div>
@@ -368,9 +367,15 @@
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap-input-spinner.js"></script>
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
     <script>
         $("input[type='number']").inputSpinner()
     </script>
+    <script>
+        var prod = '<?php echo json_encode($prodIndividual); ?>';
+    </script>
+    <script src="js/prod-individual.js"></script>
 
 </body></html>
