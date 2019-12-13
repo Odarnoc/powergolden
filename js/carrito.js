@@ -59,27 +59,21 @@ function eliminar(index) {
 }
 
 function confirmarCompra() {
-    //localStorage.setItem('carrito', JSON.stringify([]));
     $.ajax({
         url: 'ajax/realizarCompra.php',
-        data: datos,
+        data: { carrito: carrito },
         type: 'POST',
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
             console.log(respuesta);
-            setTimeout(function() {
-                location.href = "iniciar-sesion.html"
-            }, 5000);
             Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: json_mensaje.mensaje
-                })
-                .then((ok) => {
-                    if (ok) {
-                        location.href = "iniciar-sesion.html"
-                    }
-                });
+                icon: 'success',
+                title: 'Éxito',
+                text: json_mensaje.mensaje
+            });
+            carrito = [];
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            pintarCarrito();
         },
         error: function(er) {
             var json_mensaje = JSON.parse(er.responseText);
