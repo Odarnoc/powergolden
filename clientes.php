@@ -1,4 +1,10 @@
+<?php
 
+require 'user_preferences/user-info.php';
+
+$clientes=R::find('usuarios','rol = 1');
+
+?>
 <!doctype html>
 <html lang="es">
 
@@ -89,7 +95,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Clientes</p>
-                                    <p class="small-text-cuenta">Numero de clientes registrados <b>(4)</b></p>
+                                    <p class="small-text-cuenta">Numero de clientes registrados <b>(<?php echo count($clientes) ?>)</b></p>
                                 </div>
                             </div>
 
@@ -98,26 +104,21 @@
                         <table class="table" style="text-align:center">
                             <thead class="thead-dark">
                                 <tr>
-                                <th scope="col">Numero</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Fecha de nacimiento</th>
                                 </tr>
                             </thead>
                             <tbody >
-                                <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td><a href="detalle-historial.php"><i class="fas fa-eye"></i>  </a> </td>
-                                </tr> 
-
-                                <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td><a href="detalle-historial.php"><i class="fas fa-eye"></i>  </a> </td>
-                                </tr>    
+                                <?php foreach ($clientes as $item) { ?>
+                                    <tr>
+                                        <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
+                                        <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
+                                        <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
+                                        <td><?php echo $item['nacimiento'] ?></td>
+                                    </tr> 
+                                <?php } ?>    
                             </tbody>
                         </table>
                     </div>
@@ -175,7 +176,8 @@
     <script src="js/bootstrap-input-spinner.js"></script>
 
     <script>
-        $("input[type='number']").inputSpinner()
+        $("input[type='number']").inputSpinner();
+        $('[data-toggle="tooltip"]').tooltip();
     </script>
 
 </body></html>

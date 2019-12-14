@@ -61,7 +61,7 @@ function eliminar(index) {
 function confirmarCompra() {
     $.ajax({
         url: 'ajax/realizarCompra.php',
-        data: { carrito: carrito },
+        data: { carrito: carrito, total: total },
         type: 'POST',
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);

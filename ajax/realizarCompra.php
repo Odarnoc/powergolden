@@ -14,11 +14,15 @@ if(empty($_POST['carrito'])){
     $carrito = $_POST['carrito'];
 
     if(sizeof($carrito) > 0){
+        $venta = R::dispense('ventas');
+        $venta->user_id = $user_id;
+        $venta->fecha = new DateTime();
+        $venta->total = $_POST['total'];
+        $id_venta = R::store($venta);
         foreach ($carrito as $item) {
-            $registro = R::dispense('ventas');
+            $registro = R::dispense('productosxventas');
+            $registro->venta_id = $id_venta;
             $registro->producto_id = $item['id'];
-            $registro->usuario_id = $user_id;
-            $registro->fecha = new DateTime();
             $registro->cantidad = $item['cant'];
             $id = R::store($registro);
             if(empty($id)){
