@@ -1,16 +1,6 @@
 <?php
 
-    session_start();
-    if(!isset($_SESSION["user_id"])){
-        header("Location: iniciar-sesion.php");
-    }
-
-    require 'bd/conexion.php';
-
-    $query = 'SELECT * FROM `usuarios` WHERE id= "26"';
-
-    $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
-
+require 'user_preferences/user-info.php';
 
 ?>
 
@@ -50,73 +40,19 @@
 <body>
 
 
-    <nav class="navbar navbar-solid navbar-expand-lg navbar-dark bg-dark">
-
-        <div class="container">
-            <a class="logo" href="index.html">
-                <img src="images/logo-navbar-white.png">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn-cuenta-nav" href="editar-perfil-desktop.html"><i class="fas fa-user-circle"></i>Brayam Morando</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-    </nav>
+            <!-- Top Menu -->
+            <?php include("menus/top_menu.php"); ?>
+            <!-- End Top Menu -->
 
 
-    <!-- End Navbar ====
-    	======================================= -->
 
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4 bg-white">
-                    <div class="d-menu-left">
-                        <div class="clearfix d-img-name">
-                            <img src="images/profile-brayam-morando.png" alt="">
-                            <p class="t1 one-line"><?php echo $information->nombre." ".$information->apellidos; ?></p>
-                            <p class="t2 one-line"><?php echo $information->correo; ?></p>
-                        </div>
 
-                        <div class="d-list-menu">
-                            <ul>
-                                <li><a href="">Usuarios</a></li>
-                                <li><a href="">Timeline de productos</a></li>
-                                <li>
-                                    <div class="dropdown show">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Productos
-                                        </a>
-
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="#">Listado de productos</a>
-                                            <a class="dropdown-item" href="#">Carrito de compras</a>
-                                            <a class="dropdown-item" href="#">Lista de carrito</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li><a href="">Tarjetas</a></li>
-                                <li><a href="">Paquetes de productos</a></li>
-                                <li><a href="">Folletos electrónicos</a></li>
-                                <li><a href="">Promociones</a></li>
-                                <li><a href="">Videos</a></li>
-                                <li><a href="">New letters</a></li>
-                                <li><a class="logout" href="iniciar-sesion.html">Cerrar sesión<i class="fas fa-sign-out-alt"></i></a></li>
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                <!-- Admin Menu -->
+                <?php include("menus/menu_general_admin.php"); ?>
+                <!-- End Admin Menu -->
 
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">

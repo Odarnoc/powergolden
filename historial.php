@@ -1,3 +1,14 @@
+<?php
+
+require 'user_preferences/user-info.php';
+
+$query = 'SELECT * FROM ventas where usuario_id = '.$_SESSION["user_id"];
+
+$ventas=R::getAll($query);
+
+?>
+
+
 <!doctype html>
 <html lang="es">
 
@@ -48,27 +59,10 @@
 
 <body>
 
+            <!-- Top Menu -->
+            <?php include("menus/top_menu.php"); ?>
+            <!-- End Top Menu -->
 
-    <nav class="navbar navbar-solid navbar-expand-lg navbar-dark bg-dark">
-
-        <div class="container">
-            <a class="logo" href="index.html">
-                <img src="images/logo-navbar-white.png">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn-cuenta-nav" href="editar-perfil-desktop.php"><i class="fas fa-user-circle"></i>Brayam Morando</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-    </nav>
 
 
     <!-- End Navbar ====
@@ -88,7 +82,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Historial de pedidos</p>
-                                    <p class="small-text-cuenta">Numero de pedido realizados <b>(4)</b></p>
+                                    <p class="small-text-cuenta">Numero de pedido realizados <b>(<?php echo sizeof($ventas)?>)</b></p>
                                 </div>
                             </div>
 
@@ -104,19 +98,14 @@
                                 </tr>
                             </thead>
                             <tbody >
+                            <?php foreach ($ventas as $item) { ?>
                                 <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td><?php echo $item['id'] ?></td>
+                                <td><?php echo $item['fecha'] ?></td>
+                                <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
                                 <td><a href="detalle-historial.php"><i class="fas fa-eye"></i>  </a> </td>
                                 </tr> 
-
-                                <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td><a href="detalle-historial.php"><i class="fas fa-eye"></i>  </a> </td>
-                                </tr>    
+                            <?php } ?> 
                             </tbody>
                         </table>
                     </div>
@@ -127,31 +116,9 @@
     </section>
 
 
-    <footer class="valign">
-        <div class="container">
-            <div class="row valign">
-                <div class="col-lg-6 col-md-6">
-                    <div class="d-footer-left ">
-                        <img src="images/logo-footer.png" alt="">
-                        <p class="t1">© PG 2019, Todos los derechos son reservados.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="d-footer-right">
-                        <p class="t1">
-                            <a target="_blank" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-instagram"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-twitter"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-youtube"></i></a>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </footer>
+            <!-- Footer-->
+            <?php include("menus/footer_general.php"); ?>
+            <!-- End Footer -->
 
 
     <!-- jQuery -->

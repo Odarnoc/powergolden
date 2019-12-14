@@ -1,4 +1,5 @@
 <?php
+
 require '../bd/conexion.php';
 require '../utils/error.php';
 $response['mensaje'] = "El correo se envio correctamente.";
@@ -30,7 +31,7 @@ $pinIn =  $randomNumber = rand(1000,9999);
 
 
 
-$user_id = 26;
+    $user_id = $registros_in[0]['id'];
 
     if(sizeof($registros_in) == 1){
 

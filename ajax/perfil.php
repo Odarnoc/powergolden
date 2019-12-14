@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -24,29 +27,28 @@ if(empty($_POST['phone'])){
     return;
 }
 
-if(empty($_POST['email'])){
-    error_mensaje('Llenar el campo correo.');
+
+if(!isset($_SESSION["user_id"])){
+    error_mensaje('Sesion no iniciada');
     return;
 }
 
 
-    $user_id = 26;
+    $user_id=$_SESSION["user_id"];
     $nombre = $_POST['name'];
     $apellido = $_POST['last_name'];
     $telefono = $_POST['phone'];
-    $correo = $_POST['email'];
     $nacimiento = $_POST['date'];
     $direccion = $_POST['address'];
     $estado = $_POST['state'];
     $ciudad = $_POST['city'];
     $codigop = $_POST['cp'];
-  
+
         
     $registro = R::load('usuarios',$user_id);
 
             $registro->nombre = $nombre;
             $registro->telefono = $telefono;
-            $registro->correo = $correo;
             $registro->apellidos = $apellido;
             $registro->nacimiento = $nacimiento;
             $registro->direccion = $direccion;
@@ -56,10 +58,10 @@ if(empty($_POST['email'])){
 
             $id = R::store($registro);
 
-     if(empty($id)){
+    if(empty($id)){
         error_mensaje("Error al guardar usuario.");
     }else{
         echo json_encode($response);
         }
-       
+    
 ?>

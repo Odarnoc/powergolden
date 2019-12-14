@@ -16,7 +16,7 @@ $query = 'SELECT id FROM `usuarios` WHERE pin= "'.$pin.'"';
 
     $registros_in=R::getAll($query);
 
-            $user_id = 26;
+            $user_id = $registros_in[0]['id'] ;
 
             $registro = R::load('usuarios',$user_id);
 
