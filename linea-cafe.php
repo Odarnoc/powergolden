@@ -32,41 +32,9 @@
 <body>
 
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-    <div class="container">
-      <a class="logo" href="index.html">
-        <img src="images/logo-navbar-white.png">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-scroll-nav="0">Inicio <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Sobre Power Golden</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-scroll-nav="1">Tienda</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Sucursales</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link btn-socios" href="#">Socios</a>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-
-  </nav>
+            <!-- Menu -->
+            <?php include("menus/menu_general.php"); ?>
+            <!-- End Menu -->
 
 
   <!-- End Navbar ====
@@ -243,31 +211,9 @@
 
   </section>
 
-  <footer class="valign">
-    <div class="container">
-      <div class="row valign">
-        <div class="col-lg-6 col-md-6">
-          <div class="d-footer-left ">
-            <img src="images/logo-footer.png" alt="">
-            <p class="t1">© PG 2019, Todos los derechos son reservados.</p>
-          </div>
-        </div>
-
-        <div class="col-lg-6 col-md-6">
-          <div class="d-footer-right">
-            <p class="t1">
-              <a target="_blank" href=""><i class="fab fa-facebook-f"></i></a>
-              <a target="_blank" href=""><i class="fab fa-instagram"></i></a>
-              <a target="_blank" href=""><i class="fab fa-twitter"></i></a>
-              <a target="_blank" href=""><i class="fab fa-youtube"></i></a>
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </footer>
+            <!-- Footer-->
+            <?php include("menus/footer_general.php"); ?>
+            <!-- End Footer -->
 
 
   <!-- jQuery -->

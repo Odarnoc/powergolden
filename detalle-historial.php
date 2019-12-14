@@ -2,10 +2,13 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM ventas where usuario_id = '.$_SESSION["user_id"];
+$id_venta = $_GET['id'];
 
+$query = 'SELECT * FROM ventas where id = '.$id_venta;
 $ventas=R::getAll($query);
-var_dump($ventas);
+
+$queryprodventa = 'SELECT p.nombre,p.precio,px.cantidad FROM productosxventas as px LEFT JOIN productos as p on px.producto_id = p.id where venta_id = '.$id_venta;
+$productos=R::getAll($queryprodventa);
 
 ?>
 
@@ -84,10 +87,10 @@ var_dump($ventas);
                                     <p class="title-cuenta">Detalle de pedido</p>
                                     <div class="row small-text-cuenta">
                                         <div class="col">
-                                            <p class="small-text-cuenta" style="margin-bottom: 0px; padding-top: 10px">Numero de productos <b>(4)</b></p> 
+                                            <p class="small-text-cuenta" style="margin-bottom: 0px; padding-top: 10px">Numero de productos <b>(<?php echo sizeof($productos)?>)</b></p> 
                                         </div>
                                         <div style="text-align: right; padding-top: 10px" class="col">
-                                            <p>Fecha de pedido: <a>16/06/2020</a></p>
+                                            <p>Fecha de pedido: <?php echo $ventas[0]['fecha'] ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -104,19 +107,19 @@ var_dump($ventas);
                                 </tr>
                             </thead>
                             <tbody >
-                            <?php foreach ($ventas as $item) { ?>
+                            <?php foreach ($productos as $item) { ?>
                                 <tr>
                                 <td><?php echo $item['nombre'] ?></td>
                                 <td><?php echo $item['cantidad'] ?></td>
                                 <td><?php echo $item['precio'] ?></td>
-                                <td><?php echo $item['total'] ?></td>
+                                <td><?php echo $item['cantidad']*$item['precio'] ?></td>
                                 </tr> 
                                 <?php } ?> 
                             </tbody>
                         </table>
                     </div>
                     <div style="text-align: right; font-family: Poppins; font-size: 22px; margin-bottom: 50px ">
-                    <span>Total del pedido: <a>$</a><a>199</a><sup>.00</sup></span>
+                    <span>Total del pedido: <?php echo $ventas[0]['total'] ?><sup>.00</sup></span>
                     </div>
                     <div style="margin-left: 100px; margin-right: 100px; margin-bottom: 50px">
                         <a class="btn btn-lg-blue mt-30" href="historial.php" style="padding-top: 18px">Atras</a>

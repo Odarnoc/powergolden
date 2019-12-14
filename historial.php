@@ -2,7 +2,7 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM ventas where usuario_id = '.$_SESSION["user_id"];
+$query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"];
 
 $ventas=R::getAll($query);
 
@@ -103,7 +103,7 @@ $ventas=R::getAll($query);
                                 <td><?php echo $item['id'] ?></td>
                                 <td><?php echo $item['fecha'] ?></td>
                                 <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
-                                <td><a href="detalle-historial.php"><i class="fas fa-eye"></i>  </a> </td>
+                                <td><a href="detalle-historial.php?id=<?php echo $item['id'] ?>"><i class="fas fa-eye"></i>  </a> </td>
                                 </tr> 
                             <?php } ?> 
                             </tbody>

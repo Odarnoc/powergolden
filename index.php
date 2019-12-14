@@ -47,9 +47,9 @@ $prods=R::getAll($query);
 <body>
 
 
-            <!-- Admin Menu -->
+            <!-- Menu -->
             <?php include("menus/menu_general.php"); ?>
-            <!-- End Admin Menu -->
+            <!-- End Menu -->
 
 
   <!-- End Navbar ====

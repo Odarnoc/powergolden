@@ -54,6 +54,7 @@ if(empty($_POST['pass'])){
             $registro->pass = $contrasena;
             $registro->correo = $correo;
             $registro->apellidos = $apellido;
+            $registro->rol =1;
 
             $id = R::store($registro);
 
