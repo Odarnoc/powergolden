@@ -28,6 +28,8 @@ if(isset($_SESSION["user_id"])){
   <!-- Plugin -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="css/helper.css">
+  <!-- responseive menu -->
+  <link rel="stylesheet" href="css/menu-movil.css">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -104,6 +106,8 @@ if(isset($_SESSION["user_id"])){
 
   <!-- custom scripts -->
   <script src="js/scripts.js"></script>
+  <!-- responseive menu -->
+  <script src="js/menu-movil.js"></script>
 
   <!-- sesion scripts -->
   <script src="js/sesion.js"></script>

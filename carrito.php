@@ -26,6 +26,8 @@ require 'user_preferences/user-info.php';
     <!-- Plugin -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
+    <!-- responseive menu -->
+    <link rel="stylesheet" href="css/menu-movil.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -145,6 +147,8 @@ require 'user_preferences/user-info.php';
     <script>
         $("input[type='number']").inputSpinner()
     </script>
+    <!-- responseive menu -->
+  <script src="js/menu-movil.js"></script>
 
     <script src="js/carrito.js"></script>
 

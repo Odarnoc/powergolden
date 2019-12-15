@@ -20,6 +20,8 @@
     <!-- Plugin -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
+    <!-- responseive menu -->
+  <link rel="stylesheet" href="css/menu-movil.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -93,7 +95,7 @@
 
                         <div class="d-footer-form">
                             <p class="t1">¿Ya tienes una cuenta?</p>
-                            <p class="t2"><a href="iniciar-sesion.html" class="btn-link-active">Iniciar sesión ahora</a></p>
+                            <p class="t2"><a href="iniciar-sesion.php" class="btn-link-active">Iniciar sesión ahora</a></p>
 
                             <div class="row row-links-form">
                                 <div class="col-lg-6 col-md-6">
@@ -137,6 +139,8 @@
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
+    <!-- responseive menu -->
+  <script src="js/menu-movil.js"></script>
 
     <!-- register scripts -->
     <script src="js/registro.js"></script>

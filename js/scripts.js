@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
 
     "use strict";
 
@@ -23,7 +23,7 @@ $(function () {
                     [ Navbar ( Change Background & Logo ) ]
     -----------------------------------------------------------------*/
 
-    wind.on("scroll", function () {
+    /* wind.on("scroll", function() {
 
         var bodyScroll = wind.scrollTop(),
             navbar = $(".navbar"),
@@ -43,9 +43,9 @@ $(function () {
 
 
     // close navbar-collapse when a  clicked
-    $(".navbar-nav a").on('click', function () {
+    $(".navbar-nav a").on('click', function() {
         $(".navbar-collapse").removeClass("show");
-    });
+    }); */
 
 
 
