@@ -25,11 +25,17 @@ $query = 'SELECT * FROM `usuarios` WHERE correo= "'.$correo.'"';
 
 $registros_in=R::getAll($query);
 
-$pinIn =  $randomNumber = rand(1000,9999);
+$bandera = true;
 
-//$queryPin = R::findOne('usuarios','pin = '.$pinIn.''); 
+$pinIn;
 
-
+while ($bandera) {
+    $pinIn =  rand(1000,9999);
+    $queryPin = R::findOne('usuarios','pin = '.$pinIn.''); 
+    if(empty($queryPin)){ 
+        $bandera = false;
+    }  
+}
 
     $user_id = $registros_in[0]['id'];
 
@@ -58,13 +64,33 @@ $pinIn =  $randomNumber = rand(1000,9999);
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Soporte PowerGolden';
-                    $mail->Body    = 'PIN de recuperacion: '.$pinIn;
+                    $mail->Body    = '<!DOCTYPE html>
+                                        <html lang="en">
+                                        <head>
+                                            <meta charset="UTF-8">
+                                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                                            <title>Document</title>
+                                        </head>
+                                        <body>
+                                            <center>
+                                                <img style="width: 50%;" src="https://powergoldendemos.000webhostapp.com/images/logo-navbar.png">
+                                                <div> 
+                                                    <h3>El soporte técnico de PowerGolden te envía el siguiente PIN de verificación para recuperar tu contraseña.</h3>
+                                                    <h2>Pin de verificación: <b>'.$pinIn.'</b></h2>
+                                                    <h3>Si no recuerdas haber solicitado recuperación de contraseña. Ponerse en contacto con algún administrador de PowerGolden para mayor información y aclaraciones. </h3>
+                                                    <h1>Gracias por su preferencia en los mejores productos de herbolaria.</h1>
+                                                </div>
+                                            </center>
+                                        </body>
+                                    </html>';
+                    
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                     $mail->send();
                 } catch (Exception $e) {
                     echo "No se pudo enviar el correo: {$mail->ErrorInfo}";
-               
+                
                 }
 
             $id = R::store($registro);
