@@ -36,8 +36,8 @@ function registrar() {
                 icon: 'success',
                 title: 'Éxito',
                 text: json_mensaje.mensaje
-              }) 
-              .then((ok) => {
+            }) 
+            .then((ok) => {
                 if (ok) {
                     location.href="iniciar-sesion.php"
                 }
