@@ -6,12 +6,14 @@ $user_id=-1;
 if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
 }
+$busqueda="";
+if(isset($_GET['busqueda'])){
+  $busqueda = $_GET['busqueda'];
+}
 
-$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id LIMIT 6';
-$query2='SELECT p.*,COUNT(*) as conteo,l.imagenlinea FROM productosxventas as pxv LEFT JOIN productos as p ON pxv.producto_id = p.id LEFT JOIN lineas as l ON p.categoria = l.id GROUP BY producto_id ORDER BY conteo DESC LIMIT 1';
+$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id WHERE p.nombre LIKE "%'.$busqueda.'%"';
 
 $prods=R::getAll($query);
-$prodRelevante=R::getAll($query2);
 ?>
 
 <!doctype html>
@@ -38,11 +40,6 @@ $prodRelevante=R::getAll($query2);
   <link rel="stylesheet" href="css/helper.css">
   <!-- responseive menu -->
   <link rel="stylesheet" href="css/menu-movil.css">
-  <style>
-    #sec-busqueda{
-      margin-top:0px;
-    }
-  </style>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -64,25 +61,8 @@ $prodRelevante=R::getAll($query2);
   <!-- End Navbar ====
     	======================================= -->
 
-  <header class="header-home valign" data-overlay-dark="4" data-scroll-index="0">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-12">
-
-          <div class="d-info-header">
-            <img class="logo-header" src="images/logo-header.png" alt="">
-            <h1 class="t1">El mundo</h1>
-            <h1 class="t2">de la Herbolaria</h1>
-            <a class="btn btn-header mt-30" href="#" data-scroll-nav="1" role="button">Ver productos</a>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </header>
-
-
-  <?php include("menus/search.php"); ?>
+            <?php include("menus/search.php"); ?>
+  
 
 
   <section class="sec-gray">
@@ -93,40 +73,31 @@ $prodRelevante=R::getAll($query2);
 
         <div class="col-lg-9 col-md-6">
 
-          <div class="row row-destacado">
-            <div class="col-lg-12 col-md-12">
-              <p class="title-sec mb-20">Destacado</p>
-
-            </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <p class="title-busqueda">Búsqueda: <b>"<?php echo $busqueda ?>"</b></p>
           </div>
-
-          <div style="background-image: url(<?php echo $prodRelevante[0]['imagenlinea']; ?>);" class="d-banner-destacado" data-overlay-dark="4">
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
-                <div class="d-img-destacado">
-                  <img style="height: 300px;width: auto;" src="productos_img/<?php echo $prodRelevante[0]['imagen']; ?>" alt="">
-                </div>
-              </div>
-
-              <div class="col-lg-6 col-md-6 valign">
-                <div class="d-info-destacado">
-                  <p class="t1"><?php echo $prodRelevante[0]['nombre']; ?></p>
-                  <p class="t2"><?php echo $prodRelevante[0]['ingredientes']; ?></p>
-                  <a class="btn btn-blue-banner mt-3" href="producto-individual.php?key=<?php echo $prodRelevante[0]['id']; ?>" role="button">Ver producto</a>
-
-                </div>
-              </div>
-
-            </div>
+        </div>
+        
+        <?php
+          if(empty($prods)){
+        ?>
+          <div class="row">
+                  <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
+                      <div class="d-listo">
+                          <img src="images/icon-search-blue.svg" alt="">
+                          <p class="t1">¡Sin resultados!</p>
+                          <p class="t2">No se han encontrado productos con la búsqueda: <b>"<?php echo $busqueda ?>"</b></p>
+                          <a class="btn btn-lg-link mt-40" href="#0" role="button">Nueva búsqueda</a>
+                      </div>
+                  </div>
           </div>
+          <?php
+          }else{
+          ?>
 
           <div class="row row-items-pro">
 
-            <div class="col-lg-12 col-md-12">
-              <p class="title-sec mb-20">Populares</p>
-            </div>
-
-            
             <?php foreach ($prods as $item) { ?>
               <div class="col-lg-6 d-all-item-pro">
                 <div class="d-item-pro h-100">
@@ -156,6 +127,7 @@ $prodRelevante=R::getAll($query2);
 
 
           </div>
+          <?php } ?>
 
         </div>
 

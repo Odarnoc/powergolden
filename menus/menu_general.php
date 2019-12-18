@@ -32,9 +32,18 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Socios</a>
             </li>
+            <?php if(isset($_SESSION["user_id"])){ ?>
             <li class="nav-item">
                 <a class="nav-link btn-socios" href="ajax/cerrar_sesion.php">Cerrar Sesion</a>
             </li>
+            <?php }else{ ?>
+            <li class="nav-item">
+                <a class="nav-link btn-socios" href="iniciar-sesion.php">Iniciar Sesion</a>
+            </li>
+            <li class="nav-item" style="padding-left:8px;">
+                <a class="nav-link btn-socios" href="registro.php">Registrate</a>
+            </li>
+            <?php } ?>
         </ul>
     </div>
 </div>

@@ -1,3 +1,22 @@
+
+<?php
+require 'bd/conexion.php';
+
+session_start();
+$user_id=-1;
+if(isset($_SESSION["user_id"])){
+  $user_id=$_SESSION["user_id"];
+}
+$linea="1";
+if(isset($_GET['linea'])){
+  $linea = $_GET['linea'];
+}
+
+$lineaInfo=R::findOne('lineas','id='.$linea);
+$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id WHERE l.id ='.$linea;
+
+$prods=R::getAll($query);
+?>
 <!doctype html>
 <html lang="en">
 
@@ -42,25 +61,9 @@
   <!-- End Navbar ====
     	======================================= -->
 
-  <header class="header-home valign" data-overlay-dark="4" data-scroll-index="0">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-12">
-
-          <div class="d-info-header">
-            <img class="logo-header" src="images/logo-header.png" alt="">
-            <h1 class="t1">El mundo</h1>
-            <h1 class="t2">de la Herbolaria</h1>
-            <a class="btn btn-header mt-30" href="#" data-scroll-nav="1" role="button">Ver productos</a>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </header>
 
 
-  <section class="sec-search" data-scroll-index="1">
+      <section id="sec-busqueda" class="sec-search" data-scroll-index="1">
     <div class="container">
       <div class="row">
 
@@ -123,84 +126,38 @@
 
 
         <div class="col-lg-9 col-md-6">
-          <div style="background-image: url(images/bg-coffee.jpg); " class="d-banner-linea valign" data-overlay-dark="3">
+          <div style="background-image: url(<?php echo $lineaInfo->imagenlinea; ?>); " class="d-banner-linea valign" data-overlay-dark="3">
             <span class="t1">LÍNEA</span>
-            <span class="t2">Café</span>
+            <span class="t2"><?php echo $lineaInfo->nombre; ?></span>
           </div>
 
           <div class="row row-items-pro">
 
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-cafe/co-l.jpg" alt="">
+            <?php foreach ($prods as $item) { ?>
+              <div class="col-lg-6 d-all-item-pro">
+                <div class="d-item-pro h-100">
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4 col-4">
+                      <div class="d-img-pro">
+                        <img src="productos_img/<?php echo $item['imagen'] ?>" alt="">
 
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 cafe">Línea Café</p>
-                      <p class="t2">COL-L</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
+                    <div class="col-lg-8 col-md-8 col-8">
+                      <div class="d-info-pro">
+                        <p class="t1" style="color:<?php echo $item['color'] ?>">Línea <?php echo $item['linea'] ?></p>
+                        <p class="t2"><?php echo $item['nombre'] ?></p>
+                        <p class="t3"><?php echo $item['descripcion'] ?></p>
+                        <p class="t4 two-lines"><?php echo $item['ingredientes'] ?></p>
+                        <a class="btn btn-blue mt-3" href="producto-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver producto</a>
+                      </div>
                     </div>
-                  </div>
 
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-cafe/g-tri.jpg" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 cafe">Línea Café</p>
-                      <p class="t2">G-Tri</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 d-all-item-pro">
-              <div class="d-item-pro h-100">
-                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-4">
-                    <div class="d-img-pro">
-                      <img src="images/productos/linea-cafe/hilatExt.jpg" alt="">
-
-                    </div>
-                  </div>
-
-                  <div class="col-lg-8 col-md-8 col-8">
-                    <div class="d-info-pro">
-                      <p class="t1 cafe">Línea Café</p>
-                      <p class="t2">Hilat</p>
-                      <p class="t3">Frasco con 30 cápsulas</p>
-                      <p class="t4 two-lines">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint itaque eaque, ex quia quisquam</p>
-                      <a class="btn btn-blue mt-3" href="#" role="button">Ver producto</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
+            <?php } ?>
 
 
 
