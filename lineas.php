@@ -63,67 +63,14 @@ $prods=R::getAll($query);
 
 
 
-      <section id="sec-busqueda" class="sec-search" data-scroll-index="1">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-lg-5 col-md-5 col-10 ">
-          <form action="" class="f-search-home">
-            <div class="form-row">
-              <div class="form-group col-md-10 col-10">
-                <input type="text" class="form-control input-search" placeholder="Buscar productos">
-
-              </div>
-
-              <div class="form-group col-md-2 col-2 text-center">
-                <a class="btn btn-search" href="#" role="button"><img src="images/icon-search-white.svg" alt=""></a>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div class="col-lg-2 col-md-2 offset-md-5  col-2">
-          <div class="d-icon-bag">
-            <a class="btn btn-bag" href="#" role="button"><i class="fas fa-shopping-bag"></i></a>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </section>
+    <?php include("menus/search.php"); ?>
 
 
   <section class="sec-gray">
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-3">
-          <div class="d-lineas">
-            <p class="title-sec">LÍneas</p>
 
-            <ul>
-              <li><a class="active" href="linea-cafe.html"><i class="fas fa-circle cafe"></i>Café</a></li>
-              <li><a href="linea-amarilla.html"><i class="fas fa-circle amarilla"></i>Amarilla</a></li>
-              <li><a href="linea-rosa.html"><i class="fas fa-circle rosa"></i>Rosa</a></li>
-              <li><a href="linea-tinta.html"><i class="fas fa-circle tinta"></i>Tinta</a></li>
-              <li><a href="linea-verde.html"><i class="fas fa-circle verde"></i>Verde</a></li>
-              <li><a href="linea-yin-yang.html"><i class="fas fa-circle ying-yang"></i>Yin Yang</a></li>
-              <li><a href="linea-estrella.html"><i class="fas fa-circle estrella"></i>Estrella</a></li>
-            </ul>
-
-          </div>
-
-          <div class="d-asistencia mt-30">
-            <img src="images/icon-asistencia.svg" alt="">
-            <p class="t1">Asistencia</p>
-            <p class="t2"><a href="tel:3331227000">33 3122 7000</a></p>
-          </div>
-
-
-
-        </div>
-
+        <?php include 'menus/lineas_asistencia.php'; ?>
 
         <div class="col-lg-9 col-md-6">
           <div style="background-image: url(<?php echo $lineaInfo->imagenlinea; ?>); " class="d-banner-linea valign" data-overlay-dark="3">
