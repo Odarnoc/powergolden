@@ -2,6 +2,10 @@
 
 require 'user_preferences/user-info.php';
 
+$query = 'SELECT * FROM tarjetas WHERE idusuario = '.$_SESSION["user_id"];
+
+$tarjeta=R::getAll($query); 
+
 ?>
 
 <!doctype html>
@@ -84,14 +88,14 @@ require 'user_preferences/user-info.php';
                                             <form action="" class="form-tarjetas">
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input type="text" class="form-control input-form-underline" required />
+                                                        <input type="text" id="propietario" class="form-control input-form-underline" required />
                                                         <label class="floating-label-underline">Nombre en la tarjeta</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input type="text" class="form-control input-form-underline" required />
+                                                        <input type="text" id="numtarjeta" class="form-control input-form-underline" required />
                                                         <label class="floating-label-underline">Número en la tarjeta</label>
                                                     </div>
                                                 </div>
@@ -99,14 +103,14 @@ require 'user_preferences/user-info.php';
                                                 <div class="form-row">
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form-underline" required />
+                                                            <input type="text" id="fecha" class="form-control input-form-underline" required />
                                                             <label class="floating-label-underline">MM/AA</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form-underline" required />
+                                                            <input type="text" id="codigo" class="form-control input-form-underline" required />
                                                             <label class="floating-label-underline">CVV</label>
                                                         </div>
                                                     </div>
@@ -114,7 +118,7 @@ require 'user_preferences/user-info.php';
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <button type="button" id="btn-guardar-perfil" class="btn btn-lg-blue">Guardar</button>
+                                                    <button type="button" id="registrar_tar" class="btn btn-lg-blue">Guardar</button>
                                                 </div>
 
                                             </form>
@@ -127,33 +131,31 @@ require 'user_preferences/user-info.php';
 
                                             <p class="sub-title-cuenta">Mis tarjetas</p>
 
-                                            <div class="d-item-tarjeta master">
+                                        <?php foreach ($tarjeta as $item) { ?>
+                                            <div class="d-item-tarjeta visa">
                                                 <div class="row mb-10">
                                                     <div class="col-lg-6 col-md-6 col-6">
-                                                        <p class="t1"><img src="images/icon-master-card.svg" alt=""></p>
+                                                        <p class="t1" style="color: white">Informacion</p>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-6">
-                                                        <p class="t2">**** 4543</p>
+                                                        <p class="t2">xxxx-<?php echo substr ($item['numerotar'],12,15) ?></p>
                                                     </div>
                                                 </div>
-
                                                 <p class="t3">Nombre</p>
-                                                <p class="t4 one-line">Brayam Omar Morando Pérez</p>
-
+                                                <p class="t4 one-line"><?php echo $item['propietario'] ?></p>
                                                 <div class="row mt-10">
                                                     <div class="col-lg-6 col-md-6 col-6">
-                                                        <p class="t3">Fecha</p>
-                                                        <p class="t4">09/22</p>
-
+                                                        <p class="t3"><?php echo $item['fecha'] ?></p>
+                                                        <p class="t4">CCV: <?php echo $item['ccv'] ?></p>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-6 d-btn-eliminar-tarjeta">
-                                                        <a class="btn btn-eliminar-tarjeta" href="#" role="button" data-toggle="modal" data-target="#exampleModalCenter">Eliminar tarjeta</a>
+                                                        <a class="btn btn-eliminar-tarjeta"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter">Eliminar tarjeta</a>
                                                     </div>
                                                 </div>
-
                                             </div>
+                                        <?php } ?> 
 
-                                            <div class="d-item-tarjeta visa">
+                                    <!--  <div class="d-item-tarjeta visa">
                                                 <div class="row mb-10">
                                                     <div class="col-lg-6 col-md-6 col-6">
                                                         <p class="t1"><img src="images/icon-visa.svg" alt=""></p>
@@ -176,8 +178,7 @@ require 'user_preferences/user-info.php';
                                                         <a class="btn btn-eliminar-tarjeta" href="#" role="button" data-toggle="modal" data-target="#exampleModalCenter">Eliminar tarjeta</a>
                                                     </div>
                                                 </div>
-
-                                            </div>
+                                            </div> -->
 
 
                                         </div>
@@ -211,7 +212,7 @@ require 'user_preferences/user-info.php';
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar-modal">Aceptar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
                 </div>
             </div>
         </div>
@@ -240,6 +241,10 @@ require 'user_preferences/user-info.php';
 
     <script src="js/scripts.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
+    <!-- billetera js -->
+    <script src="js/billetera-add.js"></script>
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
 </body></html>
