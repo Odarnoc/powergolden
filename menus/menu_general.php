@@ -21,7 +21,7 @@
                 <a class="nav-link" href="#">Sobre Power Golden</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php#sec-tienda">Tienda</a>
+                <a class="nav-link" href="index.php#sec-busqueda">Tienda</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contacto</a>
