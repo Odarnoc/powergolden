@@ -31,20 +31,29 @@ function registrar() {
         type: 'POST',
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
-            console.log(respuesta);
-            setTimeout(function(){
-                location.reload();
-            }, 5000);
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: json_mensaje.mensaje
-            }) 
-            .then((ok) => {
-                if (ok) {
-                location.reload();
-                }
-            });
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                console.log(respuesta);
+                setTimeout(function(){
+                    location.reload();
+                }, 5000);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: json_mensaje.mensaje
+                }) 
+                .then((ok) => {
+                    if (ok) {
+                    location.reload();
+                    }
+                }); 
+            }
+            
         },
 
         error: function(er) {

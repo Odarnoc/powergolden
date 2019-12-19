@@ -65,15 +65,23 @@ function confirmarCompra() {
         type: 'POST',
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
-            console.log(respuesta);
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: json_mensaje.mensaje
-            });
-            carrito = [];
-            localStorage.setItem('carrito', JSON.stringify(carrito));
-            pintarCarrito();
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                console.log(respuesta);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: json_mensaje.mensaje
+                });
+                carrito = [];
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+                pintarCarrito(); 
+            } 
         },
         error: function(er) {
             var json_mensaje = JSON.parse(er.responseText);

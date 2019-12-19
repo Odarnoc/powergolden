@@ -37,19 +37,27 @@ function registrar() {
         success: function(respuesta) {
            var json_mensaje = JSON.parse(respuesta);
             console.log(respuesta);
-            setTimeout(function(){
-                $("#edit_button").click();
-            }, 5000);
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: json_mensaje.mensaje
-              }) 
-              .then((ok) => {
-                if (ok) {
-                $("#edit_button").click();
-                }
-            });
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                setTimeout(function(){
+                    $("#edit_button").click();
+                }, 5000);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: json_mensaje.mensaje
+                }) 
+                .then((ok) => {
+                    if (ok) {
+                    $("#edit_button").click();
+                    }
+                });
+            }
         },
 
         error: function(er) {

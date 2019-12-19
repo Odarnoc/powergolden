@@ -18,19 +18,27 @@ function recupera() {
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
             console.log(respuesta);
-            setTimeout(function(){
-               location.href="ingresar-pin.php"
-            }, 5000);
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: json_mensaje.mensaje
-              }) 
-              .then((ok) => {
-                if (ok) {
-                   location.href="ingresar-pin.php"
-                }
-            });
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                setTimeout(function(){
+                    location.href="ingresar-pin.php"
+                }, 5000);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: json_mensaje.mensaje
+                }) 
+                .then((ok) => {
+                    if (ok) {
+                        location.href="ingresar-pin.php"
+                    }
+                }); 
+            }
         },
         error: function(er) {
             var json_mensaje = JSON.parse(er.responseText);

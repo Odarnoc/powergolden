@@ -29,6 +29,13 @@ function registrar() {
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
             console.log(respuesta);
+        if (json_mensaje.error != undefined) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: json_mensaje.mensaje
+            }); 
+        } else {
             setTimeout(function(){
                 location.href="iniciar-sesion.php"
             }, 5000);
@@ -42,6 +49,7 @@ function registrar() {
                     location.href="iniciar-sesion.php"
                 }
             });
+        }
         },
 
         error: function(er) {

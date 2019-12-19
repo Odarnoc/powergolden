@@ -206,35 +206,12 @@
 
     <script src="js/scripts.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
 
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
-    <script>
-        $("#form-producto").submit(function(e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            formData.append('accionproducto','guardar')
-            $.ajax({
-                url: 'ajax/guardarproducto.php',
-                type: 'POST',
-                data: formData,
-                success: function(data) {
-                    if (data) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Éxito',
-                            text: "El producto ha sido registrado!"
-                        });
-                    }
-                    $('#form-producto').trigger("reset");
-                },
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-        });
-    </script>
+    <script src="js/registro-producto.js"></script>
+
 
 </body></html>
