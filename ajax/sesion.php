@@ -31,7 +31,7 @@ if(empty($_POST['pass'])){
         error_mensaje('Usuario o contraseña invalido');
     }else{
         $_SESSION["user_id"] = $login_in[0]['id'];
-        var_dump(json_encode($login_in[0]['id']));
+        echo json_encode($login_in[0]);
     }
 
 ?>

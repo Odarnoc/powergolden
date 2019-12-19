@@ -1,7 +1,6 @@
 <?php
-require 'bd/conexion.php';
-
 session_start();
+require 'bd/conexion.php';
 $user_id=-1;
 if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];

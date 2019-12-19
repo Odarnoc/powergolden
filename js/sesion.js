@@ -21,8 +21,17 @@ function iniciar() {
         data: datos,
         type: 'POST',
         success: function(respuesta) {
-            console.log(respuesta);
-            location.href = "index.php";
+            var json_mensaje = JSON.parse(respuesta);
+            console.log(json_mensaje);
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                location.href = "index.php";
+            }
         },
         error: function(er) {
 
