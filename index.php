@@ -96,14 +96,14 @@ if(empty($prodRelevante)){
 
         <div class="col-lg-9 col-md-6">
 
-          <div class="row row-destacado">
+          <div class="row row-destacado no-movil">
             <div class="col-lg-12 col-md-12">
               <p class="title-sec mb-20">Destacado</p>
 
             </div>
           </div>
 
-          <div style="background-image: url(<?php echo $prodRelevante[0]['imagenlinea']; ?>);" class="d-banner-destacado" data-overlay-dark="4">
+          <div style="background-image: url(<?php echo $prodRelevante[0]['imagenlinea']; ?>);" class="d-banner-destacado no-movil" data-overlay-dark="4">
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="d-img-destacado">
@@ -123,7 +123,7 @@ if(empty($prodRelevante)){
             </div>
           </div>
 
-          <div class="row row-items-pro">
+          <div class="row row-items-pro lista-productos-movil">
 
             <div class="col-lg-12 col-md-12">
               <p class="title-sec mb-20">Populares</p>

@@ -72,7 +72,7 @@ $prods=R::getAll($query);
         
         <?php include 'menus/lineas_asistencia.php'; ?>
 
-        <div class="col-lg-9 col-md-6">
+        <div class="col-lg-9 col-md-6 lista-productos-movil">
 
         <div class="row">
           <div class="col-lg-12 col-md-12">

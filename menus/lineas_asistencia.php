@@ -6,7 +6,7 @@
             <div class="d-lineas">
                 <p class="title-sec">LÍneas</p>
 
-                <ul>
+                <ul id="lista-lineas">
                     <?php foreach ($lineas as $valorLinea) { ?>
                     <li><a href="lineas.php?linea=<?php echo $valorLinea['id'] ?>"><i class="fas fa-circle" style="color:<?php echo $valorLinea['color'] ?>"></i><?php echo $valorLinea['nombre'] ?></a></li>
                     <?php } ?>

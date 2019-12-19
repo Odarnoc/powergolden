@@ -40,7 +40,7 @@
             <li class="nav-item">
                 <a class="nav-link btn-socios" href="iniciar-sesion.php">Iniciar Sesion</a>
             </li>
-            <li class="nav-item" style="padding-left:8px;">
+            <li class="nav-item registrate-movil" style="padding-left:8px;">
                 <a class="nav-link btn-socios" href="registro.php">Registrate</a>
             </li>
             <?php } ?>
