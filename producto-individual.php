@@ -1,9 +1,9 @@
 <?php
+session_start();
 require 'bd/conexion.php';
 
 $id_prod = $_GET['key'];
 
-session_start();
 $user_id=-1;
 if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
@@ -254,7 +254,9 @@ $prodsRelacionados=R::getAll($query2);
         $("input[type='number']").inputSpinner()
     </script>
     <script>
-        var prod = '<?php echo json_encode($prodIndividual); ?>';
+        var prod = '<?php echo $id_prod; ?>';
+        console.log(prod);
+        
     </script>
     <script src="js/prod-individual.js"></script>
 

@@ -6,11 +6,15 @@ if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
 }
 
-$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id LIMIT 6';
+$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 6';
 $query2='SELECT p.*,COUNT(*) as conteo,l.imagenlinea FROM productosxventas as pxv LEFT JOIN productos as p ON pxv.producto_id = p.id LEFT JOIN lineas as l ON p.categoria = l.id GROUP BY producto_id ORDER BY conteo DESC LIMIT 1';
 
 $prods=R::getAll($query);
 $prodRelevante=R::getAll($query2);
+if(empty($prodRelevante)){
+  $query3='SELECT p.*,l.imagenlinea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 1';
+  $prodRelevante=R::getAll($query3);
+}
 ?>
 
 <!doctype html>
