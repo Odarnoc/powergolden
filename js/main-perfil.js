@@ -11,7 +11,6 @@ $(".btn-editar-perfil").click(function () {
     input.prop('disabled', true);
     btn.prop('disabled', true);
   }
-
-  $("#correo").prop('disabled', true);
+  
 
 });

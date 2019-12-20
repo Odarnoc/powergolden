@@ -21,16 +21,13 @@
                 <a class="nav-link" href="#">Sobre Power Golden</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php#sec-tienda">Tienda</a>
+                <a class="nav-link" href="index.php#sec-busqueda">Tienda</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contacto</a>
+                <a class="nav-link" href="contacto.php">Contacto</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Sucursales</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Socios</a>
+                <a class="nav-link" href="sucursales.php">Sucursales</a>
             </li>
             <?php if(isset($_SESSION["user_id"])){ ?>
             <li class="nav-item">
@@ -40,7 +37,7 @@
             <li class="nav-item">
                 <a class="nav-link btn-socios" href="iniciar-sesion.php">Iniciar Sesion</a>
             </li>
-            <li class="nav-item" style="padding-left:8px;">
+            <li class="nav-item registrate-movil" style="padding-left:8px;">
                 <a class="nav-link btn-socios" href="registro.php">Registrate</a>
             </li>
             <?php } ?>

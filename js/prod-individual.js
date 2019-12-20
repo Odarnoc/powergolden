@@ -1,7 +1,31 @@
+var productoJson;
+$(document).ready(function() {
+    $.ajax({
+        url: 'ajax/info-prod-ind.php',
+        data: { id: prod },
+        type: 'GET',
+        success: function(respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
+            console.log(json_mensaje);
+            productoJson = json_mensaje;
+        },
+        error: function(er) {
+            var json_mensaje = JSON.parse(er.responseText);
+            console.log(json_mensaje);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: json_mensaje.mensaje
+            })
+        }
+    });
+});
+
 function agregar() {
     var carrito = localStorage.getItem('carrito');
     var cant = $('#cantidad').val();
-    var productoJson = JSON.parse(prod);
+    console.log(productoJson);
+
     productoJson.cant = cant;
     var carritoTemporal = [];
     if (carrito == null || carrito == "" || carrito == undefined) {

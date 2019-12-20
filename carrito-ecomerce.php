@@ -59,7 +59,7 @@ require 'user_preferences/user-info.php';
         
         <?php include 'menus/lineas_asistencia.php'; ?>
 
-        <div class="col-lg-9 col-md-6 bg-gray">
+        <div class="col-lg-9 col-md-6 bg-gray lista-productos-movil">
                     <div class="">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
@@ -158,6 +158,8 @@ require 'user_preferences/user-info.php';
   <!-- custom scripts -->
   <script src="js/scripts.js"></script>
   <script src="js/bootstrap-input-spinner.js"></script>
+  <!-- sweetalert scripts -->
+  <script src="js/sweetalert2.js"></script>
 
   <!-- responseive menu -->
   <script src="js/menu-movil.js"></script>

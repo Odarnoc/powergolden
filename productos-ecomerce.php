@@ -1,7 +1,7 @@
 <?php
+session_start();
 require 'bd/conexion.php';
 
-session_start();
 $user_id=-1;
 if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
@@ -11,9 +11,10 @@ if(isset($_GET['busqueda'])){
   $busqueda = $_GET['busqueda'];
 }
 
-$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id WHERE p.nombre LIKE "%'.$busqueda.'%"';
+$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id WHERE (p.nombre LIKE "%'.$busqueda.'%") or (p.ingredientes LIKE "%'.$busqueda.'%")';
 
 $prods=R::getAll($query);
+
 ?>
 
 <!doctype html>
@@ -71,7 +72,7 @@ $prods=R::getAll($query);
         
         <?php include 'menus/lineas_asistencia.php'; ?>
 
-        <div class="col-lg-9 col-md-6">
+        <div class="col-lg-9 col-md-6 lista-productos-movil">
 
         <div class="row">
           <div class="col-lg-12 col-md-12">
@@ -100,20 +101,19 @@ $prods=R::getAll($query);
 
             <?php foreach ($prods as $item) { ?>
               <div class="col-lg-6 d-all-item-pro">
-                <div class="d-item-pro h-100">
+                <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
                   <div class="row">
-                    <div class="col-lg-4 col-md-4 col-4">
+                    <div class="col-lg-5 col-md-5 col-5">
                       <div class="d-img-pro">
                         <img src="productos_img/<?php echo $item['imagen'] ?>" alt="">
 
                       </div>
                     </div>
 
-                    <div class="col-lg-8 col-md-8 col-8">
+                    <div class="col-lg-7 col-md-7 col-7">
                       <div class="d-info-pro">
                         <p class="t1" style="color:<?php echo $item['color'] ?>">Línea <?php echo $item['linea'] ?></p>
                         <p class="t2"><?php echo $item['nombre'] ?></p>
-                        <p class="t3"><?php echo $item['descripcion'] ?></p>
                         <p class="t4 two-lines"><?php echo $item['ingredientes'] ?></p>
                         <a class="btn btn-blue mt-3" href="producto-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver producto</a>
                       </div>

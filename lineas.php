@@ -1,8 +1,7 @@
-
 <?php
+session_start();
 require 'bd/conexion.php';
 
-session_start();
 $user_id=-1;
 if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
@@ -72,7 +71,7 @@ $prods=R::getAll($query);
 
         <?php include 'menus/lineas_asistencia.php'; ?>
 
-        <div class="col-lg-9 col-md-6">
+        <div class="col-lg-9 col-md-6 lista-productos-movil">
           <div style="background-image: url(<?php echo $lineaInfo->imagenlinea; ?>); " class="d-banner-linea valign" data-overlay-dark="3">
             <span class="t1">LÍNEA</span>
             <span class="t2"><?php echo $lineaInfo->nombre; ?></span>

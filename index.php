@@ -6,11 +6,15 @@ if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
 }
 
-$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id LIMIT 6';
+$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 6';
 $query2='SELECT p.*,COUNT(*) as conteo,l.imagenlinea FROM productosxventas as pxv LEFT JOIN productos as p ON pxv.producto_id = p.id LEFT JOIN lineas as l ON p.categoria = l.id GROUP BY producto_id ORDER BY conteo DESC LIMIT 1';
 
 $prods=R::getAll($query);
 $prodRelevante=R::getAll($query2);
+if(empty($prodRelevante)){
+  $query3='SELECT p.*,l.imagenlinea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 1';
+  $prodRelevante=R::getAll($query3);
+}
 ?>
 
 <!doctype html>
@@ -92,14 +96,14 @@ $prodRelevante=R::getAll($query2);
 
         <div class="col-lg-9 col-md-6">
 
-          <div class="row row-destacado">
+          <div class="row row-destacado no-movil">
             <div class="col-lg-12 col-md-12">
               <p class="title-sec mb-20">Destacado</p>
 
             </div>
           </div>
 
-          <div style="background-image: url(<?php echo $prodRelevante[0]['imagenlinea']; ?>);" class="d-banner-destacado" data-overlay-dark="4">
+          <div style="background-image: url(<?php echo $prodRelevante[0]['imagenlinea']; ?>);" class="d-banner-destacado no-movil" data-overlay-dark="4">
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="d-img-destacado">
@@ -119,7 +123,7 @@ $prodRelevante=R::getAll($query2);
             </div>
           </div>
 
-          <div class="row row-items-pro">
+          <div class="row row-items-pro lista-productos-movil">
 
             <div class="col-lg-12 col-md-12">
               <p class="title-sec mb-20">Populares</p>
