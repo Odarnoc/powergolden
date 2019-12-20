@@ -221,4 +221,10 @@ if(empty($prodRelevante)){
   <!-- responseive menu -->
   <script src="js/menu-movil.js"></script>
 
+  <script>
+    $(document).ready(function() {
+      $('#inicio-active').addClass("active");
+    });
+  </script>
+
 </body></html>
