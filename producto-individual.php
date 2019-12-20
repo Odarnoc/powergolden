@@ -246,7 +246,7 @@ $prodsRelacionados=R::getAll($query2);
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
