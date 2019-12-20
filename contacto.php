@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="es">
 
@@ -72,33 +76,33 @@
 
               <div class="form-group">
                 <div class="floating-label-group">
-                  <input type="text" class="form-control input-form" required />
+                  <input type="text" id="nombre" class="form-control input-form" required />
                   <label class="floating-label">Nombre</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="floating-label-group">
-                  <input type="text" class="form-control input-form" required />
+                  <input type="text" id="email" class="form-control input-form" required />
                   <label class="floating-label">Correo electrónico</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="floating-label-group">
-                  <input type="tel" class="form-control input-form" required />
+                  <input type="tel" id="telefono" class="form-control input-form" required />
                   <label class="floating-label">Teléfono</label>
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="floating-label-group">
-                  <textarea class="form-control input-form" rows="3" required></textarea>
+                  <textarea class="form-control input-form" id="mensaje" rows="3" required></textarea>
                   <label class="floating-label">Mensaje</label>
                 </div>
               </div>
 
-              <button type="button" class="btn btn-lg-blue mt-20">Enviar</button>
+              <button type="button" id="enviar" class="btn btn-lg-blue mt-20">Enviar</button>
 
             </form>
 
@@ -134,5 +138,10 @@
   <script src="js/scripts.js"></script>
   <!-- responseive menu -->
   <script src="js/menu-movil.js"></script>
+  <!-- Contacto js -->
+  <script src="js/contacto.js"></script>
+  <!-- sweetalert scripts -->
+  <script src="js/sweetalert2.js"></script>
+
 
 </body></html>
