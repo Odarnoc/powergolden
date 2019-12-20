@@ -5,7 +5,10 @@
         text-align: center;
     }
     .no-movil {
-        display: none;
+        display: none !important;
+    }
+    .footer-movil {
+        margin-bottom: 55px;
     }
     .registrate-movil {
         padding-left: 0px !important;

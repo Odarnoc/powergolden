@@ -2,7 +2,7 @@
         $lineas=R::find('lineas');
     ?>
 
-        <div class="col-lg-3 col-md-3">
+        <div id="lineas-asistencia-no-movil" class="col-lg-3 col-md-3">
             <div class="d-lineas">
                 <p class="title-sec">LÍneas</p>
 

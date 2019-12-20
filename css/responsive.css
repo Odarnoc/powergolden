@@ -186,5 +186,15 @@
     .d-info-carrito .t1 {
         padding-top: 10px;
     }
+    
+    .d-item-mision{
+        height: auto;
+        margin-bottom: 25px;
+    }
+    
+    .navbar-bottom{
+        display: block;
+    }
+    
 
 }

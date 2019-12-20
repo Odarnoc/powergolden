@@ -1,4 +1,4 @@
-<footer class="valign">
+<footer id="footer-no-movil" class="valign footer-movil">
     <div class="container">
         <div class="row valign">
             <div class="col-lg-6 col-md-6">

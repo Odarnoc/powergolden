@@ -1,3 +1,7 @@
+<!-- Menu-bottom -->
+<?php include("menus/menu_bottom.php"); ?>
+<!-- End Menu-bottom -->
+
 <nav class="navbar navbar-solid navbar-expand-lg navbar-dark bg-dark fixed-top" style="z-index: 1030;">
 
 <div class="container">
@@ -18,7 +22,7 @@
                 <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Sobre Power Golden</a>
+                <a class="nav-link" href="sobre-power-golden.php">Sobre Power Golden</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php#sec-busqueda">Tienda</a>

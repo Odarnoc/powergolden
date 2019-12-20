@@ -58,10 +58,9 @@ if(empty($prodRelevante)){
 
 <body>
 
-
-            <!-- Menu -->
-            <?php include("menus/menu_general.php"); ?>
-            <!-- End Menu -->
+  <!-- Menu -->
+  <?php include("menus/menu_general.php"); ?>
+  <!-- End Menu -->
 
 
   <!-- End Navbar ====

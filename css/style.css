@@ -1488,6 +1488,11 @@ textarea:not(:focus):valid~.floating-label-underline {
     background-position: center;
 }
 
+.header-conocenos {
+    background-image: url(../images/bg-linea-verde.jpg);
+    background-position: center;
+}
+
 .title-header-int {
     font-size: 35px;
     font-family: "Poppins";
@@ -1567,4 +1572,123 @@ textarea:not(:focus):valid~.floating-label-underline {
 
 .d-item-sucursal .t3 a i {
     margin-right: 10px;
+}
+
+.p-text-gray {
+    color: rgba(0, 0, 0, .6);
+}
+
+.d-item-mision {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    transition: .4s;
+    height: 100%;
+}
+
+.d-item-mision:hover {
+    transform: translateY(-4px);
+}
+
+.d-item-mision .t1 {
+    font-size: 30px;
+    font-weight: 300;
+    font-family: "Poppins";
+    color: #49B7F3;
+    margin-bottom: 10px;
+}
+
+.d-item-mision .t2 {
+    font-size: 14px;
+    color: rgba(0, 0, 0, .5);
+    line-height: 1.8;
+    margin-bottom: 0px;
+}
+
+.d-item-mision.card {
+    border: none;
+}
+
+ul {
+    list-style: none;
+    padding-left: 20px;
+    margin: 0px;
+}
+
+.d-item-mision li {
+    padding-left: 1em;
+    text-indent: -.7em;
+    line-height: 2;
+    color: rgba(0, 0, 0, .5);
+}
+
+.d-item-mision li::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f058";
+    color: #49B7F3;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.padding-sec {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.p-text-gray b {
+    color: #49B7F3;
+    font-weight: 600;
+}
+
+.p-duda {
+    margin-bottom: 5px;
+    font-size: 19px;
+}
+
+.btn-contacto {
+    background-color: #49B7F3;
+    font-size: 14px;
+    color: white;
+    border-radius: 4px;
+    transition: .4s;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.btn-contacto:hover {
+    color: white;
+    background-color: #242424;
+}
+
+.navbar-bottom {
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 99;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(12, 0, 46, 0.1);
+    box-shadow: 0px -5px 15px 0px rgba(12, 0, 46, 0.05);
+    display: none;
+}
+
+.navbar-bottom a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    font-size: 17px;
+    width: 33.33%;
+    opacity: .4;
+}
+
+.navbar-bottom a.active {
+    opacity: 1;
 }

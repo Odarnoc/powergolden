@@ -48,12 +48,24 @@ require 'user_preferences/user-info.php';
 
   <!-- End Navbar ====
     	======================================= -->
-
-            <?php include("menus/search.php"); ?>
   
 
+      <div class="navbar-bottom" style="bottom: 55px;">
+        <div class="d-btn-carrito" style="margin-top: 0px;">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-6">
+                <p class="t1">TOTAL:</p>
+                <p class="t2" id="total2"></p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-6">
+                <button class="btn btn-lg-link" onclick="confirmarCompra()" role="button">Continuar</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <section class="sec-gray">
+
+  <section class="sec-gray" style="margin-top:55px">
     <div class="container">
       <div class="row">
         
@@ -71,7 +83,7 @@ require 'user_preferences/user-info.php';
 
                         </div>
 
-                        <div class="row row-form-perfil">
+                        <div class="row row-form-perfil footer-movil">
 
                             <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
 
@@ -79,7 +91,7 @@ require 'user_preferences/user-info.php';
                                 </div>
 
 
-                                <div class="d-btn-carrito">
+                                <div class="d-btn-carrito no-movil">
                                     <div class="row">
 
                                         <div class="col-lg-6 col-md-6 col-6">
@@ -101,37 +113,6 @@ require 'user_preferences/user-info.php';
                 </div>
 
       </div>
-    </div>
-
-  </section>
-
-
-  <section>
-    <div class="container">
-
-      <div class="d-asistencia-movil">
-
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-6">
-            <div class="d-img-asistencia">
-              <img src="images/icon-asistencia.svg" alt="">
-
-            </div>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-6 valign">
-            <div class="d-info-asistencia">
-
-              <p class="t1">Asistencia</p>
-              <p class="t2"><a href="tel:3331227000">33 3122 7000</a></p>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
     </div>
 
   </section>
@@ -164,5 +145,6 @@ require 'user_preferences/user-info.php';
   <!-- responseive menu -->
   <script src="js/menu-movil.js"></script>
   <script src="js/carrito.js"></script>
+  <script src="js/carrito-movil.js"></script>
 
 </body></html>

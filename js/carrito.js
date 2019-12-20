@@ -40,6 +40,7 @@ function pintarCarrito() {
     $('#lista-productos').append(listaProds);
     $('#cantProds').text('(' + carrito.length + ')');
     $('#total').text('$' + total);
+    $('#total2').text('$' + total);
     $("input[type='number']").inputSpinner();
 }
 
@@ -80,8 +81,8 @@ function confirmarCompra() {
                 });
                 carrito = [];
                 localStorage.setItem('carrito', JSON.stringify(carrito));
-                pintarCarrito(); 
-            } 
+                pintarCarrito();
+            }
         },
         error: function(er) {
             var json_mensaje = JSON.parse(er.responseText);
