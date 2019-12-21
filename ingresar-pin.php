@@ -98,6 +98,7 @@
     <script src="js/scripts.js"></script>
     <!-- responseive menu -->
   <script src="js/menu-movil.js"></script>
+  <script src="js/no-menu-movil.js"></script>
 
     <!-- custom scripts -->
     <script src="js/pin.js"></script>

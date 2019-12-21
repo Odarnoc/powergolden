@@ -2,14 +2,14 @@
 <?php include("menus/menu_bottom.php"); ?>
 <!-- End Menu-bottom -->
 
-<nav class="navbar navbar-solid navbar-expand-lg navbar-dark bg-dark fixed-top" style="z-index: 1030;">
+<nav class="navbar navbar-solid navbar-expand-lg bg-dark fixed-top" style="z-index: 1030;">
 
 <div class="container">
     <a class="logo" href="index.php">
-        <img src="images/logo-navbar-white.png">
+        <img src="images/logo-navbar.png">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler navbar-hamburguer" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
     </button>
     <div class="collapse navbar-collapse navbar-solid p-3 p-lg-0 mt-lg-0 justify-content-lg-end  d-flex flex-column flex-lg-row flex-xl-row mobileMenu" id="navbarNav">
         <ul class="navbar-nav align-self-stretch ml-auto">
@@ -35,14 +35,14 @@
             </li>
             <?php if(isset($_SESSION["user_id"])){ ?>
             <li class="nav-item">
+                <a class="nav-link" href="perfil-ecomerce.php">Mi perfil</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link btn-socios" href="ajax/cerrar_sesion.php">Cerrar Sesion</a>
             </li>
             <?php }else{ ?>
             <li class="nav-item">
-                <a class="nav-link btn-socios" href="iniciar-sesion.php">Iniciar Sesion</a>
-            </li>
-            <li class="nav-item registrate-movil" style="padding-left:8px;">
-                <a class="nav-link btn-socios" href="registro.php">Registrate</a>
+                <a class="nav-link btn-socios" href="iniciar-sesion.php">Socios</a>
             </li>
             <?php } ?>
         </ul>

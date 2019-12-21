@@ -32,12 +32,12 @@ body {
 }
 
 .navbar-solid {
-    background-color: #242424 !important;
+    background-color: white !important;
 }
 
 .navbar .nav-item .nav-link {
     font-size: 14px;
-    color: rgba(255, 255, 255, .6);
+    color: rgba(0, 0, 0, .6);
     padding-left: 1.2rem;
     padding-right: 1.2rem;
     padding-top: .3rem;
@@ -45,18 +45,26 @@ body {
     transition: .4s;
 }
 
+.navbar .nav-item .nav-link:hover {
+    color: rgba(0, 0, 0, 1);
+}
+
 .navbar .nav-item .nav-link.btn-socios {
-    background-color: #49B7F3;
+    background-color: white;
     border-radius: 4px;
-    padding-left: 1.6rem;
     padding-right: 1.6rem;
-    color: white;
+    color: #49B7F3;
     transition: .4s;
 }
 
 .navbar .nav-item .nav-link.btn-socios:hover {
     background-color: white;
     color: #242424;
+}
+
+.navbar-hamburguer {
+    color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 0, 0, .1);
 }
 
 .navbar .nav-item {

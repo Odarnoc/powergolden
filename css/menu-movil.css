@@ -4,6 +4,12 @@
         overflow: scroll;
         text-align: center;
     }
+    .separar-menu {
+        margin-top: 55px;
+    }
+    .perfil-movil {
+        padding-bottom: 0px;
+    }
     .no-movil {
         display: none !important;
     }

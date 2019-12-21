@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-lg-5 col-md-5 col-10 ">
+            <div class="col-lg-5 col-md-5 col ">
                 <form action="productos-ecomerce.php" class="f-search-home">
                     <div class="form-row">
                         <div class="form-group col-md-10 col-10">
@@ -18,7 +18,7 @@
                 </form>
             </div>
 
-            <div class="col-lg-2 col-md-2 offset-md-5  col-2">
+            <div class="col-lg-2 col-md-2 offset-md-5  col-2 no-movil">
                 <div class="d-icon-bag">
                     <a class="btn btn-bag" href="carrito-ecomerce.php" role="button"><i class="fas fa-shopping-bag"></i></a>
 
