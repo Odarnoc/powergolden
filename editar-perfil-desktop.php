@@ -218,7 +218,7 @@ require 'user_preferences/user-info.php';
 
     <script src="js/scripts.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
 
     <!-- perfil scripts -->
     <script src="js/perfil.js"></script>

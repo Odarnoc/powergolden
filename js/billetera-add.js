@@ -1,7 +1,5 @@
 var select;
 
-
-
 $(document).ready(function() {
     $("#registrar_tar").click(function(event) {
         event.preventDefault();

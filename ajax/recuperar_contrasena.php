@@ -48,14 +48,15 @@ while ($bandera) {
 
                 try {
                     //Server settings
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                    $mail->Port       = 587;   
                     $mail->SMTPDebug = 0;                      // Enable verbose debug output
                     $mail->isSMTP();                                            // Send using SMTP
                     $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-                    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                    $mail->SMTPAuth   = true;                                    // Enable SMTP authentication
                     $mail->Username   = 'powergolden01@gmail.com';                     // SMTP username
                     $mail->Password   = 'pg12345678';                               // SMTP password
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-                    $mail->Port       = 587;                                    // TCP port to connect to
+                                 // TCP port to connect to
 
                     //Recipients
                     $mail->setFrom('powergolden01@gmail.com', 'PowerGolden');

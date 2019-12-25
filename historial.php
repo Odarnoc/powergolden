@@ -91,7 +91,7 @@ $ventas=R::getAll($query);
                         </div>
 
                         <table class="table" style="text-align:center">
-                            <thead class="thead-dark">
+                            <thead class="table-primary">
                                 <tr>
                                 <th scope="col">Numero</th>
                                 <th scope="col">Fecha</th>
@@ -142,7 +142,7 @@ $ventas=R::getAll($query);
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
 
     <script>
         $("input[type='number']").inputSpinner()

@@ -2,9 +2,13 @@
 
 require 'user_preferences/user-info.php';
 
-$clientes=R::find('usuarios','rol = 1');
+$query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"];
+
+$ventas=R::getAll($query);
 
 ?>
+
+
 <!doctype html>
 <html lang="es">
 
@@ -57,10 +61,10 @@ $clientes=R::find('usuarios','rol = 1');
 
 <body>
 
-
             <!-- Top Menu -->
             <?php include("menus/top_menu.php"); ?>
             <!-- End Top Menu -->
+
 
 
     <!-- End Navbar ====
@@ -79,8 +83,12 @@ $clientes=R::find('usuarios','rol = 1');
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Clientes</p>
-                                    <p class="small-text-cuenta">Numero de clientes registrados <b>(<?php echo count($clientes) ?>)</b></p>
+                                    <p class="title-cuenta">Historial de ventas.</p>
+                                    <p class="small-text-cuenta">Ventas realizadas el dia:  
+                                        <input style="margin-left 20px" type="date" id="datein" name="trip-start"> 
+                                        <a class="btn btn-aceptar-modal" style="color: white" id="buscar" type="button">Buscar<i style="margin-left: 20px" class="fas fa-search"></i>
+                                        </a>
+                                    </p> 
                                 </div>
                             </div>
 
@@ -89,21 +97,21 @@ $clientes=R::find('usuarios','rol = 1');
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Fecha de nacimiento</th>
+                                <th scope="col">Numero</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody >
-                                <?php foreach ($clientes as $item) { ?>
-                                    <tr>
-                                        <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
-                                        <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
-                                        <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
-                                        <td><?php echo $item['nacimiento'] ?></td>
-                                    </tr> 
-                                <?php } ?>    
+                            <?php foreach ($ventas as $item) { ?>
+                                <tr>
+                                <td><?php echo $item['id'] ?></td>
+                                <td><?php echo $item['fecha'] ?></td>
+                                <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
+                                <td><a href="detalle-historial.php?id=<?php echo $item['id'] ?>"><i class="fas fa-eye"></i>  </a> </td>
+                                </tr> 
+                            <?php } ?> 
                             </tbody>
                         </table>
                     </div>
@@ -138,11 +146,12 @@ $clientes=R::find('usuarios','rol = 1');
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
+        <!-- responseive menu -->
+        <script src="js/ventas.js"></script>
 
     <script>
-        $("input[type='number']").inputSpinner();
-        $('[data-toggle="tooltip"]').tooltip();
+        $("input[type='number']").inputSpinner()
     </script>
 
 </body></html>

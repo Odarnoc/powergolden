@@ -7,7 +7,7 @@ $id_venta = $_GET['id'];
 $query = 'SELECT * FROM ventas where id = '.$id_venta;
 $ventas=R::getAll($query);
 
-$queryprodventa = 'SELECT p.nombre,p.precio,px.cantidad FROM productosxventas as px LEFT JOIN productos as p on px.producto_id = p.id where venta_id = '.$id_venta;
+$queryprodventa = 'SELECT p.nombre,p.precio,p.imagen,px.cantidad FROM productosxventas as px LEFT JOIN productos as p on px.producto_id = p.id where venta_id = '.$id_venta;
 $productos=R::getAll($queryprodventa);
 
 ?>
@@ -100,8 +100,9 @@ $productos=R::getAll($queryprodventa);
                         </div>
 
                         <table class="table" style="text-align:center">
-                            <thead class="thead-dark">
+                            <thead class="table-primary">
                                 <tr>
+                                <th style="width: 20%" scope="col">Imagen</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Cantidad</th>
                                 <th scope="col">Precio unitario</th>
@@ -111,10 +112,11 @@ $productos=R::getAll($queryprodventa);
                             <tbody >
                             <?php foreach ($productos as $item) { ?>
                                 <tr>
-                                <td><?php echo $item['nombre'] ?></td>
-                                <td><?php echo $item['cantidad'] ?></td>
-                                <td><?php echo $item['precio'] ?></td>
-                                <td><?php echo $item['cantidad']*$item['precio'] ?></td>
+                                <td style="vertical-align: middle"><img style="width: 50%" src="productos_img/<?php echo $item['imagen']?>"> </td>
+                                <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
+                                <td style="vertical-align: middle"><?php echo $item['cantidad'] ?></td>
+                                <td style="vertical-align: middle"><?php echo $item['precio'] ?></td>
+                                <td style="vertical-align: middle"><?php echo $item['cantidad']*$item['precio'] ?></td>
                                 </tr> 
                                 <?php } ?> 
                             </tbody>

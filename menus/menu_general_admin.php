@@ -13,6 +13,7 @@
                                 <li><a href="clientes.php">Clientes</a></li>
                                 <li><a href="ventas.php">Ventas</a></li>
                                 <li><a href="">Timeline de productos</a></li>
+                                <li><a href="registro-administrador.php">Registro Administrador</a></li>
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -15,6 +15,12 @@ if(empty($prodRelevante)){
   $query3='SELECT p.*,l.imagenlinea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 1';
   $prodRelevante=R::getAll($query3);
 }
+
+$datetime = new DateTime();
+$visita = R::dispense('visitas');
+$visita->fecha=$datetime->format('Y-m-d');
+R::store($visita);
+
 ?>
 
 <!doctype html>

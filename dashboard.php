@@ -2,6 +2,18 @@
 
 require 'user_preferences/user-info.php';
 
+$query = 'SELECT nombre FROM usuarios WHERE rol = 1';
+
+$querydos = 'SELECT SUM(total) as sumita FROM ventas where fecha = CURRENT_DATE()';
+
+$querytres = 'SELECT id FROM visitas where fecha = CURRENT_DATE()';
+
+$fecha=R::getAll($querydos);
+$usuario=R::getAll($query);
+$visita=R::getAll($querytres);
+
+
+
 ?>
 
 <!doctype html>
@@ -78,7 +90,7 @@ require 'user_preferences/user-info.php';
                             <div class="col-lg-4 col-md-4">
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-user.svg" alt="">
-                                    <p class="t1">1,104</p>
+                                    <p class="t1"><?php echo count($usuario) ?></p>
                                     <p class="t2">Clientes</p>
                                 </div>
                             </div>
@@ -86,7 +98,7 @@ require 'user_preferences/user-info.php';
                             <div class="col-lg-4 col-md-4">
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-bag.svg" alt="">
-                                    <p class="t1">$18,104</p>
+                                    <p class="t1">$<?php if($fecha[0]['sumita'] == null) echo '0'; else echo ($fecha[0]['sumita']) ?></p>
                                     <p class="t2">Ventas de hoy</p>
                                 </div>
                             </div>
@@ -94,7 +106,7 @@ require 'user_preferences/user-info.php';
                             <div class="col-lg-4 col-md-4">
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-eye.svg" alt="">
-                                    <p class="t1">357</p>
+                                    <p class="t1"><?php echo count($visita) ?></p>
                                     <p class="t2">Visitas de hoy</p>
                                 </div>
                             </div>
@@ -137,7 +149,7 @@ require 'user_preferences/user-info.php';
     <!-- scrollIt -->
     <script src="js/scrollIt.min.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
