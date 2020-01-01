@@ -95,7 +95,7 @@ $.ajax({
         }) 
         .then((ok) => {
             if (ok) {
-                location.reload;
+                location.reload();
             }
         });
     },

@@ -2,6 +2,10 @@
 
 require 'user_preferences/user-info.php';
 
+$id_usuario = $_GET['id'];
+
+$item=R::findOne('usuarios','id ='.$id_usuario );
+
 ?>
 
 <!doctype html>
@@ -62,7 +66,7 @@ require 'user_preferences/user-info.php';
                         <div class="row">
                             <div class="col-lg-10 col-md-10">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Registro de usuarios.</p>
+                                    <p class="title-cuenta">Editar usuarios.</p>
                                 </div>
                             </div>
 
@@ -82,21 +86,21 @@ require 'user_preferences/user-info.php';
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form" id="name" required />
+                                                            <input type="text" class="form-control input-form" id="name" value="<?php echo $item['nombre']?>" require/>
                                                             <label class="floating-label">Nombre</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form" id="last_name" required />
+                                                            <input type="text" class="form-control input-form" value="<?php echo $item['apellidos']?>" id="last_name" require/>
                                                             <label class="floating-label">Apellido</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                        <select id="rol" class="form-control input-form" required>
+                                                        <select id="rol" class="form-control input-form" value="<?php echo $item['rol']?>" required>
                                                             <option value="2">Tipo de usuario</option>
                                                             <option value="0">Administrador</option>
                                                             <option value="1">Cliente</option>
@@ -106,26 +110,21 @@ require 'user_preferences/user-info.php';
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="tel" class="form-control input-form" id="phone" required />
+                                                            <input type="tel" class="form-control input-form" value="<?php echo $item['telefono']?>" id="phone" require/>
                                                             <label class="floating-label">Teléfono</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form" id="email" required />
+                                                            <input type="text" class="form-control input-form" value="<?php echo $item['correo']?>" id="email" require/>
+                                                            <input type="text" style="display:none" id="pass" value="<?php echo $item['pass']?>" />
+                                                            <input type="text" style="display:none" id="id" value="<?php echo $id_usuario?>" />
                                                             <label class="floating-label">Correo electrónico</label>
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <div class="floating-label-group">
-                                                            <input type="password" class="form-control input-form" id="pass" required />
-                                                            <label class="floating-label">Contraseña</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <button class="btn btn-lg-blue mt-30" id="registrar_but">Aceptar</button>
+                                                    <button class="btn btn-lg-blue mt-30" id="edit_but">Aceptar</button>
 
                                                 </form>
                                             </div>
@@ -191,7 +190,7 @@ require 'user_preferences/user-info.php';
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
     <!-- billetera js -->
-    <script src="js/registro-administrador.js"></script>
+    <script src="js/editar-persona.js"></script>
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 

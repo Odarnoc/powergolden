@@ -92,7 +92,8 @@ $clientes=R::find('usuarios','rol = 1');
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Telefono</th>
-                                <th scope="col">Fecha de nacimiento</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -101,7 +102,8 @@ $clientes=R::find('usuarios','rol = 1');
                                         <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
-                                        <td><?php echo $item['nacimiento'] ?></td>
+                                        <td><a href="editar-usuario.php?id=<?php echo $item['id']?>"><i class="fas fa-user-edit"></i></a></td>
+                                        <td><a role="button" onclick="eliminar('<?php echo $item['id'] ?>')"><i class="far fa-trash-alt"></i></a></td>
                                     </tr> 
                                 <?php } ?>    
                             </tbody>
@@ -122,23 +124,22 @@ $clientes=R::find('usuarios','rol = 1');
     <!-- jQuery -->
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.min.js"></script>
-
     <!-- popper.min -->
     <script src="js/popper.min.js"></script>
-
     <!-- bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-
     <!-- scrollIt -->
     <script src="js/scrollIt.min.js"></script>
-
     <!-- custom scripts -->
     <script src="js/main-perfil.js"></script>
-
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
+    <!-- eliminar js -->
+    <script src="js/editar-persona.js"></script>
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
     <script>
         $("input[type='number']").inputSpinner();

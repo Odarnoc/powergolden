@@ -2,9 +2,8 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"];
-
-$ventas=R::getAll($query);
+$queryprodventa = 'SELECT * FROM  productos';
+$productos=R::getAll($queryprodventa);
 
 ?>
 
@@ -61,53 +60,57 @@ $ventas=R::getAll($query);
 
 <body>
 
+
             <!-- Top Menu -->
             <?php include("menus/top_menu.php"); ?>
             <!-- End Top Menu -->
 
 
 
-    <!-- End Navbar ====
-    	======================================= -->
 
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
 
-            <!-- Admin Menu -->
-            <?php include("menus/menu_general_admin.php"); ?>
-            <!-- End Admin Menu -->
+                <!-- Admin Menu -->
+                <?php include("menus/menu_general_admin.php"); ?>
+                <!-- End Admin Menu -->
 
                 <div class="col-lg-8 col-md-8 bg-gray" >
                     <div class="d-cont-right">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Historial de pedidos</p>
-                                    <p class="small-text-cuenta">Numero de pedido realizados <b>(<?php echo sizeof($ventas)?>)</b></p>
+                                    <p class="title-cuenta">Lista de productos.</p>
+                                    <div class="row small-text-cuenta">
+                                        <div class="col">
+                                            <p class="small-text-cuenta" style="margin-bottom: 0px; padding-top: 10px">Numero de productos <b>(<?php echo sizeof($productos)?>)</b></p> 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
-                                <th scope="col">Numero</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Acciones</th>
+                                <th style="width: 20%" scope="col">Imagen</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio unitario</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Acción</th>
                                 </tr>
                             </thead>
                             <tbody >
-                            <?php foreach ($ventas as $item) { ?>
+                            <?php foreach ($productos as $item) { ?>
                                 <tr>
-                                <td><?php echo $item['id'] ?></td>
-                                <td><?php echo $item['fecha'] ?></td>
-                                <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
-                                <td><a href="detalle-historial.php?id=<?php echo $item['id']?>"><i class="fas fa-eye"></i>  </a> </td>
+                                <td style="vertical-align: middle"><img style="width: 50%" src="productos_img/<?php echo $item['imagen']?>"> </td>
+                                <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
+                                <td style="vertical-align: middle"><?php echo $item['precio'] ?></td>
+                                <td style="vertical-align: middle"><?php echo $item['inventario'] ?></td>
+                                <td style="vertical-align: middle"><a href="editar-producto.php?id=<?php echo $item['id']?>"><i class="far fa-edit"></i></a></td>
                                 </tr> 
-                            <?php } ?> 
+                                <?php } ?> 
                             </tbody>
                         </table>
                     </div>

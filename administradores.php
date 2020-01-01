@@ -2,13 +2,9 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"];
-
-$ventas=R::getAll($query);
+$clientes=R::find('usuarios','rol = 0');
 
 ?>
-
-
 <!doctype html>
 <html lang="es">
 
@@ -61,10 +57,10 @@ $ventas=R::getAll($query);
 
 <body>
 
+
             <!-- Top Menu -->
             <?php include("menus/top_menu.php"); ?>
             <!-- End Top Menu -->
-
 
 
     <!-- End Navbar ====
@@ -83,8 +79,8 @@ $ventas=R::getAll($query);
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Historial de pedidos</p>
-                                    <p class="small-text-cuenta">Numero de pedido realizados <b>(<?php echo sizeof($ventas)?>)</b></p>
+                                    <p class="title-cuenta">Administrador</p>
+                                    <p class="small-text-cuenta">Numero de administradores registrados <b>(<?php echo count($clientes) ?>)</b></p>
                                 </div>
                             </div>
 
@@ -93,21 +89,23 @@ $ventas=R::getAll($query);
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
-                                <th scope="col">Numero</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody >
-                            <?php foreach ($ventas as $item) { ?>
-                                <tr>
-                                <td><?php echo $item['id'] ?></td>
-                                <td><?php echo $item['fecha'] ?></td>
-                                <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
-                                <td><a href="detalle-historial.php?id=<?php echo $item['id']?>"><i class="fas fa-eye"></i>  </a> </td>
-                                </tr> 
-                            <?php } ?> 
+                                <?php foreach ($clientes as $item) { ?>
+                                    <tr>
+                                        <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
+                                        <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
+                                        <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
+                                        <td><a href="editar-usuario.php?id=<?php echo $item['id']?>"><i class="fas fa-user-edit"></i></a></td>
+                                        <td><a role="button" onclick="eliminar('<?php echo $item['id'] ?>')"><i class="far fa-trash-alt"></i></a></td>
+                                    </tr> 
+                                <?php } ?>    
                             </tbody>
                         </table>
                     </div>
@@ -126,26 +124,26 @@ $ventas=R::getAll($query);
     <!-- jQuery -->
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.min.js"></script>
-
     <!-- popper.min -->
     <script src="js/popper.min.js"></script>
-
     <!-- bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-
     <!-- scrollIt -->
     <script src="js/scrollIt.min.js"></script>
-
     <!-- custom scripts -->
     <script src="js/main-perfil.js"></script>
-
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
+    <!-- eliminar js -->
+    <script src="js/editar-persona.js"></script>
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
     <script>
-        $("input[type='number']").inputSpinner()
+        $("input[type='number']").inputSpinner();
+        $('[data-toggle="tooltip"]').tooltip();
     </script>
 
 </body></html>

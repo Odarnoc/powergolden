@@ -41,7 +41,7 @@ if(empty($_POST['pass'])){
     return;
 }
 
-if(empty($_POST['rol'])){
+if($_POST['rol']==NULL || $_POST['rol']==2){
     error_mensaje('Elegir un tipo de usuario.');
     return;
 }
