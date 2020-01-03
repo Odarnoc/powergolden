@@ -39,8 +39,8 @@
                                 <li><a href="">Paquetes de productos</a></li>
                                 <li><a href="">Folletos electrónicos</a></li>
                                 <li><a href="billetera.php">Billetera</a></li>
-                                <li><a href="bonos.php">Bonos</a></li>
-                                <li><a href="reportes.php">Reportes</a></li>
+                                <li><a href="">Bonos</a></li>
+                                <li><a href="">Reportes</a></li>
                                 <li><a href="matriz.php">Matriz de clientes</a></li>
                                 <li><a href="">Promociones</a></li>
                                 <li><a href="">Videos</a></li>

@@ -2,7 +2,13 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"];
+if(!isset($_POST['fecha-in'])){
+    $query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"];
+    $filtro = "dd-mm-aaaa";
+}else{
+    $query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"].' AND fecha = "'.$_POST['fecha-in'].'"' ;
+    $filtro = $_POST['fecha-in'];
+}
 
 $ventas=R::getAll($query);
 
@@ -85,9 +91,13 @@ $ventas=R::getAll($query);
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Historial de ventas.</p>
                                     <p class="small-text-cuenta">Ventas realizadas el dia:  
-                                        <input style="margin-left 20px" type="date" id="datein" name="trip-start"> 
-                                        <a class="btn btn-aceptar-modal" style="color: white" id="buscar" type="button">Buscar<i style="margin-left: 20px" class="fas fa-search"></i>
-                                        </a>
+                                        <form action="ventas.php" method="post">
+                                            <input style="margin-left 20px" value="<?php echo $filtro;  ?>" type="date" id="datein" name="fecha-in"> 
+                                            <button class="btn btn-aceptar-modal" style="color: white" id="buscar" type="submit">Buscar<i style="margin-left: 20px" class="fas fa-search"></i>
+                                            </button>
+                                            <a class="btn btn-aceptar-modal" style="color: white" href="ventas.php" >Limpiar filtro<i style="margin-left: 20px" class="fas fa-search"></i>
+                                            </a>
+                                        </form>  
                                     </p> 
                                 </div>
                             </div>
@@ -147,8 +157,6 @@ $ventas=R::getAll($query);
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
-        <!-- responseive menu -->
-        <script src="js/ventas.js"></script>
 
     <script>
         $("input[type='number']").inputSpinner()
