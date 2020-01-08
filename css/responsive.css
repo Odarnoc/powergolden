@@ -196,5 +196,15 @@
         display: block;
     }
     
-
+    .d-img-pro-lp > img{
+        width: 100%;
+    }
+    
+    .d-video .t1{
+        padding-top: 2px;
+    }
+    
+    .d-desc .t1{
+        padding-top: 3px;
+    }
 }

@@ -1,8 +1,9 @@
 <?php
 session_start();
-if(isset($_SESSION["user_id"])){
+if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=1){
     header("Location: index.php");
 }
+
 
 ?>
 

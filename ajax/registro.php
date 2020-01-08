@@ -41,6 +41,11 @@ if(empty($_POST['pass'])){
     return;
 }
 
+if(!is_numeric($_POST['phone'])){
+    error_mensaje('Llenar el campo "Telefono", de forma correcta.');
+    return;
+}
+
     $nombre = $_POST['name'];
     $apellido = $_POST['last_name'];
     $telefono = $_POST['phone'];

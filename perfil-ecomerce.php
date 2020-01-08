@@ -103,7 +103,7 @@ require 'user_preferences/user-info.php';
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="<?php echo $information->telefono; ?>" type="text" id="telefono" class="form-control input-form-underline" disabled/>
+                                                        <input value="<?php echo $information->telefono; ?>" type="text" id="telefono"  pattern="[0-9]" class="form-control input-form-underline" disabled/>
                                                         <label class="floating-label-underline">Teléfono</label>
                                                     </div>
                                                 </div>

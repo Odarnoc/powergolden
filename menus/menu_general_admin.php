@@ -36,8 +36,19 @@
                                     </div>
                                 </li>
                                 <li><a href="">Tarjetas</a></li>
-                                <li><a href="">Paquetes de productos</a></li>
-                                <li><a href="">Folletos electrónicos</a></li>
+                                <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Paquetes de productos
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="paquetes-productos.php">Listado de paquetes</a>
+                                            <a class="dropdown-item" href="crear-paquetes.php">Agregar paquetes</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="folletos.php">Folletos electrónicos</a></li>
                                 <li><a href="billetera.php">Billetera</a></li>
                                 <li><a href="">Bonos</a></li>
                                 <li><a href="">Reportes</a></li>

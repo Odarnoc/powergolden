@@ -33,6 +33,17 @@ if(!isset($_SESSION["user_id"])){
     return;
 }
 
+if(!is_numeric($_POST['phone'])){
+    error_mensaje('Llenar el campo "Telefono", de forma correcta.');
+    return;
+}
+
+if(!is_numeric($_POST['cp']) || strlen($_POST['cp']) != 5){
+    error_mensaje('Codigo postal incorrecto');
+    return;
+} 
+
+
 
     $user_id=$_SESSION["user_id"];
     $nombre = $_POST['name'];
