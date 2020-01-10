@@ -1,5 +1,5 @@
 
-<div class="col-lg-4 col-md-4 bg-white">
+<div class="col-lg-4 col-md-4 bg-white" style="margin-top: 6rem">
                     <div class="d-menu-left">
 
                         <div class="d-list-menu">
@@ -14,12 +14,12 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="clientes.php">Clientes</a>
                                             <a class="dropdown-item" href="administradores.php">Administradores</a>
+                                            <a class="dropdown-item" href="registro-administrador.php">Registro Administrador</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li><a href="ventas.php">Ventas</a></li>
                                 <li><a href="">Timeline de productos</a></li>
-                                <li><a href="registro-administrador.php">Registro Administrador</a></li>
 
                                 <li>
                                     <div class="dropdown show">
@@ -54,7 +54,7 @@
                                 <li><a href="">Reportes</a></li>
                                 <li><a href="matriz.php">Matriz de clientes</a></li>
                                 <li><a href="">Promociones</a></li>
-                                <li><a href="">Videos</a></li>
+                                <li><a href="videos.php">Videos</a></li>
                                 <li><a href="">New letters</a></li>
                                 <li><a class="logout" href="ajax/cerrar_sesion.php">Cerrar sesión<i class="fas fa-sign-out-alt"></i></a></li>
                             </ul>

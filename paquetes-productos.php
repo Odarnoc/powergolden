@@ -2,6 +2,21 @@
 
 require 'user_preferences/user-info.php';
 
+if(!isset($_POST['busqueda'])){
+    $query = 'SELECT * FROM paquetes';
+    $filtro = "Buscar paquete";
+}else{
+    $query = 'SELECT * FROM ventas where  nombre = "'.$_POST['busqueda'].'"' ;
+    $filtro = $_POST['busqueda'];
+}
+
+var_dump($_POST['busqueda']);
+
+
+$paquetes=R::getAll($query); 
+
+
+
 ?>
 
 <!doctype html>
@@ -67,14 +82,14 @@ require 'user_preferences/user-info.php';
 
                             <div class="col-lg-8 col-md-8">
                                 <div class="d-buscar-l-p">
-                                    <form action="" class="f-search-home">
+                                    <form action="paquetes-productos.php" method="post"class="f-search-home">
                                         <div class="form-row">
                                             <div class="form-group col-lg-10 col-md-10 col-10">
-                                                <input type="text" class="form-control input-search" placeholder="Buscar paquete">
+                                                <input type="text" name="busqueda" class="form-control input-search" placeholder="<?php echo $filtro;  ?>">
                                             </div>
 
                                             <div class="form-group col-md-2 col-2 text-center">
-                                                <a class="btn btn-search" href="#" role="button"><img src="images/icon-search-white.svg" alt=""></a>
+                                                <button class="btn btn-search" type="submit" role="button"><img src="images/icon-search-white.svg" alt=""></button>
                                             </div>
                                         </div>
                                     </form>
@@ -84,89 +99,26 @@ require 'user_preferences/user-info.php';
                         </div>
 
                         <div class="row row-listado-productos">
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-paquete h-100">
-                                    <div class="d-1">
-                                        <img src="images/productos/paquetes/paquetes.jpg" alt="">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t2">$1,249<sup>.00</sup></p>
-                                        <p class="t1 one-line">Nombre del Kit</p>
-                                        <p class="t3">Total de productos: <b>5</b></p>
-                                        <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-paquete h-100">
-                                    <div class="d-1">
-                                        <img src="images/productos/paquetes/paquetes.jpg" alt="">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t2">$1,249<sup>.00</sup></p>
-                                        <p class="t1 one-line">Nombre del Kit</p>
-                                        <p class="t3">Total de productos: <b>5</b></p>
-                                        <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-paquete h-100">
-                                    <div class="d-1">
-                                        <img src="images/productos/paquetes/paquetes.jpg" alt="">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t2">$1,249<sup>.00</sup></p>
-                                        <p class="t1 one-line">Nombre del Kit</p>
-                                        <p class="t3">Total de productos: <b>5</b></p>
-                                        <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a>
+                            <?php foreach ($paquetes as $item) { ?>
+                                <div class="col-lg-6 col-md-6 d-all-item-pro">
+                                    <div class="d-item-paquete h-100">
+                                        <div class="d-1">
+                                            <img src="images/productos/paquetes/paquetes.jpg" alt="">
+                                        </div>
+                                        <div class="d-2">
+                                            <p class="t1 one-line"><?php echo $item['nombre'] ?></p>
+                                            <p class="t3">Total de productos: <b><?php echo $item['productos'] ?></b></p>
+                                            <p class="t2">$<?php echo $item['precio'] ?><sup>.00</sup></p>
+                                            <div>
+                                                <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a>
+                                                <a style="margin-left: 8rem" class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
+                                            </div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-paquete h-100">
-                                    <div class="d-1">
-                                        <img src="images/productos/paquetes/paquetes.jpg" alt="">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t2">$1,249<sup>.00</sup></p>
-                                        <p class="t1 one-line">Nombre del Kit</p>
-                                        <p class="t3">Total de productos: <b>5</b></p>
-                                        <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-paquete h-100">
-                                    <div class="d-1">
-                                        <img src="images/productos/paquetes/paquetes.jpg" alt="">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t2">$1,249<sup>.00</sup></p>
-                                        <p class="t1 one-line">Nombre del Kit</p>
-                                        <p class="t3">Total de productos: <b>5</b></p>
-                                        <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-paquete h-100">
-                                    <div class="d-1">
-                                        <img src="images/productos/paquetes/paquetes.jpg" alt="">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t2">$1,249<sup>.00</sup></p>
-                                        <p class="t1 one-line">Nombre del Kit</p>
-                                        <p class="t3">Total de productos: <b>5</b></p>
-                                        <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?> 
 
                         </div>
                     </div>
@@ -175,6 +127,28 @@ require 'user_preferences/user-info.php';
         </div>
 
     </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center mb">
+                    <img class="img-mb" src="images/icon-atencion.png" alt="">
+                    <p class="title-mb mt-20">Atención</p>
+                    <p class="sub-title-mb">¿Desea eliminar el paquete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
             <!-- Footer-->
@@ -198,5 +172,10 @@ require 'user_preferences/user-info.php';
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
     <script src="js/dashboard.js"></script>
+
+        <!-- sweetalert scripts -->
+        <script src="js/sweetalert2.js"></script>
+
+        <script src="js/crear-paquete.js"></script>
 
 </body></html>

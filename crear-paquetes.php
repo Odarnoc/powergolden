@@ -3,7 +3,7 @@
 
     /*require 'bd/conexion.php';*/ //No se si es necesario //La imagen no se borra al subir el producto
     
-    $lineas = R::find('lineas');
+    $productos = R::find('productos');
 ?>
 
 <!doctype html>
@@ -79,8 +79,8 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Nuevo producto</p>
-                                    <p class="small-text-cuenta">Para agregar un nuevo producto deberás completar el siguiente formulario.</p>
+                                    <p class="title-cuenta">Nuevo paquete</p>
+                                    <p class="small-text-cuenta">Puedes crear paquetes con la cantidad de productos que necesites.</p>
                                 </div>
                             </div>
 
@@ -93,53 +93,59 @@
                                 <div class="d-form-registro-productos">
 
                                     <form id="form-producto" class="form-registro-productos" method="post" enctype="multipart/form-data">
+
                                         <div class="form-group">
-                                            <div class="image-upload" style="background-image: url(images/bg-image-upload.jpg);">
+                                            <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg);">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
                                                 <label for="file-input">
                                                     <i class="fas fa-plus"></i> Subir foto
                                                 </label>
-                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required />
+                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required hidden />
+                                            </div>
+                                        </div>                          
 
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input name="nombre" id="nombre" type="text" class="form-control input-form-underline"/>
+                                                <label class="floating-label-underline">Nombre del paquete</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="nombre" type="text" class="form-control input-form-underline" required />
-                                                <label class="floating-label-underline">Nombre del producto *</label>
+                                                <input name="descripcion" id="descripcion" type="text" class="form-control input-form-underline"/>
+                                                <label class="floating-label-underline">Descripción del paquete</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="descripcion" type="text" class="form-control input-form-underline" required />
-                                                <label class="floating-label-underline">Descripción *</label>
+                                                <input class="input-form-underline " id="cantidad" type="number" name="quantity" min="1" max="25">
+                                                <label class="floating-label-underline">Numero de productos</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <textarea name="ingredientes" class="form-control input-form-underline" rows="3" required></textarea>
-                                                <label class="floating-label-underline">Ingredientes *</label>
+                                                <input name="descripcion" id="precio" type="text" class="form-control input-form-underline"/>
+                                                <label class="floating-label-underline">Precio</label>
                                             </div>
                                         </div>
 
+                                        <!--
                                         <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <textarea name="uso" class="form-control input-form-underline" rows="3" required></textarea>
-                                                <label class="floating-label-underline">Modo de uso *</label>
-                                            </div>
+                                            <button class="btn btn-primary" onclick="productos()" >Agregar</button>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input name="inventario" type="text" class="form-control input-form-underline" required />
-                                                <label class="floating-label-underline">Inventario *</label>
-                                            </div>
-                                        </div>
+                                        <div id="select">
 
+                                        </div> -->
 
-                                        <button type="submit" class="btn btn-lg-blue mt-3">Guardar</button>
+                                        <button type="submit" onclick="enviarpaquete()" class="btn btn-lg-blue mt-3">Guardar</button>
 
                                     </form>
                                 </div>
@@ -185,7 +191,8 @@
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
-    <script src="js/registro-producto.js"></script>
+    <script src="js/crear-paquete.js"></script>
+
 
 
 </body></html>

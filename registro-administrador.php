@@ -63,6 +63,7 @@ require 'user_preferences/user-info.php';
                             <div class="col-lg-10 col-md-10">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Registro de usuarios.</p>
+                                    <p class="small-text-cuenta">Crear usuarios de tipo administrador y clientes.</p>
                                 </div>
                             </div>
 

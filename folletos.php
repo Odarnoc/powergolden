@@ -1,3 +1,9 @@
+<?php
+
+require 'user_preferences/user-info.php';
+
+?>
+
 <!doctype html>
 <html lang="es">
 
@@ -30,26 +36,9 @@
 
 <body>
 
-    <nav class="navbar navbar-solid navbar-expand-lg navbar-dark bg-dark">
-
-        <div class="container">
-            <a class="logo" href="index.html">
-                <img src="images/logo-navbar-white.png">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn-cuenta-nav" href="editar-perfil-desktop.html"><i class="fas fa-user-circle"></i>Brayam Morando</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-    </nav>
+            <!-- Top Menu -->
+            <?php include("menus/top_menu.php"); ?>
+            <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -58,12 +47,12 @@
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4 bg-white">
-                    <div class="d-menu-left">
 
-                    </div>
+                <!-- Admin Menu -->
+                <?php include("menus/menu_general_admin.php"); ?>
+                <!-- End Admin Menu -->
 
-                </div>
+
 
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
@@ -98,6 +87,7 @@
                         </div>
 
                         <div class="row row-listado-productos">
+
                             <div class="col-lg-6 col-md-6 d-all-item-pro">
                                 <div class="d-item-folleto h-100">
                                     <div class="d-1" style="background-image: url(images/image-example.png)">
@@ -105,67 +95,7 @@
                                     <div class="d-2">
                                         <p class="t1">Nombre del folleto</p>
                                         <p class="t2 two-lines mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum molestiae mollitia rem. Tempora reprehenderit, necessitatibus unde temporibus architecto sequi harum sapiente, delectus dolores consectetur itaque repellendus aliquid nisi, adipisci accusantium?</p>
-                                        <a class="btn btn-ver-mas mt-3" href="folleto-individual.html" role="button"><i class="fas fa-eye"></i> Ver más</a>
-                                    </div> 
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-folleto h-100">
-                                    <div class="d-1" style="background-image: url(images/image-example.png)">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t1">Nombre del folleto</p>
-                                        <p class="t2 two-lines mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum molestiae mollitia rem. Tempora reprehenderit, necessitatibus unde temporibus architecto sequi harum sapiente, delectus dolores consectetur itaque repellendus aliquid nisi, adipisci accusantium?</p>
-                                        <a class="btn btn-ver-mas mt-3" href="folleto-individual.html" role="button"><i class="fas fa-eye"></i> Ver más</a>
-                                    </div> 
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-folleto h-100">
-                                    <div class="d-1" style="background-image: url(images/image-example.png)">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t1">Nombre del folleto</p>
-                                        <p class="t2 two-lines mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum molestiae mollitia rem. Tempora reprehenderit, necessitatibus unde temporibus architecto sequi harum sapiente, delectus dolores consectetur itaque repellendus aliquid nisi, adipisci accusantium?</p>
-                                        <a class="btn btn-ver-mas mt-3" href="folleto-individual.html" role="button"><i class="fas fa-eye"></i> Ver más</a>
-                                    </div> 
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-folleto h-100">
-                                    <div class="d-1" style="background-image: url(images/image-example.png)">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t1">Nombre del folleto</p>
-                                        <p class="t2 two-lines mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum molestiae mollitia rem. Tempora reprehenderit, necessitatibus unde temporibus architecto sequi harum sapiente, delectus dolores consectetur itaque repellendus aliquid nisi, adipisci accusantium?</p>
-                                        <a class="btn btn-ver-mas mt-3" href="folleto-individual.html" role="button"><i class="fas fa-eye"></i> Ver más</a>
-                                    </div> 
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-folleto h-100">
-                                    <div class="d-1" style="background-image: url(images/image-example.png)">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t1">Nombre del folleto</p>
-                                        <p class="t2 two-lines mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum molestiae mollitia rem. Tempora reprehenderit, necessitatibus unde temporibus architecto sequi harum sapiente, delectus dolores consectetur itaque repellendus aliquid nisi, adipisci accusantium?</p>
-                                        <a class="btn btn-ver-mas mt-3" href="folleto-individual.html" role="button"><i class="fas fa-eye"></i> Ver más</a>
-                                    </div> 
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-folleto h-100">
-                                    <div class="d-1" style="background-image: url(images/image-example.png)">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t1">Nombre del folleto</p>
-                                        <p class="t2 two-lines mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum molestiae mollitia rem. Tempora reprehenderit, necessitatibus unde temporibus architecto sequi harum sapiente, delectus dolores consectetur itaque repellendus aliquid nisi, adipisci accusantium?</p>
-                                        <a class="btn btn-ver-mas mt-3" href="folleto-individual.html" role="button"><i class="fas fa-eye"></i> Ver más</a>
+                                        <a class="btn btn-ver-mas mt-3" href="folleto-individual.php" role="button"><i class="fas fa-eye"></i> Ver más</a>
                                     </div> 
                                 </div>
                             </div>
@@ -179,31 +109,9 @@
     </section>
 
 
-    <footer class="valign">
-        <div class="container">
-            <div class="row valign">
-                <div class="col-lg-6 col-md-6">
-                    <div class="d-footer-left ">
-                        <img src="images/logo-footer.png" alt="">
-                        <p class="t1">© PG 2019, Todos los derechos son reservados.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="d-footer-right">
-                        <p class="t1">
-                            <a target="_blank" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-instagram"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-twitter"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-youtube"></i></a>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </footer>
+            <!-- Footer-->
+            <?php include("menus/footer_general.php"); ?>
+            <!-- End Footer -->
 
 
     <!-- jQuery -->

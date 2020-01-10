@@ -8,9 +8,12 @@ $querydos = 'SELECT SUM(total) as sumita FROM ventas where fecha = CURRENT_DATE(
 
 $querytres = 'SELECT id FROM visitas where fecha = CURRENT_DATE()';
 
+$querycuatro = 'SELECT MONTH(fecha), COUNT(*) FROM ventas WHERE YEAR(fecha) = YEAR(now()) GROUP BY YEAR(fecha), MONTH(fecha)';
+
 $fecha=R::getAll($querydos);
 $usuario=R::getAll($query);
 $visita=R::getAll($querytres);
+
 
 
 

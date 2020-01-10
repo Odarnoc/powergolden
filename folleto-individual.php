@@ -1,3 +1,10 @@
+<?php
+
+require 'user_preferences/user-info.php';
+
+?>
+
+
 <!doctype html>
 <html lang="es">
 
@@ -30,26 +37,9 @@
 
 <body>
 
-    <nav class="navbar navbar-solid navbar-expand-lg navbar-dark bg-dark">
-
-        <div class="container">
-            <a class="logo" href="index.html">
-                <img src="images/logo-navbar-white.png">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn-cuenta-nav" href="editar-perfil-desktop.html"><i class="fas fa-user-circle"></i>Brayam Morando</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-    </nav>
+            <!-- Top Menu -->
+            <?php include("menus/top_menu.php"); ?>
+            <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -58,11 +48,10 @@
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4 bg-white">
-                    <div class="d-menu-left">
-                    
-                    </div>
-                </div>
+                    <!-- Admin Menu -->
+                    <?php include("menus/menu_general_admin.php"); ?>
+                    <!-- End Admin Menu -->
+
 
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
@@ -79,15 +68,15 @@
                         <div class="row mt-4">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-folleto-ind">
-                                   <div style="background-image: url(images/image-example.png)" class="d-1">
-                                       
-                                   </div>
-                                   <div class="d-2">
-                                       <p class="t1">Nombre del folleto</p>
-                                       <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio adipisci vel dolor vitae quam sequi laborum culpa facilis quo, voluptatem assumenda ut possimus neque facere natus sed repellat tempora sunt? Aliquid voluptatum, recusandae minima ratione architecto cumque fugiat non laudantium hic accusantium! Molestiae possimus ducimus magni vero id atque necessitatibus similique quisquam vel, quos nisi dolorem reprehenderit, itaque dolore aspernatur molestias ab esse facere expedita voluptatem? Vero, maxime, accusantium? Error nemo quaerat laudantium tempore quibusdam odio adipisci accusantium fugiat, esse numquam ad expedita voluptatum eius sequi voluptatem vero enim animi impedit accusamus aperiam. Officia quos est dicta voluptas corporis dolore!</p>
-                                       <a class="btn btn-blue" href="#" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
-                                   </div>
-                                     
+                                    <div style="background-image: url(images/image-example.png)" class="d-1">
+                            
+                                    </div>
+                                    <div class="d-2">
+                                        <p class="t1">Nombre del folleto</p>
+                                        <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio adipisci vel dolor vitae quam sequi laborum culpa facilis quo, voluptatem assumenda ut possimus neque facere natus sed repellat tempora sunt? Aliquid voluptatum, recusandae minima ratione architecto cumque fugiat non laudantium hic accusantium! Molestiae possimus ducimus magni vero id atque necessitatibus similique quisquam vel, quos nisi dolorem reprehenderit, itaque dolore aspernatur molestias ab esse facere expedita voluptatem? Vero, maxime, accusantium? Error nemo quaerat laudantium tempore quibusdam odio adipisci accusantium fugiat, esse numquam ad expedita voluptatum eius sequi voluptatem vero enim animi impedit accusamus aperiam. Officia quos est dicta voluptas corporis dolore!</p>
+                                        <a class="btn btn-blue" href="#" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
+                                    </div>
+                                
                                 </div>
                             </div>
                         </div>
@@ -99,31 +88,9 @@
     </section>
 
 
-    <footer class="valign">
-        <div class="container">
-            <div class="row valign">
-                <div class="col-lg-6 col-md-6">
-                    <div class="d-footer-left ">
-                        <img src="images/logo-footer.png" alt="">
-                        <p class="t1">© PG 2019, Todos los derechos son reservados.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="d-footer-right">
-                        <p class="t1">
-                            <a target="_blank" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-instagram"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-twitter"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-youtube"></i></a>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </footer>
+            <!-- Footer-->
+            <?php include("menus/footer_general.php"); ?>
+            <!-- End Footer -->
 
 
     <!-- jQuery -->
