@@ -2,6 +2,17 @@
 
 require 'user_preferences/user-info.php';
 
+if(!isset($_POST['busqueda'])){
+    $query = 'SELECT * FROM folletos';
+    $filtro = "Buscar paquete";
+}else{
+    $query = 'SELECT * FROM folletos where  nombre = "'.$_POST['busqueda'].'"' ;
+    $filtro = $_POST['busqueda'];
+}
+
+$paquetes=R::getAll($query); 
+var_dump($paquetes);
+
 ?>
 
 <!doctype html>
@@ -88,18 +99,24 @@ require 'user_preferences/user-info.php';
 
                         <div class="row row-listado-productos">
 
-                            <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                <div class="d-item-folleto h-100">
-                                    <div class="d-1" style="background-image: url(images/image-example.png)">
+                            <?php foreach ($paquetes as $item) { ?>
+                                <div class="col-lg-6 col-md-6 d-all-item-pro">
+                                    <div class="d-item-folleto h-100">
+                                        <div class="d-img-pro-ind ">
+                                            <img src="images/folletos/<?php echo $item['imagen'] ?>.jpg" alt="">
+                                        </div>
+                                        <div class="d-2">
+                                            <p class="t1"><?php echo $item['nombre'] ?></p>
+                                            <p class="t2 two-lines mt-1"><?php echo $item['descripcion'] ?></p>
+                                            <div>
+                                                <a class="btn btn-ver-mas mt-3" href="folleto-individual.php?id=<?php echo $item['id']?>" role="button"><i class="fas fa-eye"></i> Ver más</a>
+                                                <a style="margin-left: 8rem" class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
+                                            </div>
+                                        </div> 
                                     </div>
-                                    <div class="d-2">
-                                        <p class="t1">Nombre del folleto</p>
-                                        <p class="t2 two-lines mt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum molestiae mollitia rem. Tempora reprehenderit, necessitatibus unde temporibus architecto sequi harum sapiente, delectus dolores consectetur itaque repellendus aliquid nisi, adipisci accusantium?</p>
-                                        <a class="btn btn-ver-mas mt-3" href="folleto-individual.php" role="button"><i class="fas fa-eye"></i> Ver más</a>
-                                    </div> 
                                 </div>
-                            </div>
-                            
+                            <?php } ?> 
+
                         </div>
                     </div>
                 </div>
@@ -107,6 +124,28 @@ require 'user_preferences/user-info.php';
         </div>
 
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center mb">
+                    <img class="img-mb" src="images/icon-atencion.png" alt="">
+                    <p class="title-mb mt-20">Atención</p>
+                    <p class="sub-title-mb">¿Desea eliminar el paquete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
             <!-- Footer-->
@@ -130,5 +169,10 @@ require 'user_preferences/user-info.php';
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
     <script src="js/dashboard.js"></script>
+
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
+
+    <script src="js/nuevo-folleto.js"></script>
 
 </body></html>

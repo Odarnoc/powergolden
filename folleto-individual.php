@@ -2,6 +2,14 @@
 
 require 'user_preferences/user-info.php';
 
+$id = $_GET['key'];
+
+$query = 'SELECT * FROM folletos where  id = "'.$_GET['id'].'"' ;
+
+$res=R::getAll($query); 
+
+$folletod = $res[0];
+
 ?>
 
 
@@ -68,12 +76,12 @@ require 'user_preferences/user-info.php';
                         <div class="row mt-4">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-folleto-ind">
-                                    <div style="background-image: url(images/image-example.png)" class="d-1">
-                            
+                                    <div>
+                                        <img stylesrc="folletos/<?php echo $folletod['imagen'] ?>.jpg" class="d-1"></img>                          
                                     </div>
                                     <div class="d-2">
-                                        <p class="t1">Nombre del folleto</p>
-                                        <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio adipisci vel dolor vitae quam sequi laborum culpa facilis quo, voluptatem assumenda ut possimus neque facere natus sed repellat tempora sunt? Aliquid voluptatum, recusandae minima ratione architecto cumque fugiat non laudantium hic accusantium! Molestiae possimus ducimus magni vero id atque necessitatibus similique quisquam vel, quos nisi dolorem reprehenderit, itaque dolore aspernatur molestias ab esse facere expedita voluptatem? Vero, maxime, accusantium? Error nemo quaerat laudantium tempore quibusdam odio adipisci accusantium fugiat, esse numquam ad expedita voluptatum eius sequi voluptatem vero enim animi impedit accusamus aperiam. Officia quos est dicta voluptas corporis dolore!</p>
+                                        <p class="t1"><?php echo $folletod['nombre'] ?></p>
+                                        <p class="t2"><?php echo $folletod['descripcion'] ?></p>
                                         <a class="btn btn-blue" href="#" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
                                     </div>
                                 

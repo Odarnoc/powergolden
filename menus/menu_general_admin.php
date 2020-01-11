@@ -19,7 +19,6 @@
                                     </div>
                                 </li>
                                 <li><a href="ventas.php">Ventas</a></li>
-                                <li><a href="">Timeline de productos</a></li>
 
                                 <li>
                                     <div class="dropdown show">
@@ -48,14 +47,26 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="folletos.php">Folletos electrónicos</a></li>
+                                
+                                <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Folletos
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="folletos.php">Folletos electrónicos</a>
+                                            <a class="dropdown-item" href="agregar-folleto.php">Nuevo folleto</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                
                                 <li><a href="billetera.php">Billetera</a></li>
-                                <li><a href="">Bonos</a></li>
                                 <li><a href="">Reportes</a></li>
                                 <li><a href="matriz.php">Matriz de clientes</a></li>
                                 <li><a href="">Promociones</a></li>
                                 <li><a href="videos.php">Videos</a></li>
-                                <li><a href="">New letters</a></li>
                                 <li><a class="logout" href="ajax/cerrar_sesion.php">Cerrar sesión<i class="fas fa-sign-out-alt"></i></a></li>
                             </ul>
 

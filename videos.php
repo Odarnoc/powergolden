@@ -1,3 +1,7 @@
+<?php
+    require 'user_preferences/user-info.php';
+?>
+
 <!doctype html>
 <html lang="es">
 
@@ -30,26 +34,9 @@
 
 <body>
 
-    <nav class="navbar navbar-solid navbar-expand-lg navbar-dark bg-dark">
-
-        <div class="container">
-            <a class="logo" href="index.html">
-                <img src="images/logo-navbar-white.png">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link btn-cuenta-nav" href="editar-perfil-desktop.html"><i class="fas fa-user-circle"></i>Brayam Morando</a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-    </nav>
+            <!-- Top Menu -->
+            <?php include("menus/top_menu.php"); ?>
+            <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -59,10 +46,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 bg-white">
-                    <div class="d-menu-left position-sticky">
-
-
-                    </div>
+                <!-- Admin Menu -->
+                <?php include("menus/menu_general_admin.php"); ?>
+                <!-- End Admin Menu -->
 
                 </div>
 
@@ -80,138 +66,23 @@
 
                         <div class="row mt-4">
                             <div class="col-lg-12 col-md-12">
-                                <div class="d-item-video mb-30">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-video">
-                                                <iframe src="https://www.youtube.com/embed/1Ba7BC58t9w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                <p class="t1"><a target="_blank" class="one-line" href="https://www.youtube.com/watch?v=1Ba7BC58t9w">https://www.youtube.com/watch?v=1Ba7BC58t9w</a></p>
-                                                <p class="t2">07/02/19</p>
+
+                                    <div class="d-item-video mb-30">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="d-video">
+                                                <iframe src="https://www.youtube.com/embed/FJ7A3kAiZk0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-desc">
-                                                <p class="t1">Descripción</p>
-                                                <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic officiis cum non qui deleniti nulla voluptatibus rem. Possimus sapiente similique consequuntur et. Reprehenderit possimus nihil, expedita nostrum laboriosam quia iste eaque, dolores, facilis, fuga soluta minima ducimus officia dolor. Nobis cum totam ipsum magnam vero nemo eligendi numquam corporis.</p>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="d-desc">
+                                                    <p class="t1">Descripción</p>
+                                                    <p class="t2">Video de muestra para la pantalla misma</p>
+                                                </div>
                                             </div>
+                                            
                                         </div>
-                                        
                                     </div>
-                                </div>
-                                
-                                <div class="d-item-video mb-30">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-video">
-                                                <iframe src="https://www.youtube.com/embed/1Ba7BC58t9w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                <p class="t1"><a target="_blank" class="one-line" href="https://www.youtube.com/watch?v=1Ba7BC58t9w">https://www.youtube.com/watch?v=1Ba7BC58t9w</a></p>
-                                                <p class="t2">07/02/19</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-desc">
-                                                <p class="t1">Descripción</p>
-                                                <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic officiis cum non qui deleniti nulla voluptatibus rem. Possimus sapiente similique consequuntur et. Reprehenderit possimus nihil, expedita nostrum laboriosam quia iste eaque, dolores, facilis, fuga soluta minima ducimus officia dolor. Nobis cum totam ipsum magnam vero nemo eligendi numquam corporis.</p>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                
-                                <div class="d-item-video mb-30">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-video">
-                                                <iframe src="https://www.youtube.com/embed/1Ba7BC58t9w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                <p class="t1"><a target="_blank" class="one-line" href="https://www.youtube.com/watch?v=1Ba7BC58t9w">https://www.youtube.com/watch?v=1Ba7BC58t9w</a></p>
-                                                <p class="t2">07/02/19</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-desc">
-                                                <p class="t1">Descripción</p>
-                                                <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic officiis cum non qui deleniti nulla voluptatibus rem. Possimus sapiente similique consequuntur et. Reprehenderit possimus nihil, expedita nostrum laboriosam quia iste eaque, dolores, facilis, fuga soluta minima ducimus officia dolor. Nobis cum totam ipsum magnam vero nemo eligendi numquam corporis.</p>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                
-                                <div class="d-item-video mb-30">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-video">
-                                                <iframe src="https://www.youtube.com/embed/1Ba7BC58t9w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                <p class="t1"><a target="_blank" class="one-line" href="https://www.youtube.com/watch?v=1Ba7BC58t9w">https://www.youtube.com/watch?v=1Ba7BC58t9w</a></p>
-                                                <p class="t2">07/02/19</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-desc">
-                                                <p class="t1">Descripción</p>
-                                                <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic officiis cum non qui deleniti nulla voluptatibus rem. Possimus sapiente similique consequuntur et. Reprehenderit possimus nihil, expedita nostrum laboriosam quia iste eaque, dolores, facilis, fuga soluta minima ducimus officia dolor. Nobis cum totam ipsum magnam vero nemo eligendi numquam corporis.</p>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                
-                                <div class="d-item-video mb-30">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-video">
-                                                <iframe src="https://www.youtube.com/embed/1Ba7BC58t9w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                <p class="t1"><a target="_blank" class="one-line" href="https://www.youtube.com/watch?v=1Ba7BC58t9w">https://www.youtube.com/watch?v=1Ba7BC58t9w</a></p>
-                                                <p class="t2">07/02/19</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-desc">
-                                                <p class="t1">Descripción</p>
-                                                <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic officiis cum non qui deleniti nulla voluptatibus rem. Possimus sapiente similique consequuntur et. Reprehenderit possimus nihil, expedita nostrum laboriosam quia iste eaque, dolores, facilis, fuga soluta minima ducimus officia dolor. Nobis cum totam ipsum magnam vero nemo eligendi numquam corporis.</p>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                
-                                <div class="d-item-video mb-30">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-video">
-                                                <iframe src="https://www.youtube.com/embed/1Ba7BC58t9w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                <p class="t1"><a target="_blank" class="one-line" href="https://www.youtube.com/watch?v=1Ba7BC58t9w">https://www.youtube.com/watch?v=1Ba7BC58t9w</a></p>
-                                                <p class="t2">07/02/19</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-desc">
-                                                <p class="t1">Descripción</p>
-                                                <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic officiis cum non qui deleniti nulla voluptatibus rem. Possimus sapiente similique consequuntur et. Reprehenderit possimus nihil, expedita nostrum laboriosam quia iste eaque, dolores, facilis, fuga soluta minima ducimus officia dolor. Nobis cum totam ipsum magnam vero nemo eligendi numquam corporis.</p>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                
-                                <div class="d-item-video mb-30">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-video">
-                                                <iframe src="https://www.youtube.com/embed/1Ba7BC58t9w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                <p class="t1"><a target="_blank" class="one-line" href="https://www.youtube.com/watch?v=1Ba7BC58t9w">https://www.youtube.com/watch?v=1Ba7BC58t9w</a></p>
-                                                <p class="t2">07/02/19</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="d-desc">
-                                                <p class="t1">Descripción</p>
-                                                <p class="t2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic officiis cum non qui deleniti nulla voluptatibus rem. Possimus sapiente similique consequuntur et. Reprehenderit possimus nihil, expedita nostrum laboriosam quia iste eaque, dolores, facilis, fuga soluta minima ducimus officia dolor. Nobis cum totam ipsum magnam vero nemo eligendi numquam corporis.</p>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
                                 
                             </div>
                         </div>
@@ -223,31 +94,9 @@
     </section>
 
 
-    <footer class="valign">
-        <div class="container">
-            <div class="row valign">
-                <div class="col-lg-6 col-md-6">
-                    <div class="d-footer-left ">
-                        <img src="images/logo-footer.png" alt="">
-                        <p class="t1">© PG 2019, Todos los derechos son reservados.</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6">
-                    <div class="d-footer-right">
-                        <p class="t1">
-                            <a target="_blank" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-instagram"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-twitter"></i></a>
-                            <a target="_blank" href=""><i class="fab fa-youtube"></i></a>
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </footer>
+            <!-- Footer-->
+            <?php include("menus/footer_general.php"); ?>
+            <!-- End Footer -->
 
 
     <!-- jQuery -->
