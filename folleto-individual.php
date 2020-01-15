@@ -66,7 +66,7 @@ $folletod = $res[0];
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Folletos</p>
+                                    <p class="title-cuenta">Folleto</p>
                                     <p class="small-text-cuenta"></p>
                                 </div>
                             </div>
@@ -76,9 +76,11 @@ $folletod = $res[0];
                         <div class="row mt-4">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-folleto-ind">
-                                    <div>
-                                        <img stylesrc="folletos/<?php echo $folletod['imagen'] ?>.jpg" class="d-1"></img>                          
-                                    </div>
+                                <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $folletod['imagen'] ?>.jpg'); height: 350px;
+                                            background-size: cover;
+                                            background-repeat: no-repeat; 
+                                            ">
+                                        </div>
                                     <div class="d-2">
                                         <p class="t1"><?php echo $folletod['nombre'] ?></p>
                                         <p class="t2"><?php echo $folletod['descripcion'] ?></p>

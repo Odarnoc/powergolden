@@ -6,16 +6,13 @@ if(!isset($_POST['busqueda'])){
     $query = 'SELECT * FROM paquetes';
     $filtro = "Buscar paquete";
 }else{
-    $query = 'SELECT * FROM ventas where  nombre = "'.$_POST['busqueda'].'"' ;
+    $query = 'SELECT * FROM paquetes where  (nombre LIKE "%'.$_POST['busqueda'].'%")';
     $filtro = $_POST['busqueda'];
 }
 
 var_dump($_POST['busqueda']);
 
-
 $paquetes=R::getAll($query); 
-
-
 
 ?>
 
@@ -111,7 +108,7 @@ $paquetes=R::getAll($query);
                                             <p class="t3">Total de productos: <b><?php echo $item['productos'] ?></b></p>
                                             <p class="t2">$<?php echo $item['precio'] ?><sup>.00</sup></p>
                                             <div>
-                                                <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a>
+                                            <!--  <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a> -->
                                                 <a style="margin-left: 8rem" class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
                                             </div>
                                             

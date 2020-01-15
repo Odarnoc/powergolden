@@ -6,7 +6,7 @@ if(!isset($_POST['busqueda'])){
     $query = 'SELECT * FROM folletos';
     $filtro = "Buscar paquete";
 }else{
-    $query = 'SELECT * FROM folletos where  nombre = "'.$_POST['busqueda'].'"' ;
+    $query = 'SELECT * FROM folletos where  (nombre LIKE "%'.$_POST['busqueda'].'%")' ;
     $filtro = $_POST['busqueda'];
 }
 
@@ -81,14 +81,14 @@ var_dump($paquetes);
 
                             <div class="col-lg-8 col-md-8">
                                 <div class="d-buscar-l-p">
-                                    <form action="" class="f-search-home">
+                                    <form action="folletos.php" method="post"class="f-search-home">
                                         <div class="form-row">
                                             <div class="form-group col-lg-10 col-md-10 col-10">
-                                                <input type="text" class="form-control input-search" placeholder="Buscar folleto">
+                                                <input type="text" name="busqueda" class="form-control input-search" placeholder="<?php echo $filtro;  ?>">
                                             </div>
 
                                             <div class="form-group col-md-2 col-2 text-center">
-                                                <a class="btn btn-search" href="#" role="button"><img src="images/icon-search-white.svg" alt=""></a>
+                                                <button class="btn btn-search" type="submit" role="button"><img src="images/icon-search-white.svg" alt=""></button>
                                             </div>
                                         </div>
                                     </form>
@@ -102,8 +102,9 @@ var_dump($paquetes);
                             <?php foreach ($paquetes as $item) { ?>
                                 <div class="col-lg-6 col-md-6 d-all-item-pro">
                                     <div class="d-item-folleto h-100">
-                                        <div class="d-img-pro-ind ">
-                                            <img src="images/folletos/<?php echo $item['imagen'] ?>.jpg" alt="">
+                                        <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $item['imagen'] ?>.jpg'); height: 200px;
+                                            background-size: cover;
+                                            background-repeat: no-repeat; ">
                                         </div>
                                         <div class="d-2">
                                             <p class="t1"><?php echo $item['nombre'] ?></p>
