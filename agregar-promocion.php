@@ -1,11 +1,6 @@
 <?php
     require 'user_preferences/user-info.php';
 
-    $id_producto = $_GET['id'];
-    $item=R::findOne('productos','id ='.$id_producto );
-
-    $lineas = R::find('lineas');
-
 ?>
 
 <!doctype html>
@@ -31,7 +26,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
     <!-- responseive menu -->
-    <link rel="stylesheet" href="css/menu-movil.css">
+  <link rel="stylesheet" href="css/menu-movil.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -81,93 +76,69 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Editar producto</p>
-                                    <p class="small-text-cuenta">Para editar un producto deberás completar el siguiente formulario.</p>
+                                    <p class="title-cuenta">Nuevo paquete</p>
+                                    <p class="small-text-cuenta">Puedes crear paquetes con la cantidad de productos que necesites.</p>
                                 </div>
                             </div>
 
                         </div>
-                        
+
                         <div class="row row-form-perfil">
 
                             <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
 
                                 <div class="d-form-registro-productos">
-                                    <form id="form-producto" class="form-registro-productos" method="post" enctype="multipart/form-data">
+
+                                    <form id="form-paquete" class="form-registro-productos" method="post" enctype="multipart/form-data">
+
                                         <div class="form-group">
-                                            <div class="image-upload" style="background-image: url(productos_img/<?php echo $item['imagen']?>)">
+                                            <div class="image-upload " style="background-image: url(images/<?php echo $item['imagen'] ?>);">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <a type="button" for="file-input"><i class="fas fa-plus"></i> Subir foto </a >
-                                                <input hidden name="img-producto" id="file-input" type="file" onchange="readURL(this);"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div >
-                                                <label>Nombre del producto *</label>
-                                                <input name="nombre" type="text" class="form-control input-form-underline" value="<?php echo $item['nombre']?>" required></input>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label >Descripción *</label>
-                                                <input name="descripcion" type="text" class="form-control input-form-underline" value="<?php echo $item['descripcion']?>" required />
-                                                <input name="id_producto" type="text" class="form-control input-form-underline" value="<?php echo $item['id']?>" hidden />
+                                                <label for="file-input"><i class="fas fa-plus"></i> Subir foto</label>
+                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required hidden/>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <label>Ingredientes *</label>
-                                                <textarea name="ingredientes" class="form-control input-form-underline" rows="3" required><?php echo $item['ingredientes']?></textarea>
+                                                <input name="nombre" type="text" class="form-control input-form-underline" required />
+                                                <label class="floating-label-underline">Nombre de la promocion </label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <label>Modo de uso *</label>
-                                                <textarea name="uso" class="form-control input-form-underline" rows="3" required><?php echo $item['uso']?></textarea>
+                                                <input name="descripcion" type="text" class="form-control input-form-underline" required />
+                                                <label class="floating-label-underline">Descripción </label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <label>Inventario *</label>
-                                                <input name="inventario" type="text" class="form-control input-form-underline" value="<?php echo $item['inventario']?>" required />
+                                                <label class="">Fecha de inicio</label>
+                                                <input name="inicio" type="date" class="form-control input-form-underline" required />
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-
                                             <div class="floating-label-group">
-
-                                                <label class="label-select">Categoria *</label>
-                                                <select name="categoria" class="form-control input-form-underline">
-                                                    <option hidden>Seleccionar la categoria</option>
-                                                        <?php
-                                                        foreach ($lineas as $valor) {
-                                                        ?>
-                                                            <option <?php if($valor->id == $item['categoria'] ) echo "selected"; ?> value="<?php echo $valor->id; ?>">Línea <?php echo $valor->nombre; ?></option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                </select>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label>Precio *</label>
-                                                <input name="precio" type="text" class="form-control input-form-underline" value="<?php echo $item['precio']?>" required />
+                                                <label class="">Fecha de finalizacion</label>
+                                                <input name="fin" type="date" class="form-control input-form-underline" required />
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-lg-blue mt-3">Guardar</button>
+
+                                    <!--<div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input name="precio" type="text" class="form-control input-form-underline" required />
+                                                <label class="floating-label-underline">Precio </label>
+                                            </div>
+                                        </div> -->
+
+                                        <button type="submit"  class="btn btn-lg-blue mt-3">Guardar</button>
 
                                     </form>
                                 </div>
@@ -213,7 +184,9 @@
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
-    <script src="js/editar-producto.js"></script>
+    <script src="js/crear-promocion.js"></script>
+
 
 
 </body></html>
+

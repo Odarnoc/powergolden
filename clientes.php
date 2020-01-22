@@ -103,7 +103,7 @@ $clientes=R::find('usuarios','rol = 1');
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
                                         <td><a href="editar-usuario.php?id=<?php echo $item['id']?>"><i class="fas fa-user-edit"></i></a></td>
-                                        <td><a role="button" onclick="eliminar('<?php echo $item['id'] ?>')"><i class="far fa-trash-alt"></i></a></td>
+                                        <td><a href="" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i class="fas fa-trash-alt"></i></a></td>
                                     </tr> 
                                 <?php } ?>    
                             </tbody>
@@ -112,9 +112,29 @@ $clientes=R::find('usuarios','rol = 1');
                 </div>
             </div>
         </div>
-
     </section>
 
+        <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center mb">
+                    <img class="img-mb" src="images/icon-atencion.png" alt="">
+                    <p class="title-mb mt-20">Atención</p>
+                    <p class="sub-title-mb">¿Desea eliminar el metodo de pago?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
             <!-- Footer-->
             <?php include("menus/footer_general.php"); ?>

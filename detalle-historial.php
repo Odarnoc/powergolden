@@ -115,15 +115,15 @@ $productos=R::getAll($queryprodventa);
                                 <td style="vertical-align: middle"><img style="width: 50%" src="productos_img/<?php echo $item['imagen']?>"> </td>
                                 <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
                                 <td style="vertical-align: middle"><?php echo $item['cantidad'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['precio'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['cantidad']*$item['precio'] ?></td>
+                                <td style="vertical-align: middle">$<?php echo $item['precio'] ?><sup>.00</sup></td>
+                                <td style="vertical-align: middle">$<?php echo $item['cantidad']*$item['precio'] ?><sup>.00</sup></td>
                                 </tr> 
                                 <?php } ?> 
                             </tbody>
                         </table>
                     </div>
                     <div style="text-align: right; font-family: Poppins; font-size: 22px; margin-bottom: 50px ">
-                    <span>Total del pedido: <?php echo $ventas[0]['total'] ?><sup>.00</sup></span>
+                    <span>Total del pedido: $<?php echo $ventas[0]['total'] ?><sup>.00</sup></span>
                     </div>
                     <div style="margin-left: 100px; margin-right: 100px; margin-bottom: 50px">
                         <a class="btn btn-lg-blue mt-30" href="historial.php" style="padding-top: 18px">Atras</a>

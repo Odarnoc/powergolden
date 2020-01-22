@@ -1,9 +1,6 @@
 <?php
     require 'user_preferences/user-info.php';
 
-    /*require 'bd/conexion.php';*/ //No se si es necesario //La imagen no se borra al subir el producto
-    
-    $productos = R::find('productos');
 ?>
 
 <!doctype html>
@@ -92,10 +89,10 @@
 
                                 <div class="d-form-registro-productos">
 
-                                    <form id="form-producto" class="form-registro-productos" method="post" enctype="multipart/form-data">
+                                    <form id="form-paquete" class="form-registro-productos" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group">
-                                            <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg);">
+                                            <div class="image-upload " style="background-image: url(images/<?php echo $item['imagen'] ?>);">
                                             </div>
                                         </div>
 
@@ -117,21 +114,21 @@
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="descripcion" id="descripcion" type="text" class="form-control input-form-underline"/>
+                                                <input name="description" id="descripcion" type="text" class="form-control input-form-underline"/>
                                                 <label class="floating-label-underline">Descripción del paquete</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input class="input-form-underline " id="cantidad" type="number" name="quantity" min="1" max="25">
+                                                <input class="input-form-underline " id="cantidad" type="prod" name="cantidad" min="1" max="25">
                                                 <label class="floating-label-underline">Numero de productos</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="descripcion" id="precio" type="text" class="form-control input-form-underline"/>
+                                                <input name="price" id="precio" type="text" class="form-control input-form-underline"/>
                                                 <label class="floating-label-underline">Precio</label>
                                             </div>
                                         </div>
@@ -145,7 +142,7 @@
 
                                         </div> -->
 
-                                        <button type="submit" onclick="enviarpaquete()" class="btn btn-lg-blue mt-3">Guardar</button>
+                                        <button type="submit"  class="btn btn-lg-blue mt-3">Guardar</button>
 
                                     </form>
                                 </div>

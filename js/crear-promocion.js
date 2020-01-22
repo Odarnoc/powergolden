@@ -8,7 +8,7 @@ $("#form-paquete").submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
     $.ajax({
-        url: 'ajax/nuevo-paquete.php',
+        url: 'ajax/agregar-promocion.php',
         type: 'POST',
         data: formData,
         success: function(respuesta) {
@@ -62,7 +62,7 @@ function confirmar(){
     console.log(sel);
     
     $.ajax({
-        url: 'ajax/eliminar-paquete.php',
+        url: 'ajax/eliminar-promocion.php',
         data: {id_producto:sel},
         type: 'POST',
         success: function(respuesta) {

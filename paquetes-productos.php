@@ -70,16 +70,16 @@ $paquetes=R::getAll($query);
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Paquetes</p>
-                                    <p class="small-text-cuenta">Selecciona el Kit que deseas comprar</p>
+                                    <p class="small-text-cuenta">En esta pantalla puedes controlar los paquete agregados.</p></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row row-buscar-productos">
+                        <!-- <div class="row row-buscar-productos">
 
                             <div class="col-lg-8 col-md-8">
                                 <div class="d-buscar-l-p">
-                                    <form action="paquetes-productos.php" method="post"class="f-search-home">
+                                    <form action="paquetes-productos.php" method="post" class="f-search-home">
                                         <div class="form-row">
                                             <div class="form-group col-lg-10 col-md-10 col-10">
                                                 <input type="text" name="busqueda" class="form-control input-search" placeholder="<?php echo $filtro;  ?>">
@@ -93,7 +93,7 @@ $paquetes=R::getAll($query);
                                 </div>
                             </div>
 
-                        </div>
+                        </div> -->
 
                         <div class="row row-listado-productos">
 
@@ -101,15 +101,16 @@ $paquetes=R::getAll($query);
                                 <div class="col-lg-6 col-md-6 d-all-item-pro">
                                     <div class="d-item-paquete h-100">
                                         <div class="d-1">
-                                            <img src="images/productos/paquetes/paquetes.jpg" alt="">
+                                            <img src="images/paquetes/<?php echo $item['imagen'] ?>" alt="">
                                         </div>
                                         <div class="d-2">
                                             <p class="t1 one-line"><?php echo $item['nombre'] ?></p>
                                             <p class="t3">Total de productos: <b><?php echo $item['productos'] ?></b></p>
                                             <p class="t2">$<?php echo $item['precio'] ?><sup>.00</sup></p>
-                                            <div>
+                                            <div style="text-align: center">
                                             <!--  <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a> -->
-                                                <a style="margin-left: 8rem" class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
+                                                <a class="btn btn-blue mt-2" href="editar-paquete.php?id=<?php echo $item['id'] ?>"><i style="color: white"class="far fa-edit"></i></a>
+                                                <a class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
                                             </div>
                                             
                                         </div>
@@ -168,7 +169,6 @@ $paquetes=R::getAll($query);
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
-    <script src="js/dashboard.js"></script>
 
         <!-- sweetalert scripts -->
         <script src="js/sweetalert2.js"></script>

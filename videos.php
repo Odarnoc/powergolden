@@ -45,12 +45,10 @@
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4 bg-white">
+
                 <!-- Admin Menu -->
                 <?php include("menus/menu_general_admin.php"); ?>
                 <!-- End Admin Menu -->
-
-                </div>
 
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
@@ -114,7 +112,6 @@
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
-    <script src="js/dashboard.js"></script>
 
     <script src="js/bootstrap-input-spinner.js"></script>
 

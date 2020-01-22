@@ -97,7 +97,6 @@ $productos=R::getAll($queryprodventa);
                                 <th style="width: 20%" scope="col">Imagen</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Precio unitario</th>
-                                <th scope="col">Stock</th>
                                 <th scope="col">Acción</th>
                                 </tr>
                             </thead>
@@ -107,8 +106,13 @@ $productos=R::getAll($queryprodventa);
                                 <td style="vertical-align: middle"><img style="width: 50%" src="productos_img/<?php echo $item['imagen']?>"> </td>
                                 <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
                                 <td style="vertical-align: middle"><?php echo $item['precio'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['inventario'] ?></td>
-                                <td style="vertical-align: middle"><a href="editar-producto.php?id=<?php echo $item['id']?>"><i class="far fa-edit"></i></a></td>
+                                <td style="vertical-align: middle">
+                                    <div>
+                                        <a href="editar-producto.php?id=<?php echo $item['id']?>"><i class="far fa-edit"></i></a>
+                                        <a style="padding-left: 2rem;" href="" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i class="fas fa-trash-alt"></i></a>
+                                        <a style="padding-left: 2rem;" href="vista-producto.php?key=<?php echo $item['id']; ?>"><i class="fas fa-eye"></i></a>
+                                    </div>
+                                </td>
                                 </tr> 
                                 <?php } ?> 
                             </tbody>
@@ -119,6 +123,28 @@ $productos=R::getAll($queryprodventa);
         </div>
 
     </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center mb">
+                    <img class="img-mb" src="images/icon-atencion.png" alt="">
+                    <p class="title-mb mt-20">Atención</p>
+                    <p class="sub-title-mb">¿Desea eliminar el metodo de pago?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
             <!-- Footer-->
@@ -146,6 +172,11 @@ $productos=R::getAll($queryprodventa);
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
+
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
+
+    <script src="js/editar-producto.js"></script>
 
     <script>
         $("input[type='number']").inputSpinner()

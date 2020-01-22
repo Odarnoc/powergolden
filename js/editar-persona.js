@@ -73,7 +73,6 @@ function editar() {
 /*Eliminar Funcion*/ 
 function eliminar(id){
     select = id;
-    confirmar();
 }
 
 

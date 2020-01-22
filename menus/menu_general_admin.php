@@ -28,13 +28,13 @@
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="lista-productos.php">Listado de productos</a>
-                                            <a class="dropdown-item" href="carrito.php">Carrito de compras</a>
-                                            <a class="dropdown-item" href="#">Lista de carrito</a>
+                                            <!-- <a class="dropdown-item" href="carrito.php">Carrito de compras</a> -->
+                                            <!-- <a class="dropdown-item" href="#">Lista de carrito</a> -->
                                             <a class="dropdown-item" href="registro-productos.php">Agregar producto</a>
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="">Tarjetas</a></li>
+                                <!-- <li><a href="">Tarjetas</a></li> -->
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -60,12 +60,37 @@
                                         </div>
                                     </div>
                                 </li>
-                                
-                                
-                                <li><a href="billetera.php">Billetera</a></li>
-                                <li><a href="">Reportes</a></li>
+
+                                <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Promociones
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="promociones.php">Lista de promociones</a>
+                                            <a class="dropdown-item" href="agregar-promocion.php">Agregar promocion</a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <!-- <li><a href="billetera.php">Billetera</a></li> -->
+
+                                <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Reportes
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="reportes-productos.php">Reporte productos</a>
+                                            <a class="dropdown-item" href="reportes-ventas.php">Reportes ventas</a>
+                                        </div>
+                                    </div>
+                                </li>
+
                                 <li><a href="matriz.php">Matriz de clientes</a></li>
-                                <li><a href="promociones.php">Promociones</a></li>
+                                <!-- <li><a href="promociones.php">Promociones</a></li> -->
                                 <li><a href="videos.php">Videos</a></li>
                                 <li><a class="logout" href="ajax/cerrar_sesion.php">Cerrar sesión<i class="fas fa-sign-out-alt"></i></a></li>
                             </ul>
