@@ -76,7 +76,7 @@ $folletod = $res[0];
                         <div class="row mt-4">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-folleto-ind">
-                                <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $folletod['imagen'] ?>.jpg'); height: 350px;
+                                <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $folletod['imagen'] ?>'); height: 350px;
                                             background-size: cover;
                                             background-repeat: no-repeat; 
                                             ">

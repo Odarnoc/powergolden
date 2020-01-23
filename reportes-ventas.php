@@ -124,7 +124,7 @@ $productos=R::getAll($query);
                                                 <td><?php echo $item['fecha'] ?></td>
                                                 <td><?php echo $item['venta'] ?></td>
                                                 <td><?php echo $item['nombre'] ?></td>
-                                                <td><?php echo $item['tottal'] ?></td>
+                                                <td>$<?php echo $item['tottal'] ?><sup>.00</sup></td>
                                             </tr>
                                         <?php } ?>  
                                         </tbody>

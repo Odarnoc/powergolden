@@ -3,9 +3,7 @@
 
     $id=$_GET['id'];
 
-    $query = 'SELECT * FROM paquetes where id = "'.$id.'"';
-
-$paquetes=R::getAll($query); 
+    $item=R::findOne('paquetes','id ='.$id );
 
 ?>
 
@@ -32,7 +30,7 @@ $paquetes=R::getAll($query);
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
     <!-- responseive menu -->
-  <link rel="stylesheet" href="css/menu-movil.css">
+    <link rel="stylesheet" href="css/menu-movil.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -95,49 +93,58 @@ $paquetes=R::getAll($query);
 
                                 <div class="d-form-registro-productos">
 
-                                    <form id="form-paquete" class="form-registro-productos" method="post" enctype="multipart/form-data">
+                                    <form id="edit-paquete" class="form-registro-productos" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group">
-                                            <div class="image-upload " style="background-image: url(images/<?php echo $item['imagen'] ?>);">
+                                            <div class="image-upload " style="background-image: url(images/paquetes/<?php echo $item['imagen'] ?>);">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label for="file-input">
+                                            <div class="floating-label-group" style="text-align: right">
+                                                <label for="file-input" style="cursor: pointer;">
                                                     <i class="fas fa-plus"></i> Subir foto
                                                 </label>
-                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required hidden />
+                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" hidden />
                                             </div>
                                         </div>                          
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="nombre" id="nombre" type="text" class="form-control input-form-underline"/>
+                                                <input name="nombre" id="nombre" type="text" value="<?php echo $item['nombre']; ?>"class="form-control input-form-underline"/>
                                                 <label class="floating-label-underline">Nombre del paquete</label>
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group" hidden>
                                             <div class="floating-label-group">
-                                                <input name="description" id="descripcion" type="text" class="form-control input-form-underline"/>
+                                                <input name="id" value="<?php echo $item['id']; ?>" id="nombre" type="text" class="form-control input-form-underline"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" >
+                                            <div class="floating-label-group">
+                                                <input name="description" value='<?php echo $item['descripcion']; ?>' id="descripcion" type="text" class="form-control input-form-underline"/>
                                                 <label class="floating-label-underline">Descripción del paquete</label>
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input class="input-form-underline " id="cantidad" type="prod" name="cantidad" min="1" max="25">
-                                                <label class="floating-label-underline">Numero de productos</label>
+                                        <div class="row">
+                                            <div class="form-group col" >
+                                                <div class="floating-label-group">
+                                                    <input class="input-form-underline form-control" value="<?php echo $item['productos']; ?>" id="cantidad" type="number" name="cantidad" min="1" max="25">
+                                                    <label class="floating-label-underline">Numero de productos</label>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input name="price" id="precio" type="text" class="form-control input-form-underline"/>
-                                                <label class="floating-label-underline">Precio</label>
+                                            <div class="form-group col" >
+                                                <div class="floating-label-group">
+                                                    <input name="price" id="precio" type="number" value="<?php echo $item['precio']; ?>" class="form-control input-form-underline"/>
+                                                    <label class="floating-label-underline">Precio</label>
+                                                </div>
                                             </div>
                                         </div>
+                                        
 
                                         <!--
                                         <div class="form-group">

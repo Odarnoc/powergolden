@@ -21,7 +21,6 @@ $productos=R::getAll($query);
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/datepicker.min.css">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
@@ -63,7 +62,7 @@ $productos=R::getAll($query);
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Reportes de productos</p>
-                                    <p class="small-text-cuenta">Genera un reporte del stock de productos.</p>
+                                    <p class="small-text-cuenta">Genera un reporte del stock de productos del dia: <?php echo date('d-m-Y') ?></p>
                                 </div>
                             </div>
 
@@ -76,7 +75,7 @@ $productos=R::getAll($query);
                                     <form action="" class="form-reporte">
                                         <div class="form-row">
                                             <div class="form-group col-lg-4 col-md-4">
-                                                <a type="button" href="pdf-productos.php?fecha=<?php echo date('Y-m-d') ?>" target="_blank" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i> Generar reporte</a>
+                                                <a type="button" href="pdf-productos.php?fecha=<?php echo date('d-m-Y') ?>" target="_blank" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i> Generar reporte</a>
                                             </div>
                                         </div>
                                     </form>
@@ -140,10 +139,6 @@ $productos=R::getAll($query);
 
     <!-- custom scripts -->
     <script src="js/main-perfil.js"></script>
-    <script src="js/dashboard.js"></script>
-    <script src="js/datepicker.min.js"></script>
-    <script src="js/datepicker.es.js"></script>
-    <script src="js/promociones.js"></script>
     <script src="js/scripts.js"></script>
 
 </body>

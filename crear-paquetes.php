@@ -97,11 +97,11 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label for="file-input">
+                                            <div class="floating-label-group" style="text-align: right">
+                                                <label style="cursor: pointer; " for="file-input">
                                                     <i class="fas fa-plus"></i> Subir foto
                                                 </label>
-                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required hidden />
+                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);"  hidden />
                                             </div>
                                         </div>                          
 
@@ -119,20 +119,24 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input class="input-form-underline " id="cantidad" type="prod" name="cantidad" min="1" max="25">
-                                                <label class="floating-label-underline">Numero de productos</label>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <input class="form-control input-form-underline id="cantidad" type="number" name="cantidad" min="1" max="25">
+                                                        <label class="floating-label-underline">Numero de productos</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <input name="price" id="precio" type="number" class="form-control input-form-underline"/>
+                                                        <label class="floating-label-underline">Precio</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input name="price" id="precio" type="text" class="form-control input-form-underline"/>
-                                                <label class="floating-label-underline">Precio</label>
-                                            </div>
-                                        </div>
-
                                         <!--
                                         <div class="form-group">
                                             <button class="btn btn-primary" onclick="productos()" >Agregar</button>

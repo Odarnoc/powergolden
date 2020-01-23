@@ -32,7 +32,7 @@ if(empty($_POST['fin'])){
     $fin = $_POST['fin'];
 
         
-            $registro = R::dispense('promociones');
+            $registro = R::load('promociones',$_POST['id']);
 
             $dir_subida = '../images/promocion/';
             $fichero_subido = $dir_subida . basename($_FILES['img-producto']['name']);

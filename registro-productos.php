@@ -134,7 +134,7 @@
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="inventario" type="text" class="form-control input-form-underline" required />
+                                                <input name="inventario" type="number" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Inventario *</label>
                                             </div>
                                         </div>
@@ -160,7 +160,7 @@
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="precio" type="text" class="form-control input-form-underline" required />
+                                                <input name="precio" type="number" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Precio *</label>
                                             </div>
                                         </div>

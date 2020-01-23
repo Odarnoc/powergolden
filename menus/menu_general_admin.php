@@ -38,7 +38,7 @@
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Paquetes de productos
+                                        Paquetes
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

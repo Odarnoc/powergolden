@@ -1,6 +1,10 @@
 <?php
     require 'user_preferences/user-info.php';
 
+    $id=$_GET['id'];
+
+    $item=R::findOne('promociones','id ='.$id );
+
 ?>
 
 <!doctype html>
@@ -76,8 +80,8 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Nueva promocion</p>
-                                    <p class="small-text-cuenta">Puedes crear aqui las promociones.</p>
+                                    <p class="title-cuenta">Editar promocion</p>
+                                    <p class="small-text-cuenta">Aqui puedes editar las promociones existentes.</p>
                                 </div>
                             </div>
 
@@ -89,10 +93,10 @@
 
                                 <div class="d-form-registro-productos">
 
-                                    <form id="form-promocion" class="form-registro-productos" method="post" enctype="multipart/form-data">
+                                    <form id="edit-promocion" class="form-registro-productos" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group">
-                                            <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg);">
+                                            <div class="image-upload " style="background-image: url(images/promocion/<?php echo $item['imagen'] ?>);">
                                             </div>
                                         </div>
 
@@ -105,36 +109,38 @@
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="nombre" type="text" class="form-control input-form-underline" required />
+                                                <input name="nombre" type="text" value="<?php echo $item['nombre'] ?>" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Nombre de la promocion </label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="descripcion" type="text" class="form-control input-form-underline" required />
+                                                <input name="descripcion" type="text" value="<?php echo $item['descripcion'] ?>" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Descripción </label>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <label class="">Fecha de inicio</label>
-                                                        <input name="inicio" type="date" class="form-control input-form-underline" required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <label class="">Fecha de finalizacion</label>
-                                                        <input name="fin" type="date" class="form-control input-form-underline" required />
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <label class="">Fecha de inicio</label>
+                                                <input name="inicio" value="<?php echo $item['inicio'] ?>" type="date" class="form-control input-form-underline" required />
                                             </div>
                                         </div>
+
+                                        <div class="form-group" hidden>
+                                            <div class="floating-label-group">
+                                                <input name="id" value="<?php echo $item['id'] ?>" type="text" class="form-control input-form-underline"  />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <label class="">Fecha de finalizacion</label>
+                                                <input name="fin" type="date" value="<?php echo $item['fin'] ?>" class="form-control input-form-underline" required />
+                                            </div>
+                                        </div>
+
                                     <!--<div class="form-group">
                                             <div class="floating-label-group">
                                                 <input name="precio" type="text" class="form-control input-form-underline" required />

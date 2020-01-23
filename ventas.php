@@ -3,10 +3,10 @@
 require 'user_preferences/user-info.php';
 
 if(!isset($_POST['fecha-in'])){
-    $query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"];
+    $query = 'SELECT v.*, u.nombre as nombre, u.apellidos as apellido from ventas as v LEFT JOIN usuarios as u on v.user_id = u.id';
     $filtro = "dd-mm-aaaa";
 }else{
-    $query = 'SELECT * FROM ventas where user_id = '.$_SESSION["user_id"].' AND fecha = "'.$_POST['fecha-in'].'"' ;
+    $query = 'SELECT v.*, u.nombre as nombre, u.apellidos as apellido from ventas as v LEFT JOIN usuarios as u on v.user_id = u.id where fecha = "'.$_POST['fecha-in'].'"' ;
     $filtro = $_POST['fecha-in'];
 }
 
@@ -107,7 +107,7 @@ $ventas=R::getAll($query);
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
-                                <th scope="col">Numero</th>
+                                <th scope="col">Cliente</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Acciones</th>
@@ -116,7 +116,7 @@ $ventas=R::getAll($query);
                             <tbody >
                             <?php foreach ($ventas as $item) { ?>
                                 <tr>
-                                <td><?php echo $item['id'] ?></td>
+                                <td style="text-align:left"><?php echo $item['nombre'] ?> <?php echo $item['apellido'] ?></td>
                                 <td><?php echo $item['fecha'] ?></td>
                                 <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
                                 <td><a href="detalle-historial.php?id=<?php echo $item['id'] ?>"><i class="fas fa-eye"></i>  </a> </td>
