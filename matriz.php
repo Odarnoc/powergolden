@@ -1,3 +1,17 @@
+<?php
+require 'bd/conexion.php';
+$id=15;
+$testTree = R::getAll("select  id,
+nombre,
+referido 
+from    (select * from usuarios
+ order by referido, id) clientes_sorted,
+(select @pv := '$id') initialisation
+where   find_in_set(referido, @pv)
+and     length(@pv := concat(@pv, ',', id))");
+
+echo json_encode($testTree);
+?>
 <!doctype html>
 <html lang="es">
 
@@ -56,18 +70,11 @@
     <!-- End Navbar ====
     	======================================= -->
 
-    <section class="sec-cuenta">
+    <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4 bg-white">
-                    <div class="d-menu-left">
 
-
-                    </div>
-
-                </div>
-
-                <div class="col-lg-8 col-md-8 bg-gray">
+                <div class="col-lg-12 col-md-12 bg-gray">
                     <div class="d-cont-right">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
@@ -87,78 +94,12 @@
                                 <div class="matriz">
                                     <ul>
                                         <li>
+                                            <p class="t1">$50</p>
                                             <a href="#"><i class="fas fa-user"></i></a>
-                                            <ul>
-                                                <li>
-                                                    <p class="t1">$200</p>
-                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                    <ul>
-                                                        <li>
-                                                            <p class="t1">$100</p>
-                                                            <a href="#"><i class="fas fa-user"></i></a>
-                                                            <ul>
-                                                                <li>
-                                                                    <p class="t1">$50</p>
-                                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <p class="t1">$50</p>
-                                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <p class="t1">$100</p>
-                                                            <a href="#"><i class="fas fa-user"></i></a>
-                                                            <ul>
-                                                                <li>
-                                                                    <p class="t1">$50</p>
-                                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <p class="t1">$50</p>
-                                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <p class="t1">$200</p>
-                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                    <ul>
-                                                        <li>
-                                                            <p class="t1">$100</p>
-                                                            <a href="#"><i class="fas fa-user"></i></a>
-                                                            <ul>
-                                                                <li>
-                                                                    <p class="t1">$50</p>
-                                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <p class="t1">$50</p>
-                                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <p class="t1">$100</p>
-                                                            <a href="#"><i class="fas fa-user"></i></a>
-                                                            <ul>
-                                                                <li>
-                                                                    <p class="t1">$50</p>
-                                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <p class="t1">$50</p>
-                                                                    <a href="#"><i class="fas fa-user"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
+                                        </li>
+                                        <li>
+                                            <p class="t1">$50</p>
+                                            <a href="#"><i class="fas fa-user"></i></a>
                                         </li>
                                     </ul>
                                 </div>
