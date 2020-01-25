@@ -2,17 +2,9 @@
 
 require 'user_preferences/user-info.php';
 
-if(!isset($_POST['busqueda'])){
-    $query = 'SELECT * FROM paquetes';
-    $filtro = "Buscar paquete";
-}else{
-    $query = 'SELECT * FROM paquetes where  (nombre LIKE "%'.$_POST['busqueda'].'%")';
-    $filtro = $_POST['busqueda'];
-}
+    $query = 'SELECT * FROM promociones';
 
-var_dump($_POST['busqueda']);
-
-$paquetes=R::getAll($query); 
+    $promociones=R::getAll($query); 
 
 ?>
 
@@ -70,7 +62,7 @@ $paquetes=R::getAll($query);
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Promociones</p>
-                                    <!-- <p class="small-text-cuenta">Selecciona el Kit que deseas comprar</p> -->
+                                    <p class="small-text-cuenta">Aqui se muestran todas las promociones existentes hasta la fecha.</p> 
                                 </div>
                             </div>
                         </div>
@@ -97,7 +89,7 @@ $paquetes=R::getAll($query);
 
                         <div class="row row-listado-productos">
 
-                            <?php foreach ($paquetes as $item) { ?>
+                            <?php foreach ($promociones as $item) { ?>
                                 <div class="col-lg-6 col-md-6 d-all-item-pro">
                                     <div class="d-item-paquete h-100">
                                         <div class="d-1">
@@ -105,11 +97,21 @@ $paquetes=R::getAll($query);
                                         </div>
                                         <div class="d-2">
                                             <p class="t1 one-line"><?php echo $item['nombre'] ?></p>
-                                            <p class="t3">Total de productos: <b><?php echo $item['productos'] ?></b></p>
-                                            <p class="t2">$<?php echo $item['precio'] ?><sup>.00</sup></p>
-                                            <div>
+                                            <p class="t3 two-lines"><b><?php echo $item['descripcion'] ?></b></p>
+                                                <div class="row" style="text-align: center">
+                                                    <div class="col" > 
+                                                        <p style="margin-bottom: 0rem">Inicio:</p>
+                                                        <p class="t2"><?php echo $item['inicio'] ?></p>
+                                                    </div>
+                                                    <div class="col">
+                                                        <p style="margin-bottom: 0rem">Finalizacion:</p>
+                                                        <p class="t2"><?php echo $item['fin'] ?></p>
+                                                    </div>
+                                                </div>
+                                            <div style="text-align: center">
                                             <!--  <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a> -->
-                                                <a style="margin-left: 8rem" class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
+                                                <a class="btn btn-blue mt-2" href="editar-promocion.php?id=<?php echo $item['id'] ?>"><i style="color: white;"class="far fa-edit"></i></a>
+                                                <a style="background-color: #e4605e" class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
                                             </div>
                                             
                                         </div>
@@ -168,11 +170,10 @@ $paquetes=R::getAll($query);
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
-    <script src="js/dashboard.js"></script>
 
         <!-- sweetalert scripts -->
         <script src="js/sweetalert2.js"></script>
 
-        <script src="js/crear-paquete.js"></script>
+        <script src="js/crear-promocion.js"></script>
 
 </body></html>

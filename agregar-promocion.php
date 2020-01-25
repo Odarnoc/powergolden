@@ -76,8 +76,8 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Nuevo paquete</p>
-                                    <p class="small-text-cuenta">Puedes crear paquetes con la cantidad de productos que necesites.</p>
+                                    <p class="title-cuenta">Nueva promocion</p>
+                                    <p class="small-text-cuenta">Puedes crear aqui las promociones.</p>
                                 </div>
                             </div>
 
@@ -89,10 +89,10 @@
 
                                 <div class="d-form-registro-productos">
 
-                                    <form id="form-paquete" class="form-registro-productos" method="post" enctype="multipart/form-data">
+                                    <form id="form-promocion" class="form-registro-productos" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group">
-                                            <div class="image-upload " style="background-image: url(images/<?php echo $item['imagen'] ?>);">
+                                            <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg);">
                                             </div>
                                         </div>
 
@@ -117,20 +117,24 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label class="">Fecha de inicio</label>
-                                                <input name="inicio" type="date" class="form-control input-form-underline" required />
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <label class="">Fecha de inicio</label>
+                                                        <input name="inicio" type="date" class="form-control input-form-underline" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <label class="">Fecha de finalizacion</label>
+                                                        <input name="fin" type="date" class="form-control input-form-underline" required />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label class="">Fecha de finalizacion</label>
-                                                <input name="fin" type="date" class="form-control input-form-underline" required />
-                                            </div>
-                                        </div>
-
                                     <!--<div class="form-group">
                                             <div class="floating-label-group">
                                                 <input name="precio" type="text" class="form-control input-form-underline" required />

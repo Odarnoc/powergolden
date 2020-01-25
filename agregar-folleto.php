@@ -80,7 +80,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Nuevo folleto</p>
-                                    <p class="small-text-cuenta">Puedes agregar nuevos.</p>
+                                    <p class="small-text-cuenta">Aqui puedes crear nuevos folletos.</p>
                                 </div>
                             </div>
 
@@ -92,32 +92,32 @@
 
                                 <div class="d-form-registro-productos">
 
-                                    <form id="form-producto" class="form-registro-productos" method="post" enctype="multipart/form-data">
+                                    <form id="form-folleto" class="form-registro-productos" method="post" enctype="multipart/form-data">
 
-                                        <div class="form-group">
+                                    <div class="form-group">
                                             <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg);">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label for="file-input">
+                                            <div class="floating-label-group" style="text-align: right">
+                                                <label for="file-input" style="cursor: pointer;">
                                                     <i class="fas fa-plus"></i> Subir foto
                                                 </label>
-                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required hidden />
+                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" hidden />
                                             </div>
-                                        </div>                          
+                                        </div>                              
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="nombre" id="nombre" type="text" class="form-control input-form-underline"/>
+                                                <input name="name" id="nombre" type="text" class="form-control input-form-underline"/>
                                                 <label class="floating-label-underline">Nombre del folleto</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="descripcion" id="descripcion" type="text" class="form-control input-form-underline"/>
+                                                <input name="description" id="descripcion" type="text" class="form-control input-form-underline"/>
                                                 <label class="floating-label-underline">Descripción del folleto</label>
                                             </div>
                                         </div>
@@ -132,7 +132,7 @@
 
                                         </div> -->
 
-                                        <button type="submit" onclick="enviarfolleto()" class="btn btn-lg-blue mt-3">Guardar</button>
+                                        <button type="submit"  class="btn btn-lg-blue mt-3">Guardar</button>
 
                                     </form>
                                 </div>

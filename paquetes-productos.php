@@ -96,21 +96,21 @@ $paquetes=R::getAll($query);
                         </div> -->
 
                         <div class="row row-listado-productos">
-
                             <?php foreach ($paquetes as $item) { ?>
                                 <div class="col-lg-6 col-md-6 d-all-item-pro">
                                     <div class="d-item-paquete h-100">
                                         <div class="d-1">
-                                            <img src="images/paquetes/<?php echo $item['imagen'] ?>" alt="">
+                                            <img src="images/paquetes/<?php echo $item['imagen'] ?>"  alt="">
                                         </div>
                                         <div class="d-2">
                                             <p class="t1 one-line"><?php echo $item['nombre'] ?></p>
+                                            <p class="t3 two-lines"><?php echo $item['descripcion'] ?></p>
                                             <p class="t3">Total de productos: <b><?php echo $item['productos'] ?></b></p>
                                             <p class="t2">$<?php echo $item['precio'] ?><sup>.00</sup></p>
                                             <div style="text-align: center">
                                             <!--  <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a> -->
-                                                <a class="btn btn-blue mt-2" href="editar-paquete.php?id=<?php echo $item['id'] ?>"><i style="color: white"class="far fa-edit"></i></a>
-                                                <a class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
+                                                <a class="btn btn-blue mt-2" href="editar-paquete.php?id=<?php echo $item['id'] ?>"><i style="color: white;"class="far fa-edit"></i></a>
+                                                <a style="background-color: #e4605e" class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
                                             </div>
                                             
                                         </div>

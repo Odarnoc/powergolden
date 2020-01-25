@@ -38,7 +38,7 @@
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Paquetes de productos
+                                        Paquetes
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -89,7 +89,6 @@
                                     </div>
                                 </li>
 
-                                <li><a href="matriz.php">Matriz de clientes</a></li>
                                 <!-- <li><a href="promociones.php">Promociones</a></li> -->
                                 <li><a href="videos.php">Videos</a></li>
                                 <li><a class="logout" href="ajax/cerrar_sesion.php">Cerrar sesión<i class="fas fa-sign-out-alt"></i></a></li>

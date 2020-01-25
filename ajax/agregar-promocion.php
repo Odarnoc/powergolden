@@ -5,7 +5,6 @@ require '../utils/error.php';
 
 $response['mensaje'] = "Exito al crear la promocion.";
 
-
 if(empty($_POST['nombre'])){
     error_mensaje('Agregar un nombre a la promocion.');
     return;
@@ -45,7 +44,7 @@ if(empty($_POST['fin'])){
             $registro->inicio = $inicio;
             $registro->fin = $fin;
             $registro->imagen=basename($_FILES['img-producto']['name']);
-
+            
             $id = R::store($registro);
 
             if(empty($id)){

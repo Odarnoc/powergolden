@@ -71,7 +71,7 @@ var_dump($paquetes);
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Folletos electrónicos</p>
-                                    <p class="small-text-cuenta"></p>
+                                    <p class="small-text-cuenta">Aqui se muestran todos los folletos agregados hastala fecha.</p>
                                 </div>
                             </div>
 
@@ -79,7 +79,7 @@ var_dump($paquetes);
 
                         <div class="row row-buscar-productos">
 
-                            <div class="col-lg-8 col-md-8">
+                            <!-- <div class="col-lg-8 col-md-8">
                                 <div class="d-buscar-l-p">
                                     <form action="folletos.php" method="post"class="f-search-home">
                                         <div class="form-row">
@@ -93,7 +93,7 @@ var_dump($paquetes);
                                         </div>
                                     </form>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
 
@@ -102,16 +102,22 @@ var_dump($paquetes);
                             <?php foreach ($paquetes as $item) { ?>
                                 <div class="col-lg-6 col-md-6 d-all-item-pro">
                                     <div class="d-item-folleto h-100">
-                                        <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $item['imagen'] ?>.jpg'); height: 200px;
+                                        <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $item['imagen'] ?>'); height: 200px;
                                             background-size: cover;
                                             background-repeat: no-repeat; ">
                                         </div>
                                         <div class="d-2">
                                             <p class="t1"><?php echo $item['nombre'] ?></p>
                                             <p class="t2 two-lines mt-1"><?php echo $item['descripcion'] ?></p>
-                                            <div>
-                                                <a class="btn btn-ver-mas mt-3" href="folleto-individual.php?id=<?php echo $item['id']?>" role="button"><i class="fas fa-eye"></i> Ver más</a>
-                                                <a style="margin-left: 8rem" class="btn btn-blue mt-2"  role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a class="btn btn-ver-mas mt-3" href="folleto-individual.php?id=<?php echo $item['id']?>" role="button"><i class="fas fa-eye"></i> Ver más</a>
+                                                </div>
+                                                <div class="col" style="text-align: right">
+                                                    <a style="" class="btn btn-blue mt-2"  href="editar-folleto.php?id=<?php echo $item['id']?>" role="button" ><i style="color: white" class="far fa-edit"></i></a>
+                                                    <a style="background-color: #e4605e" class="btn btn-blue mt-2"  href="" role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
+                                                </div>
+
                                             </div>
                                         </div> 
                                     </div>
@@ -169,7 +175,6 @@ var_dump($paquetes);
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
-    <script src="js/dashboard.js"></script>
 
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>

@@ -20,18 +20,20 @@ if(empty($_POST['description'])){
     return;
 }
 
-turn;
-}
-
-
     $nombre = $_POST['name'];
     $descripcion = $_POST['description'];
 
         
-            $registro = R::dispense('paquetes');
+            $registro = R::dispense('folletos');
+
+            $dir_subida = '../images/folletos/';
+            $fichero_subido = $dir_subida . basename($_FILES['img-producto']['name']);
+
+        if (move_uploaded_file($_FILES['img-producto']['tmp_name'], $fichero_subido)) {
 
             $registro->nombre = $nombre;
             $registro->descripcion = $descripcion;
+            $registro->imagen=basename($_FILES['img-producto']['name']);
 
             $id = R::store($registro);
 
@@ -40,5 +42,6 @@ turn;
             }else{
                 echo json_encode($response);
             }
+        }
 
 ?>
