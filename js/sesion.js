@@ -30,7 +30,7 @@ function iniciar() {
                     text: json_mensaje.mensaje
                 });
             } else {
-                location.href = "index.php";
+                location.href = "dashboard.php";
             }
         },
         error: function(er) {

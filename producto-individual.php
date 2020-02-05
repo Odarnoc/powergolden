@@ -15,6 +15,17 @@ $prodIndividual = $res[0];
 $query2='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id where p.id!='.$prodIndividual['id'].' and p.categoria='.$prodIndividual['categoria'].' ORDER BY RAND() LIMIT 2';
 $prodsRelacionados=R::getAll($query2);
 
+$fragmaneto;
+$color;
+
+if($prodIndividual['inventario'] != 0){
+    $fragmaneto = 'Disponibles: '.$prodIndividual['inventario'].'pz';
+    $color = 'style = "background-color:#3CC16F"';
+}else{
+    $fragmaneto = 'No disponible';
+    $color =  'style = "background-color:#ff4c4c"';
+}
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -43,9 +54,18 @@ $prodsRelacionados=R::getAll($query2);
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
-
-
-
+    <style>
+        input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        
+        input[type="number"] {
+            -moz-appearance: textfield;
+            text-align: center; 
+            padding: 19px;
+        }
+    </style>
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
 
@@ -101,7 +121,7 @@ $prodsRelacionados=R::getAll($query2);
                                         <div class="d-info-pro-ind">
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8">
-                                                    <span class="badge badge-disponible">Disponible</span>
+                                                    <span <?php echo $color ?> class="badge badge-disponible"><?php echo $fragmaneto ?>.</span>
                                                     <p class="title-pro-ind one-line"><?php echo $prodIndividual['nombre'] ?></p>
                                                 </div>
 
@@ -123,17 +143,25 @@ $prodsRelacionados=R::getAll($query2);
                                             <div class="row row-cant-pro-ind">
                                                 <div class="col-lg-12 col-md-12">
 
-                                                    <form class="form-cant-pro-ind">
+                                                    <div class="form-cant-pro-ind">
                                                        <p class="t1"><b>Cantidad</b></p>
                                                         <div class="form-row">
                                                             <div class="form-group col-lg-4 col-md-4">
-                                                                <input id="cantidad" type="number" class="cant-number" value="1" min="1" max="500" step="1" />
+                                                                <div class="input-group mb-3">
+                                                                    <div class="input-group-prepend">
+                                                                        <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
+                                                                    </div>
+                                                                        <input type="number" id="cantidad"  class="form-control form-control-sm" value="1" min="1">
+                                                                    <div class="input-group-prepend">
+                                                                        <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="form-group col-lg-4 col-md-4">
                                                                 <button type="button" class="btn btn-add-car" onclick="agregar()">Agregar al carrito</button>
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                     
                                                 </div>
                                             </div>
@@ -244,14 +272,25 @@ $prodsRelacionados=R::getAll($query2);
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
-    <script src="js/bootstrap-input-spinner.js"></script>
+    
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
     <script>
-        $("input[type='number']").inputSpinner()
+    $(document).ready(function(){
+    $('#cantidad').prop('disabled', true);
+    $('#plus-btn').click(function(){
+        $('#cantidad').val(parseInt($('#cantidad').val()) + 1 );
+            });
+        $('#minus-btn').click(function(){
+        $('#cantidad').val(parseInt($('#cantidad').val()) - 1 );
+        if ($('#cantidad').val() == 0) {
+            $('#cantidad').val(1);
+        }
+        });
+    });
     </script>
     <script>
         var prod = '<?php echo $id_prod; ?>';

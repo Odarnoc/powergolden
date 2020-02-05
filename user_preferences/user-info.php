@@ -8,4 +8,9 @@ require 'bd/conexion.php';
 
 $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
 
+if($information['rol']!=0){
+    header("Location: index.php");
+}
+
+
 ?>

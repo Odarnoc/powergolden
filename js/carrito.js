@@ -25,7 +25,15 @@ function pintarCarrito() {
             '<p class="t3">$' + item.precio + '</p>' +
             '<div class="row">' +
             '<div class="col-lg-6 col-md-6 col-6 col-8">' +
-            '<input id="cantProdsEdit' + index + '" onchange="editarCant(\'' + index + '\')" type="number" class="cant-number-white" value="' + item.cant + '" min="1" max="500" step="1" />' +
+            '<div class="input-group mb-3">'+
+            '<div class="input-group-prepend">'+
+            '<button class="btn btn-dark btn-sm" id="minus-btn" onclick="res(\'' + index + '\')"><i class="fa fa-minus"></i></button>'+
+            '</div>'+
+            '<input type="number" id="cantProdsEdit' + index + '" onchange="editarCant(\'' + index + '\')" class="form-control form-control-sm" value="' + item.cant + '" min="1">'+
+            '<div class="input-group-prepend">'+
+            '<button class="btn btn-dark btn-sm" id="plus-btn" onclick="sum(\'' + index + '\')"><i class="fa fa-plus"></i></button>'+
+            '</div>'+
+            '</div>'+
             '</div>' +
             '</div>' +
             '<button class="btn btn-link-carrito" onclick="eliminar(\'' + index + '\')" role="button">Eliminar producto</button>' +
@@ -41,7 +49,6 @@ function pintarCarrito() {
     $('#cantProds').text('(' + carrito.length + ')');
     $('#total').text('$' + total);
     $('#total2').text('$' + total);
-    $("input[type='number']").inputSpinner();
 }
 
 function editarCant(index) {
@@ -94,4 +101,17 @@ function confirmarCompra() {
             });
         }
     });
+}
+
+function sum(index){
+        carrito[index].cant = parseInt(carrito[index].cant)+1;
+        pintarCarrito();
+}
+
+function res(index){
+    if(carrito[index].cant > 1){
+        carrito[index].cant = parseInt(carrito[index].cant)-1;
+        pintarCarrito();
+    }
+    
 }

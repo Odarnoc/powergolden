@@ -24,6 +24,8 @@ $(document).ready(function() {
 function agregar() {
     var carrito = localStorage.getItem('carrito');
     var cant = $('#cantidad').val();
+    console.log(cant);
+    
     console.log(productoJson);
 
     productoJson.cant = cant;

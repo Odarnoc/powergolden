@@ -1,6 +1,12 @@
 <?php
+session_start();
+if(!isset($_SESSION["user_id"])){
+    header("Location: iniciar-sesion.php");
+}
 
-require 'user_preferences/user-info.php';
+require 'bd/conexion.php';
+
+$information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
 
 ?>
 
@@ -32,6 +38,18 @@ require 'user_preferences/user-info.php';
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 
+  <style>
+        input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        
+        input[type="number"] {
+            -moz-appearance: textfield;
+            text-align: center; 
+            padding: 19px;
+        }
+    </style>
 
 
   <title>Power Golden | El Mundo de la Herbolaria</title>
@@ -80,7 +98,6 @@ require 'user_preferences/user-info.php';
                                     <p class="small-text-cuenta">Productos en tu carrito de compras <b id="cantProds" ></b></p>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="row row-form-perfil footer-movil">
@@ -99,7 +116,7 @@ require 'user_preferences/user-info.php';
                                             <p class="t2" id="total"></p>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-6">
-                                            <button class="btn btn-lg-link" onclick="confirmarCompra()" role="button">Continuar</button>
+                                          <a href="nuevo-envio.php"><button class="btn btn-lg-link" type="button" role="button">Continuar</button></a>
                                         </div>
                                     </div>
 
@@ -139,12 +156,33 @@ require 'user_preferences/user-info.php';
   <!-- custom scripts -->
   <script src="js/scripts.js"></script>
   <script src="js/bootstrap-input-spinner.js"></script>
-  <!-- sweetalert scripts -->
-  <script src="js/sweetalert2.js"></script>
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
-  <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
-  <script src="js/carrito.js"></script>
-  <script src="js/carrito-movil.js"></script>
+    <!-- responseive menu -->
+    <script src="js/menu-movil.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/carrito-movil.js"></script>
+
+    <script>
+    $(document).ready(function(){
+    $('#cantidad').prop('disabled', true);
+    $('#plus-btn').click(function(){
+        $('#cantidad').val(parseInt($('#cantidad').val()) + 1 );
+            });
+        $('#minus-btn').click(function(){
+        $('#cantidad').val(parseInt($('#cantidad').val()) - 1 );
+        if ($('#cantidad').val() == 0) {
+            $('#cantidad').val(1);
+        }
+        });
+    });
+    </script>
+
+    <script>
+        var prod = '<?php echo $id_prod; ?>';
+        console.log(prod);
+        
+    </script>
 
 </body></html>

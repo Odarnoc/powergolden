@@ -28,6 +28,9 @@ if(empty($_POST['carrito'])){
             if(empty($id)){
                 error_mensaje("Error al crear el usuario.");
             }
+            $producto = R::load('productos',$item['id']);
+            $producto->inventario -= $item['cant'];
+            R::store($producto);
         }
         echo json_encode($response);
     }else{

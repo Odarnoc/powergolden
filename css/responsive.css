@@ -207,4 +207,7 @@
     .d-desc .t1{
         padding-top: 3px;
     }
+    .th-producto-review, .td-producto-review{
+        min-width: 200px;
+    }
 }
