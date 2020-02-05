@@ -24,7 +24,7 @@ if(empty($_POST['pass'])){
     $correo = $_POST['email'];
     $contrasena = $_POST['pass'];
 
-    $query = 'SELECT * FROM `usuarios` WHERE correo= "'.$correo.'" &&  pass= "'.$contrasena.'"' ;
+    $query = 'SELECT id,rol FROM `usuarios` WHERE correo= "'.$correo.'" &&  pass= "'.$contrasena.'"' ;
 
     $login_in=R::getAll($query);
     if(sizeof($login_in) == 0){

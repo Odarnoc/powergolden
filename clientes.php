@@ -92,6 +92,7 @@ $clientes=R::find('usuarios','rol = 1');
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Telefono</th>
+                                <th scope="col">Matriz</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Eliminar</th>
                                 </tr>
@@ -102,6 +103,7 @@ $clientes=R::find('usuarios','rol = 1');
                                         <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
+                                        <td><a href="matriz-admin.php?id=<?php echo $item['id']?>"><i class="fas fa-sitemap"></i></a></td>
                                         <td><a href="editar-usuario.php?id=<?php echo $item['id']?>"><i class="fas fa-user-edit"></i></a></td>
                                         <td><a href="" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i class="fas fa-trash-alt"></i></a></td>
                                     </tr> 

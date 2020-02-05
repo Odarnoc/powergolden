@@ -8,9 +8,12 @@ $querydos = 'SELECT SUM(total) as sumita FROM ventas where fecha = CURRENT_DATE(
 
 $querytres = 'SELECT id FROM visitas where fecha = CURRENT_DATE()';
 
+$querycuatro = 'SELECT MONTH(fecha), COUNT(*) FROM ventas WHERE YEAR(fecha) = YEAR(now()) GROUP BY YEAR(fecha), MONTH(fecha)';
+
 $fecha=R::getAll($querydos);
 $usuario=R::getAll($query);
 $visita=R::getAll($querytres);
+
 
 
 
@@ -38,13 +41,107 @@ $visita=R::getAll($querytres);
     <!-- Plugin -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
-    <!-- responseive menu -->
-    <link rel="stylesheet" href="css/menu-movil.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .matrix {
+            margin: auto;
+            font-size: 12px;
+        }
+
+        .matrix .depth {
+            min-height: 20px;
+            margin: 20px auto;
+            text-align: center;
+            clear: both;
+            background-color: white;
+            border-radius: 10px;
+            padding-bottom: 20px;
+            -webkit-box-shadow: 0px 10px 44px -5px rgba(0, 0, 0, 0.05);
+            box-shadow: 0px 10px 44px -5px rgba(0, 0, 0, 0.05);
+
+        }
+
+        .matrix .depth-counter {
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            padding-left: 20px;
+            padding-top: 15px;
+            font-family: "Open Sans";
+        }
+
+        .matrix .user {
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+            margin: 5px auto;
+        }
+
+        .matrix .user .avatar {
+            width: 70px;
+            height: 70px;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .matrix .user-name {
+            white-space: nowrap;
+        }
+
+        .matrix .cell {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 5px 1px 5px 1px;
+            overflow: hidden;
+            text-align: center;
+            font-family: "Open Sans";
+            font-weight: 600;
+        }
+
+        .matrix .matrix-join-group {
+            display: inline-block;
+        }
+
+        .matrix .matrix-group-separator {
+            width: 10px;
+            display: inline-block;
+        }
+
+        .matrix .matrix-user-info {
+            display: none
+        }
+
+        .matrix .user:hover .matrix-user-info {
+            display: block;
+            position: absolute;
+            width: 200px;
+            min-height: 30px;
+            border: double 3px silver;
+            background: #8BAA79;
+            padding: 10px;
+            margin-left: -3px;
+            margin-top: -3px;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .sec-matriz {
+            padding-top: 100px;
+            padding-bottom: 100px;
+            background-color: #F4F4F4;
+        }
+    </style>
 
 </head>
 
@@ -78,50 +175,14 @@ $visita=R::getAll($querytres);
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Dashboard</p>
+                                    <p class="title-cuenta">Matriz de clientes</p>
                                     <p class="small-text-cuenta"></p>
                                 </div>
                             </div>
 
                         </div>
 
-                        <div class="row row-form-perfil">
-
-                            <div class="col-lg-4 col-md-4">
-                                <div class="clearfix d-item-num">
-                                    <img src="images/icon-user.svg" alt="">
-                                    <p class="t1"><?php echo count($usuario) ?></p>
-                                    <p class="t2">Clientes</p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-4">
-                                <div class="clearfix d-item-num">
-                                    <img src="images/icon-bag.svg" alt="">
-                                    <p class="t1">$<?php if($fecha[0]['sumita'] == null) echo '0'; else echo ($fecha[0]['sumita']) ?></p>
-                                    <p class="t2">Ventas de hoy</p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-4">
-                                <div class="clearfix d-item-num">
-                                    <img src="images/icon-eye.svg" alt="">
-                                    <p class="t1"><?php echo count($visita) ?></p>
-                                    <p class="t2">Visitas de hoy</p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row mt-2">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="d-grafica-ventas">
-                                    <p class="t1">Gráfica de ventas</p>
-                                    <canvas height="400" id="myChart"></canvas>
-
-                                </div>
-                            </div>
-                        </div>
+                        <?php include("matriz/demo/index.php"); ?>
 
                     </div>
                 </div>
@@ -148,12 +209,10 @@ $visita=R::getAll($querytres);
 
     <!-- scrollIt -->
     <script src="js/scrollIt.min.js"></script>
-    <!-- responseive menu -->
-    <script src="js/menu-movil.js"></script>
 
     <!-- custom scripts -->
+    <script src="js/main-perfil.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="js/scripts.js"></script>
-    <script src="js/Chart.js"></script>
-    <script src="js/chart-ventas.js"></script>
 
 </body></html>

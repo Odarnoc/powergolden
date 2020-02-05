@@ -89,7 +89,6 @@
                                     </div>
                                 </li>
 
-                                <li><a href="matriz.php">Matriz de clientes</a></li>
                                 <!-- <li><a href="promociones.php">Promociones</a></li> -->
                                 <li><a href="videos.php">Videos</a></li>
                                 <li><a class="logout" href="ajax/cerrar_sesion.php">Cerrar sesión<i class="fas fa-sign-out-alt"></i></a></li>

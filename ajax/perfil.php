@@ -27,12 +27,6 @@ if(empty($_POST['phone'])){
     return;
 }
 
-
-if(!isset($_SESSION["user_id"])){
-    error_mensaje('Sesion no iniciada');
-    return;
-}
-
 if(!is_numeric($_POST['phone'])){
     error_mensaje('Llenar el campo "Telefono", de forma correcta.');
     return;
@@ -44,8 +38,12 @@ if(!is_numeric($_POST['cp']) || strlen($_POST['cp']) != 5){
 } 
 
 
-
+if (isset($_POST['user_id'])) {
+    $user_id=$_POST['user_id'];
+}else{
     $user_id=$_SESSION["user_id"];
+}
+
     $nombre = $_POST['name'];
     $apellido = $_POST['last_name'];
     $telefono = $_POST['phone'];
