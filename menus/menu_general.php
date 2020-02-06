@@ -33,6 +33,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="sucursales.php">Sucursales</a>
             </li>
+            
             <?php if(isset($_SESSION["user_id"])){ ?>
             <li class="nav-item">
                 <a class="nav-link" href="perfil-ecomerce.php">Mi perfil</a>
@@ -45,9 +46,20 @@
                 <a class="nav-link btn-socios" href="iniciar-sesion.php">Socios</a>
             </li>
             <?php } ?>
+            <li>
+            <div id="google_translate_element"></div>
+            </li>
         </ul>
     </div>
 </div>
 
 </nav>
 <div class="overlay"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'es,en'}, 'google_translate_element');
+}
+
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
