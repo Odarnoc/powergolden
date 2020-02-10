@@ -12,6 +12,15 @@ body {
     background-position: center;
 }
 
+.goog-logo-link,
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+.goog-te-gadget {
+    color: transparent !important;
+}
+
 .valign {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1964,94 +1973,95 @@ ul {
     line-height: 1.6;
     margin-bottom: 0px;
 }
+
 .datepicker-here {
-  background-color: #F4F4F4;
-  border: none;
-  border-radius: 0px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  height: 45px;
-  font-size: 14px;
-  padding-left: 28px;
-  padding-right: 10px;
-  color: black;
-  background-image: url(../images/calendar-alt-solid.svg);
-  background-size: 15px;
-  background-repeat: no-repeat;
-  background-position: left;
-  cursor: pointer;
-  transition: .4s;
+    background-color: #F4F4F4;
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    height: 45px;
+    font-size: 14px;
+    padding-left: 28px;
+    padding-right: 10px;
+    color: black;
+    background-image: url(../images/calendar-alt-solid.svg);
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position: left;
+    cursor: pointer;
+    transition: .4s;
 }
 
-.datepicker-here:hover{
-  border-bottom: 1px solid #49B7F3;
+.datepicker-here:hover {
+    border-bottom: 1px solid #49B7F3;
 }
 
 .datepicker-here:active,
 .datepicker-here:focus {
-  background-color: #F4F4F4;
-  box-shadow: none;
-  outline: 0;
-  color: black;
-  border-bottom: 1px solid #49B7F3;
+    background-color: #F4F4F4;
+    box-shadow: none;
+    outline: 0;
+    color: black;
+    border-bottom: 1px solid #49B7F3;
 }
 
 .datepicker-here::placeholder {
-  color: rgba(0, 0, 0, .5);
+    color: rgba(0, 0, 0, .5);
 }
 
 .radio-form label {
-  font-size: 14px;
-  margin-left: 5px;
+    font-size: 14px;
+    margin-left: 5px;
 }
 
 .radio-form input {
-  margin-top: 7px;
+    margin-top: 7px;
 }
 
 .d-items-almacen {}
 
 .d-item-almacen {
-  display: inline-table;
+    display: inline-table;
 }
 
 .d-item-almacen .alert-primary {
-  font-size: 12px;
-  font-weight: 600;
-  padding-left: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-right: 0px;
-  width: 60px;
-  margin-bottom: 0px;
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 0px;
+    width: 60px;
+    margin-bottom: 0px;
 }
 
 .d-item-almacen .close {
-  padding-left: 0px;
-  padding-right: 10px;
-  padding-bottom: 0px;
-  padding-top: 5px;
-  font-size: 18px;
+    padding-left: 0px;
+    padding-right: 10px;
+    padding-bottom: 0px;
+    padding-top: 5px;
+    font-size: 18px;
 }
 
 .matriz ul {
-  padding-top: 20px;
-  position: relative;
+    padding-top: 20px;
+    position: relative;
 
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
 }
 
 .matriz li {
-  float: left;
-  text-align: center;
-  list-style-type: none;
-  position: relative;
-  padding: 20px 5px 0 5px;
+    float: left;
+    text-align: center;
+    list-style-type: none;
+    position: relative;
+    padding: 20px 5px 0 5px;
 
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
 }
 
 
@@ -2069,231 +2079,231 @@ ul {
 .matriz li::before,
 .matriz li::after {
 
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 50%;
-  border-top: 1px solid #ccc;
-  width: 50%;
-  height: 20px;
-  
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 50%;
+    border-top: 1px solid #ccc;
+    width: 50%;
+    height: 20px;
+
 }
 
 .matriz li::after {
-  right: auto;
-  left: 50%;
-  border-left: 1px solid #ccc;
+    right: auto;
+    left: 50%;
+    border-left: 1px solid #ccc;
 }
 
 /*We need to remove left-right connectors from elements without
 any siblings*/
 .matriz li:only-child::after,
 .matriz li:only-child::before {
-  display: none;
+    display: none;
 }
 
 /*Remove space from the top of single children*/
 .matriz li:only-child {
-  padding-top: 0;
+    padding-top: 0;
 }
 
 /*Remove left connector from first child and
 right connector from last child*/
 .matriz li:first-child::before,
 .matriz li:last-child::after {
-  border: 0 none;
+    border: 0 none;
 }
 
 /*Adding back the vertical connector to the last nodes*/
 .matriz li:last-child::before {
-  border-right: 1px solid #ccc;
-  border-radius: 0 5px 0 0;
-  -webkit-border-radius: 0 5px 0 0;
-  -moz-border-radius: 0 5px 0 0;
+    border-right: 1px solid #ccc;
+    border-radius: 0 5px 0 0;
+    -webkit-border-radius: 0 5px 0 0;
+    -moz-border-radius: 0 5px 0 0;
 }
 
 .matriz li:first-child::after {
-  border-radius: 5px 0 0 0;
-  -webkit-border-radius: 5px 0 0 0;
-  -moz-border-radius: 5px 0 0 0;
+    border-radius: 5px 0 0 0;
+    -webkit-border-radius: 5px 0 0 0;
+    -moz-border-radius: 5px 0 0 0;
 }
 
 /*Time to add downward connectors from parents*/
 .matriz ul ul::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  border-left: 1px solid #ccc;
-  width: 0;
-  height: 20px;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-left: 1px solid #ccc;
+    width: 0;
+    height: 20px;
 }
 
 .matriz li a {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 12px;
-  padding-right: 12px;
-  background-color: #FFFFFF;
-  text-decoration: none;
-  color: rgba(0,0,0,.3);
-  font-size: 11px;
-  display: inline-block;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  border-radius: 100px!important;
-  box-shadow: 0px 5px 3px 3px rgba(0,0,0,.03);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: #FFFFFF;
+    text-decoration: none;
+    color: rgba(0, 0, 0, .3);
+    font-size: 11px;
+    display: inline-block;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    border-radius: 100px !important;
+    box-shadow: 0px 5px 3px 3px rgba(0, 0, 0, .03);
 }
 
-.matriz ul li a i{
-  font-size: 18px;
+.matriz ul li a i {
+    font-size: 18px;
 }
 
-.matriz ul li .t1{
-  font-size: 11px;
-  font-weight: 600;
-  text-align: center;
-  color: rgba(0,0,0,.5);
-  margin-top: 5px;
-  margin-bottom: 5px;
+.matriz ul li .t1 {
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    color: rgba(0, 0, 0, .5);
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 /*Time for some hover effects*/
 /*We will apply the hover effect the the lineage of the element also*/
 .matriz li a:hover,
-.matriz li a:hover + ul li a {
-  background: #49B7F3;
-  color: #FFFFFF;
+.matriz li a:hover+ul li a {
+    background: #49B7F3;
+    color: #FFFFFF;
 }
 
 
 /*Connector styles on hover*/
-.matriz li a:hover + ul li::after,
-.matriz li a:hover + ul li::before,
-.matriz li a:hover + ul::before,
-.matriz li a:hover + ul ul::before {
-  border-color: #49B7F3;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
+.matriz li a:hover+ul li::after,
+.matriz li a:hover+ul li::before,
+.matriz li a:hover+ul::before,
+.matriz li a:hover+ul ul::before {
+    border-color: #49B7F3;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
 }
 
-.btn-generar{
-  width: 100%;
-  background-color: #F4F4F4;
-  border: none;
-  border-radius: 0px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  height: 45px;
-  font-size: 14px;
-  padding-left: 0px;
-  padding-right: 10px;
-  color: rgba(0,0,0,.4);
-  transition: .4s;
+.btn-generar {
+    width: 100%;
+    background-color: #F4F4F4;
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    height: 45px;
+    font-size: 14px;
+    padding-left: 0px;
+    padding-right: 10px;
+    color: rgba(0, 0, 0, .4);
+    transition: .4s;
 }
 
-.btn-generar:hover{
-  border-bottom: 1px solid #49B7F3;
-  color: rgba(0,0,0,1);
+.btn-generar:hover {
+    border-bottom: 1px solid #49B7F3;
+    color: rgba(0, 0, 0, 1);
 }
 
-.btn-generar:hover > i{
-  color: rgba(0,0,0,1);
-  
+.btn-generar:hover>i {
+    color: rgba(0, 0, 0, 1);
+
 }
 
-.btn-generar > i{
-  color: rgba(0,0,0,.25);
-  transition: .4s;
+.btn-generar>i {
+    color: rgba(0, 0, 0, .25);
+    transition: .4s;
 }
 
-.form-reporte .t1{
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 5px;
+.form-reporte .t1 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
-.table-ventas thead th{
-  font-size: 14px;
-  font-weight: 600;
+.table-ventas thead th {
+    font-size: 14px;
+    font-weight: 600;
 }
 
-.table-ventas thead{
-  background-color: #FFFFFF;
-  border-radius: 50%;
-  box-shadow: 0 8px 10px -10px rgba(0, 0, 0, 0.15);
+.table-ventas thead {
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    box-shadow: 0 8px 10px -10px rgba(0, 0, 0, 0.15);
 }
 
-.table-ventas thead th:nth-child(1){
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px
+.table-ventas thead th:nth-child(1) {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px
 }
 
-.table-ventas thead th:nth-child(5){
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+.table-ventas thead th:nth-child(5) {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
-.table-ventas tbody td{
-  font-size: 12px;
-  border-bottom: 1px solid rgba(0,0,0,.05);
-  color: rgba(0,0,0,.5);
+.table-ventas tbody td {
+    font-size: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    color: rgba(0, 0, 0, .5);
 }
 
-.table-ventas tbody tr{
-  transition: .4s;
+.table-ventas tbody tr {
+    transition: .4s;
 }
 
-.table-ventas tbody tr:hover{
-  background-color: rgba(0,0,0,.03);
-  transition: .4s;
+.table-ventas tbody tr:hover {
+    background-color: rgba(0, 0, 0, .03);
+    transition: .4s;
 }
 
-.form-delivery-checkout{
-  margin-top: 50px;
+.form-delivery-checkout {
+    margin-top: 50px;
 }
 
-.form-delivery-checkout .form-check-label{
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 14px;
-  font-family: "Open Sans";
-  letter-spacing: 2px;
-  padding-left: 4px;
+.form-delivery-checkout .form-check-label {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    font-family: "Open Sans";
+    letter-spacing: 2px;
+    padding-left: 4px;
 }
 
-.form-delivery-checkout .form-check-input{
-  margin-top: 7px;
+.form-delivery-checkout .form-check-input {
+    margin-top: 7px;
 }
 
-.row-btns-checkout .btn-lg-blue i{
-  margin-left: 10px;
+.row-btns-checkout .btn-lg-blue i {
+    margin-left: 10px;
 }
 
 
 .btn-back-checkout {
-  width: 100%;
-  background-color: rgba(0,0,0,.05);
-  color: rgba(0,0,0,.5);
-  font-size: 14px;
-  height: 55px;
-  transition: .4s;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .05);
+    color: rgba(0, 0, 0, .5);
+    font-size: 14px;
+    height: 55px;
+    transition: .4s;
 }
 
 .btn-back-checkout:hover {
-  color: rgba(0,0,0,.5);
-  background-color: rgba(0,0,0,.08);
+    color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, .08);
 }
 
-.btn-back-checkout i{
-  margin-right: 10px;
+.btn-back-checkout i {
+    margin-right: 10px;
 }
 
-.d-tabla-review{
-  margin-top: 50px;
+.d-tabla-review {
+    margin-top: 50px;
 }
 
 
@@ -2371,4 +2381,3 @@ right connector from last child*/
     text-align: center;
     vertical-align: middle !important;
 }
-
