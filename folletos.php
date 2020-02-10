@@ -117,7 +117,6 @@ var_dump($paquetes);
                                                     <a style="" class="btn btn-blue mt-2"  href="editar-folleto.php?id=<?php echo $item['id']?>" role="button" ><i style="color: white" class="far fa-edit"></i></a>
                                                     <a style="background-color: #e4605e" class="btn btn-blue mt-2"  href="" role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
                                                 </div>
-
                                             </div>
                                         </div> 
                                     </div>

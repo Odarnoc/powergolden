@@ -40,6 +40,8 @@ $direccion=R::getAll($query);
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
 
+
+
 </head>
 
 <body>
@@ -74,12 +76,12 @@ $direccion=R::getAll($query);
 
                         <div class="row row-form-perfil footer-movil"> 
                             <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
-                                <form class="form-delivery-checkout">
+                                <form class="form-delivery-checkout" action="resumen.php" name="formulario" method="POST">
 
                                     <?php foreach ($direccion as $item) { ?>
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1">
+                                                <input class="form-check-input" type="radio" name="iddir"  value="<?php echo ($item['id'])?>">
                                                 <label class="form-check-label" for="exampleRadios1">
                                                     <?php echo ($item['direccion'])?>
                                                 </label>
@@ -88,18 +90,20 @@ $direccion=R::getAll($query);
                                         </div>
                                     <?php } ?> 
 
+                                    <div class="row row-btns-checkout mt-60">
+                                        <div class="col-lg-6 col-md-6 col-6">
+                                            <a href="carrito-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
+                                        </div>
+                                        <div class=" col-lg-6 col-md-6 col-6">
+                                            <a><button type="submit" id="boton" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button></a>
+                                        </div>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
                     </div>
-                        <div class="row row-btns-checkout mt-60">
-                            <div class="col-lg-6 col-md-6 col-6">
-                                <a href="carrito-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
-                            </div>
-                            <div class=" col-lg-6 col-md-6 col-6">
-                                <a href="metodo-envio.php"><button type="button" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button></a>
-                            </div>
-                        </div>
+
                 </div>
             </div>
         </div>
@@ -127,11 +131,9 @@ $direccion=R::getAll($query);
         </div>
     </div>
 
-
             <!-- Admin Menu -->
             <?php include("menus/footer_general.php"); ?>
             <!-- End Admin Menu -->
-
 
     <!-- jQuery -->
     <script src="js/jquery-3.0.0.min.js"></script>

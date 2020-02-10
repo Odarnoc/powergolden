@@ -7,6 +7,7 @@ if(!isset($_SESSION["user_id"])){
 require 'bd/conexion.php';
 
 $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
+$direccion  = R::findOne( 'direcciones', ' id = '.$_POST["iddir"]);
 
 ?>
 
@@ -39,7 +40,14 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 
-
+    <style>
+    .margen{
+        margin-left: 3rem !important;
+    }
+    .margend{
+        margin-left: 3rem !important;
+    }
+    </style>
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
 
@@ -72,14 +80,35 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
                         </div>  
                     </div>
 
-                    <div class="d-tabla-review">
-                        <div class="table-responsive">
-                            <div class="d-title-cuenta">
-                                <h6>Datos de envio</h6>
-                                <p>Direccion: Estado: </p>
+                    <div class="row"> 
+                        <div class="col">
+                            <div class="d-tabla-review">
+                                <div class="table-responsive">
+                                    <div class="d-title-cuenta">
+                                        <h6>Datos de envio</h6>
+                                        <p class="margen" style="margin-bottom: 1px">Direccion:  <?php echo ($direccion['direccion'])?> </p>
+                                        <p class="small-text-cuenta ml-4 margend"><?php echo ($direccion['colonia'])?>, <?php echo ($direccion['ciudad'])?>, <?php echo ($direccion['estado'])?>, <?php echo ($direccion['codigo'])?></p>
+                                    </div>
+                                </div>  
                             </div>
-                        </div>  
+                        </div>
+                        
+                            <div class="col">
+                                <div class="d-tabla-review">
+                                    <div class="table-responsive">
+                                        <div class="d-title-cuenta">
+                                            <h6>Datos de tarjeta</h6>
+                                            <p class="margen" style="margin-bottom: 1px">Direccion:  <?php echo ($direccion['direccion'])?> </p>
+                                            <p class="small-text-cuenta ml-4 margend"><?php echo ($direccion['colonia'])?>, <?php echo ($direccion['ciudad'])?>, <?php echo ($direccion['estado'])?>, <?php echo ($direccion['codigo'])?></p>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+
                     </div>
+
+
+
 
                         <div class="d-tabla-review">
                             <div class="table-responsive">
@@ -101,7 +130,7 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
 
                             <div class="row row-btns-checkout mt-40">
                                 <div class="col-lg-6 col-md-6 col-6">
-                                    <a href="metodo-envio.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
+                                    <a href="nuevo-envio.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-6">
@@ -142,5 +171,9 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
     <script src="js/scripts.js"></script>
     <script src="js/menu-movil.js"></script>
     <script src="js/resumen.js"></script>
+
+    <script>
+        var radioValue = $("input[name='id']:checked").val();
+    </script>
 
 </body></html>

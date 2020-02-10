@@ -84,7 +84,7 @@ $folletod = $res[0];
                                     <div class="d-2">
                                         <p class="t1"><?php echo $folletod['nombre'] ?></p>
                                         <p class="t2"><?php echo $folletod['descripcion'] ?></p>
-                                        <a class="btn btn-blue" href="#" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
+                                        <a class="btn btn-blue" download="<?php echo $folletod['imagen'] ?>" href="/images/folletos/" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
                                     </div>
                                 
                                 </div>

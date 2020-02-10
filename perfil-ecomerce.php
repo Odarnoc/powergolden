@@ -9,6 +9,14 @@ require 'bd/conexion.php';
 
 $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
 
+$query = 'SELECT * FROM direcciones WHERE idusuario = '.$_SESSION["user_id"];
+
+$queryt = 'SELECT * FROM tarjetas WHERE idusuario = '.$_SESSION["user_id"];
+
+$tarjeta=R::getAll($queryt); 
+
+$direccion=R::getAll($query); 
+
 ?>
 
 <!doctype html>
@@ -63,16 +71,26 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
                 <div class="col-lg-12 col-md-12">
                     <div class="d-cont-right perfil-movil">
                         <div class="row">
-                            <div class="col-lg-10 col-md-10">
+                            <div class="col-lg-8 col-md-8">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Perfil</p>
                                     <p class="small-text-cuenta">Deberás ingresar algunos datos para completar tu registro en la plataforma.</p>
                                 </div>
                             </div>
 
-                            <div class="col-lg-2 col-md-2">
+                            <div class="col-lg-4 col-md-4">
                                 <div class="d-btn-editar-perfil">
-                                    <a class="btn btn-editar-perfil" id="edit_button" href="#0" role="button">Editar</a>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="btn btn-editar-perfil" id="edit_button" href="#0" role="button">Editar</a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-editar-perfil" id="edit_button" href="add-direccion.php" role="button">Direcciones</a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="btn btn-editar-perfil" id="edit_button" href="billetera-ecomerce.php" role="button">Tarjetas</a>
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -85,7 +103,7 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
                                         <div class="form-row">
                                             <div class="col-lg-5 col-md-5">
 
-                                                <p class="sub-title-cuenta">Datos personales</p>
+                                                <p style="font-size: larger; font-weight: 600;" class="sub-title-cuenta">Datos personales</p>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
@@ -126,41 +144,42 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
                                             </div>
 
                                             <div class="col-lg-5 col-md-5 offset-lg-2 offset-md-2">
-
-                                                <p class="sub-title-cuenta">Dirección</p>
-
-
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input value="<?php echo $information->direccion; ?>" type="text" id="direccion" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Dirección</label>
+                                                <p style="font-size: larger; font-weight: 600;" class="sub-title-cuenta">Direcciónes de envio.</p>
+                                                <?php foreach ($direccion as $item) { ?>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label" for="exampleRadios1">
+                                                                <?php echo ($item['direccion'])?>
+                                                            </label>
+                                                        </div>
+                                                        <p class="small-text-cuenta ml-4"><?php echo ($item['colonia'])?>, <?php echo ($item['ciudad'])?>, <?php echo ($item['estado'])?>, <?php echo ($item['codigo'])?></p>
+                                                    </div>
+                                                    <div class="col" style="text-align: right">
+                                                        <a style="" class="btn btn-blue mt-2"  href="editar-direccion.php?id=<?php echo $item['id']?>" role="button" ><i style="color: white" class="far fa-edit"></i></a>
+                                                        <a style="background-color: #e4605e" class="btn btn-blue mt-2"  href="" role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
                                                     </div>
                                                 </div>
+                                                <?php } ?> 
 
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input value="<?php echo $information->estado; ?>" type="text" id="estado" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Estado</label>
+                                                <p style="font-size: larger; font-weight: 600;" class="sub-title-cuenta">Tarjetas</p>
+                                                <?php foreach ($tarjeta as $item) { ?>
+                                                <div class="row d-item-tarjeta visa">
+                                                    <div class="form-group" style="margin-bottom: 1px">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label" for="exampleRadios1">
+                                                                <p class="t2">XXXX - XXXX - XXXX - <?php echo substr ($item['numerotar'],12,15) ?></p>
+                                                            </label>
+                                                        </div>
+                                                        <p class="small-text-cuenta ml-4"><?php echo $item['propietario'] ?></p>
+                                                        <p class="ml-4">Expiracion:  <a class="small-text-cuenta ml-4"><?php echo $item['fecha'] ?></a></p>
+                                                    </div>
+                                                    <div class="col" style="text-align: right">
+                                                        <a style="" class="btn btn-blue mt-2"  href="editar-tarjeta.php?id=<?php echo $item['id']?>" role="button" ><i style="color: white" class="far fa-edit"></i></a>
+                                                        <a style="background-color: #e4605e" class="btn btn-blue mt-2"  href="" role="button" data-toggle="modal" onclick="eliminart('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input value="<?php echo $information->ciudad; ?>" type="text" id="ciudad" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Ciudad</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input value="<?php echo $information->codigop; ?>" type="text" id="cp" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Código postal</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <button type="button" id="btn-guardar-perfil" class="btn btn-lg-blue inactive" disabled>Guardar</button>
-                                                </div>
+                                                <?php } ?> 
 
                                             </div>
                                         </div>
@@ -175,6 +194,28 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
         </div>
 
     </section>
+
+            <!-- Modal Direccion-->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center mb">
+                            <img class="img-mb" src="images/icon-atencion.png" alt="">
+                            <p class="title-mb mt-20">Atención</p>
+                            <p class="sub-title-mb">¿Desea eliminar el metodo de pago?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
             <!-- Admin Menu -->
@@ -204,10 +245,12 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
   <!-- sweetalert scripts -->
   <script src="js/sweetalert2.js"></script>
 
-  <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
-  <!-- perfil scripts -->
-  <script src="js/perfil.js"></script>
+    <!-- responseive menu -->
+    <script src="js/menu-movil.js"></script>
+    <!-- perfil scripts -->
+    <script src="js/perfil.js"></script>
+    <script src="js/add-direccion.js"></script>
+    <script src="js/billetera-add.js"></script>
 
   <script>
     $(document).ready(function() {

@@ -2,9 +2,9 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM tarjetas WHERE idusuario = '.$_SESSION["user_id"];
+$id=$_GET['id'];
 
-$tarjeta=R::getAll($query); 
+$item=R::findOne('tarjetas','id ='.$id );
 
 ?>
 
@@ -86,14 +86,14 @@ $tarjeta=R::getAll($query);
                                             <form action="" class="form-tarjetas">
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input type="text" id="propietario" class="form-control input-form-underline" required />
+                                                        <input type="text" id="propietario" class="form-control input-form-underline" value="<?php echo $item['propietario']; ?>" required />
                                                         <label class="floating-label-underline">Nombre en la tarjeta</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input type="text" id="numtarjeta" class="form-control input-form-underline" required />
+                                                        <input type="text" id="numtarjeta" class="form-control input-form-underline" value="<?php echo $item['numerotar']; ?>" required />
                                                         <label class="floating-label-underline">Número en la tarjeta</label>
                                                     </div>
                                                 </div>
@@ -101,22 +101,23 @@ $tarjeta=R::getAll($query);
                                                 <div class="form-row">
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
-                                                            <input type="text" id="fecha" class="form-control input-form-underline" required />
+                                                            <input type="text" id="fecha" class="form-control input-form-underline" value="<?php echo $item['fecha']; ?>" required />
                                                             <label class="floating-label-underline">MM/AA</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
-                                                            <input type="text" id="codigo" class="form-control input-form-underline" required />
+                                                            <input type="text" id="codigo" class="form-control input-form-underline" value="<?php echo $item['ccv']; ?>"required />
                                                             <label class="floating-label-underline">CVV</label>
+                                                            <input value="<?php echo ($item['id']) ?>" id="id" hidden>
                                                         </div>
                                                     </div>
 
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <button type="button" id="registrar_tar" class="btn btn-lg-blue">Guardar</button>
+                                                    <button type="button" id="editar_tar" class="btn btn-lg-blue">Guardar</button>
                                                 </div>
 
                                             </form>

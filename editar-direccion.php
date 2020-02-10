@@ -2,9 +2,9 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM direcciones WHERE idusuario = '.$_SESSION["user_id"];
+$id=$_GET['id'];
 
-$direccion=R::getAll($query); 
+$item=R::findOne('direcciones','id ='.$id );
 
 ?>
 
@@ -80,12 +80,10 @@ $direccion=R::getAll($query);
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12" style="margin-left: auto; margin-right: auto">
 
-                                            <p class="sub-title-cuenta">Nueva direccion</p>
-
                                             <form action="" class="form-tarjetas">
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input type="text" id="direccion" class="form-control input-form-underline" required />
+                                                        <input type="text" id="direccion" value="<?php echo $item['direccion']; ?>" class="form-control input-form-underline" required />
                                                         <label class="floating-label-underline">Direccion</label>
                                                     </div>
                                                 </div>
@@ -94,29 +92,29 @@ $direccion=R::getAll($query);
 
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
-                                                            <input type="number" id="cp" class="form-control input-form-underline" required />
+                                                            <input type="number" id="cp" value="<?php echo $item['codigo']; ?>" class="form-control input-form-underline" required />
                                                             <label class="floating-label-underline">C. Postal</label>
+                                                            <input type="text" id="id" value="<?php echo $item['id']; ?>" hidden>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
-                                                            <input type="text" id="colo" class="form-control input-form-underline" required />
+                                                            <input type="text" id="colo" value="<?php echo $item['colonia']; ?>"class="form-control input-form-underline" required />
                                                             <label class="floating-label-underline">Colonia</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
-                                                            <input type="text" id="muni" class="form-control input-form-underline" required />
+                                                            <input type="text" id="muni" value="<?php echo $item['ciudad']; ?>" class="form-control input-form-underline" required />
                                                             <label class="floating-label-underline">Ciudad</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
-                                                            <select autocomplete="false" style="height:60%;" class="form-control" id="estado" name="estado" required>
-                                                                <option select hidden>Estado</option>
+                                                            <select autocomplete="false" value="'BC'" style="height:60%;" class="form-control" id="estado" name="estado" required>
                                                                 <option value="AG">Aguascalientes</option>
                                                                 <option value="BC">Baja California Norte</option>
                                                                 <option value="BS">Baja California Sur</option>
@@ -154,7 +152,7 @@ $direccion=R::getAll($query);
                                                     </div>
                                                 </div>
                                                 <div class="form-group" style="text-align: right;">
-                                                    <button type="button" id="registrar_tar" style="width: 50%" class="btn btn-lg-blue">Guardar</button>
+                                                    <button type="button" style="width: 50%" id="editar_tar" class="btn btn-lg-blue">Guardar</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -197,5 +195,13 @@ $direccion=R::getAll($query);
     <script src="js/perfil.js"></script>
     <!-- billetera js -->
     <script src="js/add-direccion.js"></script>
+
+    <script>
+        $(function() {
+            var temp="<?php echo $item['estado']; ?>"; 
+                console.log(temp);
+            $("#estado").val(temp);
+        });
+    </script>
 
 </body></html>
