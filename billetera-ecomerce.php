@@ -79,7 +79,7 @@ $tarjeta=R::getAll($query);
                                 <div class="d-form-tarjetas">
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-6">
+                                        <div class="col-lg-6 col-md-6" style="margin-left:auto; margin-right:auto;">
 
                                             <p class="sub-title-cuenta">Nueva tarjeta</p>
 

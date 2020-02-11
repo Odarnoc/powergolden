@@ -8,6 +8,7 @@ require 'bd/conexion.php';
 
 $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
 $direccion  = R::findOne( 'direcciones', ' id = '.$_POST["iddir"]);
+$tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
 
 ?>
 
@@ -86,7 +87,7 @@ $direccion  = R::findOne( 'direcciones', ' id = '.$_POST["iddir"]);
                                 <div class="table-responsive">
                                     <div class="d-title-cuenta">
                                         <h6>Datos de envio</h6>
-                                        <p class="margen" style="margin-bottom: 1px">Direccion:  <?php echo ($direccion['direccion'])?> </p>
+                                        <p class="margen" style="margin-bottom: 1px"><?php echo ($direccion['direccion'])?> </p>
                                         <p class="small-text-cuenta ml-4 margend"><?php echo ($direccion['colonia'])?>, <?php echo ($direccion['ciudad'])?>, <?php echo ($direccion['estado'])?>, <?php echo ($direccion['codigo'])?></p>
                                     </div>
                                 </div>  
@@ -98,8 +99,16 @@ $direccion  = R::findOne( 'direcciones', ' id = '.$_POST["iddir"]);
                                     <div class="table-responsive">
                                         <div class="d-title-cuenta">
                                             <h6>Datos de tarjeta</h6>
-                                            <p class="margen" style="margin-bottom: 1px">Direccion:  <?php echo ($direccion['direccion'])?> </p>
-                                            <p class="small-text-cuenta ml-4 margend"><?php echo ($direccion['colonia'])?>, <?php echo ($direccion['ciudad'])?>, <?php echo ($direccion['estado'])?>, <?php echo ($direccion['codigo'])?></p>
+                                                <div class="">
+                                                    <div class="form-group" style="margin-bottom: 1px">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label" for="exampleRadios1">
+                                                                <p style="margin-bottom: 0;" class="t2">XXXX - XXXX - XXXX - <?php echo substr ($tarjeta['numerotar'],12,15) ?></p>
+                                                            </label>
+                                                        </div>
+                                                        <p style="padding-left: 1rem; " class="small-text-cuenta ml-4">Expiracion: <a class="small-text-cuenta ml-4"><?php echo $tarjeta['fecha'] ?></a></p>
+                                                    </div>
+                                                </div>
                                         </div>
                                     </div>  
                                 </div>
@@ -130,7 +139,7 @@ $direccion  = R::findOne( 'direcciones', ' id = '.$_POST["iddir"]);
 
                             <div class="row row-btns-checkout mt-40">
                                 <div class="col-lg-6 col-md-6 col-6">
-                                    <a href="nuevo-envio.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
+                                    <a href="tarjetas.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-6">

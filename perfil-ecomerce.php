@@ -164,7 +164,7 @@ $direccion=R::getAll($query);
 
                                                 <p style="font-size: larger; font-weight: 600;" class="sub-title-cuenta">Tarjetas</p>
                                                 <?php foreach ($tarjeta as $item) { ?>
-                                                <div class="row d-item-tarjeta visa">
+                                                <div class="row d-item-tarjeta visa" style="margin: 0.5px">
                                                     <div class="form-group" style="margin-bottom: 1px">
                                                         <div class="form-check">
                                                             <label class="form-check-label" for="exampleRadios1">
@@ -174,9 +174,9 @@ $direccion=R::getAll($query);
                                                         <p class="small-text-cuenta ml-4"><?php echo $item['propietario'] ?></p>
                                                         <p class="ml-4">Expiracion:  <a class="small-text-cuenta ml-4"><?php echo $item['fecha'] ?></a></p>
                                                     </div>
-                                                    <div class="col" style="text-align: right">
+                                                    <div class="col" style="text-align: right; padding: 1px;">
                                                         <a style="" class="btn btn-blue mt-2"  href="editar-tarjeta.php?id=<?php echo $item['id']?>" role="button" ><i style="color: white" class="far fa-edit"></i></a>
-                                                        <a style="background-color: #e4605e" class="btn btn-blue mt-2"  href="" role="button" data-toggle="modal" onclick="eliminart('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
+                                                        <a style="background-color: #e4605e" class="btn btn-blue mt-2"  href="" role="button" data-toggle="modal" onclick="eliminart('<?php echo $item['id'] ?>')" data-target="#tarjetaModal"><i style="color: white" class="far fa-trash-alt"></i></a>
                                                     </div>
                                                 </div>
                                                 <?php } ?> 
@@ -207,11 +207,32 @@ $direccion=R::getAll($query);
                         <div class="modal-body text-center mb">
                             <img class="img-mb" src="images/icon-atencion.png" alt="">
                             <p class="title-mb mt-20">Atención</p>
-                            <p class="sub-title-mb">¿Desea eliminar el metodo de pago?</p>
+                            <p class="sub-title-mb">¿Desea eliminar la direccion?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
                             <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="tarjetaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center mb">
+                            <img class="img-mb" src="images/icon-atencion.png" alt="">
+                            <p class="title-mb mt-20">Atención</p>
+                            <p class="sub-title-mb">¿Desea eliminar el metodo de pago?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-aceptar-modal" onclick="confirmart()" >Aceptar</button>
                         </div>
                     </div>
                 </div>

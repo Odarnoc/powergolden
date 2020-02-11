@@ -2,9 +2,9 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM direcciones WHERE idusuario = '.$_SESSION["user_id"];
+$queryt = 'SELECT * FROM tarjetas WHERE idusuario = '.$_SESSION["user_id"];
 
-$direccion=R::getAll($query); 
+$tarjeta=R::getAll($queryt); 
 
 ?>
 
@@ -76,23 +76,25 @@ $direccion=R::getAll($query);
 
                         <div class="row row-form-perfil footer-movil"> 
                             <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
-                                <form class="form-delivery-checkout" action="tarjetas.php" name="formulario" method="POST">
-
-                                    <?php foreach ($direccion as $item) { ?>
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="iddir"  value="<?php echo ($item['id'])?>">
-                                                <label class="form-check-label" for="exampleRadios1">
-                                                    <?php echo ($item['direccion'])?>
-                                                </label>
+                                <form class="form-delivery-checkout" action="resumen.php" name="formulario" method="POST"> 
+                                    <input name="iddir" value="<?php echo ($_POST['iddir'])?>" hidden>
+                                    <?php foreach ($tarjeta as $item) { ?>
+                                            <div class="">
+                                                <div class="form-group" >
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="idtar"  value="<?php echo ($item['id'])?>">
+                                                        <label class="form-check-label" for="exampleRadios1">
+                                                            <p style="margin-bottom: 0;" class="t2">XXXX - XXXX - XXXX - <?php echo substr ($item['numerotar'],12,15) ?></p>
+                                                        </label>
+                                                    </div>
+                                                    <p style="padding-left: 1rem; " class="small-text-cuenta ml-4">Expiracion: <?php echo $item['fecha'] ?></a></p>
+                                                </div>
                                             </div>
-                                            <p style="padding-left: 1rem;" class="small-text-cuenta ml-4"><?php echo ($item['colonia'])?>, <?php echo ($item['ciudad'])?>, <?php echo ($item['estado'])?>, <?php echo ($item['codigo'])?></p>
-                                        </div>
                                     <?php } ?> 
 
                                     <div class="row row-btns-checkout mt-60">
                                         <div class="col-lg-6 col-md-6 col-6">
-                                            <a href="carrito-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
+                                            <a href="nuebo-envio.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                         </div>
                                         <div class=" col-lg-6 col-md-6 col-6">
                                             <a><button type="submit" id="boton" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button></a>
@@ -108,6 +110,28 @@ $direccion=R::getAll($query);
             </div>
         </div>
     </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center mb">
+                    <img class="img-mb" src="images/icon-atencion.png" alt="">
+                    <p class="title-mb mt-20">Atención</p>
+                    <p class="sub-title-mb">¿Desea eliminar el metodo de pago?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
             <!-- Admin Menu -->
             <?php include("menus/footer_general.php"); ?>
