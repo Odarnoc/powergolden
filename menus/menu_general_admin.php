@@ -101,6 +101,7 @@
 
                                 <!-- <li><a href="promociones.php">Promociones</a></li> -->
                                 <li><a href="videos.php">Videos</a></li>
+                                <li><a href="notificaciones.php">Notificaciones</a></li>
                                 <li><a class="logout" href="ajax/cerrar_sesion.php">Cerrar sesión<i class="fas fa-sign-out-alt"></i></a></li>
                             </ul>
 

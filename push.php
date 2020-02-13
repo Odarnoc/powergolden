@@ -43,7 +43,7 @@ $result = curl_exec($ch );
 curl_close( $ch );
 echo $result;
 
-header("Location: notificacion.php");
+header("Location: notificaciones.php");
 die();
 
 ?>

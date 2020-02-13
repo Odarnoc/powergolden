@@ -1,7 +1,7 @@
 <nav class="navbar navbar-solid navbar-expand-lg navbar-dark bg-dark">
 
 <div class="container">
-     <a class="logo" href="index.php">
+     <a class="logo" href="dashboard.php">
         <img src="images/logo-navbar.png">
     </a> 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

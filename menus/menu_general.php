@@ -39,6 +39,9 @@
                 <a class="nav-link" href="perfil-ecomerce.php">Mi perfil</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="oficina-virtual.php">Oficina virtual</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link btn-socios" href="ajax/cerrar_sesion.php">Cerrar Sesion</a>
             </li>
             <?php }else{ ?>
