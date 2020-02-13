@@ -18,6 +18,18 @@
                                         </div>
                                     </div>
                                 </li>
+                                <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Sucursales
+                                        </a>
+                                        
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="registro-sucursal.php">Registrar Sucursal</a>
+                                            <a class="dropdown-item" href="lista-sucursal.php">Lista Sucursales</a>
+                                        </div>
+                                    </div>
+                                </li>
                                 <li><a href="ventas.php">Ventas</a></li>
 
                                 <li>
@@ -28,13 +40,11 @@
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="lista-productos.php">Listado de productos</a>
-                                            <!-- <a class="dropdown-item" href="carrito.php">Carrito de compras</a> -->
-                                            <!-- <a class="dropdown-item" href="#">Lista de carrito</a> -->
                                             <a class="dropdown-item" href="registro-productos.php">Agregar producto</a>
                                         </div>
                                     </div>
                                 </li>
-                                <!-- <li><a href="">Tarjetas</a></li> -->
+
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -61,103 +61,57 @@ require 'user_preferences/user-info.php';
                         <div class="row">
                             <div class="col-lg-10 col-md-10">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Perfil</p>
-                                    <p class="small-text-cuenta">Deberás ingresar algunos datos para completar tu registro en la plataforma.</p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-2 col-md-2">
-                                <div class="d-btn-editar-perfil">
-                                    <a class="btn btn-editar-perfil" id="edit_button" href="#0" role="button">Editar</a>
+                                    <p class="title-cuenta">Mi perfil.</p>
+                                    <p class="small-text-cuenta">Como administrador puedes editar todos los datos de tu cuenta.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row row-form-perfil">
+                        <div class="row row-form-perfil" style="margin-left: 8rem;">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-form-perfil">
                                     <form class="form-perfil">
 
                                         <div class="form-row">
-                                            <div class="col-lg-5 col-md-5">
-
-                                                <p class="sub-title-cuenta">Datos personales</p>
+                                        <div class="col-lg-12 col-md-12" style="margin-left: auto; margin-right: auto">
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="<?php echo $information->nombre; ?>" type="text" id="nombre" class="form-control input-form-underline" disabled/>
+                                                        <input value="<?php echo $information->nombre; ?>" type="text" id="nombre" class="form-control input-form-underline" />
                                                         <label class="floating-label-underline">Nombre </label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="<?php echo $information->apellidos; ?>" type="text" id="apellido" class="form-control input-form-underline" disabled/>
+                                                        <input value="<?php echo $information->apellidos; ?>" type="text" id="apellido" class="form-control input-form-underline" />
                                                         <label class="floating-label-underline">Apellidos</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="<?php echo $information->correo; ?>" type="text" id="correo" class="form-control input-form-underline" disabled/>
+                                                        <input value="<?php echo $information->correo; ?>" type="text" id="correo" class="form-control input-form-underline" />
                                                         <label class="floating-label-underline">Correo electrónico</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="<?php echo $information->telefono; ?>" type="text" id="telefono" class="form-control input-form-underline" disabled/>
+                                                        <input value="<?php echo $information->telefono; ?>" type="text" id="telefono" class="form-control input-form-underline" />
                                                         <label class="floating-label-underline">Teléfono</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input value="<?php echo $information->nacimiento; ?>" type="date" id="nacimiento" class="form-control input-form-underline" required disabled/>
+                                                        <input value="<?php echo $information->nacimiento; ?>" type="date" id="nacimiento" class="form-control input-form-underline" required />
                                                         <label class="floating-label-underline">Fecha de nacimiento</label>
                                                     </div>
                                                 </div>
-
-
-                                            </div>
-
-                                            <div class="col-lg-5 col-md-5 offset-lg-2 offset-md-2">
-
-                                                <p class="sub-title-cuenta">Dirección</p>
-
-
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input value="<?php echo $information->direccion; ?>" type="text" id="direccion" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Dirección</label>
-                                                    </div>
+                                                <div class="form-group" style="text-align: right;">
+                                                    <button type="button" id="editar_perf_admin" style="width: 50%" class="btn btn-lg-blue">Guardar</button>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input value="<?php echo $information->estado; ?>" type="text" id="estado" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Estado</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input value="<?php echo $information->ciudad; ?>" type="text" id="ciudad" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Ciudad</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input value="<?php echo $information->codigop; ?>" type="text" id="cp" class="form-control input-form-underline" required disabled/>
-                                                        <label class="floating-label-underline">Código postal</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <button type="button" id="btn-guardar-perfil" class="btn btn-lg-blue inactive" disabled>Guardar</button>
-                                                </div>
-
                                             </div>
                                         </div>
                                     </form>

@@ -5,12 +5,7 @@ session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
-$response['mensaje'] = "Exito al guardar.";
-
-if(!isset($_POST['name'])&&!isset($_POST['last_name'])&&!isset($_POST['phone'])&&!isset($_POST['email'])){
-    error_mensaje("Completar todos los campos personales.");
-    return;
-}
+$response['mensaje'] = "Exito al editar el usuario.";
 
 if(empty($_POST['name'])){
     error_mensaje('Llenar el campo nombre.');
@@ -19,6 +14,16 @@ if(empty($_POST['name'])){
 
 if(empty($_POST['last_name'])){
     error_mensaje('Llenar el campo apellido.');
+    return;
+}
+
+if(empty($_POST['email'])){
+    error_mensaje('Llenar el campo correo.');
+    return;
+}
+
+if(empty($_POST['date'])){
+    error_mensaje('Llenar el campo fecha de nacimiento.');
     return;
 }
 
@@ -32,20 +37,25 @@ if(!is_numeric($_POST['phone'])){
     return;
 }
 
-if(!is_numeric($_POST['cp']) || strlen($_POST['cp']) != 5){
-    error_mensaje('Codigo postal incorrecto');
-    return;
-} 
+
+if (isset($_POST['user_id'])) {
+    $user_id=$_POST['user_id'];
+}else{
+    $user_id=$_SESSION["user_id"];
+}
 
     $nombre = $_POST['name'];
     $apellido = $_POST['last_name'];
+    $correo = $_POST['email'];
     $telefono = $_POST['phone'];
     $nacimiento = $_POST['date'];
+
 
         
     $registro = R::load('usuarios',$user_id);
 
             $registro->nombre = $nombre;
+            $registro->correo = $correo;
             $registro->telefono = $telefono;
             $registro->apellidos = $apellido;
             $registro->nacimiento = $nacimiento;
@@ -54,7 +64,7 @@ if(!is_numeric($_POST['cp']) || strlen($_POST['cp']) != 5){
             $id = R::store($registro);
 
     if(empty($id)){
-        error_mensaje("Error al guardar usuario.");
+        error_mensaje("Error al editar el usuario.");
     }else{
         echo json_encode($response);
         }

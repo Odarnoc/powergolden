@@ -140,6 +140,10 @@ $direccion=R::getAll($query);
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group" style="text-align: center;">
+                                                    <button type="button" id="editar_perf" style="width: 50%" class="btn btn-lg-blue">Guardar</button>
+                                                </div>
+
 
                                             </div>
 
@@ -270,8 +274,6 @@ $direccion=R::getAll($query);
     <script src="js/menu-movil.js"></script>
     <!-- perfil scripts -->
     <script src="js/perfil.js"></script>
-    <script src="js/add-direccion.js"></script>
-    <script src="js/billetera-add.js"></script>
 
   <script>
     $(document).ready(function() {

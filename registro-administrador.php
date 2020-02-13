@@ -83,21 +83,21 @@ require 'user_preferences/user-info.php';
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form" id="name" required />
+                                                            <input type="text" class="form-control input-form-underline" id="name" required />
                                                             <label class="floating-label">Nombre</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form" id="last_name" required />
+                                                            <input type="text" class="form-control input-form-underline" id="last_name" required />
                                                             <label class="floating-label">Apellido</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                        <select id="rol" class="form-control input-form" required>
+                                                        <select id="rol" class="form-control input-form-underline" required>
                                                             <option value="2">Tipo de usuario</option>
                                                             <option value="0">Administrador</option>
                                                             <option value="1">Cliente</option>
@@ -107,21 +107,21 @@ require 'user_preferences/user-info.php';
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="tel" class="form-control input-form" id="phone" required />
+                                                            <input type="tel" class="form-control input-form-underline" id="phone" required />
                                                             <label class="floating-label">Teléfono</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form" id="email" required />
+                                                            <input type="text" class="form-control input-form-underline" id="email" required />
                                                             <label class="floating-label">Correo electrónico</label>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                            <input type="password" class="form-control input-form" id="pass" required />
+                                                            <input type="password" class="form-control input-form-underline" id="pass" required />
                                                             <label class="floating-label">Contraseña</label>
                                                         </div>
                                                     </div>
