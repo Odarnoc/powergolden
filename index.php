@@ -8,8 +8,12 @@ if(isset($_SESSION["user_id"])){
 
 $query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 6';
 $query2='SELECT p.*,COUNT(*) as conteo,l.imagenlinea FROM productosxventas as pxv LEFT JOIN productos as p ON pxv.producto_id = p.id LEFT JOIN lineas as l ON p.categoria = l.id GROUP BY producto_id ORDER BY conteo DESC LIMIT 1';
+$query3='SELECT * FROM promociones WHERE NOW()>=inicio && NOW()<=fin ORDER BY RAND() LIMIT 6';
+$query4='SELECT * FROM paquetes ORDER BY RAND() LIMIT 6';
 
 $prods=R::getAll($query);
+$promos=R::getAll($query3);
+$packs=R::getAll($query4);
 $prodRelevante=R::getAll($query2);
 if(empty($prodRelevante)){
   $query3='SELECT p.*,l.imagenlinea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 1';
@@ -152,6 +156,78 @@ R::store($visita);
                         <p class="t2"><?php echo $item['nombre'] ?></p>
                         <p class="t4 two-lines"><?php echo $item['ingredientes'] ?></p>
                         <a class="btn btn-blue mt-3" href="producto-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver producto</a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+
+
+
+          </div>
+
+          <div class="row row-items-pro lista-productos-movil">
+
+            <div class="col-lg-12 col-md-12">
+              <p class="title-sec mb-20">Promociones</p>
+            </div>
+
+            
+            <?php foreach ($promos as $item) { ?>
+              <div class="col-lg-6 d-all-item-pro">
+                <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
+                  <div class="row">
+                    <div class="col-lg-5 col-md-5 col-5">
+                      <div class="d-img-pro">
+                        <img src="images/promocion/<?php echo $item['imagen'] ?>" alt="">
+
+                      </div>
+                    </div>
+
+                    <div class="col-lg-7 col-md-7 col-7">
+                      <div class="d-info-pro">
+                        <p class="t1">Promoción</p>
+                        <p class="t2"><?php echo $item['nombre'] ?></p>
+                        <p class="t4 two-lines"><?php echo $item['descripcion'] ?></p>
+                        <a class="btn btn-blue mt-3" href="promocion-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver promoción</a>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            <?php } ?>
+
+
+
+          </div>
+
+          <div class="row row-items-pro lista-productos-movil">
+
+            <div class="col-lg-12 col-md-12">
+              <p class="title-sec mb-20">Paquetes</p>
+            </div>
+
+            
+            <?php foreach ($packs as $item) { ?>
+              <div class="col-lg-6 d-all-item-pro">
+                <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
+                  <div class="row">
+                    <div class="col-lg-5 col-md-5 col-5">
+                      <div class="d-img-pro">
+                        <img src="images/paquetes/<?php echo $item['imagen'] ?>" alt="">
+
+                      </div>
+                    </div>
+
+                    <div class="col-lg-7 col-md-7 col-7">
+                      <div class="d-info-pro">
+                        <p class="t1">Paquete</p>
+                        <p class="t2"><?php echo $item['nombre'] ?></p>
+                        <p class="t4 two-lines"><?php echo $item['descripcion'] ?></p>
+                        <a class="btn btn-blue mt-3" href="paquete-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver paquete</a>
                       </div>
                     </div>
 

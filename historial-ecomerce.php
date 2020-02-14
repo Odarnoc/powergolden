@@ -7,6 +7,9 @@ if(!isset($_SESSION["user_id"])){
 
 require 'bd/conexion.php';
 
+$query="SELECT p.*,pxv.cantidad,v.fecha FROM productosxventas as pxv LEFT JOIN ventas as v ON pxv.venta_id = v.id LEFT JOIN productos as p ON pxv.producto_id = p.id WHERE v.user_id=".$_SESSION["user_id"];
+
+$historial=R::getAll($query);
 ?>
 
 <!doctype html>
@@ -63,7 +66,7 @@ require 'bd/conexion.php';
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Oficina virtual</p>
+                                    <p class="title-cuenta">Historial</p>
                                 </div>
                             </div>
                         </div>
@@ -74,26 +77,34 @@ require 'bd/conexion.php';
                                     <form class="form-perfil">
 
                                         <div class="form-row">
-                                            <div class="col-lg-5 col-md-5">
-
-                                                <p class="t1">Gráfica de compras</p>
-                                                <canvas height="400" id="myChart"></canvas>
-
-                                                
-
-                                            </div>
-
-                                            <div class="col-lg-5 col-md-5 offset-lg-2 offset-md-2">
-                                                <div class="card d-item-mision">
-                                                    <center>
-                                                        <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="promociones-ecomerce.php" role="button">Ver promociones</a>
-                                                        <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="paquetes-ecomerce.php" role="button">Ver paquetes</a>
-                                                        <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="historial-ecomerce.php" role="button">Historial</a>
-                                                        <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="facturacion.php" role="button">Facturación</a>
-                                                        <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="contacto.php" role="button">Contacto</a>
-                                                    </center>
-                                                </div> 
-                                            </div>
+                                            <center>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div id="lista-productos">
+                                                        
+                                                        
+                                                        <?php foreach ($historial as $item) { ?>
+                                                            <div class="d-item-carrito">
+                                                                <div class="row">
+                                                                    <div class="col-lg-4 col-md-4 col-4">
+                                                                        <div class="d-img-carrito">
+                                                                            <img src="productos_img/<?php echo $item['imagen'] ?>" alt="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-8 col-md-8 col-8">
+                                                                        <div class="d-info-carrito" style="text-align: left;">
+                                                                            <p class="t1 one-line"><?php echo $item['nombre'] ?></p>
+                                                                            <p class="t2 one-line"><?php echo $item['descripcion'] ?></p>
+                                                                            <p class="t2 one-line">Cantidad: <?php echo $item['cantidad'] ?></p>
+                                                                            <p class="t3">$<?php echo $item['precio'] ?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </center>
                                         </div>
                                     </form>
                                 </div>
