@@ -48,18 +48,18 @@ while ($bandera) {
 
                 try {
                     //Server settings
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-                    $mail->Port       = 587;   
                     $mail->SMTPDebug = 0;                      // Enable verbose debug output
-                    $mail->isSMTP();                                            // Send using SMTP
-                    $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
-                    $mail->SMTPAuth   = true;                                    // Enable SMTP authentication
-                    $mail->Username   = 'powergolden01@gmail.com';                     // SMTP username
-                    $mail->Password   = 'pg12345678';                               // SMTP password
-                                 // TCP port to connect to
-
+                    $mail->isSMTP();
+                    $mail->SMTPAuth   = true;  
+    
+                    $mail->SMTPSecure = 'ssl';                                             // Send using SMTP
+                    $mail->Host       = 'mail.powergolden.com.mx';
+                    $mail->Port       = 465; 
+                    $mail->Username   = 'golden1@powergolden.com.mx';                     // SMTP username
+                    $mail->Password   = '1f4IRMiugdr#';        // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+    
                     //Recipients
-                    $mail->setFrom('powergolden01@gmail.com', 'PowerGolden');
+                    $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
                     $mail->addAddress( $correo, $registros_in[0]['nombre'].' '.$registros_in[0]['apellidos']);     // Add a recipient
 
                     // Content
