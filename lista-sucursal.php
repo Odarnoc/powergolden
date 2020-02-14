@@ -88,8 +88,6 @@ $sucursal=R::getAll($query);
                                 <td style="vertical-align: middle">
                                     <div>
                                         <a href="editar-sucursal.php?id=<?php echo $item['id']?>"><i class="far fa-edit"></i></a>
-                                        <a style="padding-left: 2rem;" href="" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i class="fas fa-trash-alt"></i></a>
-                                        <a style="padding-left: 2rem;" href="vista-producto.php?key=<?php echo $item['id']; ?>"><i class="fas fa-users"></i></a>
                                     </div>
                                 </td>
                                 </tr> 

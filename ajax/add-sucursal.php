@@ -37,39 +37,56 @@ if(empty($_POST['estado'])){
 }
 
 if($_POST['estado'] == "Estado"){
-    error_mensaje('Llenar el campo estado.');
+    error_mensaje('Seleccionar estado.');
     return;
 }
 
-    $nom = $_POST['nombre'];
-    $dir = $_POST['direccion'];
-    $cp = $_POST['cp'];
-    $col = $_POST['colonia'];
-    $mun = $_POST['munici'];
-    $est = $_POST['estado'];
+if(empty($_POST['usuario'])){
+    error_mensaje('Llenar el campo usuario.');
+    return;
+}
 
-            if(strlen($cp) == 5 ){ 
-        
-            $registro = R::dispense('sucursales');
+if(empty($_POST['pass'])){
+    error_mensaje('Llenar el campo contraseña.');
+    return;
+}
 
-            $registro->nombre = $nom;
-            $registro->direccion = $dir;
-            $registro->codigo = $cp;
-            $registro->colonia = $col;
-            $registro->ciudad = $mun;
-            $registro->estado = $est;
-
-            $id = R::store($registro);
-
-            if(empty($id)){
-                error_mensaje("Error al agregar la sucursal.");
+        $nom = $_POST['nombre'];
+        $dir = $_POST['direccion'];
+        $cp = $_POST['cp'];
+        $col = $_POST['colonia'];
+        $mun = $_POST['munici'];
+        $est = $_POST['estado'];
+        $user = $_POST['usuario'];
+        $contra = $_POST['pass'];
+    
+                if(strlen($cp) == 5 ){ 
+            
+                $registro = R::dispense('sucursales');
+    
+                $registro->nombre = $nom;
+                $registro->direccion = $dir;
+                $registro->codigo = $cp;
+                $registro->colonia = $col;
+                $registro->ciudad = $mun;
+                $registro->estado = $est;
+                $registro->usuario = $user;
+                $registro->pass = $contra;
+    
+                $id = R::store($registro);
+    
+                if(empty($id)){
+                    error_mensaje("Error al agregar la sucursal.");
+                }else{
+                    echo json_encode($response);
+                }
+    
             }else{
-                echo json_encode($response);
+                error_mensaje("El codigo postal es incorrecto");
             }
+    
 
-        }else{
-            error_mensaje("El codigo postal es incorrecto");
-        }
+
 
 
 ?>

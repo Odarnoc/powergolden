@@ -8,9 +8,8 @@ $user_id=-1;
 if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
 }
-$query1='SELECT * FROM promociones WHERE id = '.$id_prod.' LIMIT 1';
-$res=R::getAll($query1);
-$prodIndividual = $res[0];
+$item=R::findOne('promociones','id ='.$id_prod );
+
 
 ?>
 <!doctype html>
@@ -36,7 +35,7 @@ $prodIndividual = $res[0];
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
     <!-- responseive menu -->
-  <link rel="stylesheet" href="css/menu-movil.css">
+    <link rel="stylesheet" href="css/menu-movil.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -85,7 +84,7 @@ $prodIndividual = $res[0];
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"><?php echo $prodIndividual['nombre'] ?></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><?php echo $item['nombre'] ?></li>
                                 </ol>
                             </nav>
                         </div>
@@ -93,11 +92,11 @@ $prodIndividual = $res[0];
 
                     <div class="row row-pro-ind ">
                         <div class="col-lg-12 col-md-12 ">
-                            <div class="d-pro-ind ">
+                            <div classitem
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4">
                                         <div class="d-img-pro-ind ">
-                                            <img src="images/paquetes/<?php echo $prodIndividual['imagen'] ?>" alt="">
+                                            <img src="images/paquetes/<?php echo $item['imagen'] ?>" alt="">
                                         </div>
 
                                     </div>
@@ -106,22 +105,21 @@ $prodIndividual = $res[0];
                                         <div class="d-info-pro-ind">
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8">
-                                                    <p class="title-pro-ind one-line"><?php echo $prodIndividual['nombre'] ?></p>
+                                                    <p class="title-pro-ind one-line"><?php echo $item['nombre'] ?></p>
                                                 </div>
 
                                                 <div class="col-lg-4 col-md-4">
-                                                    <p class="price-pro-ind">$<?php echo $prodIndividual['precio'] ?></p>
+                                                    <p class="price-pro-ind">$<?php echo $item['precio'] ?></p>
                                                 </div>
                                             </div>
 
-                                            <p class="sub-title-pro-ind"><?php echo $prodIndividual['descripcion'] ?></p>
+                                            <p class="sub-title-pro-ind"><?php echo $item['descripcion'] ?></p>
                                             <br>
                                             <br>
                                             <div class="row row-cant-pro-ind">
                                                 <div class="col-lg-12 col-md-12">
 
                                                     <div class="form-cant-pro-ind">
-                                                       
                                                         <div class="form-row">
                                                             <div class="form-group col-lg-12 col-md-12">
                                                                 <button type="button" class="btn btn-add-car" onclick="agregar()">Comprar</button>
@@ -131,9 +129,7 @@ $prodIndividual = $res[0];
                                                     
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

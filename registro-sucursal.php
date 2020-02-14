@@ -157,6 +157,21 @@ require 'user_preferences/user-info.php';
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <input type="text" id="user" class="form-control input-form-underline" required />
+                                                        <label class="floating-label-underline">Usuario</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <input type="text" id="pass" class="form-control input-form-underline" required />
+                                                        <label class="floating-label-underline">Contraseña</label>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group" style="text-align: right;">
                                                     <button type="button" id="registrar_suc" style="width: 50%" class="btn btn-lg-blue">Guardar</button>
                                                 </div>

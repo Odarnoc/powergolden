@@ -65,8 +65,8 @@ var_dump($paquetes);
 
 
 
-                <div class="col-lg-8 col-md-8 bg-gray">
-                    <div class="d-cont-right">
+                <div class="col-lg-8 col-md-8 bg-gray" >
+                    <div class="d-cont-right" style="padding-top: 6rem">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
@@ -74,26 +74,6 @@ var_dump($paquetes);
                                     <p class="small-text-cuenta">Aqui se muestran todos los folletos agregados hastala fecha.</p>
                                 </div>
                             </div>
-
-                        </div>
-
-                        <div class="row row-buscar-productos">
-
-                            <!-- <div class="col-lg-8 col-md-8">
-                                <div class="d-buscar-l-p">
-                                    <form action="folletos.php" method="post"class="f-search-home">
-                                        <div class="form-row">
-                                            <div class="form-group col-lg-10 col-md-10 col-10">
-                                                <input type="text" name="busqueda" class="form-control input-search" placeholder="<?php echo $filtro;  ?>">
-                                            </div>
-
-                                            <div class="form-group col-md-2 col-2 text-center">
-                                                <button class="btn btn-search" type="submit" role="button"><img src="images/icon-search-white.svg" alt=""></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div> -->
 
                         </div>
 
