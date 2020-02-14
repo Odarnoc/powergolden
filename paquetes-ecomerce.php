@@ -110,7 +110,7 @@ $prods=R::getAll($query);
                         <p class="t1">Paquete</p>
                         <p class="t2"><?php echo $item['nombre'] ?></p>
                         <p class="t4 two-lines"><?php echo $item['descripcion'] ?></p>
-                        <a class="btn btn-blue mt-3" href="producto-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver paquete</a>
+                        <a class="btn btn-blue mt-3" href="paquete-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver paquete</a>
                       </div>
                     </div>
 
