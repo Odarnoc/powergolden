@@ -86,6 +86,8 @@ require 'bd/conexion.php';
                                             <div class="col-lg-5 col-md-5 offset-lg-2 offset-md-2">
                                                 <div class="card d-item-mision">
                                                     <center>
+                                                        <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="registro-oficina.php" role="button">Registro</a>
+                                                        <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="reporte-venta-oficina.php" role="button">Reporte de venta</a>
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="promociones-ecomerce.php" role="button">Ver promociones</a>
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="paquetes-ecomerce.php" role="button">Ver paquetes</a>
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="historial-ecomerce.php" role="button">Historial</a>

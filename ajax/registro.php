@@ -73,7 +73,7 @@ if(!is_numeric($_POST['phone'])){
             try {
                 $mail->SMTPDebug = 0;                      // Enable verbose debug output
                 $mail->isSMTP();
-                $mail->SMTPAuth   = true;  
+                //$mail->SMTPAuth   = true;  
 
                 $mail->SMTPSecure = 'ssl';                                             // Send using SMTP
                 $mail->Host       = 'mail.powergolden.com.mx';
@@ -98,7 +98,7 @@ if(!is_numeric($_POST['phone'])){
                                     </head>
                                     <body>
                                         <center>
-                                            <img style="width: 50%;" src="https://powergoldendemos.000webhostapp.com/images/logo-navbar.png">
+                                            <img style="width: 50%;" src="http://www.powergolden.com.mx/">
                                             <div> 
                                                 <h1>PowerGolden le da la bienvenida a nuestro apartado electrónico de compras.</h1>
                                                 <h3>Le pedimos iniciar sesión en nuestro sitio o aplicación y completar el formulario de perfil.</h3>
@@ -112,7 +112,7 @@ if(!is_numeric($_POST['phone'])){
 
                 $mail->send();
             } catch (Exception $e) {
-                echo "No se pudo enviar el correo: {$mail->ErrorInfo}";
+                echo "No se pudo enviar el correo.";
             
             }
 
