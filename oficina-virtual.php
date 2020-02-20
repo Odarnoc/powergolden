@@ -92,6 +92,7 @@ require 'bd/conexion.php';
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="reporte-venta-oficina.php" role="button">Reporte de venta</a>
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="promociones-ecomerce.php" role="button">Ver promociones</a>
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="paquetes-ecomerce.php" role="button">Ver paquetes</a>
+                                                        <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="folletos-oficina.php" role="button">Foalletos electronicos</a>
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="historial-ecomerce.php" role="button">Historial</a>
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="facturacion.php" role="button">Facturación</a>
                                                         <a class="btn btn-blue mt-3" style="width: 80%; padding: 1rem;font-size: 14px;" href="contacto.php" role="button">Contacto</a>

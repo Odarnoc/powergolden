@@ -2,8 +2,6 @@
 
 require 'user_preferences/user-info.php';
 
-$id = $_GET['key'];
-
 $query = 'SELECT * FROM folletos where  id = "'.$_GET['id'].'"' ;
 
 $res=R::getAll($query); 
@@ -59,34 +57,21 @@ $folletod = $res[0];
                     <!-- Admin Menu -->
                     <?php include("menus/menu_general_admin.php"); ?>
                     <!-- End Admin Menu -->
-
-
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Folleto</p>
-                                    <p class="small-text-cuenta"></p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row mt-4">
+                        <div class="row ">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-folleto-ind">
-                                <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $folletod['imagen'] ?>'); height: 350px;
+                                    <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $folletod['imagen'] ?>'); height: 350px;
                                             background-size: cover;
                                             background-repeat: no-repeat; 
                                             ">
-                                        </div>
+                                    </div>
                                     <div class="d-2">
                                         <p class="t1"><?php echo $folletod['nombre'] ?></p>
                                         <p class="t2"><?php echo $folletod['descripcion'] ?></p>
-                                        <a class="btn btn-blue" download="<?php echo $folletod['imagen'] ?>" href="/images/folletos/" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
+                                        <a class="btn btn-blue" download href="/images/folletos/<?php echo $folletod['imagen'] ?>" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
                                     </div>
-                                
                                 </div>
                             </div>
                         </div>
@@ -94,7 +79,6 @@ $folletod = $res[0];
                 </div>
             </div>
         </div>
-
     </section>
 
 
