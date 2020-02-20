@@ -7,20 +7,10 @@
     $user_id=$_SESSION["user_id"];
     }
 
-    if(!isset($_POST['fechauno'])||!isset($_POST['fechados'])){
-    $query = 'SELECT DISTINCT pxv.venta_id as idv, pxv.cantidad as cantidad, pxv.producto_id as idp, p.nombre as nombre, v.fecha as fecha,v.total as total 
-    FROM ventas as v LEFT JOIN productosxventas as pxv ON v.id = pxv.venta_id LEFT JOIN productos as p on p.id = pxv.producto_id WHERE v.user_id ="'.$_SESSION["user_id"].'"' ;
-    }else{
-    $query = 'SELECT DISTINCT pxv.venta_id as idv, pxv.cantidad as cantidad, pxv.producto_id as idp, p.nombre as nombre, v.fecha as fecha,v.total as total 
-    FROM ventas as v LEFT JOIN productosxventas as pxv ON v.id = pxv.venta_id LEFT JOIN productos as p on p.id = pxv.producto_id WHERE v.user_id ="'.$_SESSION["user_id"].'" and v.fecha BETWEEN "'.$_POST['fechauno'].'" and "'.$_POST['fechados'].'"';
-    $filtro = $_POST['fechauno'];
-    $filtrodos = $_POST['fechados'];
-}
-
-$productos=R::getAll($query);
+    $productos=R::find( 'ventascliente', 'user_id = '.$user_id);
 
 
-    ?>
+?>
 
     <!doctype html>
     <html lang="es">
@@ -76,7 +66,7 @@ $productos=R::getAll($query);
                 <div class="col-lg-9 col-md-6 lista-productos-movil">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
-                            <p class="title-sec mb-20">Reporte de ventas</p>
+                            <p class="title-sec mb-20">Mis ventas</p>
                         </div>
                     </div>
 
@@ -84,26 +74,7 @@ $productos=R::getAll($query);
                             <div class="col-lg-12 col-md-12">
 
                                 <div class="d-form-reporte">
-
-                                    <form action="reporte-venta-oficina.php" method="post" class="form-reporte">
-                                        <p class="t1">Rango de fechas</p>
-                                        <div class="form-row">
-
-                                            <div class="form-group col-lg-4 col-md-4">
-                                                <input type="date" class="datepicker-here form-control" placeholder="<?php echo $filtro;  ?>"  name="fechauno" data-date-format="yyyy/mm/dd" data-language='es' placeholder="Inicio">
-                                            </div>
-
-                                            <div class="form-group col-lg-4 col-md-4">
-                                                <input type="date" class="datepicker-here form-control" placeholder="<?php echo $filtrodos;  ?>" name="fechados" data-date-format="yyyy/mm/dd" data-language='es' placeholder="Fin">
-                                            </div>
-
-                                            <div class="form-group col-lg-4 col-md-4">
-                                                <button type="submit"  style="margin-top: 0rem!important; height: 37px;" class="btn btn-blue mt-2"><i style="color: white" class="fas fa-search"></i></button>
-<a type="button" style="margin-top: 0rem!important; height: 37px;" href="pdf-ventas-oficina.php<?php if (isset($_POST['fechauno'])&&isset($_POST['fechados'])){ ?>?inicio=<?php echo $_POST['fechauno'] ;  ?>&fin=<?php echo $_POST['fechados'] ; }?>" target="_blank" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i>Generar reporte</a>
-                                            </div>
-
-                                        </div>
-                                    </form>
+                                    <a type="button" style="margin-top: 0rem!important; height: 37px;margin-bottom:2rem;" href="nueva-venta-oficina.php" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i>Nueva venta</a>
                                 </div>
                             </div>
                         </div>
@@ -115,19 +86,27 @@ $productos=R::getAll($query);
                                         <thead>
                                             <tr class="table-primary">
                                                 <th>Fecha</th>
-                                                <th>Productos</th>
-                                                <th>Cantidad</th>
+                                                <th>Cliente</th>
+                                                <th>Venta</th>
                                                 <th>Total</th>
+                                                <th>Cobrado</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
                                         <?php foreach ($productos as $item) { ?>
                                             <tr>
-                                                <td><?php echo $item['fecha'] ?></td>
-                                                <td><?php echo $item['nombre'] ?></td>
-                                                <td><?php echo $item['cantidad'] ?></td>
-                                                <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
+                                                <td><?php echo $item->fecha ?></td>
+                                                <td><?php echo $item->nombre ?></td>
+                                                <td><?php echo $item->venta ?></td>
+                                                <td>$<?php echo $item->total ?></td>
+                                                <td><?php 
+                                                    if ($item->cobrado === 1 || $item->cobrado === "1" ) {
+                                                       echo "Si";
+                                                    }else{
+                                                        echo "No";
+                                                    }
+                                                ?></td>
                                             </tr>
                                         <?php } ?>  
                                         </tbody>
