@@ -1,10 +1,9 @@
 <?php
+session_start();
 
 require '../bd/conexion.php';
 require '../utils/error.php';
-$response['mensaje'] = "El correo se envio correctamente.";
 
-/* PHPMailer*/
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -12,42 +11,69 @@ require '../phpMailer/Exception.php';
 require '../phpMailer/PHPMailer.php';
 require '../phpMailer/SMTP.php';
 
-$contador = true;
+$response['mensaje'] = "Exito al crear usuario.";
 
-if(!isset($_POST['email'])){
-    error_mensaje("Completa el campo correo.");
+if(empty($_POST['name'])){
+    error_mensaje('Llenar el campo nombre.');
     return;
 }
 
-$correo = $_POST['email'];
-
-$query = 'SELECT * FROM `usuarios` WHERE correo= "'.$correo.'"'; 
-
-$registros_in=R::getAll($query);
-
-$bandera = true;
-
-$pinIn;
-
-while ($bandera) {
-    $pinIn =  rand(1000,9999);
-    $queryPin = R::findOne('usuarios','pin = '.$pinIn.''); 
-    if(empty($queryPin)){ 
-        $bandera = false;
-    }  
+if(empty($_POST['last_name'])){
+    error_mensaje('Llenar el campo apellido.');
+    return;
 }
 
-    $user_id = $registros_in[0]['id'];
+if(empty($_POST['phone'])){
+    error_mensaje('Llenar el campo teléfono.');
+    return;
+}
 
-    if(sizeof($registros_in) == 1){
+if(empty($_POST['email'])){
+    error_mensaje('Llenar el campo correo.');
+    return;
+}
 
-        $registro = R::load('usuarios',$user_id);
-        $registro->pin = $pinIn;    
+if(!is_numeric($_POST['phone'])){
+    error_mensaje('Ingresar un numero de telefono.');
+    return;
+}
 
-        $mail = new PHPMailer(true);
+    $pass = base64_encode(rand(100000, 999999));
+
+    $nombre = $_POST['name'];
+    $apellido = $_POST['last_name'];
+    $telefono = $_POST['phone'];
+    $correo = $_POST['email'];
+
+
+
+    $query = 'SELECT correo FROM `usuarios` WHERE correo= "'.$correo.'"';
+
+    $registros_in=R::getAll($query);
+
+    if(sizeof($registros_in) == 0){
+        
+            $registro = R::dispense('usuarios');
+
+            $registro->nombre = $nombre;
+            $registro->telefono = $telefono;
+            $registro->pass = $pass;
+            $registro->correo = $correo;
+            $registro->apellidos = $apellido;
+            $registro->rol = 1;
+            $registro->referido =$_SESSION["user_id"];
+
+            $id = R::store($registro);
+
+            
+            if(empty($id)){
+                error_mensaje("Error al crear el usuario.");
+            }else{
+                echo json_encode($response);
+                
+                $mail = new PHPMailer(true);
 
                 try {
-                    //Server settings
                     $mail->SMTPDebug = 0;                      // Enable verbose debug output
                     $mail->isSMTP();
                     //$mail->SMTPAuth   = true;  
@@ -60,8 +86,8 @@ while ($bandera) {
     
                     //Recipients
                     $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
-                    $mail->addAddress( $correo, $registros_in[0]['nombre'].' '.$registros_in[0]['apellidos']);     // Add a recipient
-
+                    $mail->addAddress( $correo, $nombre.' '.$apellido);     // Add a recipient
+    
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Soporte PowerGolden';
@@ -75,11 +101,11 @@ while ($bandera) {
                                         </head>
                                         <body>
                                             <center>
-                                                <img style="width: 50%;" src="https://powergoldendemos.000webhostapp.com/images/logo-navbar.png">
+                                                <img style="width: 50%;" src="http://www.powergolden.com.mx/">
                                                 <div> 
-                                                    <h3>El soporte técnico de PowerGolden te envía el siguiente PIN de verificación para recuperar tu contraseña.</h3>
-                                                    <h2>Pin de verificación: <b>'.$pinIn.'</b></h2>
-                                                    <h3>Si no recuerdas haber solicitado recuperación de contraseña. Ponerse en contacto con algún administrador de PowerGolden para mayor información y aclaraciones. </h3>
+                                                    <h1>PowerGolden le da la bienvenida a nuestro apartado electrónico de compras.</h1>
+                                                    <h3>Le pedimos iniciar sesión en nuestro sitio o aplicación y completar el formulario de perfil.</h3>
+                                                    <h3>Su contraseña por defecto es: '.$pass.' </h3>
                                                     <h1>Gracias por su preferencia en los mejores productos de herbolaria.</h1>
                                                 </div>
                                             </center>
@@ -87,23 +113,16 @@ while ($bandera) {
                                     </html>';
                     
                     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+    
                     $mail->send();
                 } catch (Exception $e) {
-                    echo "No se pudo enviar el correo: {$mail->ErrorInfo}";
+                    echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
                 
-                }
+                }    
 
-            $id = R::store($registro);
-
-            if(empty($id)){
-                error_mensaje("Error al enviar el correo.");
-            }else{
-                echo json_encode($response);
-                }
+            }
     }else{
-        error_mensaje("El correo no esta registrado.");
-    }  
-
+        error_mensaje("El correo ya esta registrado.");
+    } 
 
 ?>
