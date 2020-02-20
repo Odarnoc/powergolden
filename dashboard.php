@@ -1,5 +1,4 @@
 <?php
-
 require 'user_preferences/user-info.php';
 
 $query = 'SELECT nombre FROM usuarios WHERE rol = 1';
