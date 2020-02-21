@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
                                     <div class="d-title-cuenta">
-                                        <p class="title-cuenta">Historial</p>
+                                        <p class="title-cuenta">Mis compras</p>
                                     </div>
                                 </div>
                             </div>
