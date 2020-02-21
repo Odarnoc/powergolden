@@ -8,11 +8,9 @@
     }
 
     if(!isset($_POST['fechauno'])||!isset($_POST['fechados'])){
-    $query = 'SELECT DISTINCT pxv.venta_id as idv, pxv.cantidad as cantidad, pxv.producto_id as idp, p.nombre as nombre, v.fecha as fecha,v.total as total 
-    FROM ventas as v LEFT JOIN productosxventas as pxv ON v.id = pxv.venta_id LEFT JOIN productos as p on p.id = pxv.producto_id WHERE v.user_id ="'.$_SESSION["user_id"].'"' ;
+    $query = 'SELECT * FROM ventascliente WHERE user_id ="'.$_SESSION["user_id"].'"' ;
     }else{
-    $query = 'SELECT DISTINCT pxv.venta_id as idv, pxv.cantidad as cantidad, pxv.producto_id as idp, p.nombre as nombre, v.fecha as fecha,v.total as total 
-    FROM ventas as v LEFT JOIN productosxventas as pxv ON v.id = pxv.venta_id LEFT JOIN productos as p on p.id = pxv.producto_id WHERE v.user_id ="'.$_SESSION["user_id"].'" and v.fecha BETWEEN "'.$_POST['fechauno'].'" and "'.$_POST['fechados'].'"';
+    $query = 'SELECT * FROM ventascliente WHERE user_id ="'.$_SESSION["user_id"].'" and fecha BETWEEN "'.$_POST['fechauno'].'" and "'.$_POST['fechados'].'"';
     $filtro = $_POST['fechauno'];
     $filtrodos = $_POST['fechados'];
 }
@@ -99,7 +97,7 @@ $productos=R::getAll($query);
 
                                             <div class="form-group col-lg-4 col-md-4">
                                                 <button type="submit"  style="margin-top: 0rem!important; height: 37px;" class="btn btn-blue mt-2"><i style="color: white" class="fas fa-search"></i></button>
-<a type="button" style="margin-top: 0rem!important; height: 37px;" href="pdf-ventas-oficina.php<?php if (isset($_POST['fechauno'])&&isset($_POST['fechados'])){ ?>?inicio=<?php echo $_POST['fechauno'] ;  ?>&fin=<?php echo $_POST['fechados'] ; }?>" target="_blank" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i>Generar reporte</a>
+                                                <a type="button" style="margin-top: 0rem!important; height: 37px;" href="pdf-ventas-oficina.php<?php if (isset($_POST['fechauno'])&&isset($_POST['fechados'])){ ?>?inicio=<?php echo $_POST['fechauno'] ;  ?>&fin=<?php echo $_POST['fechados'] ; }?>" target="_blank" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i>Generar reporte</a>
                                             </div>
 
                                         </div>
@@ -115,8 +113,8 @@ $productos=R::getAll($query);
                                         <thead>
                                             <tr class="table-primary">
                                                 <th>Fecha</th>
-                                                <th>Productos</th>
-                                                <th>Cantidad</th>
+                                                <th>Cliente</th>
+                                                <th style="text-align: center">Estatus</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
@@ -126,7 +124,7 @@ $productos=R::getAll($query);
                                             <tr>
                                                 <td><?php echo $item['fecha'] ?></td>
                                                 <td><?php echo $item['nombre'] ?></td>
-                                                <td><?php echo $item['cantidad'] ?></td>
+                                                <td style="text-align: center"><?php if($item['cobrado']!=0){?><i style="color: green;" class="far fa-check-circle"></i><?php }else{?><i style="color: red;" class="far fa-times-circle"></i><?php }?></td>
                                                 <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
                                             </tr>
                                         <?php } ?>  

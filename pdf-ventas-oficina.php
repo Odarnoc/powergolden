@@ -3,14 +3,10 @@ require('PDF/fpdf.php');
 
 require 'user_preferences/user-info.php';
 
-if(isset($_POST['fechauno'])&&isset($_POST['fechados'])){
-    $query = 'SELECT DISTINCT pxv.venta_id as idv, pxv.cantidad as cantidad, pxv.producto_id as idp, p.nombre as nombre, v.fecha as fecha,v.total as total 
-    FROM ventas as v LEFT JOIN productosxventas as pxv ON v.id = pxv.venta_id LEFT JOIN productos as p on p.id = pxv.producto_id WHERE v.user_id ="'.$_SESSION["user_id"].'" and v.fecha BETWEEN "'.$_POST['fechauno'].'" and "'.$_POST['fechados'].'"';
-        $finicio=$_GET['inicio'];
-        $ffin=$_GET['fin'];
+if(isset($_GET['inicio'])&&isset($_GET['fin'])){
+    $query = 'SELECT * FROM ventascliente WHERE user_id ="'.$_SESSION["user_id"].'" and fecha BETWEEN "'.$_GET['inicio'].'" and "'.$_GET['fin'].'"';
 }else{
-    $query = 'SELECT DISTINCT pxv.venta_id as idv, pxv.cantidad as cantidad, pxv.producto_id as idp, p.nombre as nombre, v.fecha as fecha,v.total as total 
-    FROM ventas as v LEFT JOIN productosxventas as pxv ON v.id = pxv.venta_id LEFT JOIN productos as p on p.id = pxv.producto_id WHERE v.user_id ="'.$_SESSION["user_id"].'"' ;
+    $query = 'SELECT * FROM ventascliente WHERE user_id ="'.$_SESSION["user_id"].'"' ;
 }
     $productos=R::getAll($query);
 
@@ -32,8 +28,8 @@ function Header()
 
     $this->SetFont('Arial','',15);
     
-    if(isset($_POST['fechauno'])&&isset($_POST['fechados'])){
-        $this->Cell(40,10,'Fecha de reporte: Del '.$finicio.' al '.$ffin,0,0,'c',0); 
+    if(isset($_GET['inicio'])&&isset($_GET['fin'])){
+        $this->Cell(40,10,'Fecha de reporte: Del '.$_GET['inicio'].' al '.$_GET['fin'],0,0,'c',0); 
     }else{
         $this->Cell(40,10,'Reporte total del vendedor ',0,0,'c',0); 
     }
@@ -41,9 +37,9 @@ function Header()
     $this->Ln(10);
 
     $this->SetFont('Arial','B',15);
-    $this->Cell(40,10,'Fecha',1,0,'c',0); 
-    $this->Cell(60,10,'Producto',1,0,'c',0); 
-    $this->Cell(30,10,'Cantidad',1,0,'c',0); 
+    $this->Cell(35,10,'Fecha',1,0,'c',0); 
+    $this->Cell(90,10,'Cliente',1,0,'c',0); 
+    $this->Cell(30,10,'Estatus',1,0,'c',0); 
     $this->Cell(25,10,'Total',1,1,'c',0); 
 }
 
@@ -64,11 +60,22 @@ $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',18); 
+
+$suma=0;
 foreach ($productos as $item) {
-    $pdf->Cell(40,10, $item['fecha'],1,0,'c',0);  
-    $pdf->Cell(60,10,utf8_decode($item['nombre']),1,0,'c',0); 
-    $pdf->Cell(30,10,utf8_decode($item['cantidad']),1,0,'c',0); 
+    $pdf->Cell(35,10, $item['fecha'],1,0,'c',0);  
+    $pdf->Cell(90,10,utf8_decode($item['nombre']),1,0,'c',0);
+    if($item['cobrado']!=0){
+        $pdf->Cell(30,10,utf8_decode('Pagado'),1,0,'c',0); 
+    }else{
+        $pdf->Cell(30,10,utf8_decode('No pagado'),1,0,'c',0); 
+    } 
     $pdf->Cell(25,10,utf8_decode('$'.$item['total']),1,1,'c',0);
-}  
+    $suma += $item['total'];
+} 
+$pdf->Cell(100,10,utf8_decode(''),0,1,'c',0);
+$pdf->Cell(45,10,utf8_decode('Total de ventas:'),1,0,'c',0); 
+$pdf->Cell(40,10,utf8_decode('$'.$suma),1,0,'c',0);
+
 $pdf->Output();
 ?>

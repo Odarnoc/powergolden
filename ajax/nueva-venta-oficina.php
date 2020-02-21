@@ -28,6 +28,7 @@ if(empty($_POST['total'])){
         
     $registro = R::dispense('ventascliente');
     $registro->nombre = $nombre;
+    $registro->fecha = date('Y-m-d');
     $registro->venta = $descripcion;
     $registro->total = $total;
     $registro->cobrado = $cobrado;
