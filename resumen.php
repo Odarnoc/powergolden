@@ -88,6 +88,9 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
                                     <div class="d-title-cuenta">
                                         <h6>Datos de envio</h6>
                                         <p class="margen" style="margin-bottom: 1px"><?php echo ($direccion['direccion'])?> </p>
+                                        <a hidden value="<?php echo ($direccion['direccion'])?>" id="direccion"></a> <a hidden value="<?php echo ($direccion['codigo'])?>" id="codigo"></a>
+                                        <a hidden value="<?php echo ($direccion['colonia'])?>" id="col"></a> <a hidden value="<?php echo ($direccion['estado'])?>" id="estado"></a>
+                                        <a hidden value="<?php echo ($direccion['ciudad'])?>" id="ciudad"></a> <a hidden value="<?php echo ($information['nombre'])?> <?php echo ($information['apellidos'])?>" id="nombre"></a><a hidden value="<?php echo ($information['telefono'])?>" id="telefono"></a>
                                         <p class="small-text-cuenta ml-4 margend"><?php echo ($direccion['colonia'])?>, <?php echo ($direccion['ciudad'])?>, <?php echo ($direccion['estado'])?>, <?php echo ($direccion['codigo'])?></p>
                                     </div>
                                 </div>  
@@ -143,7 +146,7 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-6">
-                                    <button type="button" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button>
+                                    <button type="button" onclick="confirmarCompra()" class="btn btn-lg-blue">Comprar <i class="fas fa-chevron-right"></i></button>
                                 </div>
                             </div>
 
@@ -176,10 +179,14 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
     <!-- scrollIt -->
     <script src="js/scrollIt.min.js"></script>
 
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
+
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
     <script src="js/menu-movil.js"></script>
     <script src="js/resumen.js"></script>
+    <script src="js/finalizar-compra.js"></script>
 
     <script>
         var radioValue = $("input[name='id']:checked").val();
