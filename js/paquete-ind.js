@@ -50,10 +50,16 @@ function pintarProds() {
                         '<div class="col-lg-7 col-md-7 col-7">'+
                         '<div class="d-info-pro">'+
                             '<p class="t2">'+prod.nombre+'</p>'+
-                            '<p class="t1" style="color:'+prod.color+'">Línea '+prod.linea+'</p>'+
-                            '<a class="btn btn-blue mt-3" style="background-color:49B7F3;margin-right: 6px;" onclick="agregar('+index+')" role="button"><i style="color:white;" class="fas fa-check"></i></a>'+
-                            '<a class="btn btn-blue mt-3" style="background-color:red;" onclick="eliminar('+index+')" role="button"><i style="color:white;" class="fas fa-times"></i></a>'+
-                        '</div>'+
+                            '<p class="t1" style="color:'+prod.color+'">Línea '+prod.linea+'</p>';
+                            
+                            seleccion.forEach(function(sel) {
+                                if(parseInt(index) == parseInt(sel)){
+                                    html+='<a class="btn btn-blue mt-3" style="background-color:red;" onclick="eliminar('+index+')" role="button"><i style="color:white;" class="fas fa-times"></i></a>';
+                                }else{
+                                    html+='<a class="btn btn-blue mt-3" style="background-color:49B7F3;margin-right: 6px;" onclick="agregar('+index+')" role="button"><i style="color:white;" class="fas fa-check"></i></a>';
+                                }
+                            });
+            html+=          '</div>'+
                         '</div>'+
                     '</div>'+
                     '</div>'+

@@ -61,12 +61,12 @@ table td, table th {
 }
 table thead tr {
   height: 60px;
-  background: #FFED86;
+  background: #7abaff;
   font-size: 16px;
 }
 table tbody tr {
   height: 48px;
-  border-bottom: 1px solid #E3F1D5;
+  border-bottom: 1px solid #7abaff;
 }
 table tbody tr:last-child {
   border: 0;
@@ -219,8 +219,9 @@ form.example::after {
                                                 <button type="submit"><i class="fa fa-search"></i></button>
                                             
                                             </form>
+                                            
 
-                                            <table id="tabla" class="table" style="text-align:center">
+                                            <table id="tabla" class="table" style="text-align:center; margin-top: 20px;">
                                                 <thead class="table-primary">
                                                     <tr>
                                                         <th>Id</th>

@@ -63,7 +63,7 @@ $pdf->SetFont('Times','',18);
 
 $suma=0;
 foreach ($productos as $item) {
-    $pdf->Cell(35,10, $item['fecha'],1,0,'c',0);  
+    $pdf->Cell(35,10, substr($item['fecha'],0,10),1,0,'c',0);  
     $pdf->Cell(90,10,utf8_decode($item['nombre']),1,0,'c',0);
     if($item['cobrado']!=0){
         $pdf->Cell(30,10,utf8_decode('Pagado'),1,0,'c',0); 

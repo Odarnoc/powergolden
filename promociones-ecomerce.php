@@ -58,109 +58,79 @@ $prods=R::getAll($query);
   <!-- End Navbar ====
     	======================================= -->
 
-            <?php include("menus/search.php"); ?>
   
 
 
-  <section class="sec-gray">
-    <div class="container">
-      <div class="row">
-        
-        <?php include 'menus/lineas_asistencia.php'; ?>
 
-        <div class="col-lg-9 col-md-6 lista-productos-movil">
-
-        <div class="row">
-          <div class="col-lg-12 col-md-12">
-              <p class="title-sec mb-20">Promociones</p>
-            </div>
-        </div>
-        
-        <?php
-          if(empty($prods)){
-        ?>
-          <div class="row">
-                  <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
-                      <div class="d-listo">
-                          <img src="images/icon-search-blue.svg" alt="">
-                          <p class="t1">¡Sin resultados!</p>
-                          <p class="t2">No se encontraron promociones disponibles</p>
-                      </div>
-                  </div>
-          </div>
-          <?php
-          }else{
-          ?>
-
-          <div class="row row-items-pro">
-
-            <?php foreach ($prods as $item) { ?>
-              <div class="col-lg-6 d-all-item-pro">
-                <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
-                  <div class="row">
-                    <div class="col-lg-5 col-md-5 col-5">
-                      <div class="d-img-pro">
-                        <img src="images/promocion/<?php echo $item['imagen'] ?>" alt="">
-
-                      </div>
+      <section class="sec-cuenta">
+        <div class="container">
+            <div class="row">
+            
+                <div class="col-lg-3 col-md-3 bg-white">
+                    <div style="margin-top: 100px" class="d-menu-oficina">
+                        <?php include("componentes/menu-oficina.php"); ?>
                     </div>
-
-                    <div class="col-lg-7 col-md-7 col-7">
-                      <div class="d-info-pro">
-                        <p class="t1">Promoción</p>
-                        <p class="t2"><?php echo $item['nombre'] ?></p>
-                        <p class="t4 two-lines"><?php echo $item['descripcion'] ?></p>
-                        <a class="btn btn-blue mt-3" href="promocion-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver promoción</a>
-                      </div>
-                    </div>
-
-                  </div>
                 </div>
-              </div>
-            <?php } ?>
 
+                    <div class="col-lg-9 col-md-9 bg-gray">
+                        <div class="d-cont-right">
+                            <div class="row">
+                                <div style="width: 100%;">
+                                    
 
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <p class="title-sec mb-20">Promociones</p>
+                                    </div>
+                                </div>
+                                  <?php
+                                    if(empty($prods)){
+                                  ?>
+                                    <div class="row">
+                                            <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
+                                                <div class="d-listo">
+                                                    <img src="images/icon-search-blue.svg" alt="">
+                                                    <p class="t1">¡Sin resultados!</p>
+                                                    <p class="t2">No se encontraron promociones disponibles</p>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <?php
+                                    }else{
+                                    ?>
 
-          </div>
-          <?php } ?>
-
-        </div>
-
-      </div>
-    </div>
-
-  </section>
-
-
-  <section>
-    <div class="container">
-
-      <div class="d-asistencia-movil">
-
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-6">
-            <div class="d-img-asistencia">
-              <img src="images/icon-asistencia.svg" alt="">
+                                    <div class="row row-items-pro">
+                                      <?php foreach ($prods as $item) { ?>
+                                        <div class="col-lg-6 d-all-item-pro">
+                                          <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
+                                            <div class="row">
+                                              <div class="col-lg-5 col-md-5 col-5">
+                                                <div class="d-img-pro">
+                                                  <img src="images/promocion/<?php echo $item['imagen'] ?>" alt="">
+                                                </div>
+                                              </div>
+                                              <div class="col-lg-7 col-md-7 col-7">
+                                                <div class="d-info-pro">
+                                                  <p class="t1">Promoción</p>
+                                                  <p class="t2"><?php echo $item['nombre'] ?></p>
+                                                  <p class="t4 two-lines"><?php echo $item['descripcion'] ?></p>
+                                                  <a class="btn btn-blue mt-3" href="promocion-individual.php?key=<?php echo $item['id'] ?>" role="button">Ver promoción</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <?php } ?>
+                                    </div>
+                                  <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
             </div>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-6 valign">
-            <div class="d-info-asistencia">
-
-              <p class="t1">Asistencia</p>
-              <p class="t2"><a href="tel:3331227000">33 3122 7000</a></p>
-
-            </div>
-          </div>
-
         </div>
-      </div>
-
-
-    </div>
-
-  </section>
+    </section>
 
 
             <!-- Admin Menu -->
