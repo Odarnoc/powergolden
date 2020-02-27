@@ -12,6 +12,10 @@ $query1='SELECT * FROM paquetes WHERE id = '.$id_prod.' LIMIT 1';
 $res=R::getAll($query1);
 $prodIndividual = $res[0];
 
+$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id';
+
+$prods=R::getAll($query);
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -69,81 +73,57 @@ $prodIndividual = $res[0];
     	======================================= -->
 
 
-    <?php include("menus/search.php"); ?>
-
 
     <section class="sec-gray">
         <div class="container">
-            <div class="row">
-                
-                <?php include 'menus/lineas_asistencia.php'; ?>
+                <div class="row row-items-pro">
 
-                <div class="col-lg-9 col-md-6">
-
-                    <div class="row row-breadcrumb">
-                        <div class="col-lg-12 col-md-12">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"><?php echo $prodIndividual['nombre'] ?></li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <div class="row row-pro-ind ">
-                        <div class="col-lg-12 col-md-12 ">
-                            <div class="d-pro-ind ">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="d-img-pro-ind ">
-                                            <img src="images/paquetes/<?php echo $prodIndividual['imagen'] ?>" alt="">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-8 col-md-8">
-                                        <div class="d-info-pro-ind">
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8">
-                                                    <p class="title-pro-ind one-line"><?php echo $prodIndividual['nombre'] ?></p>
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-4">
-                                                    <p class="price-pro-ind">$<?php echo $prodIndividual['precio'] ?></p>
-                                                </div>
-                                            </div>
-
-                                            <p class="sub-title-pro-ind"><?php echo $prodIndividual['descripcion'] ?></p>
-                                            <br>
-                                            <br>
-                                            <div class="row row-cant-pro-ind">
-                                                <div class="col-lg-12 col-md-12">
-
-                                                    <div class="form-cant-pro-ind">
-                                                       
-                                                        <div class="form-row">
-                                                            <div class="form-group col-lg-12 col-md-12">
-                                                                <button type="button" class="btn btn-add-car" onclick="agregar()">Comprar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
+                    <div class="col-lg-12 d-all-item-pro" style="padding: 0;">
+                        <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-9 col-9 d-info-pro" style="padding:2rem;">
+                                    <p class="t2"><?php echo $prodIndividual['nombre']; ?></p>
+                                    <p class="t1">Total de productos: <b><?php echo $prodIndividual['productos']; ?></b></p>
+                                    <p class="t1">Productos seleccionados( <span id="seleccion"> 0 </span> )</p>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-3 d-info-pro" style="padding:2rem;">
+                                    <a class="btn btn-blue mt-3" style="background-color:49B7F3; color:white; width:100%;padding:1rem;" onclick="" role="button">Continuar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="row" id="lista-productos">
+                        <?php foreach ($prods as $item) { ?>
+                            <div class="col-lg-4 d-all-item-pro">
+                                <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-5">
+                                    <div class="d-img-pro">
+                                        <img src="productos_img/<?php echo $item['imagen'] ?>" alt="">
+
+                                    </div>
+                                    </div>
+
+                                    <div class="col-lg-7 col-md-7 col-7">
+                                    <div class="d-info-pro">
+                                        <p class="t2"><?php echo $item['nombre'] ?></p>
+                                        <p class="t1" style="color:<?php echo $item['color'] ?>">Línea <?php echo $item['linea'] ?></p>
+                                        <a class="btn btn-blue mt-3" style="background-color:49B7F3;" onclick="" role="button"><i style="color:white;" class="fas fa-check"></i></a>
+                                        <a class="btn btn-blue mt-3" style="background-color:red;" onclick="" role="button"><i style="color:white;" class="fas fa-times"></i></a>
+                                    </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    
+
+
 
                 </div>
-
-            </div>
         </div>
 
     </section>
@@ -206,25 +186,6 @@ $prodIndividual = $res[0];
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
-    <script>
-    $(document).ready(function(){
-    $('#cantidad').prop('disabled', true);
-    $('#plus-btn').click(function(){
-        $('#cantidad').val(parseInt($('#cantidad').val()) + 1 );
-            });
-        $('#minus-btn').click(function(){
-        $('#cantidad').val(parseInt($('#cantidad').val()) - 1 );
-        if ($('#cantidad').val() == 0) {
-            $('#cantidad').val(1);
-        }
-        });
-    });
-    </script>
-    <script>
-        var prod = '<?php echo $id_prod; ?>';
-        console.log(prod);
-        
-    </script>
-    <script src="js/prod-individual.js"></script>
+    <script src="js/paquete-ind.js"></script>
 
 </body></html>

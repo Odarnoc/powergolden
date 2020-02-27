@@ -112,13 +112,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input name="description" id="descripcion" type="text" class="form-control input-form-underline"/>
-                                                <label class="floating-label-underline">Descripción del paquete</label>
-                                            </div>
-                                        </div>
-
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
