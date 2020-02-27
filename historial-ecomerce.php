@@ -1,17 +1,20 @@
-    <?php
+<?php
 
-    session_start();
-    if(!isset($_SESSION["user_id"])){
-        header("Location: iniciar-sesion.php");
-    }
+session_start();
 
-    require 'bd/conexion.php';
+if(!isset($_SESSION["user_id"])){
+    header("Location: iniciar-sesion.php");
+}
 
-    $query="SELECT p.*,pxv.cantidad,v.fecha FROM productosxventas as pxv LEFT JOIN ventas as v ON pxv.venta_id = v.id LEFT JOIN productos as p ON pxv.producto_id = p.id WHERE v.user_id=".$_SESSION["user_id"];
+require 'bd/conexion.php';
 
-    $historial=R::getAll($query);
-    ?>
+$user_id = $_SESSION["user_id"];
 
+$query="SELECT p.*,pxv.cantidad,v.fecha FROM productosxventas as pxv LEFT JOIN ventas as v ON pxv.venta_id = v.id LEFT JOIN productos as p ON pxv.producto_id = p.id WHERE v.user_id=".$_SESSION["user_id"];
+
+$historial=R::getAll($query);
+
+?>
     <!doctype html>
     <html lang="es">
 

@@ -87,7 +87,7 @@ $prods=R::getAll($query);
                                     <p class="t1">Productos seleccionados( <span id="seleccion"> 0 </span> )</p>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-3 d-info-pro" style="padding:2rem;">
-                                    <a class="btn btn-blue mt-3" style="background-color:49B7F3; color:white; width:100%;padding:1rem;" onclick="" role="button">Continuar</a>
+                                    <a class="btn btn-blue mt-3" style="background-color:49B7F3; color:white; width:100%;padding:1rem;" onclick="comprar()" role="button">Continuar</a>
                                 </div>
                             </div>
                         </div>
@@ -185,6 +185,10 @@ $prods=R::getAll($query);
     <script src="js/menu-movil.js"></script>
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
+
+    <script>
+        var cant="<?php echo $prodIndividual['productos']; ?>";
+    </script>
 
     <script src="js/paquete-ind.js"></script>
 
