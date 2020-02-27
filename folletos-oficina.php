@@ -54,78 +54,60 @@ $prods=R::getAll($query);
             <!-- End Menu -->
 
 
-  <section class="sec-gray">
-    <div class="container">
-      <div class="row">
-        
-        <?php include 'menus/lineas_asistencia.php'; ?>
+            <section class="sec-cuenta">
+        <div class="container">
+            <div class="row">
+            
+                <div class="col-lg-3 col-md-3 bg-white">
+                    <div style="margin-top: 100px" class="d-menu-oficina">
+                        <?php include("componentes/menu-oficina.php"); ?>
+                    </div>
+                </div>
 
-        <div class="col-lg-9 col-md-6 lista-productos-movil">
-
-        <div class="row">
-          <div class="col-lg-12 col-md-12">
-              <p class="title-sec mb-20">Folletos</p>
-            </div>
-        </div>
-
-          <div class="row row-items-pro">
-          <?php foreach ($prods as $item) { ?>
-                                <div class="col-lg-6 col-md-6 d-all-item-pro">
-                                    <div class="d-item-folleto h-100">
-                                        <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $item['imagen'] ?>'); height: 200px;
-                                            background-size: cover;
-                                            background-repeat: no-repeat; ">
-                                        </div>
-                                        <div class="d-2">
-                                            <p class="t1"><?php echo $item['nombre'] ?></p>
-                                            <p class="t2 two-lines mt-1"><?php echo $item['descripcion'] ?></p>
-                                            <div class="row">
-                                                <div class="col" style="text-align: right;">
-                                                    <a class="btn btn-ver-mas mt-3" href="folleto-individual-oficina.php?id=<?php echo $item['id']?>" role="button"><i class="fas fa-eye"></i> Ver más</a>
-                                                </div>
-                                            </div>
-                                        </div> 
+                    <div class="col-lg-9 col-md-9 bg-gray">
+                        <div class="d-cont-right">
+                            <div class="row">
+                                <div style="width: 100%;">
+                                    
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <p class="title-sec mb-20">Folletos virtuales</p>
                                     </div>
                                 </div>
-                            <?php } ?> 
 
-        </div>
+                                  <div class="row row-items-pro">
+                                    <?php foreach ($prods as $item) { ?>
+                                          <div class="col-lg-6 col-md-6 d-all-item-pro">
+                                              <div class="d-item-folleto h-100">
+                                                  <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $item['imagen'] ?>'); height: 200px;
+                                                      background-size: cover;
+                                                      background-repeat: no-repeat; ">
+                                                  </div>
+                                                  <div class="d-2">
+                                                      <p class="t1"><?php echo $item['nombre'] ?></p>
+                                                      <p class="t2 two-lines mt-1"><?php echo $item['descripcion'] ?></p>
+                                                      <div class="row">
+                                                          <div class="col" style="text-align: right;">
+                                                              <a class="btn btn-ver-mas mt-3" href="folleto-individual-oficina.php?id=<?php echo $item['id']?>" role="button"><i class="fas fa-eye"></i> Ver más</a>
+                                                          </div>
+                                                      </div>
+                                                  </div> 
+                                              </div>
+                                          </div>
+                                      <?php } ?> 
+                                  </div>
 
-      </div>
-    </div>
-
-  </section>
-
-
-  <section>
-    <div class="container">
-
-      <div class="d-asistencia-movil">
-
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-6">
-            <div class="d-img-asistencia">
-              <img src="images/icon-asistencia.svg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
             </div>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-6 valign">
-            <div class="d-info-asistencia">
-
-              <p class="t1">Asistencia</p>
-              <p class="t2"><a href="tel:3331227000">33 3122 7000</a></p>
-
-            </div>
-          </div>
-
         </div>
-      </div>
+    </section>
 
 
-    </div>
-
-  </section>
+ 
 
 
             <!-- Admin Menu -->

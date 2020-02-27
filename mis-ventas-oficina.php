@@ -58,100 +58,81 @@
             ======================================= -->
 
 
-    <section class="sec-gray">
+    <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-                
-                <?php include 'menus/lineas_asistencia.php'; ?>
-                <div class="col-lg-9 col-md-6 lista-productos-movil">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <p class="title-sec mb-20">Mis ventas</p>
+            
+                <div class="col-lg-3 col-md-3 bg-white">
+                    <div style="margin-top: 100px" class="d-menu-oficina">
+                        <?php include("componentes/menu-oficina.php"); ?>
+                    </div>
+                </div>
+
+                    <div class="col-lg-9 col-md-9 bg-gray">
+                        <div class="d-cont-right">
+                            <div class="row">
+                                <div style="width: 100%;">
+                                    
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <p class="title-sec mb-20">Mis ventas</p>
+                                    </div>
+                                </div>
+
+                                <div class="row row-form-perfil">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="d-form-reporte">
+                                                <a type="button" style="margin-top: 0rem!important; height: 37px;margin-bottom:2rem;" href="nueva-venta-oficina.php" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i>Nueva venta</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row row-tabla-ventas">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr class="table-primary">
+                                                            <th>Fecha</th>
+                                                            <th>Cliente</th>
+                                                            <th>Venta</th>
+                                                            <th>Total</th>
+                                                            <th>Cobrado</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php foreach ($productos as $item) { ?>
+                                                        <tr>
+                                                            <td><?php echo $item->fecha ?></td>
+                                                            <td><?php echo $item->nombre ?></td>
+                                                            <td><?php echo $item->venta ?></td>
+                                                            <td>$<?php echo $item->total ?></td>
+                                                            <td><?php 
+                                                                if ($item->cobrado === 1 || $item->cobrado === "1" ) {
+                                                                echo "Si";
+                                                                }else{
+                                                                    echo "No";
+                                                                }
+                                                            ?></td>
+                                                        </tr>
+                                                    <?php } ?>  
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row row-form-perfil">
-                            <div class="col-lg-12 col-md-12">
-
-                                <div class="d-form-reporte">
-                                    <a type="button" style="margin-top: 0rem!important; height: 37px;margin-bottom:2rem;" href="nueva-venta-oficina.php" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i>Nueva venta</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row row-tabla-ventas">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr class="table-primary">
-                                                <th>Fecha</th>
-                                                <th>Cliente</th>
-                                                <th>Venta</th>
-                                                <th>Total</th>
-                                                <th>Cobrado</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                        <?php foreach ($productos as $item) { ?>
-                                            <tr>
-                                                <td><?php echo $item->fecha ?></td>
-                                                <td><?php echo $item->nombre ?></td>
-                                                <td><?php echo $item->venta ?></td>
-                                                <td>$<?php echo $item->total ?></td>
-                                                <td><?php 
-                                                    if ($item->cobrado === 1 || $item->cobrado === "1" ) {
-                                                       echo "Si";
-                                                    }else{
-                                                        echo "No";
-                                                    }
-                                                ?></td>
-                                            </tr>
-                                        <?php } ?>  
-                                        </tbody>
-
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-
-                </div>
             </div>
         </div>
     </section>
 
 
-    <section>
-        <div class="container">
 
-        <div class="d-asistencia-movil">
-
-            <div class="row">
-            <div class="col-lg-6 col-md-6 col-6">
-                <div class="d-img-asistencia">
-                <img src="images/icon-asistencia.svg" alt="">
-
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-6 valign">
-                <div class="d-info-asistencia">
-
-                <p class="t1">Asistencia</p>
-                <p class="t2"><a href="tel:3331227000">33 3122 7000</a></p>
-
-                </div>
-            </div>
-
-            </div>
-        </div>
-
-
-        </div>
-
-    </section>
 
 
                 <!-- Admin Menu -->

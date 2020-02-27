@@ -42,7 +42,7 @@ if(empty($_POST['mensaj'])){
                 //Server settings
                 $mail->SMTPDebug = 0;                      // Enable verbose debug output
                 $mail->isSMTP();
-                $mail->SMTPAuth   = true;  
+                //$mail->SMTPAuth   = true;  
 
                 $mail->SMTPSecure = 'ssl';                                             // Send using SMTP
                 $mail->Host       = 'mail.powergolden.com.mx';
@@ -87,7 +87,7 @@ if(empty($_POST['mensaj'])){
                 //Server settings
                 $mail->SMTPDebug = 0;                      // Enable verbose debug output
                 $mail->isSMTP();
-                $mail->SMTPAuth   = true;  
+                //$mail->SMTPAuth   = true;  
 
                 $mail->SMTPSecure = 'ssl';                                             // Send using SMTP
                 $mail->Host       = 'mail.powergolden.com.mx';
@@ -114,9 +114,9 @@ if(empty($_POST['mensaj'])){
                                         <center>
                                             <img style="width: 50%;" src="https://powergoldendemos.000webhostapp.com/images/logo-navbar.png">
                                             <div> 
-                                                <h2>Estima '.$_POST['name'].'. Agradecemos el ponerte en contacto con el servicio al cliente de PowerGolden.</h2>
+                                                <h2>Estimado '.$_POST['name'].'. Agradecemos el ponerte en contacto con el servicio al cliente de PowerGolden.</h2>
                                                 <h2>Hemos recibido la información necesaria.</h2>
-                                                <h2>Muy pronto uno de nuestros administrados se pondra en contacto contigo.</h2>
+                                                <h2>Muy pronto uno de nuestros administrados se pondrá en contacto contigo.</h2>
                                             </div>
                                         </center>
                                     </body>

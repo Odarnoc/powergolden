@@ -56,93 +56,60 @@
             ======================================= -->
 
 
-    <section class="sec-gray">
+    <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-                
-                <?php include 'menus/lineas_asistencia.php'; ?>
-                <div class="col-lg-9 col-md-6 lista-productos-movil">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <p class="title-sec mb-20">Registro de clientes</p>
+            
+                <div class="col-lg-3 col-md-3 bg-white">
+                    <div style="margin-top: 100px" class="d-menu-oficina">
+                        <?php include("componentes/menu-oficina.php"); ?>
+                    </div>
+                </div>
+
+                    <div class="col-lg-9 col-md-9 bg-gray">
+                        <div class="d-cont-right">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
+                                    <div class="d-form">
+                                    <p class="title-cuenta">Nuevo cliente.</p>
+                                        <form class="form-registro">
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" id="name" required />
+                                                    <label class="floating-label">Nombre</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" id="last_name" required />
+                                                    <label class="floating-label">Apellido</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="tel" class="form-control input-form-underline" id="phone" required />
+                                                    <label class="floating-label">Teléfono</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="email" class="form-control input-form-underline" id="email" required />
+                                                    <label class="floating-label">Correo electrónico</label>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
-                                            <div class="d-form">
-                                                <form class="form-registro">
-
-                                                    <div class="form-group">
-                                                        <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form-underline" id="name" required />
-                                                            <label class="floating-label">Nombre</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="floating-label-group">
-                                                            <input type="text" class="form-control input-form-underline" id="last_name" required />
-                                                            <label class="floating-label">Apellido</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="floating-label-group">
-                                                            <input type="tel" class="form-control input-form-underline" id="phone" required />
-                                                            <label class="floating-label">Teléfono</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="floating-label-group">
-                                                            <input type="email" class="form-control input-form-underline" id="email" required />
-                                                            <label class="floating-label">Correo electrónico</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                </div>
             </div>
-        </div>
-    </section>
-
-
-    <section>
-        <div class="container">
-
-        <div class="d-asistencia-movil">
-
-            <div class="row">
-            <div class="col-lg-6 col-md-6 col-6">
-                <div class="d-img-asistencia">
-                <img src="images/icon-asistencia.svg" alt="">
-
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-6 valign">
-                <div class="d-info-asistencia">
-
-                <p class="t1">Asistencia</p>
-                <p class="t2"><a href="tel:3331227000">33 3122 7000</a></p>
-
-                </div>
-            </div>
-
-            </div>
-        </div>
-
-
         </div>
 
     </section>
+
 
 
                 <!-- Admin Menu -->
