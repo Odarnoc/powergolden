@@ -112,18 +112,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input name="description" id="descripcion" type="text" class="form-control input-form-underline"/>
-                                                <label class="floating-label-underline">Descripción del paquete</label>
-                                            </div>
-                                        </div>
-
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <input class="form-control input-form-underline id="cantidad" type="number" name="cantidad" min="1" max="25">
+                                                        <input class="form-control input-form-underline id="cantidad" type="number" name="cantidad" min="1">
                                                         <label class="floating-label-underline">Numero de productos</label>
                                                     </div>
                                                 </div>

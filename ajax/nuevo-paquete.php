@@ -15,11 +15,6 @@ if(empty($_POST['nombre'])){
     return;
 }
 
-if(empty($_POST['description'])){
-    error_mensaje('Agregar una descripcion del paquete.');
-    return;
-}
-
 if(empty($_POST['price'])){
     error_mensaje('Agregar un precio correspondiente.');
     return;
@@ -32,7 +27,6 @@ if(empty($_POST['cantidad'])){
 
 
     $nombre = $_POST['nombre'];
-    $descripcion = $_POST['description'];
     $precio = $_POST['price'];
     $cantidad = $_POST['cantidad'];
 
@@ -45,7 +39,6 @@ if(empty($_POST['cantidad'])){
             if (move_uploaded_file($_FILES['img-producto']['tmp_name'], $fichero_subido)) {
 
             $registro->nombre = $nombre;
-            $registro->descripcion = $descripcion;
             $registro->precio = $precio;
             $registro->productos = $cantidad;
             $registro->imagen=basename($_FILES['img-producto']['name']);

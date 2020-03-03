@@ -104,7 +104,6 @@ $paquetes=R::getAll($query);
                                         </div>
                                         <div class="d-2">
                                             <p class="t1 one-line"><?php echo $item['nombre'] ?></p>
-                                            <p class="t3 two-lines"><?php echo $item['descripcion'] ?></p>
                                             <p class="t3">Total de productos: <b><?php echo $item['productos'] ?></b></p>
                                             <p class="t2">$<?php echo $item['precio'] ?><sup>.00</sup></p>
                                             <div style="text-align: center">

@@ -68,7 +68,7 @@ and     length(@pv := concat(@pv, ',', id))");
             <div class="row">
             
                 <div class="col-lg-3 col-md-3 bg-white">
-                    <div style="margin-top: 100px" class="d-menu-oficina">
+                    <div style="margin-top: 100px" >
                         <?php include("componentes/menu-oficina.php"); ?>
                     </div>
                 </div>

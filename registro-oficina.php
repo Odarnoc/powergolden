@@ -1,14 +1,16 @@
-    <?php
-    session_start();
+<?php
 
+session_start();
 
-    $user_id = -1;
-    if (isset($_SESSION["user_id"])) {
-        $user_id = $_SESSION["user_id"];
-    }
+if(!isset($_SESSION["user_id"])){
+    header("Location: iniciar-sesion.php");
+}
 
-    require 'bd/conexion.php';
-    ?>
+require 'bd/conexion.php';
+
+$user_id = $_SESSION["user_id"];
+
+?>
 
     <!doctype html>
     <html lang="es">
