@@ -1,9 +1,9 @@
 <?php
-    require 'user_preferences/user-info.php';
+require 'user_preferences/user-info.php';
 
-    /*require 'bd/conexion.php';*/ //No se si es necesario //La imagen no se borra al subir el producto
-    
-    $productos = R::find('productos');
+/*require 'bd/conexion.php';*/ //No se si es necesario //La imagen no se borra al subir el producto
+
+$productos = R::find('productos');
 ?>
 
 <!doctype html>
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
     <!-- responseive menu -->
-  <link rel="stylesheet" href="css/menu-movil.css">
+    <link rel="stylesheet" href="css/menu-movil.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -59,9 +59,9 @@
 <body>
 
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -94,7 +94,7 @@
 
                                     <form id="form-folleto" class="form-registro-productos" method="post" enctype="multipart/form-data">
 
-                                    <div class="form-group">
+                                        <div class="form-group">
                                             <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg);">
                                             </div>
                                         </div>
@@ -106,18 +106,18 @@
                                                 </label>
                                                 <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" hidden />
                                             </div>
-                                        </div>                              
+                                        </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="name" id="nombre" type="text" class="form-control input-form-underline"/>
+                                                <input name="name" id="nombre" type="text" class="form-control input-form-underline" />
                                                 <label class="floating-label-underline">Nombre del folleto</label>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="description" id="descripcion" type="text" class="form-control input-form-underline"/>
+                                                <input name="description" id="descripcion" type="text" class="form-control input-form-underline" />
                                                 <label class="floating-label-underline">Descripción del folleto</label>
                                             </div>
                                         </div>
@@ -132,7 +132,7 @@
 
                                         </div> -->
 
-                                        <button type="submit"  class="btn btn-lg-blue mt-3">Guardar</button>
+                                        <button type="submit" class="btn btn-lg-blue mt-3">Guardar</button>
 
                                     </form>
                                 </div>
@@ -150,9 +150,9 @@
     </section>
 
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -183,4 +183,6 @@
 
 
 
-</body></html>
+</body>
+
+</html>

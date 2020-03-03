@@ -1,28 +1,28 @@
 <?php
 session_start();
 require 'bd/conexion.php';
-$user_id=-1;
-if(isset($_SESSION["user_id"])){
-  $user_id=$_SESSION["user_id"];
+$user_id = -1;
+if (isset($_SESSION["user_id"])) {
+  $user_id = $_SESSION["user_id"];
 }
 
-$query='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 6';
-$query2='SELECT p.*,COUNT(*) as conteo,l.imagenlinea FROM productosxventas as pxv LEFT JOIN productos as p ON pxv.producto_id = p.id LEFT JOIN lineas as l ON p.categoria = l.id GROUP BY producto_id ORDER BY conteo DESC LIMIT 1';
-$query3='SELECT * FROM promociones WHERE NOW()>=inicio && NOW()<=fin ORDER BY RAND() LIMIT 6';
-$query4='SELECT * FROM paquetes ORDER BY RAND() LIMIT 6';
+$query = 'SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 6';
+$query2 = 'SELECT p.*,COUNT(*) as conteo,l.imagenlinea FROM productosxventas as pxv LEFT JOIN productos as p ON pxv.producto_id = p.id LEFT JOIN lineas as l ON p.categoria = l.id GROUP BY producto_id ORDER BY conteo DESC LIMIT 1';
+$query3 = 'SELECT * FROM promociones WHERE NOW()>=inicio && NOW()<=fin ORDER BY RAND() LIMIT 6';
+$query4 = 'SELECT * FROM paquetes ORDER BY RAND() LIMIT 6';
 
-$prods=R::getAll($query);
-$promos=R::getAll($query3);
-$packs=R::getAll($query4);
-$prodRelevante=R::getAll($query2);
-if(empty($prodRelevante)){
-  $query3='SELECT p.*,l.imagenlinea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 1';
-  $prodRelevante=R::getAll($query3);
+$prods = R::getAll($query);
+$promos = R::getAll($query3);
+$packs = R::getAll($query4);
+$prodRelevante = R::getAll($query2);
+if (empty($prodRelevante)) {
+  $query3 = 'SELECT p.*,l.imagenlinea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 1';
+  $prodRelevante = R::getAll($query3);
 }
 
 $datetime = new DateTime();
 $visita = R::dispense('visitas');
-$visita->fecha=$datetime->format('Y-m-d');
+$visita->fecha = $datetime->format('Y-m-d');
 R::store($visita);
 
 ?>
@@ -52,8 +52,8 @@ R::store($visita);
   <!-- responseive menu -->
   <link rel="stylesheet" href="css/menu-movil.css">
   <style>
-    #sec-busqueda{
-      margin-top:0px;
+    #sec-busqueda {
+      margin-top: 0px;
     }
   </style>
 
@@ -100,7 +100,7 @@ R::store($visita);
   <section class="sec-gray">
     <div class="container">
       <div class="row">
-        
+
         <?php include 'menus/lineas_asistencia.php'; ?>
 
         <div class="col-lg-9 col-md-6">
@@ -138,7 +138,7 @@ R::store($visita);
               <p class="title-sec mb-20">Populares</p>
             </div>
 
-            
+
             <?php foreach ($prods as $item) { ?>
               <div class="col-lg-6 d-all-item-pro">
                 <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
@@ -174,7 +174,7 @@ R::store($visita);
               <p class="title-sec mb-20">Promociones</p>
             </div>
 
-            
+
             <?php foreach ($promos as $item) { ?>
               <div class="col-lg-6 d-all-item-pro">
                 <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
@@ -210,7 +210,7 @@ R::store($visita);
               <p class="title-sec mb-20">Paquetes</p>
             </div>
 
-            
+
             <?php foreach ($packs as $item) { ?>
               <div class="col-lg-6 d-all-item-pro">
                 <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
@@ -279,9 +279,9 @@ R::store($visita);
   </section>
 
 
-            <!-- Admin Menu -->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Admin Menu -->
+  <!-- Admin Menu -->
+  <?php include("menus/footer_general.php"); ?>
+  <!-- End Admin Menu -->
 
 
   <!-- jQuery -->
@@ -309,4 +309,6 @@ R::store($visita);
     });
   </script>
 
-</body></html>
+</body>
+
+</html>

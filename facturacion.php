@@ -6,6 +6,7 @@ if(!isset($_SESSION["user_id"])){
 }
 
 require 'bd/conexion.php';
+$information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
 
 ?>
 
@@ -180,7 +181,7 @@ form.example::after {
 
 
             <!-- Menu -->
-            <?php include("menus/menu_general.php"); ?>
+            <?php include("menus/top_menu.php"); ?>
             <!-- End Menu -->
 
 
@@ -196,7 +197,7 @@ form.example::after {
                         <div class="row">
                             <div class="col-lg-9 col-md-9">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Oficina virtual</p>
+                                    <p class="title-cuenta">Facturacion</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3">

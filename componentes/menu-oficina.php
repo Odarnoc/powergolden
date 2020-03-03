@@ -25,7 +25,7 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
         <li><a href="#0">Pedidos de mis clientes <span class="noti-menu-oficina">3</span></a></li>
         <li><a href="#0">Mis pedidos con la empresa <span class="noti-menu-oficina">2</span></a></li>
         <li><a href="#0">Mis últimas compras <span class="noti-menu-oficina">1</span></a></li> -->
-        <li><a href="facturacion.php">Facturacion</a></li>
+        <!--<li><a href="facturacion.php">Facturacion</a></li>-->
         <li><a href="promociones-ecomerce.php">Promociones</a></li>
         <li><a href="paquetes-ecomerce.php">Paquetes</a></li>
         <li><a href="folletos-oficina.php">Folletos electronicos</a></li>
