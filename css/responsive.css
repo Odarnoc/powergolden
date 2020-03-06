@@ -207,7 +207,43 @@
     .d-desc .t1{
         padding-top: 3px;
     }
-    .th-producto-review, .td-producto-review{
+    .th-producto-review,
+    .td-producto-review {
         min-width: 200px;
+    }
+
+    .sec-oficina-home {
+        padding-top: 50px;
+    }
+
+    .footer-home-oficina .col-lg-3 {
+        margin-bottom: 20px;
+    }
+
+    .d-mantenimiento .t1 {
+        font-size: 20px;
+        margin-bottom: 0px;
+    }
+
+    .d-mantenimiento .t2 {
+        font-size: 30px;
+        font-weight: 600;
+        font-family: "Poppins";
+        margin-top: -6px;
+    }
+
+    .d-mantenimiento .t3 {
+        color: rgba(0, 0, 0, .5);
+        margin-top: 40px;
+    }
+
+    .d-mantenimiento .t3 a {
+        color: #27A156;
+        font-weight: 600;
+    }
+
+    .sec-mantenimiento {
+        padding-top: 60px;
+        padding-bottom: 60px;
     }
 }
