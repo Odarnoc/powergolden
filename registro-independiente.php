@@ -149,7 +149,7 @@ and     length(@pv := concat(@pv, ',', id))");
                                                 </div>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
                                                 <label class="form-check-label" for="defaultCheck1">
                                                     Aceptar los terminos del contrato. <a href="pdf-contrato.php">Terminos de contrato.</a>
                                                 </label>
