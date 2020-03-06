@@ -1,6 +1,26 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: iniciar-sesion.php");
+}
+
 require 'bd/conexion.php';
+
+$id = $_SESSION["user_id"];
+
+$usuario = R::getAll("select  id,
+        nombre,
+        referido 
+from    (select * from usuarios
+         order by referido, id) clientes_sorted,
+        (select @pv := '$id') initialisation
+where   find_in_set(referido, @pv)
+and     length(@pv := concat(@pv, ',', id))");
+
 ?>
+
 
 <!doctype html>
 <html lang="es">
@@ -48,6 +68,7 @@ require 'bd/conexion.php';
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        
     </script>
 
 </head>
@@ -68,7 +89,6 @@ require 'bd/conexion.php';
         <div class="container">
             <div class="row">
 
-
                 <div class="col-lg-9 col-md-9 bg-gray">
                     <div class="d-cont-right">
                         <div class="row">
@@ -76,46 +96,65 @@ require 'bd/conexion.php';
                                 <div class="d-form">
                                     <p class="title-cuenta">Registro independiente.</p>
                                     <form id="form-folleto" class="form-registro" method="post" enctype="multipart/form-data">
+
                                         <div class="form-group">
-                                            <div class="image-upload" style="background-image: url(images/bg-image-upload.jpg);">
-                                                <label for="file-input" style="margin-bottom: 20px;">
+                                            <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg?>);">
+                                            </div>
+                                            <p>Favor de anexar una fotografía del inverso de su identificacion.</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group" style="text-align: right">
+                                                <label for="file-input" style="cursor: pointer;">
                                                     <i class="fas fa-plus"></i> Subir foto
                                                 </label>
-                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required />
-                                            </div>
-                                            <p>Favor de anexar una fotografía de su INE.</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input type="text" class="form-control input-form-underline" name="name" required />
-                                                <label class="floating-label">Nombre</label>
+                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" hidden />
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input type="text" class="form-control input-form-underline" name="paterno" required />
-                                                <label class="floating-label">Apellido paterno</label>
+
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="name" required />
+                                                    <label class="floating-label">Nombre</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input type="text" class="form-control input-form-underline" name="materno" required />
-                                                <label class="floating-label">Apellido materno</label>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="paterno" required />
+                                                    <label class="floating-label">Apellido paterno</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input type="tel" class="form-control input-form-underline" name="phone" required />
-                                                <label class="floating-label">Teléfono</label>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="materno" required />
+                                                    <label class="floating-label">Apellido materno</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input type="email" class="form-control input-form-underline" name="email" required />
-                                                <label class="floating-label">Correo electrónico</label>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="tel" class="form-control input-form-underline" name="phone" required />
+                                                    <label class="floating-label">Teléfono</label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="email" class="form-control input-form-underline" name="email" required />
+                                                    <label class="floating-label">Correo electrónico</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="tel" class="form-control input-form-underline" name="direccion" required />
+                                                    <label class="floating-label">Direccion</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    Aceptar los terminos del contrato. <a href="pdf-contrato.php">Terminos de contrato.</a>
+                                                </label>
+                                            </div>
+                                            <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
                                     </form>
                                 </div>
                             </div>

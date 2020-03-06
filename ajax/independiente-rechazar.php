@@ -11,80 +11,14 @@ require '../phpMailer/Exception.php';
 require '../phpMailer/PHPMailer.php';
 require '../phpMailer/SMTP.php';
 
-$response['mensaje'] = "Exito al crear usuario.";
-
-if (empty($_POST['name'])) {
-    error_mensaje('Llenar el campo nombre.');
-    return;
-}
-
-if (empty($_POST['paterno'])) {
-    error_mensaje('Llenar el campo apellido paterno.');
-    return;
-}
-
-if (empty($_POST['materno'])) {
-    error_mensaje('Llenar el campo apellido materno.');
-    return;
-}
-
-if (empty($_POST['phone'])) {
-    error_mensaje('Llenar el campo teléfono.');
-    return;
-}
-if (empty($_POST['direccion'])) {
-    error_mensaje('Llenar el campo direccion.');
-    return;
-}
-
-if (empty($_POST['email'])) {
-    error_mensaje('Llenar el campo correo.');
-    return;
-}
-
-
-$pass = base64_encode(rand(100000, 999999));
+$response['mensaje'] = "Exito al confirmar status.";
 
 $nombre = $_POST['name'];
-$paterno = $_POST['paterno'];
-$materno = $_POST['materno'];
-$telefono = $_POST['phone'];
-$correo = $_POST['email'];
-$direccion = $_POST['direccion'];
+$correo = $_POST['correo'];
 
-
-$query = 'SELECT correo FROM `independientes` WHERE correo= "' . $correo . '"';
-
-$registros_in = R::getAll($query);
-
-if (sizeof($registros_in) == 0) {
-
-    $registro = R::dispense('independientes');
-
-    $dir_subida = '../images/ine/';
-    $fichero_subido = $dir_subida . basename($_FILES['img-producto']['name']);
-
-    if (move_uploaded_file($_FILES['img-producto']['tmp_name'], $fichero_subido)) {
-
-        $registro->nombre = $nombre;
-        $registro->telefono = $telefono;
-        $registro->pass = $pass;
-        $registro->correo = $correo;
-        $registro->paterno = $paterno;
-        $registro->materno = $materno;
-        $registro->direccion = $direccion;
-        $registro->imagen = basename($_FILES['img-producto']['name']);
-        $registro->status = 0;
-
-        $id = R::store($registro);
-
-
-        if (empty($id)) {
-            error_mensaje("Error al crear el usuario.");
-        } else {
             echo json_encode($response);
 
-           /* $mail = new PHPMailer(true);
+            $mail = new PHPMailer(true);
 
             try {
                 $mail->SMTPDebug = 0;                      // Enable verbose debug output
@@ -116,10 +50,11 @@ if (sizeof($registros_in) == 0) {
                                             <center>
                                                 <img style="width: 50%;" src="http://www.powergolden.com.mx/">
                                                 <div> 
-                                                    <h1>PowerGolden le da la bienvenida a nuestro apartado electrónico de compras.</h1>
-                                                    <h3>Uno de nuestros administradores revisara su petición.</h3>
-                                                    <h3>En la menor brevedad posible le enviaremos una respuesta. </h3>
-                                                    <h1>Gracias por su preferencia en los mejores productos de herbolaria.</h1>
+                                                    <h1>Agradece su interés en nuestra marca y nuestros productos de herbolaria.</h1>
+                                                    <h3>Estimado cliente. Su solicitud ha sido revisada por uno de nuestros administradores.</h3>
+                                                    <h3>Desafortunadamente, no cumple con los requisitos necesarios para pertenecer a nuestro equipo de ventas.</h3>
+                                                    <h1>Agradecemos su interés y le pedimos una disculpa. Gracias.   </h1>
+                                                    <h1>Gracias.</h1>
                                                 </div>
                                             </center>
                                         </body>
@@ -130,9 +65,7 @@ if (sizeof($registros_in) == 0) {
                 $mail->send();
             } catch (Exception $e) {
                 echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
-            }*/
-        }
-    }
-} else {
-    error_mensaje("El correo ya esta registrado.");
-}
+            }
+        
+    
+

@@ -14,10 +14,11 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="clientes.php">Clientes</a>
                                             <a class="dropdown-item" href="administradores.php">Administradores</a>
-                                            <a class="dropdown-item" href="registro-administrador.php">Registro Administrador</a>
+                                            <a class="dropdown-item" href="registro-administrador.php">Registro administrador</a>
                                         </div>
                                     </div>
                                 </li>
+                                <li><a href="lista-independientes.php">Clientes independientes</a></li>
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,8 +26,8 @@
                                         </a>
                                         
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="registro-sucursal.php">Registrar Sucursal</a>
-                                            <a class="dropdown-item" href="lista-sucursal.php">Lista Sucursales</a>
+                                            <a class="dropdown-item" href="registro-sucursal.php">Registrar sucursal</a>
+                                            <a class="dropdown-item" href="lista-sucursal.php">Lista sucursales</a>
                                         </div>
                                     </div>
                                 </li>
