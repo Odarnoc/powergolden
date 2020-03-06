@@ -350,7 +350,7 @@ and     length(@pv := concat(@pv, ',', id))");
             options: {
                 responsive: true,
                 title: {
-                    display: true,
+                    display: false,
                     text: 'Min and Max Settings'
                 },
                 scales: {
