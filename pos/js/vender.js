@@ -398,6 +398,26 @@ function efective_pay() {
     }
   });
 }
+function card_pay() {
+  $("#modalPagar").modal("hide");
+  swal({
+    type: "info",
+    title: "<p id='prealizarventa'>Realizar Cobro con Tarjeta</i>",
+    html: "<p id='psswal'>¿Cantidad a cobrar?</p>",
+    input: "number",
+    confirmButtonText: "Aceptar",
+    showCancelButton: true,
+    cancelButtonText: "Cancelar"
+  }).then(result => {
+    $("#modalPagar").modal("toggle");
+    if (result.value) {
+      var inputValue = result.value;
+
+
+      check_quantities("Tarjeta", inputValue);
+    }
+  });
+}
 $("#card_payment").submit(function(event) {
   event.preventDefault();
   cantidad_tarjeta = $("#cantidad_tarjeta").val();
@@ -434,7 +454,7 @@ var sucess_callbak = function(response) {
     },
     success(data) {
       swal.close();
-      check_quantities("Tarjeta", cantidad_tarjeta, numero_tarjeta);
+      check_quantities("Terminal Electronica", cantidad_tarjeta, numero_tarjeta);
       $('#card_payment')[0].reset();
       $("#modalTarjeta").modal("hide");
       

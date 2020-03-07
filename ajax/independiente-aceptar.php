@@ -65,7 +65,6 @@ $id = $_POST['id'];
                                                     <h1>PowerGolden le da la bienvenida a nuestro apartado electrónico de compras.</h1>
                                                     <h3>Estimado cliente. Su solicitud ha sido aprobada por uno de nuestro administrador.</h3>
                                                     <h3>Agrádensenos su interés por nuestra para y nuestros productos.</h3>
-                                                    <h3>Su contraseña por defecto es: ' . $pass . '. Con la cual usted podrá ingresar a nuestro portal web. </h3>
                                                     <h1>Gracias por su preferencia en los mejores productos de herbolaria.</h1>
                                                 </div>
                                             </center>
