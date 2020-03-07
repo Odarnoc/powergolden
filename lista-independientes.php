@@ -61,8 +61,8 @@ $clientes = R::getAll($query);
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Clientes</p>
-                                    <p class="small-text-cuenta">Numero de clientes registrados <b>(<?php echo count($clientes) ?>)</b></p>
+                                    <p class="title-cuenta">Empresarios independientes</p>
+                                    <p class="small-text-cuenta">Numero de empresarios independientes registrados <b>(<?php echo count($clientes) ?>)</b></p>
                                 </div>
                             </div>
 

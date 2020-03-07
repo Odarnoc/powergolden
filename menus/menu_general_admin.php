@@ -18,7 +18,21 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="lista-independientes.php">Empresarios independientes</a></li>
+
+                                <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Empresarios independientes
+                                        </a>
+                                        
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="lista-independientes.php">Lista independientes</a>
+                                            <a class="dropdown-item" href="registro-independiente.php">Registro independientes</a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

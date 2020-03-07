@@ -1,24 +1,5 @@
 <?php
-
-session_start();
-
-if (!isset($_SESSION["user_id"])) {
-    header("Location: iniciar-sesion.php");
-}
-
-require 'bd/conexion.php';
-
-$id = $_SESSION["user_id"];
-
-$usuario = R::getAll("select  id,
-        nombre,
-        referido 
-from    (select * from usuarios
-         order by referido, id) clientes_sorted,
-        (select @pv := '$id') initialisation
-where   find_in_set(referido, @pv)
-and     length(@pv := concat(@pv, ',', id))");
-
+require 'user_preferences/user-info.php';
 ?>
 
 
@@ -82,7 +63,6 @@ and     length(@pv := concat(@pv, ',', id))");
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        
     </script>
 
 </head>
@@ -90,9 +70,10 @@ and     length(@pv := concat(@pv, ',', id))");
 <body>
 
 
-    <!-- Menu -->
-    <?php include("menus/menu_general.php"); ?>
-    <!-- End Menu -->
+
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -103,7 +84,11 @@ and     length(@pv := concat(@pv, ',', id))");
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-9 col-md-9 bg-gray">
+                <!-- Admin Menu -->
+                <?php include("menus/menu_general_admin.php"); ?>
+                <!-- End Admin Menu -->
+
+                <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
@@ -141,49 +126,49 @@ and     length(@pv := concat(@pv, ',', id))");
                                             </div>
                                         </div>
 
-                                            <div class="form-group">
-                                                <div class="floating-label-group">
-                                                    <input type="text" class="form-control input-form-underline" name="name" required />
-                                                    <label class="floating-label">Nombre</label>
-                                                </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input type="text" class="form-control input-form-underline" name="name" required />
+                                                <label class="floating-label">Nombre</label>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="floating-label-group">
-                                                    <input type="text" class="form-control input-form-underline" name="paterno" required />
-                                                    <label class="floating-label">Apellido paterno</label>
-                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input type="text" class="form-control input-form-underline" name="paterno" required />
+                                                <label class="floating-label">Apellido paterno</label>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="floating-label-group">
-                                                    <input type="text" class="form-control input-form-underline" name="materno" required />
-                                                    <label class="floating-label">Apellido materno</label>
-                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input type="text" class="form-control input-form-underline" name="materno" required />
+                                                <label class="floating-label">Apellido materno</label>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="floating-label-group">
-                                                    <input type="tel" class="form-control input-form-underline" name="phone" required />
-                                                    <label class="floating-label">Teléfono</label>
-                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input type="tel" class="form-control input-form-underline" name="phone" required />
+                                                <label class="floating-label">Teléfono</label>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="floating-label-group">
-                                                    <input type="email" class="form-control input-form-underline" name="email" required />
-                                                    <label class="floating-label">Correo electrónico</label>
-                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input type="email" class="form-control input-form-underline" name="email" required />
+                                                <label class="floating-label">Correo electrónico</label>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="floating-label-group">
-                                                    <input type="tel" class="form-control input-form-underline" name="direccion" required />
-                                                    <label class="floating-label">Direccion</label>
-                                                </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input type="tel" class="form-control input-form-underline" name="direccion" required />
+                                                <label class="floating-label">Direccion</label>
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
-                                                <label class="form-check-label" for="defaultCheck1">
-                                                    Firmar contrato electronicamente. <a href="docs/politicas.pdf">Contrato.</a>
-                                                </label>
-                                            </div>
-                                            <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                Firmar contrato electronicamente. <a href="docs/politicas.pdf">Contrato.</a>
+                                            </label>
+                                        </div>
+                                        <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
                                     </form>
                                 </div>
                             </div>

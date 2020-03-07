@@ -435,11 +435,13 @@ foreach ($lista as $key) {
 					<p class="p-metodo-pago">Metodo de pago</p>
 
 					<div class="row">
-						<div class="col-lg-6 col-md-6 col-6">
-							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalTarjeta"><i class="fas fa-credit-card mr-2"></i> Pago con tarjeta</button>
+						<div class="col-lg-4 col-md-4 col-4">
+							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalTarjeta"><i class="fas fa-credit-card mr-2"></i> Pago con T. Electronica</button>
 						</div>
-
-						<div class="col-lg-6 col-md-6 col-6">
+						<div class="col-lg-4 col-md-4 col-4">
+							<button type="button" class="btn btn-lg-modal" onclick="card_pay();"><i class="fas fa-coins mr-2"></i> Pago con Tarjeta</button>
+						</div>
+						<div class="col-lg-4 col-md-4 col-4">
 							<button type="button" class="btn btn-lg-modal" onclick="efective_pay();"><i class="fas fa-coins mr-2"></i> Pago en efectivo</button>
 						</div>
 
