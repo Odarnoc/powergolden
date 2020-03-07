@@ -13,17 +13,13 @@ require '../phpMailer/SMTP.php';
 
 $response['mensaje'] = "Exito al confirmar status.";
 
-
-$pass = base64_encode(rand(100000, 999999));
-
 $nombre = $_POST['name'];
 $correo = $_POST['correo'];
 $id = $_POST['id'];
 
 
-    $registro = R::load('independientes',$id);
+        $registro = R::findOne('independientes','usuario_id ='.$id);
 
-        $registro->pass = $pass;
         $registro->status = 1;
 
         $id = R::store($registro);

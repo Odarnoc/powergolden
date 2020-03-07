@@ -92,7 +92,7 @@ if (sizeof($registros_in) == 0) {
             } else {
                 echo json_encode($response);
 
-                /* $mail = new PHPMailer(true);
+                $mail = new PHPMailer(true);
 
                 try {
                     $mail->SMTPDebug = 0;                      // Enable verbose debug output
@@ -138,7 +138,7 @@ if (sizeof($registros_in) == 0) {
                     $mail->send(); 
                 } catch (Exception $e) {
                     echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
-                }*/
+                }
             }
         }
     }

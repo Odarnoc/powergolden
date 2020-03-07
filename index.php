@@ -168,6 +168,8 @@ R::store($visita);
 
           </div>
 
+          <!--
+
           <div class="row row-items-pro lista-productos-movil">
 
             <div class="col-lg-12 col-md-12">
@@ -239,6 +241,7 @@ R::store($visita);
 
 
           </div>
+            -->
 
         </div>
 

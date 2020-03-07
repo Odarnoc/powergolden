@@ -1,9 +1,7 @@
 <?php
-
 require 'user_preferences/user-info.php';
-
-$clientes=R::find('independientes');
-
+$query= 'SELECT u.*,i.status FROM usuarios as u LEFT JOIN independientes as i on u.id = i.usuario_id WHERE u.rol=2';
+$clientes = R::getAll($query);
 ?>
 <!doctype html>
 <html lang="es">
@@ -36,22 +34,6 @@ $clientes=R::find('independientes');
 
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
-
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('.image-upload').attr("style", "background-image: url(" + e.target.result + ");");
-                    $('.image-upload').addClass("overlay-image-upload");
-
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 
 </head>
 
@@ -89,9 +71,11 @@ $clientes=R::find('independientes');
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
+                                <th scope="col">Usuario</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Telefono</th>
                                 <th scope="col">Correo</th>
+                                <th scope="col">Contraseña</th>
                                 <th scope="col">Status</th>
                                 <th scope="col"></th>
                                 </tr>
@@ -99,9 +83,11 @@ $clientes=R::find('independientes');
                             <tbody >
                                 <?php foreach ($clientes as $item) { ?>
                                     <tr>
-                                        <td><?php echo $item['nombre']?> <?php echo $item['paterno']?> <?php echo $item['materno']?></td>
+                                        <td><?php echo $item['id']?></td>
+                                        <td><?php echo $item['nombre'].' '.$item['apellidos']?></td>
                                         <td><?php echo $item['telefono']?></td>
                                         <td><?php echo $item['correo']?></td>
+                                        <td><?php echo $item['pass']?></td>
                                         <td style="text-align: center"><?php if($item['status']!=0){?><i style="color: green;" class="far fa-check-circle"></i><?php }else{?><i style="color: red;" class="far fa-times-circle"></i><?php }?></td>
                                         <td><a href="independiente-individual.php?id=<?php echo $item['id']?>"><i class="fas fa-user-edit"></i></a></td>
                                     </tr> 

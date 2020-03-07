@@ -2,7 +2,7 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM independientes where  id = "' . $_GET['id'] . '"';
+$query = 'SELECT u.*,i.status,i.direccion,i.imagen,i.imagen2 FROM usuarios as u LEFT JOIN independientes as i on u.id = i.usuario_id WHERE u.rol=2 && u.id = "' . $_GET['id'] . '"';
 
 $res = R::getAll($query);
 
@@ -67,9 +67,15 @@ $cliente = $res[0];
                                             background-repeat: no-repeat; 
                                             ">
                                     </div>
+                                    <br>
+                                    <div class="d-img-pro-ind" style="background-image: url('images/ine/<?php echo $cliente['imagen2'] ?>'); height: 350px;
+                                            background-size: cover;
+                                            background-repeat: no-repeat; 
+                                            ">
+                                    </div>
 
                                     <div class="d-2">
-                                        <p class="t1"><?php echo $cliente['nombre'] ?> <?php echo $cliente['paterno'] ?> <?php echo $cliente['materno'] ?> <input hidden id="nombre" type="text" value="<?php echo $cliente['nombre'] ?> <?php echo $cliente['paterno'] ?> <?php echo $cliente['materno'] ?>"></p>
+                                        <p class="t1"><?php echo $cliente['nombre'].' '.$cliente['apellidos']?> <input hidden id="nombre" type="text" value="<?php echo $cliente['nombre'].' '.$cliente['apellidos']?>"></p>
                                         <p class="t2">Telefono: <?php echo $cliente['telefono'] ?></p>
                                         <p class="t2">Correo: <input id="correo" type="text" value="<?php echo $cliente['correo'] ?>" hidden><?php echo $cliente['correo'] ?></p>
                                         <p class="t2">Direccion: <?php echo $cliente['direccion'] ?></p>

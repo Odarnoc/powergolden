@@ -24,7 +24,7 @@ if(empty($_POST['pass'])){
     $correo = $_POST['email'];
     $contrasena = $_POST['pass'];
 
-    $query = 'SELECT id,rol FROM usuarios WHERE id='.$correo.'  &&  pass= "'.$contrasena.'" && rol = 2' ;
+    $query = 'SELECT u.id,u.rol FROM usuarios as u LEFT JOIN independientes as i on u.id = i.usuario_id WHERE u.id='.$correo.'  &&  u.pass= "'.$contrasena.'" && u.rol = 2 && i.status = 1' ;
 
     $login_in=R::getAll($query);
     if(sizeof($login_in) == 0){

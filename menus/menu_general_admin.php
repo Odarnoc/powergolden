@@ -18,7 +18,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="lista-independientes.php">Clientes independientes</a></li>
+                                <li><a href="lista-independientes.php">Empresarios independientes</a></li>
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
