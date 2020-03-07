@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=1){
-    header("Location: dashboard.php");
+if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 1) {
+  header("Location: dashboard.php");
 }
 
 
@@ -54,14 +54,14 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=1){
 
                 <div class="form-group">
                   <div class="floating-label-group">
-                    <input type="text" class="form-control input-form" required id="email"/>
+                    <input type="text" class="form-control input-form" required id="email" />
                     <label class="floating-label">Correo de socio</label>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="floating-label-group">
-                    <input type="password" class="form-control input-form" required id="pass"/>
+                    <input type="password" class="form-control input-form" required id="pass" />
                     <label class="floating-label">Contraseña</label>
                   </div>
                 </div>
@@ -70,18 +70,18 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=1){
 
               </form>
 
-              <div class="d-footer-form">
+              <!--<div class="d-footer-form">
                 <div class="row row-links-form">
                   <div class="col-lg-6 col-md-6">
                     <p class="t3"><a href="recuperar-contrasena.php" class="btn-link">Olvidé mi contraseña</a></p>
 
                   </div>
                   <div class="col-lg-6 col-md-6">
-                    <p class="t4"><a href="registro.php" class="btn-link">Registrarme como socio</a></p>
+                    <p class="t4"><a href="" class="btn-link">Registrarme como socio</a></p>
 
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -113,7 +113,9 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=1){
   <!-- sesion scripts -->
   <script src="js/sesion.js"></script>
 
-      <!-- sweetalert scripts -->
-      <script src="js/sweetalert2.js"></script>
+  <!-- sweetalert scripts -->
+  <script src="js/sweetalert2.js"></script>
 
-</body></html>
+</body>
+
+</html>
