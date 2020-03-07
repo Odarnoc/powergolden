@@ -50,7 +50,7 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=0){
 
               <p class="title-form"><img src="images/logo-ind-color.png" alt="">Iniciar sesión</p>
 
-              <form id="form-login" class="form-login">
+              <form id="form-login-oficina" class="form-login">
 
                 <div class="form-group">
                   <div class="floating-label-group">
@@ -73,11 +73,7 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=0){
               <div class="d-footer-form">
                 <div class="row row-links-form">
                   <div class="col-lg-6 col-md-6">
-                    <p class="t3"><a href="recuperar-contrasena.php" class="btn-link">Olvidé mi contraseña</a></p>
-
-                  </div>
-                  <div class="col-lg-6 col-md-6">
-                    <p class="t4"><a href="registro.php" class="btn-link">Registrarme como socio</a></p>
+                    <p class="t4"><a href="registro-independiente.php" class="btn-link">Registrarme como socio</a></p>
 
                   </div>
                 </div>
