@@ -125,12 +125,6 @@
                         </div>
                         
                         
-                         <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <button type="button" class="btn btn-ticket mb-3">Enviar</button>
-                                <button type="button" class="btn btn-ticket">Imprimir</button>
-                            </div>
-                        </div>
                         
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">
