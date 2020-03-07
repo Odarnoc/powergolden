@@ -68,6 +68,20 @@ and     length(@pv := concat(@pv, ',', id))");
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.image-upload2').attr("style", "background-image: url(" + e.target.result + ");");
+                    $('.image-upload2').addClass("overlay-image-upload");
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
         
     </script>
 
@@ -98,9 +112,9 @@ and     length(@pv := concat(@pv, ',', id))");
                                     <form id="form-folleto" class="form-registro" method="post" enctype="multipart/form-data">
 
                                         <div class="form-group">
-                                            <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg?>);">
+                                            <div class="image-upload2" style="background-image: url(images/bg-image-upload.jpg?>);">
                                             </div>
-                                            <p>Favor de anexar una fotografía del inverso de su identificacion.</p>
+                                            <p>Favor de anexar una fotografía de la parte frontal de su identificacion.</p>
                                         </div>
 
                                         <div class="form-group">
@@ -108,7 +122,22 @@ and     length(@pv := concat(@pv, ',', id))");
                                                 <label for="file-input" style="cursor: pointer;">
                                                     <i class="fas fa-plus"></i> Subir foto
                                                 </label>
-                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" hidden />
+                                                <input name="img-producto" id="file-input" type="file" onchange="readURL2(this);" hidden />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg?>);">
+                                            </div>
+                                            <p>Favor de anexar una fotografía de la parte reversa de su identificacion.</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group" style="text-align: right">
+                                                <label for="file-input2" style="cursor: pointer;">
+                                                    <i class="fas fa-plus"></i> Subir foto
+                                                </label>
+                                                <input name="img-producto2" id="file-input2" type="file" onchange="readURL(this);" hidden />
                                             </div>
                                         </div>
 
@@ -151,7 +180,7 @@ and     length(@pv := concat(@pv, ',', id))");
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
                                                 <label class="form-check-label" for="defaultCheck1">
-                                                    Aceptar los terminos del contrato. <a href="pdf-contrato.php">Terminos de contrato.</a>
+                                                    Firmar contrato electronicamente. <a href="docs/politicas.pdf">Contrato.</a>
                                                 </label>
                                             </div>
                                             <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>

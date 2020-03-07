@@ -1309,6 +1309,50 @@ textarea:not(:focus):valid~.floating-label-underline {
     display: none;
 }
 
+.image-upload2 .file-input-active {
+    color: rgba(255, 255, 255, .9);
+}
+
+.image-upload2 {
+    border-radius: 8px;
+    border: 1px solid #DBDBDB;
+    color: rgba(255, 255, 255, .4);
+    text-align: left;
+    height: 215px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: #F4F4F4;
+}
+
+.image-upload2 label {
+    transition: .4s;
+    font-family: "Open Sans";
+    font-weight: 400 !important;
+    color: rgba(0, 0, 0, .4);
+    font-size: 16px;
+    position: absolute;
+    bottom: 765px;
+    right: 16px;
+}
+
+.image-upload2 label i {
+    margin-right: 10px;
+}
+
+.image-upload2 label:hover {
+    cursor: pointer;
+    color: black;
+}
+
+.image-upload2 label {
+    margin: 0px;
+}
+
+.image-upload2 input {
+    display: none;
+}
+
 .overlay-image-upload {
     background-color: #FFFFFF;
 }
