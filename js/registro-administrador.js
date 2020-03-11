@@ -12,6 +12,7 @@ function registrar() {
     var correo = $("#email").val();
     var contraseña = $("#pass").val();
     var rol = $("#rol").val();
+    var suc = $("#sucursal").val();
 
     let datos = {
         name: nombre,
@@ -19,7 +20,8 @@ function registrar() {
         phone: telefono,
         email: correo,
         pass: contraseña,
-        rol: rol
+        rol: rol,
+        sucursal: suc
     }
     
     console.log(datos);
