@@ -101,6 +101,7 @@ require 'bd/conexion.php';
                                         <div class="floating-label-group">
                                             <input type="text" id="cvv_tarjeta" data-openpay-card="cvv2" value="" class="form-control input-form-underline" required />
                                             <label class="floating-label-underline">CVV</label>
+                                            <input type="number" class="form-control input-form-border" id="cantidad_tarjeta" value="10" required hidden/>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +110,7 @@ require 'bd/conexion.php';
                                         <a href="carrito-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                     </div>
                                     <div class=" col-lg-6 col-md-6 col-6">
-                                        <a><button type="submit" id="boton" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button></a>
+                                        <button type="submit" id="pay-button" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button>
                                     </div>
                                 </div>
                                 </form>
