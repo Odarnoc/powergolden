@@ -1,7 +1,8 @@
 <?php
-require('PDF/fpdf.php');
+session_start();
+require 'bd/conexion.php';
 
-require 'user_preferences/user-info.php';
+require('PDF/fpdf.php');
 
 if(isset($_GET['inicio'])&&isset($_GET['fin'])){
     $query = 'SELECT * FROM ventascliente WHERE user_id ="'.$_SESSION["user_id"].'" and fecha BETWEEN "'.$_GET['inicio'].'" and "'.$_GET['fin'].'"';

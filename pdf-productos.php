@@ -2,8 +2,8 @@
 require('PDF/fpdf.php');
 require 'bd/conexion.php';
 
-//$query = 'SELECT p.*,l.nombre as linea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id WHERE l.id = p.categoria';
-//$productos=R::getAll($query);
+$query = 'SELECT p.*,l.nombre as linea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id WHERE l.id = p.categoria';
+$productos=R::getAll($query);
 
 class PDF extends FPDF
 {
@@ -43,16 +43,14 @@ function Footer()
 }
 
 // Creación del objeto de la clase heredada
-ob_start();
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
-$pdf->SetFont('Times','',18); /*
+$pdf->SetFont('Times','',18); 
 foreach ($productos as $item) {
     $pdf->Cell(83,10,utf8_decode($item['nombre']),1,0,'c',0); 
     $pdf->Cell(52,10,utf8_decode($item['linea']),1,0,'c',0); 
     $pdf->Cell(52,10, $item['inventario'],1,1,'c',0);  
-}  */
-$pdf->Output();
-ob_end_flush(); 
+}  
+$pdf->Output(); 
 ?>
