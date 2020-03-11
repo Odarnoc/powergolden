@@ -1,13 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"])){
-    header("Location: iniciar-sesion.php");
-}
-
 require 'bd/conexion.php';
-
-$information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
-
 ?>
 
 <!doctype html>
@@ -116,7 +109,7 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
                                             <p class="t2" id="total"></p>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-6">
-                                          <a href="nuevo-envio.php"><button class="btn btn-lg-link" type="button" role="button">Continuar</button></a>
+                                          <a href="nuevo-envio-ecomerce.php"><button class="btn btn-lg-link" type="button" role="button">Continuar</button></a>
                                         </div>
                                     </div>
 

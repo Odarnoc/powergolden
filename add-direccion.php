@@ -1,11 +1,7 @@
 <?php
-
-require 'user_preferences/user-info.php';
-
+require 'user_preferences/oficina-validacion.php';
 $query = 'SELECT * FROM direcciones WHERE idusuario = '.$_SESSION["user_id"];
-
 $direccion=R::getAll($query); 
-
 ?>
 
 <!doctype html>

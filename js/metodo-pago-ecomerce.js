@@ -908,13 +908,11 @@ var sucess_callbak = function(response) {
 
     success(data) {
 
-      swal.close();
-
-      check_quantities("Terminal Electronica", cantidad_tarjeta, numero_tarjeta);
-
-      $('#card_payment')[0].reset();
-
-      $("#modalTarjeta").modal("hide");
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: "Compra realizada"
+        });
 
       
 

@@ -15,7 +15,10 @@ $(document).ready(function() {
                     text: json_mensaje.mensaje
                 });
             } else {
-                productos = json_mensaje;
+                json_mensaje.forEach(function(prod,index) {
+                    prod.cant = 1;
+                    productos.push(prod)
+                });
                 pintarProds();
             }
         },
@@ -35,6 +38,7 @@ $(document).ready(function() {
 });
 
 function pintarProds() {
+    var prodSelectsCants = 0;
     $("#lista-productos").empty();
     var html="";
     productos.forEach(function(prod,index) {
@@ -50,7 +54,8 @@ function pintarProds() {
                         '<div class="col-lg-7 col-md-7 col-7">'+
                         '<div class="d-info-pro">'+
                             '<p class="t2">'+prod.nombre+'</p>'+
-                            '<p class="t1" style="color:'+prod.color+'">Línea '+prod.linea+'</p>';
+                            '<p class="t1" style="color:'+prod.color+'">Línea '+prod.linea+'</p>'+
+                            '<br><input type="number" id="'+index+'input" onchange="modificarCantidad('+index+')" class="form-control input-cant-pos" value="'+prod.cant+'" min="1" max="500" step="1">';
 
                             if(seleccion.length == 0){
                                 html+='<a class="btn btn-blue mt-3" style="background-color:49B7F3;margin-right: 6px;" onclick="agregar('+index+')" role="button"><i style="color:white;" class="fas fa-check"></i></a>';
@@ -64,6 +69,7 @@ function pintarProds() {
                                 if(con == 0){
                                     html+='<a class="btn btn-blue mt-3" style="background-color:49B7F3;margin-right: 6px;" onclick="agregar('+index+')" role="button"><i style="color:white;" class="fas fa-check"></i></a>';
                                 }else{
+                                    prodSelectsCants+=parseInt(prod.cant);
                                     html+='<a class="btn btn-blue mt-3" style="background-color:red;" onclick="eliminar('+index+')" role="button"><i style="color:white;" class="fas fa-times"></i></a>';
                                 }
                             }
@@ -74,14 +80,20 @@ function pintarProds() {
                     '</div>'+
                 '</div>';
     });
-
+    
     $("#lista-productos").append(html);
-    $("#seleccion").text(seleccion.length);
+    $("#seleccion").text(parseInt(prodSelectsCants));
 }
 
 function agregar(index) {
     console.log(index);
     seleccion.push(index);
+    pintarProds()
+}
+
+function modificarCantidad(index) {
+    console.log(index);
+    productos[index].cant = parseInt($('#'+index+'input').val());
     pintarProds()
 }
 
