@@ -91,24 +91,22 @@
                             <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
 
                                 <div class="d-form-registro-productos">
-                                  <form class="form-registro-productos" action="push.php">
+                                  <form class="form-registro-productos" >
                                       <div class="form-group">
                                           <div class="floating-label-group">
-                                              <input name="titulo" required type="text" class="form-control input-form-underline"/>
+                                              <input id="titulo" required type="text" class="form-control input-form-underline"/>
                                               <label class="floating-label-underline">Titulo</label>
                                           </div>
                                       </div>
                                       <div class="form-group">
                                           <div class="floating-label-group">
-                                              <input name="mensaje" required type="text" class="form-control input-form-underline"/>
+                                              <input id="mensaje" required type="text" class="form-control input-form-underline"/>
                                               <label class="floating-label-underline">Mensaje</label>
                                           </div>
                                       </div>
-                                      <button type="submit"  class="btn btn-lg-blue mt-3">Enviar</button>
+                                      <button  type="button" data-toggle="modal" data-target="#exampleModalCenter" onclick="enviar()" class="btn btn-lg-blue mt-3">Enviar</button>
                                   </form>
                                 </div>
-
-
                             </div>
 
                         </div>
@@ -124,6 +122,30 @@
             <!-- Footer-->
             <?php include("menus/footer_general.php"); ?>
             <!-- End Footer -->
+
+                    <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center mb">
+                    <img class="img-mb" src="images/icon-atencion.png" alt="">
+                    <p class="title-mb mt-20">Atención</p>
+                    <p class="sub-title-mb">¿Desea enviar la notificacion?</p>
+                    <p class="sub-title-mb"><b>Titulo: </b><span id="rtitulo"></span></p>
+                    <p class="sub-title-mb"><b>Mensaje: </b><span id="rmensaje"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="final()" >Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- jQuery -->
@@ -149,7 +171,8 @@
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
-    <script src="js/nuevo-folleto.js"></script>
+    <script src="js/push.js"></script>
+
 
 
 
