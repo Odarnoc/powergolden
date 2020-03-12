@@ -18,11 +18,11 @@
 
 			$producto->uso=$_POST["uso"];
 
-			$producto->inventario=$_POST["inventario"];
-
 			$producto->categoria=$_POST["categoria"];
 
-			$producto->precio=$_POST["precio"];
+			$producto->precio_mxn=$_POST["precio"];
+			
+			$producto->precio_usd=$_POST["preciousd"];
 			
 			//$producto->foto=basename($_FILES['img-producto']['name']);
 
@@ -48,11 +48,11 @@
 
 				$producto->uso=$_POST["uso"];
 
-				$producto->inventario=$_POST["inventario"];
-
 				$producto->categoria=$_POST["categoria"];
 
-				$producto->precio=$_POST["precio"];
+				$producto->precio_mxn=$_POST["precio"];
+			
+				$producto->precio_usd=$_POST["preciousd"];
 
 				$producto->imagen=basename($_FILES['img-producto']['name']);
 
@@ -86,11 +86,11 @@
 
 			$producto->uso=$_POST["uso"];
 
-			$producto->inventario=$_POST["inventario"];
-
 			$producto->categoria=$_POST["categoria"];
 
-			$producto->precio=$_POST["precio"];
+			$producto->precio_mxn=$_POST["precio"];
+			
+			$producto->precio_usd=$_POST["preciousd"];
 
 			$producto->imagen=basename($_FILES['img-producto']['name']);
 

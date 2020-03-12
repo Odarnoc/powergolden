@@ -96,7 +96,8 @@ $productos=R::getAll($queryprodventa);
                                 <tr>
                                 <th style="width: 20%" scope="col">Imagen</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Precio unitario</th>
+                                <th scope="col">Precio MXN</th>
+                                <th scope="col">Precio USD</th>
                                 <th scope="col">Acción</th>
                                 </tr>
                             </thead>
@@ -105,7 +106,8 @@ $productos=R::getAll($queryprodventa);
                                 <tr>
                                 <td style="vertical-align: middle"><img style="width: 50%" src="productos_img/<?php echo $item['imagen']?>"> </td>
                                 <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['precio'] ?></td>
+                                <td style="vertical-align: middle">$<?php echo $item['precio_mxn'] ?></td>
+                                <td style="vertical-align: middle">$<?php echo $item['precio_usd'] ?></td>
                                 <td style="vertical-align: middle">
                                     <div>
                                         <a href="editar-producto.php?id=<?php echo $item['id']?>"><i class="far fa-edit"></i></a>

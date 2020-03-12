@@ -136,13 +136,6 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label>Inventario *</label>
-                                                <input name="inventario" type="text" class="form-control input-form-underline" value="<?php echo $item['inventario']?>" required />
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
 
                                             <div class="floating-label-group">
 
@@ -163,10 +156,18 @@
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <label>Precio *</label>
-                                                <input name="precio" type="text" class="form-control input-form-underline" value="<?php echo $item['precio']?>" required />
+                                                <label>Precio MXN *</label>
+                                                <input name="precio" type="text" class="form-control input-form-underline" value="<?php echo $item['precio_mxn']?>" required />
                                             </div>
                                         </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <label>Precio USD *</label>
+                                                <input name="preciousd" type="text" class="form-control input-form-underline" value="<?php echo $item['precio_usd']?>" required />
+                                            </div>
+                                        </div>
+
                                         <button type="submit" class="btn btn-lg-blue mt-3">Guardar</button>
 
                                     </form>

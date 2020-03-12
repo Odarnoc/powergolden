@@ -131,13 +131,6 @@ $lineas = R::find('lineas');
                                         </div>
 
                                         <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <input name="inventario" type="number" class="form-control input-form-underline" required />
-                                                <label class="floating-label-underline">Inventario *</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
 
                                             <div class="floating-label-group">
 
@@ -159,7 +152,14 @@ $lineas = R::find('lineas');
                                         <div class="form-group">
                                             <div class="floating-label-group">
                                                 <input name="precio" type="number" class="form-control input-form-underline" required />
-                                                <label class="floating-label-underline">Precio *</label>
+                                                <label class="floating-label-underline">Precio MXN *</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input name="preciousd" type="number" class="form-control input-form-underline" required />
+                                                <label class="floating-label-underline">Precio USD *</label>
                                             </div>
                                         </div>
 

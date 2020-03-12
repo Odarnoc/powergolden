@@ -14,8 +14,6 @@ function registrari() {
     var col = $("#colo").val();
     var mun = $("#muni").val();
     var est = $("#estado").val();
-    var usr = $("#user").val();
-    var pass = $("#pass").val();
 
     let datos = {
         nombre: nom,
@@ -23,9 +21,7 @@ function registrari() {
         cp: cp,
         colonia: col,
         munici: mun,
-        estado:est,
-        pass:pass,
-        usuario:usr
+        estado:est
 
     }
     

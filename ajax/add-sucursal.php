@@ -41,24 +41,12 @@ if($_POST['estado'] == "Estado"){
     return;
 }
 
-if(empty($_POST['usuario'])){
-    error_mensaje('Llenar el campo usuario.');
-    return;
-}
-
-if(empty($_POST['pass'])){
-    error_mensaje('Llenar el campo contraseña.');
-    return;
-}
-
         $nom = $_POST['nombre'];
         $dir = $_POST['direccion'];
         $cp = $_POST['cp'];
         $col = $_POST['colonia'];
         $mun = $_POST['munici'];
         $est = $_POST['estado'];
-        $user = $_POST['usuario'];
-        $contra = $_POST['pass'];
     
                 if(strlen($cp) == 5 ){ 
             
@@ -70,8 +58,6 @@ if(empty($_POST['pass'])){
                 $registro->colonia = $col;
                 $registro->ciudad = $mun;
                 $registro->estado = $est;
-                $registro->usuario = $user;
-                $registro->pass = $contra;
     
                 $id = R::store($registro);
     
