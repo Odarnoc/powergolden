@@ -2,6 +2,9 @@
 
 require 'user_preferences/user-info.php';
 
+$tipo = R::find('roles', ' id != 1 && id !=2 ');
+$suc = R::find('sucursales');
+
 ?>
 
 <!doctype html>
@@ -41,9 +44,9 @@ require 'user_preferences/user-info.php';
 <body>
 
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -52,10 +55,10 @@ require 'user_preferences/user-info.php';
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-            
-            <!-- Admin Menu -->
-            <?php include("menus/menu_general_admin.php"); ?>
-            <!-- End Admin Menu -->
+
+                <!-- Admin Menu -->
+                <?php include("menus/menu_general_admin.php"); ?>
+                <!-- End Admin Menu -->
 
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
@@ -97,11 +100,33 @@ require 'user_preferences/user-info.php';
 
                                                     <div class="form-group">
                                                         <div class="floating-label-group">
-                                                        <select id="rol" class="form-control input-form-underline" required>
-                                                            <option value="2">Tipo de usuario</option>
-                                                            <option value="0">Administrador</option>
-                                                            <option value="1">Cliente</option>
-                                                        </select>
+                                                            <label class="label-select">Tipo de usuario.</label>
+                                                            <select id="rol" class="form-control input-form-underline">
+                                                                <option value="9" hidden>Seleccionar tipo de usuario.</option>
+                                                                <?php
+                                                                foreach ($tipo as $valor) {
+                                                                ?>
+                                                                    <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?></option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="floating-label-group">
+                                                            <label class="label-select">Sucursal de origen</label>
+                                                            <select id="sucursal" class="form-control input-form-underline">
+                                                                <option value="9" hidden>Seleccionar sucursal de origen.</option>
+                                                                <?php
+                                                                foreach ($suc as $valor) {
+                                                                ?>
+                                                                    <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?>. <?php echo $valor->estado; ?></option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
                                                         </div>
                                                     </div>
 
@@ -161,15 +186,15 @@ require 'user_preferences/user-info.php';
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()">Aceptar</button>
                 </div>
             </div>
         </div>
     </div>
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -196,4 +221,6 @@ require 'user_preferences/user-info.php';
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
-</body></html>
+</body>
+
+</html>

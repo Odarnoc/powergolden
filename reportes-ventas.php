@@ -3,17 +3,16 @@
 require 'user_preferences/user-info.php';
 
 if(!isset($_POST['fechauno'])&&!isset($_POST['fechados'])){
-    $query = 'SELECT DISTINCT pxv.venta_id AS venta, V.fecha AS fecha, v.total AS tottal, u.nombre AS nombre FROM productosxventas AS pxv 
+    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre FROM productosxventas AS pxv 
     LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha ="'.date('Y-m-d').'"';
 }else{
-    $query = 'SELECT DISTINCT pxv.venta_id AS venta, V.fecha AS fecha, v.total AS tottal, u.nombre AS nombre FROM productosxventas AS pxv 
+    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre FROM productosxventas AS pxv 
     LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha BETWEEN "'.$_POST['fechauno'].'" and "'.$_POST['fechados'].'"';
     $filtro = $_POST['fechauno'];
     $filtrodos = $_POST['fechados'];
 }
 
 $productos=R::getAll($query);
-
 ?>
 
 <!doctype html>

@@ -41,8 +41,13 @@ if(empty($_POST['pass'])){
     return;
 }
 
-if($_POST['rol']==NULL || $_POST['rol']==2){
+if($_POST['rol'] == 9 ){
     error_mensaje('Elegir un tipo de usuario.');
+    return;
+}
+
+if($_POST['sucursal'] == 9 ){
+    error_mensaje('Elegir una sucursal.');
     return;
 }
 
@@ -52,7 +57,8 @@ if($_POST['rol']==NULL || $_POST['rol']==2){
     $correo = $_POST['email'];
     $contrasena = $_POST['pass'];
     $rol = $_POST['rol'];
-  
+    $suc = $_POST['sucursal'];
+
     $query = 'SELECT correo FROM `usuarios` WHERE correo= "'.$correo.'"';
 
     $registros_in=R::getAll($query);
@@ -68,6 +74,7 @@ if($_POST['rol']==NULL || $_POST['rol']==2){
             $registro->correo = $correo;
             $registro->apellidos = $apellido;
             $registro->rol =$rol;
+            $registro->sucursal_id =$suc;
 
             /*$mail = new PHPMailer(true);
 

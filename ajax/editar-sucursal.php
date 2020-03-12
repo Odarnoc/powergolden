@@ -4,6 +4,7 @@ session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
+
 $response['mensaje'] = "Exito al editar la sucursal.";
 
 if(empty($_POST['nombre'])){
@@ -63,9 +64,11 @@ if(empty($_POST['estado'])){
                 echo json_encode($response);
             }
 
+            
         }else{
             error_mensaje("El codigo postal es incorrecto");
         }
 
+        include 'registros-administrador.php';
 
 ?>
