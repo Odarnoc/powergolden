@@ -1,10 +1,8 @@
 <?php
-
 require 'user_preferences/user-info.php';
-
-$query = 'SELECT * FROM  sucursales';
+$id=$_GET['id'];
+$query = 'SELECT * FROM  inventarios where sucursal_id = $id';
 $sucursal=R::getAll($query);
-
 ?>
 
 
@@ -63,24 +61,19 @@ $sucursal=R::getAll($query);
                 <div class="col-lg-8 col-md-8 bg-gray" >
                     <div class="d-cont-right">
                         <div class="row">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Lista de sucursales.</p>
+                                    <p class="title-cuenta">Inventario por sucursal.</p>
                                 </div>
                             </div>
-
-                            <div class="form-group col-lg-4 col-md-4" style="text-align: end;">
-                                <a type="button" href="productos-inventarios.php" style="margin-top: 0rem!important; height: 37px;" class="btn btn-blue mt-2"><i class="fas fa-plus mr-2"></i>Agregar producto a inventario</a>
-                            </div>
                         </div>
-                        <br>
 
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Direccion</th>
-                                <th scope="col">Estado</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad mínima</th>
+                                <th scope="col">Existencias</th>
                                 <th scope="col">Acción</th>
                                 </tr>
                             </thead>
@@ -92,7 +85,6 @@ $sucursal=R::getAll($query);
                                 <td style="vertical-align: middle"><?php echo $item['estado'] ?></td>
                                 <td style="vertical-align: middle">
                                     <div>
-                                        <a href><i class="fas fa-exchange-alt"></i></a>
                                         <a href><i class="fas fa-clone"></i></a>
                                         <a href="inventario-sucursal.php?id=<?php echo $item['id']?>"><i class="far fa-eye"></i></a>
                                         <a href="editar-sucursal.php?id=<?php echo $item['id']?>"><i class="far fa-edit"></i></a>
