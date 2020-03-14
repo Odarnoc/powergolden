@@ -281,6 +281,39 @@ R::store($visita);
 
   </section>
 
+  <!-- Modal -->
+  <div class="modal fade" id="modalIndex" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Hola!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-modal-cliente">
+            <p class="t1">Bienvenido a Power Golden</p>
+            <p class="t2">Por favor selecciona que tipo de cliente eres</p>
+
+            <div class="row mt-30">
+              <div class="col-lg-6 col-md-6">
+                <button type="button" data-dismiss="modal" class="btn btn-lg-modal btn-cliente-temporal">Cliente temporal</button>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <a href="iniciar-sesion-oficina.php"><button type="button" class="btn btn-lg-modal btn-empresario">Empresario independiente</button></a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Admin Menu -->
   <?php include("menus/footer_general.php"); ?>

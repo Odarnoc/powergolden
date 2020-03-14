@@ -7,9 +7,9 @@ $querydos = 'SELECT SUM(total) as sumita FROM ventas where fecha = CURRENT_DATE(
 
 $querytres = 'SELECT id FROM visitas where fecha = CURRENT_DATE()';
 
-$fecha=R::getAll($querydos);
-$usuario=R::getAll($query);
-$visita=R::getAll($querytres);
+$fecha = R::getAll($querydos);
+$usuario = R::getAll($query);
+$visita = R::getAll($querytres);
 
 
 
@@ -58,9 +58,9 @@ $visita=R::getAll($querytres);
     </section>
 
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
     <!-- End Navbar ====
     	======================================= -->
@@ -86,7 +86,7 @@ $visita=R::getAll($querytres);
 
                         <div class="row row-form-perfil">
 
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-6 col-md-6">
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-user.svg" alt="">
                                     <p class="t1"><?php echo count($usuario) ?></p>
@@ -94,19 +94,28 @@ $visita=R::getAll($querytres);
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-6 col-md-6">
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-bag.svg" alt="">
-                                    <p class="t1">$<?php if($fecha[0]['sumita'] == null) echo '0'; else echo ($fecha[0]['sumita']) ?></p>
+                                    <p class="t1">$<?php if ($fecha[0]['sumita'] == null) echo '0';
+                                                    else echo ($fecha[0]['sumita']) ?></p>
                                     <p class="t2">Ventas de hoy</p>
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-6 col-md-6">
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-eye.svg" alt="">
                                     <p class="t1"><?php echo count($visita) ?></p>
                                     <p class="t2">Visitas de hoy</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <div class="clearfix d-item-num">
+                                    <img src="images/icon-chart.svg" alt="">
+                                    <p class="t1">2,974</p>
+                                    <p class="t2">Media</p>
                                 </div>
                             </div>
 
@@ -117,7 +126,15 @@ $visita=R::getAll($querytres);
                                 <div class="d-grafica-ventas">
                                     <p class="t1">Gráfica de ventas</p>
                                     <canvas height="400" id="myChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="row mt-40">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="d-grafica-ventas">
+                                    <p class="t1">Gráfica de media</p>
+                                    <canvas style="max-height: 400px;" id="myChartMedia"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -130,9 +147,9 @@ $visita=R::getAll($querytres);
     </section>
 
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -155,4 +172,6 @@ $visita=R::getAll($querytres);
     <script src="js/Chart.js"></script>
     <script src="js/chart-ventas.js"></script>
 
-</body></html>
+</body>
+
+</html>
