@@ -1,8 +1,8 @@
 <?php
 require 'user_preferences/user-info.php';
-$id=$_GET['id'];
-$query = 'SELECT p.nombre,i.limite_inventario,i.existencia FROM inventarios as i LEFT JOIN productos as p ON i.producto_id = p.id where i.sucursal_id = '.$id;
-$sucursal=R::getAll($query);
+$id = $_GET['id'];
+$query = 'SELECT p.nombre,i.id,i.limite_inventario,i.existencia FROM inventarios as i LEFT JOIN productos as p ON i.producto_id = p.id where i.sucursal_id = ' . $id;
+$sucursal = R::getAll($query);
 ?>
 
 
@@ -43,9 +43,9 @@ $sucursal=R::getAll($query);
 <body>
 
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
 
 
@@ -58,7 +58,7 @@ $sucursal=R::getAll($query);
                 <?php include("menus/menu_general_admin.php"); ?>
                 <!-- End Admin Menu -->
 
-                <div class="col-lg-8 col-md-8 bg-gray" >
+                <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
@@ -72,25 +72,26 @@ $sucursal=R::getAll($query);
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
-                                <th scope="col">Producto</th>
-                                <th scope="col">Cantidad mínima</th>
-                                <th scope="col">Existencias</th>
-                                <th scope="col">Acción</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Cantidad mínima</th>
+                                    <th scope="col">Existencias</th>
+                                    <th scope="col">Acción</th>
                                 </tr>
                             </thead>
-                            <tbody >
-                            <?php foreach ($sucursal as $item) { ?>
-                                <tr>
-                                <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['limite_inventario'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['existencia'] ?></td>
-                                <td style="vertical-align: middle">
-                                    <div>
-                                        <a href><i class="fas fa-plus"></i></a>
-                                    </div>
-                                </td>
-                                </tr> 
-                                <?php } ?> 
+                            <tbody>
+                                <?php foreach ($sucursal as $item) { ?>
+                                    <tr>
+                                        <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
+                                        <td style="vertical-align: middle"><?php echo $item['limite_inventario'] ?></td>
+                                        <td style="vertical-align: middle"><?php echo $item['existencia'] ?></td>
+                                        <td style="vertical-align: middle">
+                                            <div>
+                                                <a href="" type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalAgregar"><i class="fas fa-plus"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -100,62 +101,75 @@ $sucursal=R::getAll($query);
 
     </section>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal Copiar-->
+    <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">¿Cuantas existencias deseas agregar al inventario. ?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-center mb">
-                    <img class="img-mb" src="images/icon-atencion.png" alt="">
-                    <p class="title-mb mt-20">Atención</p>
-                    <p class="sub-title-mb">¿Desea eliminar la sucursal?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                <div class="modal-body">
+                    <div class="d-modal-cliente">
+                        <p class="t1">Ingresa la cantidad de existencias deseas agregar.</p>
+                        <div class="form-group">
+                            <div class="floating-label-group" style="width: 50%; margin: auto;">
+                                    <input type="number" id="cantidad">
+                            </div>
+
+                            <div class="row mt-30">
+                                <div class="col-lg-6 col-md-6" style="margin: auto;">
+                                    <button style="background-color: #49B7F3; color:white;" onclick="anadir()" type="button" class="btn btn-lg-modal btn-cliente-temporal">Agregar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+        <!-- Footer-->
+        <?php include("menus/footer_general.php"); ?>
+        <!-- End Footer -->
 
 
-    <!-- jQuery -->
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/jquery-migrate-3.0.0.min.js"></script>
+        <!-- jQuery -->
+        <script src="js/jquery-3.0.0.min.js"></script>
+        <script src="js/jquery-migrate-3.0.0.min.js"></script>
 
-    <!-- popper.min -->
-    <script src="js/popper.min.js"></script>
+        <!-- popper.min -->
+        <script src="js/popper.min.js"></script>
 
-    <!-- bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
+        <!-- bootstrap -->
+        <script src="js/bootstrap.min.js"></script>
 
-    <!-- scrollIt -->
-    <script src="js/scrollIt.min.js"></script>
+        <!-- scrollIt -->
+        <script src="js/scrollIt.min.js"></script>
 
-    <!-- custom scripts -->
-    <script src="js/main-perfil.js"></script>
+        <!-- custom scripts -->
+        <script src="js/main-perfil.js"></script>
 
-    <script src="js/scripts.js"></script>
-    <script src="js/bootstrap-input-spinner.js"></script>
-    <!-- responseive menu -->
-    <script src="js/menu-movil.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="js/bootstrap-input-spinner.js"></script>
+        <!-- responseive menu -->
+        <script src="js/menu-movil.js"></script>
 
-    <!-- sweetalert scripts -->
-    <script src="js/sweetalert2.js"></script>
+        <!-- sweetalert scripts -->
+        <script src="js/sweetalert2.js"></script>
 
-    <script src="js/sucursal.js"></script>
+        <script src="js/sucursal.js"></script>
 
-    <script>
-        $("input[type='number']").inputSpinner()
-    </script>
+        <script>
+            $("input[type='number']").inputSpinner()
+        </script>
 
-</body></html>
+</body>
+
+</html>
