@@ -3,7 +3,10 @@
 require 'user_preferences/user-info.php';
 
 $query = 'SELECT * FROM  sucursales';
-$sucursal=R::getAll($query);
+$sucursal = R::getAll($query);
+
+$suc = R::find('sucursales');
+$prod = R::find('productos');
 
 ?>
 
@@ -45,9 +48,9 @@ $sucursal=R::getAll($query);
 <body>
 
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
 
 
@@ -60,7 +63,7 @@ $sucursal=R::getAll($query);
                 <?php include("menus/menu_general_admin.php"); ?>
                 <!-- End Admin Menu -->
 
-                <div class="col-lg-8 col-md-8 bg-gray" >
+                <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
                         <div class="row">
                             <div class="col-lg-8 col-md-8">
@@ -78,28 +81,28 @@ $sucursal=R::getAll($query);
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Direccion</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Acción</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Direccion</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acción</th>
                                 </tr>
                             </thead>
-                            <tbody >
-                            <?php foreach ($sucursal as $item) { ?>
-                                <tr>
-                                <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['direccion'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['estado'] ?></td>
-                                <td style="vertical-align: middle">
-                                    <div>
-                                        <a href><i class="fas fa-exchange-alt"></i></a>
-                                        <a href><i class="fas fa-clone"></i></a>
-                                        <a href="inventario-sucursal.php?id=<?php echo $item['id']?>"><i class="far fa-eye"></i></a>
-                                        <a href="editar-sucursal.php?id=<?php echo $item['id']?>"><i class="far fa-edit"></i></a>
-                                    </div>
-                                </td>
-                                </tr> 
-                                <?php } ?> 
+                            <tbody>
+                                <?php foreach ($sucursal as $item) { ?>
+                                    <tr>
+                                        <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
+                                        <td style="vertical-align: middle"><?php echo $item['direccion'] ?></td>
+                                        <td style="vertical-align: middle"><?php echo $item['estado'] ?></td>
+                                        <td style="vertical-align: middle">
+                                            <div>
+                                                <a href="" type="button" data-toggle="modal" data-target="#modalCopiar"><i class="fas fa-exchange-alt"></i></a>
+                                                <a href="" type="button" data-toggle="modal" data-target="#modalClonar"><i class="fas fa-clone"></i></a>
+                                                <a href="inventario-sucursal.php?id=<?php echo $item['id'] ?>"><i class="far fa-eye"></i></a>
+                                                <a href="editar-sucursal.php?id=<?php echo $item['id'] ?>"><i class="far fa-edit"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -109,32 +112,124 @@ $sucursal=R::getAll($query);
 
     </section>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal Clonar -->
+    <div class="modal fade" id="modalCopiar" tabindex="-1" role="dialog" aria-labelledby="modalClonar" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">¿Deseas transferir un inventario?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-center mb">
-                    <img class="img-mb" src="images/icon-atencion.png" alt="">
-                    <p class="title-mb mt-20">Atención</p>
-                    <p class="sub-title-mb">¿Desea eliminar la sucursal?</p>
+                <div class="modal-body">
+                    <div class="d-modal-cliente">
+                        <p class="t1">Selecciona la sucursal de la que deseas copiar el inventario. </p>
+                        <div class="form-group">
+                            <div class="floating-label-group">
+                                <label class="label-select">Sucursal de origen</label>
+                                <select id="sucursal" class="form-control input-form-underline">
+                                    <option value="9" hidden>Seleccionar sucursal.</option>
+                                    <?php
+                                    foreach ($suc as $valor) {
+                                    ?>
+                                        <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?>. <?php echo $valor->estado; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <p class="t1">Selecciona el producto y la cantidad que deseas transferir.</p>
+                        <div class="form-group">
+                            <div class="floating-label-group">
+                                <label class="label-select">Nombre del producto.</label>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <select id="sucursal" class="form-control input-form-underline">
+                                            <option value="9" hidden>Producto.</option>
+                                            <?php
+                                            foreach ($prod as $valor) {
+                                            ?>
+                                                <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?>. <?php echo $valor->estado; ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-30">
+                            <div class="col-lg-6 col-md-6" style="margin: auto;">
+                                <button style="background-color: #49B7F3; color:white;" type="button" class="btn btn-lg-modal btn-cliente-temporal">Copiar</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Copiar-->
+    <div class="modal fade" id="modalClonar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">¿Deseas clonar el inventario? </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-modal-cliente">
+                        <p class="t1">Selecciona la sucursal de la que deseas clonar el inventario.</p>
+                        <div class="form-group">
+                            <div class="floating-label-group">
+                                <label class="label-select">Sucursal de origen</label>
+                                <select id="sucursal" class="form-control input-form-underline">
+                                    <option value="9" hidden>Seleccionar sucursal.</option>
+                                    <?php
+                                    foreach ($suc as $valor) {
+                                    ?>
+                                        <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?>. <?php echo $valor->estado; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-30">
+                            <div class="col-lg-6 col-md-6" style="margin: auto;">
+                                <button style="background-color: #49B7F3; color:white;" type="button" class="btn btn-lg-modal btn-cliente-temporal">Clonar inventario</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+
+
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -167,4 +262,6 @@ $sucursal=R::getAll($query);
         $("input[type='number']").inputSpinner()
     </script>
 
-</body></html>
+</body>
+
+</html>
