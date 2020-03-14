@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    $("#modalIndex").modal("show");
+});
+
 $(function () {
 
     "use strict";
