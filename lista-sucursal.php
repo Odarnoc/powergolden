@@ -95,8 +95,8 @@ $prod = R::find('productos');
                                         <td style="vertical-align: middle"><?php echo $item['estado'] ?></td>
                                         <td style="vertical-align: middle">
                                             <div>
-                                                <a href="" type="button" data-toggle="modal" data-target="#modalCopiar"><i class="fas fa-exchange-alt"></i></a>
-                                                <a href="" type="button" data-toggle="modal" data-target="#modalClonar"><i class="fas fa-clone"></i></a>
+                                                <a href type="button" data-toggle="modal" data-target="#modalCopiar" onclick="selectSucursal('<?php echo $item['id'] ?>')"><i class="fas fa-exchange-alt"></i></a>
+                                                <a href type="button" data-toggle="modal" data-target="#modalClonar" onclick="selectSucursal('<?php echo $item['id'] ?>')"><i class="fas fa-clone"></i></a>
                                                 <a href="inventario-sucursal.php?id=<?php echo $item['id'] ?>"><i class="far fa-eye"></i></a>
                                                 <a href="editar-sucursal.php?id=<?php echo $item['id'] ?>"><i class="far fa-edit"></i></a>
                                             </div>
@@ -112,7 +112,7 @@ $prod = R::find('productos');
 
     </section>
 
-    <!-- Modal Clonar -->
+    <!-- Modal transferir -->
     <div class="modal fade" id="modalCopiar" tabindex="-1" role="dialog" aria-labelledby="modalClonar" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -128,7 +128,7 @@ $prod = R::find('productos');
                         <div class="form-group">
                             <div class="floating-label-group">
                                 <label class="label-select">Sucursal de origen</label>
-                                <select id="sucursal" class="form-control input-form-underline">
+                                <select id="sucursalTranferir" class="form-control input-form-underline">
                                     <option value="9" hidden>Seleccionar sucursal.</option>
                                     <?php
                                     foreach ($suc as $valor) {
@@ -147,7 +147,7 @@ $prod = R::find('productos');
                                 <label class="label-select">Nombre del producto.</label>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <select id="sucursal" class="form-control input-form-underline">
+                                        <select id="productoTranferir" class="form-control input-form-underline">
                                             <option value="9" hidden>Producto.</option>
                                             <?php
                                             foreach ($prod as $valor) {
@@ -159,7 +159,7 @@ $prod = R::find('productos');
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="number">
+                                        <input type="number" value="0" id="cantidadTranferir">
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@ $prod = R::find('productos');
 
                         <div class="row mt-30">
                             <div class="col-lg-6 col-md-6" style="margin: auto;">
-                                <button style="background-color: #49B7F3; color:white;" type="button" class="btn btn-lg-modal btn-cliente-temporal">Copiar</button>
+                                <button style="background-color: #49B7F3; color:white;" type="button" class="btn btn-lg-modal btn-cliente-temporal" onclick="tranferir()">Copiar</button>
                             </div>
                         </div>
 
@@ -180,7 +180,7 @@ $prod = R::find('productos');
         </div>
     </div>
 
-    <!-- Modal Copiar-->
+    <!-- Modal Clonar-->
     <div class="modal fade" id="modalClonar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -196,7 +196,7 @@ $prod = R::find('productos');
                         <div class="form-group">
                             <div class="floating-label-group">
                                 <label class="label-select">Sucursal de origen</label>
-                                <select id="sucursal" class="form-control input-form-underline">
+                                <select id="clonarSuc" class="form-control input-form-underline">
                                     <option value="9" hidden>Seleccionar sucursal.</option>
                                     <?php
                                     foreach ($suc as $valor) {
@@ -211,7 +211,7 @@ $prod = R::find('productos');
 
                         <div class="row mt-30">
                             <div class="col-lg-6 col-md-6" style="margin: auto;">
-                                <button style="background-color: #49B7F3; color:white;" type="button" class="btn btn-lg-modal btn-cliente-temporal">Clonar inventario</button>
+                                <button style="background-color: #49B7F3; color:white;" type="button" class="btn btn-lg-modal btn-cliente-temporal" onclick="clonar()">Clonar inventario</button>
                             </div>
                         </div>
 
@@ -257,6 +257,7 @@ $prod = R::find('productos');
     <script src="js/sweetalert2.js"></script>
 
     <script src="js/sucursal.js"></script>
+    <script src="js/sucursal-actions.js"></script>
 
     <script>
         $("input[type='number']").inputSpinner()

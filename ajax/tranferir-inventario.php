@@ -4,7 +4,7 @@ require '../utils/error.php';
 
 $response['mensaje'] = "Exito al crear usuario.";
 
-if(!isset($_POST['sucursal'])&&!isset($_POST['sucursal_clonar'])){
+if(!isset($_POST['sucursal'])&&!isset($_POST['sucursal_clonar'])&&!isset($_POST['producto'])&&!isset($_POST['cantidad'])){
     error_mensaje("Completar todos los campos.");
     return;
 }
@@ -28,31 +28,29 @@ if(empty($_POST['cantidad'])){
 
     $sucursal = $_POST['sucursal'];
     $sucursal_clonar = $_POST['sucursal_clonar'];
+    $producto = $_POST['producto'];
+    $existencias = $_POST['cantidad'];
 
-    $inventario = R::find( 'inventarios', 'sucursal_id = ?', [ $sucursal_clonar ]);
+    $transfer = R::findOne( 'inventarios', 'sucursal_id = ? && existencia >= ? && producto_id = ?', [ $sucursal_clonar,$existencias,$producto ]);
 
-    foreach ($inventario as $valor) {
-        $producto = $valor->producto_id;
-        $minimo= $valor->limite_inventario;
-        $existencias= $valor->existencia;
+    if(empty($transfer)){
+        error_mensaje("No hay suficientes existencias para la transferencia.");
+    }else{
         $existe = R::findOne( 'inventarios', ' producto_id = ? && sucursal_id = ?', [ $producto, $sucursal ]);
-
         if(empty($existe)){
             $registro = R::dispense('inventarios');
             $registro->sucursal_id = $sucursal;
-            $registro->limite_inventario = $minimo;
+            $registro->limite_inventario = 28;
             $registro->producto_id = $producto;
             $registro->existencia = $existencias;
             $id = R::store($registro);
         }else{
-            $existe->sucursal_id = $sucursal;
-            $existe->limite_inventario = $minimo;
-            $existe->producto_id = $producto;
             $existe->existencia += $existencias;
             $id = R::store($existe);
+            $transfer->existencia -= $existencias;
+            $id = R::store($transfer);
         }
+        echo json_encode($response);
     }
-
-    echo json_encode($response);
     
 ?>
