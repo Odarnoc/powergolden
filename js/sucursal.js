@@ -1,7 +1,7 @@
 var select;
 
-$(document).ready(function() {
-    $("#registrar_suc").click(function(event) {
+$(document).ready(function () {
+    $("#registrar_suc").click(function (event) {
         event.preventDefault();
         registrari();
     });
@@ -21,17 +21,17 @@ function registrari() {
         cp: cp,
         colonia: col,
         munici: mun,
-        estado:est
+        estado: est
 
     }
-    
+
     console.log(datos);
 
     $.ajax({
         url: 'ajax/add-sucursal.php',
         data: datos,
         type: 'POST',
-        success: function(respuesta) {
+        success: function (respuesta) {
             var json_mensaje = JSON.parse(respuesta);
             if (json_mensaje.error != undefined) {
                 Swal.fire({
@@ -41,24 +41,24 @@ function registrari() {
                 });
             } else {
                 console.log(respuesta);
-                setTimeout(function(){
+                setTimeout(function () {
                     location.reload();
                 }, 5000);
                 Swal.fire({
                     icon: 'success',
                     title: 'Éxito',
                     text: json_mensaje.mensaje
-                }) 
-                .then((ok) => {
-                    if (ok) {
-                        location.href="lista-sucursal.php";
-                    }
-                }); 
+                })
+                    .then((ok) => {
+                        if (ok) {
+                            location.href = "lista-sucursal.php";
+                        }
+                    });
             }
-            
+
         },
 
-        error: function(er) {
+        error: function (er) {
 
             var json_mensaje = JSON.parse(er.responseText);
             console.log(json_mensaje);
@@ -67,62 +67,14 @@ function registrari() {
                 icon: 'error',
                 title: 'Oops...',
                 text: json_mensaje.mensaje
-            }); 
+            });
         }
     });
 }
 
 
-function eliminar(id){
-    select = id;
-
-}
-
-
-function confirmar(){
-console.log(select);
-
-$.ajax({
-    url: 'ajax/eliminar-sucursal.php',
-    data: {id_sucursal:select},
-    type: 'POST',
-    success: function(respuesta) {
-        var json_mensaje = JSON.parse(respuesta);
-        console.log(respuesta);
-        setTimeout(function(){
-            location.reload();
-        }, 5000);
-        Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: json_mensaje.mensaje
-        }) 
-        .then((ok) => {
-            if (ok) {
-                location.reload();
-            }
-        });
-    },
-
-    error: function(er) {
-
-        var json_mensaje = JSON.parse(er.responseText);
-        console.log(json_mensaje);
-
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: json_mensaje.mensaje
-        }); 
-    }
-});
-
-
-}
-
-
-$(document).ready(function() {
-    $("#editar_suc").click(function(event) {
+$(document).ready(function () {
+    $("#editar_suc").click(function (event) {
         event.preventDefault();
         registrar();
     });
@@ -138,23 +90,23 @@ function registrar() {
     var idd = $("#id").val();
 
     let datos = {
-        nombre:nom,
+        nombre: nom,
         direccion: dir,
         cp: cp,
         colonia: col,
         munici: mun,
-        estado:est,
-        id:idd
+        estado: est,
+        id: idd
 
     }
-    
+
     console.log(datos);
 
     $.ajax({
         url: 'ajax/editar-sucursal.php',
         data: datos,
         type: 'POST',
-        success: function(respuesta) {
+        success: function (respuesta) {
             var json_mensaje = JSON.parse(respuesta);
             if (json_mensaje.error != undefined) {
                 Swal.fire({
@@ -164,24 +116,24 @@ function registrar() {
                 });
             } else {
                 console.log(respuesta);
-                setTimeout(function(){
+                setTimeout(function () {
                     location.reload();
                 }, 5000);
                 Swal.fire({
                     icon: 'success',
                     title: 'Éxito',
                     text: json_mensaje.mensaje
-                }) 
-                .then((ok) => {
-                    if (ok) {
-                        location.href="lista-sucursal.php";
-                    }
-                }); 
+                })
+                    .then((ok) => {
+                        if (ok) {
+                            location.href = "lista-sucursal.php";
+                        }
+                    });
             }
-            
+
         },
 
-        error: function(er) {
+        error: function (er) {
 
             var json_mensaje = JSON.parse(er.responseText);
             console.log(json_mensaje);
@@ -190,7 +142,60 @@ function registrar() {
                 icon: 'error',
                 title: 'Oops...',
                 text: json_mensaje.mensaje
-            }); 
+            });
         }
     });
 }
+
+var miid;
+function sel(id){
+    miid=id;
+}
+
+function anadir() {
+    $.ajax({
+        url: 'ajax/sumar-sucursal.php',
+        data: {cantidad:$("#cantidad").val(), idd:miid},
+        type: 'POST',
+        success: function (respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                console.log(respuesta);
+                setTimeout(function () {
+                    location.reload();
+                }, 5000);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: json_mensaje.mensaje
+                })
+                    .then((ok) => {
+                        if (ok) {
+                            location.reload();
+                        }
+                    });
+            }
+
+        },
+
+        error: function (er) {
+
+            var json_mensaje = JSON.parse(er.responseText);
+            console.log(json_mensaje);
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: json_mensaje.mensaje
+            });
+        }
+    });
+
+}
+
