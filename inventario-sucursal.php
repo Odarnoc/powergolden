@@ -1,7 +1,7 @@
 <?php
 require 'user_preferences/user-info.php';
 $id=$_GET['id'];
-$query = 'SELECT * FROM  inventarios where sucursal_id = $id';
+$query = 'SELECT p.nombre,i.limite_inventario,i.existencia FROM inventarios as i LEFT JOIN productos as p ON i.producto_id = p.id where i.sucursal_id = '.$id;
 $sucursal=R::getAll($query);
 ?>
 
@@ -67,6 +67,7 @@ $sucursal=R::getAll($query);
                                 </div>
                             </div>
                         </div>
+                        <br>
 
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
@@ -81,13 +82,11 @@ $sucursal=R::getAll($query);
                             <?php foreach ($sucursal as $item) { ?>
                                 <tr>
                                 <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['direccion'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['estado'] ?></td>
+                                <td style="vertical-align: middle"><?php echo $item['limite_inventario'] ?></td>
+                                <td style="vertical-align: middle"><?php echo $item['existencia'] ?></td>
                                 <td style="vertical-align: middle">
                                     <div>
-                                        <a href><i class="fas fa-clone"></i></a>
-                                        <a href="inventario-sucursal.php?id=<?php echo $item['id']?>"><i class="far fa-eye"></i></a>
-                                        <a href="editar-sucursal.php?id=<?php echo $item['id']?>"><i class="far fa-edit"></i></a>
+                                        <a href><i class="fas fa-plus"></i></a>
                                     </div>
                                 </td>
                                 </tr> 

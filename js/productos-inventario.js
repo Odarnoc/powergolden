@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#registrar_but").click(function(event) {
+    $("#but-inventario").click(function(event) {
         event.preventDefault();
         registrar();
     });
@@ -21,7 +21,7 @@ function registrar() {
     console.log(datos);
 
     $.ajax({
-        url: 'ajax/registro-administrador.php',
+        url: 'ajax/productos-inventario.php',
         data: datos,
         type: 'POST',
         success: function(respuesta) {

@@ -132,7 +132,7 @@ $prod = R::find('productos');
                                                         </div>
                                                     </div>
 
-                                                    <button class="btn btn-lg-blue mt-30" id="registrar_but">Aceptar</button>
+                                                    <button class="btn btn-lg-blue mt-30" id="but-inventario">Aceptar</button>
 
                                                 </form>
                                             </div>
@@ -199,6 +199,7 @@ $prod = R::find('productos');
     <script src="js/menu-movil.js"></script>
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
+    <script src="js/productos-inventario.js"></script>
 
 
 </body>
