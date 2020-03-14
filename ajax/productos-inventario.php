@@ -34,16 +34,58 @@ if(empty($_POST['existencias'])){
     $minimo = $_POST['minimo'];
     $existencias = $_POST['existencias'];
 
+    if($sucursal == -2){
+        $suc = R::find('sucursales');
+        foreach ($suc as $valor) {
+            $sucursal = $valor->id;
+            $existe = R::findOne( 'inventarios', ' producto_id = ? && sucursal_id = ?', [ $producto, $sucursal ]);
 
-    $registro = R::dispense('inventarios');
-    $registro->sucursal_id = $sucursal;
-    $registro->limite_inventario = $minimo;
-    $registro->producto_id = $producto;
-    $registro->existencia = $existencias;
-    $id = R::store($registro);
-    if(empty($id)){
-        error_mensaje("Error al crear el usuario.");
-    }else{
+            if(empty($existe)){
+                $registro = R::dispense('inventarios');
+                $registro->sucursal_id = $sucursal;
+                $registro->limite_inventario = $minimo;
+                $registro->producto_id = $producto;
+                $registro->existencia = $existencias;
+                $id = R::store($registro);
+            }else{
+                $existe->sucursal_id = $sucursal;
+                $existe->limite_inventario = $minimo;
+                $existe->producto_id = $producto;
+                $existe->existencia += $existencias;
+                $id = R::store($existe);
+            }
+        }
         echo json_encode($response);
+    }else{
+        $existe = R::findOne( 'inventarios', ' producto_id = ? && sucursal_id = ?', [ $producto, $sucursal ]);
+
+        if(empty($existe)){
+            $registro = R::dispense('inventarios');
+            $registro->sucursal_id = $sucursal;
+            $registro->limite_inventario = $minimo;
+            $registro->producto_id = $producto;
+            $registro->existencia = $existencias;
+            $id = R::store($registro);
+            if(empty($id)){
+                error_mensaje("Error al crear el usuario.");
+            }else{
+                echo json_encode($response);
+            }
+        }else{
+            $existe->sucursal_id = $sucursal;
+            $existe->limite_inventario = $minimo;
+            $existe->producto_id = $producto;
+            $existe->existencia += $existencias;
+            $id = R::store($existe);
+            if(empty($id)){
+                error_mensaje("Error al crear el usuario.");
+            }else{
+                echo json_encode($response);
+            }
+        }
     }
+    
+
+
+    
 ?>
