@@ -35,14 +35,15 @@ $sucursal = R::getAll($query);
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 
     <style>
-        input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
-        
+
         input[type="number"] {
             -moz-appearance: textfield;
-            text-align: center; 
+            text-align: center;
             padding: 19px;
         }
     </style>
@@ -103,7 +104,7 @@ $sucursal = R::getAll($query);
                                         <td style="vertical-align: middle"><?php echo $item['usd'] ?></td>
                                         <td style="vertical-align: middle">
                                             <div>
-                                                <a href type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalprueba"><i class="fas fa-dollar-sign"></i></a>
+                                                <a href type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalPrecio"><i class="fas fa-dollar-sign"></i></a>
                                                 <a href type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalAgregar"><i class="fas fa-plus"></i></a>
                                             </div>
                                         </td>
@@ -137,7 +138,7 @@ $sucursal = R::getAll($query);
                                 <div class="input-group-prepend">
                                     <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
                                 </div>
-                                    <input type="number" id="cantidad"  class="form-control form-control-sm" value="1" min="1">
+                                <input type="number" id="cantidad" class="form-control form-control-sm" value="1" min="1">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
                                 </div>
@@ -157,10 +158,10 @@ $sucursal = R::getAll($query);
                 </div>
             </div>
         </div>
-
+    </div>
 
         <!-- Modal Copiar-->
-    <div class="modal fade" id="modalprueba" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="modalPrecio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -177,7 +178,7 @@ $sucursal = R::getAll($query);
                                 <div class="input-group-prepend">
                                     <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
                                 </div>
-                                    <input type="number" id="cantidad"  class="form-control form-control-sm" value="1" min="1">
+                                <input type="number" id="cantidad" class="form-control form-control-sm" value="1" min="1">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
                                 </div>
@@ -197,51 +198,52 @@ $sucursal = R::getAll($query);
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <!-- Footer-->
-        <?php include("menus/footer_general.php"); ?>
-        <!-- End Footer -->
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
 
-        <!-- jQuery -->
-        <script src="js/jquery-3.0.0.min.js"></script>
-        <script src="js/jquery-migrate-3.0.0.min.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/jquery-migrate-3.0.0.min.js"></script>
 
-        <!-- popper.min -->
-        <script src="js/popper.min.js"></script>
+    <!-- popper.min -->
+    <script src="js/popper.min.js"></script>
 
-        <!-- bootstrap -->
-        <script src="js/bootstrap.min.js"></script>
+    <!-- bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
 
-        <!-- scrollIt -->
-        <script src="js/scrollIt.min.js"></script>
+    <!-- scrollIt -->
+    <script src="js/scrollIt.min.js"></script>
 
-        <!-- custom scripts -->
-        <script src="js/main-perfil.js"></script>
+    <!-- custom scripts -->
+    <script src="js/main-perfil.js"></script>
 
-        <script src="js/scripts.js"></script>
-        <!-- responseive menu -->
-        <script src="js/menu-movil.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- responseive menu -->
+    <script src="js/menu-movil.js"></script>
 
-        <!-- sweetalert scripts -->
-        <script src="js/sweetalert2.js"></script>
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
 
-        <script src="js/sucursal.js"></script>
+    <script src="js/sucursal.js"></script>
 
-        <script>
-        $(document).ready(function(){
-        $('#plus-btn').click(function(){
-            $('#cantidad').val(parseInt($('#cantidad').val()) + 1 );
-                });
-            $('#minus-btn').click(function(){
-            $('#cantidad').val(parseInt($('#cantidad').val()) - 1 );
-            if ($('#cantidad').val() == 0) {
-                $('#cantidad').val(1);
-            }
+    <script>
+        $(document).ready(function() {
+            $('#plus-btn').click(function() {
+                $('#cantidad').val(parseInt($('#cantidad').val()) + 1);
+            });
+            $('#minus-btn').click(function() {
+                $('#cantidad').val(parseInt($('#cantidad').val()) - 1);
+                if ($('#cantidad').val() == 0) {
+                    $('#cantidad').val(1);
+                }
             });
         });
-        </script>
+    </script>
 
 </body>
 
