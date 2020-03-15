@@ -39,6 +39,19 @@ $prod = R::find('productos');
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 
+    <style>
+        input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        
+        input[type="number"] {
+            -moz-appearance: textfield;
+            text-align: center; 
+            padding: 19px;
+        }
+    </style>
+
 
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
@@ -159,7 +172,15 @@ $prod = R::find('productos');
                                         </select>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="number" value="0" id="cantidadTranferir">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
+                                            </div>
+                                                <input type="number" id="cantidad"  class="form-control form-control-sm" value="1" min="1">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +270,6 @@ $prod = R::find('productos');
     <script src="js/main-perfil.js"></script>
 
     <script src="js/scripts.js"></script>
-    <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
 
@@ -260,7 +280,17 @@ $prod = R::find('productos');
     <script src="js/sucursal-actions.js"></script>
 
     <script>
-        $("input[type='number']").inputSpinner()
+    $(document).ready(function(){
+    $('#plus-btn').click(function(){
+        $('#cantidad').val(parseInt($('#cantidad').val()) + 1 );
+            });
+        $('#minus-btn').click(function(){
+        $('#cantidad').val(parseInt($('#cantidad').val()) - 1 );
+        if ($('#cantidad').val() == 0) {
+            $('#cantidad').val(1);
+        }
+        });
+    });
     </script>
 
 </body>

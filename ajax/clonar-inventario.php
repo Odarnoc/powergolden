@@ -2,7 +2,7 @@
 require '../bd/conexion.php';
 require '../utils/error.php';
 
-$response['mensaje'] = "Exito al crear usuario.";
+$response['mensaje'] = "Exito clonar inventario.";
 
 if(!isset($_POST['sucursal'])&&!isset($_POST['sucursal_clonar'])){
     error_mensaje("Completar todos los campos.");

@@ -2,7 +2,7 @@
 require '../bd/conexion.php';
 require '../utils/error.php';
 
-$response['mensaje'] = "Exito al crear usuario.";
+$response['mensaje'] = "Exito al crear inventario.";
 
 if(!isset($_POST['producto'])&&!isset($_POST['sucursal'])&&!isset($_POST['minimo'])&&!isset($_POST['existencias'])){
     error_mensaje("Completar todos los campos.");
@@ -10,22 +10,22 @@ if(!isset($_POST['producto'])&&!isset($_POST['sucursal'])&&!isset($_POST['minimo
 }
 
 if(empty($_POST['producto'])){
-    error_mensaje('Llenar el campo nombre.');
+    error_mensaje('Llenar el producto.');
     return;
 }
 
 if(empty($_POST['sucursal'])){
-    error_mensaje('Llenar el campo apellido.');
+    error_mensaje('Llenar el campo sucursal.');
     return;
 }
 
 if(empty($_POST['minimo'])){
-    error_mensaje('Llenar el campo teléfono.');
+    error_mensaje('Llenar el campo mínimo.');
     return;
 }
 
 if(empty($_POST['existencias'])){
-    error_mensaje('Llenar el campo correo.');
+    error_mensaje('Llenar el campo existencias.');
     return;
 }
 

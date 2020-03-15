@@ -1,7 +1,7 @@
 <?php
 require 'user_preferences/user-info.php';
 $id = $_GET['id'];
-$query = 'SELECT p.nombre,i.id,i.limite_inventario,i.existencia FROM inventarios as i LEFT JOIN productos as p ON i.producto_id = p.id where i.sucursal_id = ' . $id;
+$query = 'SELECT p.nombre,i.id,i.limite_inventario,i.existencia, IF(i.precio_mxn=0,p.precio_mxn,i.precio_mxn) as mxn, IF(i.precio_usd=0,p.precio_usd,i.precio_usd) as usd FROM inventarios as i LEFT JOIN productos as p ON i.producto_id = p.id where i.sucursal_id = ' . $id;
 $sucursal = R::getAll($query);
 ?>
 
@@ -33,6 +33,19 @@ $sucursal = R::getAll($query);
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+
+    <style>
+        input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        
+        input[type="number"] {
+            -moz-appearance: textfield;
+            text-align: center; 
+            padding: 19px;
+        }
+    </style>
 
 
 
@@ -75,6 +88,8 @@ $sucursal = R::getAll($query);
                                     <th scope="col">Producto</th>
                                     <th scope="col">Cantidad mínima</th>
                                     <th scope="col">Existencias</th>
+                                    <th scope="col">Precio MXN</th>
+                                    <th scope="col">Precio USD</th>
                                     <th scope="col">Acción</th>
                                 </tr>
                             </thead>
@@ -84,9 +99,12 @@ $sucursal = R::getAll($query);
                                         <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
                                         <td style="vertical-align: middle"><?php echo $item['limite_inventario'] ?></td>
                                         <td style="vertical-align: middle"><?php echo $item['existencia'] ?></td>
+                                        <td style="vertical-align: middle"><?php echo $item['mxn'] ?></td>
+                                        <td style="vertical-align: middle"><?php echo $item['usd'] ?></td>
                                         <td style="vertical-align: middle">
                                             <div>
-                                                <a href="" type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalAgregar"><i class="fas fa-plus"></i></a>
+                                                <a href type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalprueba"><i class="fas fa-dollar-sign"></i></a>
+                                                <a href type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalAgregar"><i class="fas fa-plus"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -115,8 +133,54 @@ $sucursal = R::getAll($query);
                     <div class="d-modal-cliente">
                         <p class="t1">Ingresa la cantidad de existencias deseas agregar.</p>
                         <div class="form-group">
-                            <div class="floating-label-group" style="width: 50%; margin: auto;">
-                                    <input type="number" id="cantidad">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
+                                </div>
+                                    <input type="number" id="cantidad"  class="form-control form-control-sm" value="1" min="1">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row mt-30">
+                                <div class="col-lg-6 col-md-6" style="margin: auto;">
+                                    <button style="background-color: #49B7F3; color:white;" onclick="anadir()" type="button" class="btn btn-lg-modal btn-cliente-temporal">Agregar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal Copiar-->
+    <div class="modal fade" id="modalprueba" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">¿Cuantas existencias deseas agregar al inventario. ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-modal-cliente">
+                        <p class="t1">Ingresa la cantidad de existencias deseas agregar.</p>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
+                                </div>
+                                    <input type="number" id="cantidad"  class="form-control form-control-sm" value="1" min="1">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+                                </div>
                             </div>
 
                             <div class="row mt-30">
@@ -157,7 +221,6 @@ $sucursal = R::getAll($query);
         <script src="js/main-perfil.js"></script>
 
         <script src="js/scripts.js"></script>
-        <script src="js/bootstrap-input-spinner.js"></script>
         <!-- responseive menu -->
         <script src="js/menu-movil.js"></script>
 
@@ -167,7 +230,17 @@ $sucursal = R::getAll($query);
         <script src="js/sucursal.js"></script>
 
         <script>
-            $("input[type='number']").inputSpinner()
+        $(document).ready(function(){
+        $('#plus-btn').click(function(){
+            $('#cantidad').val(parseInt($('#cantidad').val()) + 1 );
+                });
+            $('#minus-btn').click(function(){
+            $('#cantidad').val(parseInt($('#cantidad').val()) - 1 );
+            if ($('#cantidad').val() == 0) {
+                $('#cantidad').val(1);
+            }
+            });
+        });
         </script>
 
 </body>

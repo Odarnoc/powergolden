@@ -2,7 +2,7 @@
 require '../bd/conexion.php';
 require '../utils/error.php';
 
-$response['mensaje'] = "Exito al crear usuario.";
+$response['mensaje'] = "Exito al transferir.";
 
 if(!isset($_POST['sucursal'])&&!isset($_POST['sucursal_clonar'])&&!isset($_POST['producto'])&&!isset($_POST['cantidad'])){
     error_mensaje("Completar todos los campos.");
@@ -18,11 +18,11 @@ if(empty($_POST['sucursal_clonar'])){
     return;
 }
 if(empty($_POST['producto'])){
-    error_mensaje('Llenar sucursal a clonar.');
+    error_mensaje('selecciona producto.');
     return;
 }
 if(empty($_POST['cantidad'])){
-    error_mensaje('Llenar sucursal a clonar.');
+    error_mensaje('Llenar la cantidad.');
     return;
 }
 
