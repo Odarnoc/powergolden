@@ -31,6 +31,7 @@
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 	
 
 
@@ -38,7 +39,7 @@
 
 </head>
 
-<body class="bg-gray">
+<body class="bg-gray" id="cuerpo">
 
 	<section class="sec-nav-pos">
 
@@ -50,9 +51,24 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <p class="nav-link mb-0" id="frase"></p>
+                        </li>
+						<li class="nav-item">
+                            <p class="nav-link mb-0"><b>(<span id="meta"></span>)</b> Meta de venta</p>
+                        </li>
+                        <li class="nav-item">
+                            <p class="nav-link mb-0"><b>(<span id="venta"></span>)</b> Prod. Vendidos</p>
+                        </li>
+                        <li class="nav-item">
+                            <p class="nav-link mb-0"><b>(<span id="cantidad"></span>)</b> Prod. en Inventario</p>
+                        </li>
+                    </ul>
+
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
-							<a class="nav-link" href="#"><i class="fas fa-chart-line mr-2"></i>Dashboard</a>
+							<a class="nav-link" href="dashboard.php"><i class="fas fa-chart-line mr-2"></i>Dashboard</a>
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,7 +86,8 @@
 
 		</div>
 	</section>
-
+<input type="hidden" id="user_id" value="<?php $_SESSION["user_id"]?>">
+<input type="hidden" id="sucursal_id" value="<?php $_SESSION["sucursal_id"]?>">
 
 	<section class="sec-body-pos">
 
@@ -134,31 +151,30 @@
 					<select class="form-control input-pos select-venta-pos" id="tipo_venta" onchange="cambio_tipo_venta()">
 							<option hidden value="">Seleccionar tipo de venta</option>
 							<option value="0">Venta General</option>
+							<option value="1">Kits</option>
 						</select>
+						<div class="row" id="row_add_kits" style="display:none;">
+						<div class="col-lg-6 col-md-6 col-6 pr-0">
+						<select class="form-control input-pos mt-3" id="tipo_kit">
+							<option hidden value="">Seleccionar tipo de kit</option>
+						</select>
+
+</div>
+<div class="col-lg-3 col-md-3 col-3">
+								<button type="button" class="btn btn-lg-pos btn-bg-blue mt-3" onclick="agregar_kit()" >Agregar</button>
+							</div>
+							<div class="col-lg-3 col-md-3 col-3">
+								<button type="button" class="btn btn-lg-pos btn-bg-blue mt-3" onclick="quita_kits()" >Control</button>
+							</div>
+							</div>
 
 						<div class="row">
 							<div class="col-lg-8 col-md-8 col-8 pr-0">
 
-								<select id="sector" class="form-control input-pos select-cliente-pos mt-3">
-									<option value="" hidden>Seleccionar cliente</option>
-									<?php
+								<select id="sector" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+									<option value="0">Seleccionar cliente</option>
+									
 
-require 'webserviceapp/conexion.php';
-
-
-$lista = R::find("independientes", "status=0");
-
-$products['list'] = "";
-
-foreach ($lista as $key) {
-	echo '<option value="'.$key['id'].'">'.$key['nombre'].'</option>';
-	$products['arreglo'][$key['id']]=$key;
-}
-
-?>
-<script>
-	var clientes= <?php echo json_encode($products['arreglo']); ?>
-</script>
 								</select>
 							</div>
 							<div class="col-lg-4 col-md-4 col-4">
@@ -349,40 +365,53 @@ foreach ($lista as $key) {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="" class="form-cliente-modal">
+					<form id="add_clients_form" class="form-cliente-modal">
 
 						<div class="form-group">
 							<div class="floating-label-group">
-								<input type="text" class="form-control input-form" required />
+								<input type="text" class="form-control input-form" name="name" required />
 								<label class="floating-label">Nombre</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form" name="paterno" required />
+								<label class="floating-label">Apellido Paterno</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form" name="materno" required />
+								<label class="floating-label">Apellido Materno</label>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="floating-label-group">
-								<input type="text" class="form-control input-form" required />
+								<input type="text" class="form-control input-form" name="email"  required />
 								<label class="floating-label">Correo electrónico</label>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="floating-label-group">
-								<input type="text" class="form-control input-form" required />
+								<input type="text" class="form-control input-form" name="direccion" required />
 								<label class="floating-label">Domicilio</label>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="floating-label-group">
-								<input type="tel" class="form-control input-form" required />
+								<input type="tel" class="form-control input-form" name="phone" required />
 								<label class="floating-label">Teléfono</label>
 							</div>
 						</div>
-					</form>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-aceptar-modal">Guardar</button>
+					<button type="submit" class="btn btn-aceptar-modal">Guardar</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -435,13 +464,13 @@ foreach ($lista as $key) {
 					<p class="p-metodo-pago">Metodo de pago</p>
 
 					<div class="row">
-						<div class="col-lg-4 col-md-4 col-4">
+						<div class="col-lg-4 col-md-4 col-4" style="display:none;">
 							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalTarjeta"><i class="fas fa-credit-card mr-2"></i> Pago con T. Electronica</button>
 						</div>
-						<div class="col-lg-4 col-md-4 col-4">
-							<button type="button" class="btn btn-lg-modal" onclick="card_pay();"><i class="fas fa-coins mr-2"></i> Pago con Tarjeta</button>
+						<div class="col-lg-6 col-md-6 col-6">
+							<button type="button" class="btn btn-lg-modal" onclick="card_pay();"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
 						</div>
-						<div class="col-lg-4 col-md-4 col-4">
+						<div class="col-lg-6 col-md-6 col-6">
 							<button type="button" class="btn btn-lg-modal" onclick="efective_pay();"><i class="fas fa-coins mr-2"></i> Pago en efectivo</button>
 						</div>
 
@@ -532,6 +561,42 @@ foreach ($lista as $key) {
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="modalDeleteKits" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Control de Kits</h5>
+					<button type="button" class="close btn-close-tarjeta" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<p class="p-metodo-pago">Eliminar Kit</p>
+						<div class="form-group">
+							<div class="floating-label-group">
+							<div class="table-responsive table-pos mt-3">
+							<table class="table table-borderless" id="tablakits">
+								<thead>
+									<tr>
+										<th >Kit</th>
+										<th >Precio</th>
+										<th ><i class="fas fa-times"></i></th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+							</div>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-cancelar-modal btn-cancelar-tarjeta" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- jQuery -->
 	<script src="../js/jquery-3.0.0.min.js"></script>
@@ -558,12 +623,16 @@ foreach ($lista as $key) {
 	<script src="js/sweetalert2.all.js"></script>
 	<script src="js/app_main.js"></script>
 	<script src="js/vender.js"></script>
-	<script src="../js/select.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="../js/jquery.easypiechart.min.js"></script>
 
 	<script>
 		$(document).ready(function() {
 			$('.owl-carousel').owlCarousel();
 		});
+		
+
 
 		var owl = $('.owl-carousel');
 
