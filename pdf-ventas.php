@@ -1,13 +1,21 @@
 <?php
 require('PDF/fpdf.php');
-
 require 'user_preferences/user-info.php';
-
-$query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre, u.apellidos AS apellido FROM productosxventas AS pxv 
-LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha BETWEEN "'.$_GET['inicio'].'" and "'.$_GET['fin'].'"';
-
 $finicio;;
 $ffin;
+if(isset($_GET['inicio'])&&isset($_GET['inicio'])){
+    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre, u.apellidos AS apellido FROM productosxventas AS pxv 
+LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha BETWEEN "'.$_GET['inicio'].'" and "'.$_GET['fin'].'"';
+    $finicio=$_GET['inicio'];
+    $ffin=$_GET['fin'];
+}else{
+    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre FROM productosxventas AS pxv 
+    LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha ="'.date('Y-m-d').'"';
+    $finicio=date('Y-m-d');
+    $ffin=date('Y-m-d');
+}
+
+
 
 $productos=R::getAll($query);
 
@@ -16,9 +24,13 @@ class PDF extends FPDF
 // Cabecera de página
 function Header()
 {
-
-    $finicio=$_GET['inicio'];
-    $ffin=$_GET['fin'];
+    if(isset($_GET['inicio'])&&isset($_GET['inicio'])){
+        $finicio=$_GET['inicio'];
+        $ffin=$_GET['fin'];
+    }else{
+        $finicio=date('Y-m-d');
+        $ffin=date('Y-m-d');
+    }
     // Arial bold 15
     $this->SetFont('Arial','B',15);
     // Movernos a la derecha
@@ -57,7 +69,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',18); 
 foreach ($productos as $item) {
-    $pdf->Cell(40,10, $item['fecha'],1,0,'c',0);  
+    $pdf->Cell(40,10, substr($item['fecha'], 0, 10),1,0,'c',0);  
     $pdf->Cell(15,10,utf8_decode($item['venta']),1,0,'c',0); 
     $pdf->Cell(100,10,utf8_decode($item['nombre'].' '.$item['apellido']),1,0,'c',0); 
     $pdf->Cell(25,10,utf8_decode('$'.$item['tottal']),1,1,'c',0);
