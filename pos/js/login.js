@@ -35,7 +35,7 @@ $(document).ready(function(){
 						data.stock_id="admin";
 
 					}
-					window.location.replace("pos.php");
+					window.location.replace("dashboard.php");
 
 				}
 			}
