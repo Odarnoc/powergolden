@@ -199,3 +199,55 @@ function anadir() {
 
 }
 
+function cambiarPrecio() {
+    let data = {
+        usd:$("#newusd").val(),
+        mxn:$("#newmnx").val(),
+        idd:miid
+    }
+    $.ajax({
+        url: 'ajax/cambiar-precio.php',
+        data: data,
+        type: 'POST',
+        success: function (respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                console.log(respuesta);
+                setTimeout(function () {
+                    location.reload();
+                }, 5000);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: json_mensaje.mensaje
+                })
+                    .then((ok) => {
+                        if (ok) {
+                            location.reload();
+                        }
+                    });
+            }
+
+        },
+
+        error: function (er) {
+
+            var json_mensaje = JSON.parse(er.responseText);
+            console.log(json_mensaje);
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: json_mensaje.mensaje
+            });
+        }
+    });
+
+}
+

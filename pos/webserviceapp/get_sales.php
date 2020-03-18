@@ -1,73 +1,53 @@
 <?php
-
-require 'conexion.php';
-
-$url = "application/storage/products/";
-if ($_POST['stock_id'] == 'admin') {
-	$_POST['stock_id'] = "1";
+session_start();
+require ('conexion.php');
+$where="v.sucursal_id=".$_SESSION["sucursal_id"];
+if(isset($_POST['cliente'])&&$_POST['cliente']!="0"&&$_POST['cliente']!=""){
+    if($where!=""){
+        $where.=" AND ";
+    }
+    $where.=" user_id=".$_POST['cliente'];
 }
-$ventas['lista'] = "";
-$ventas['lista_ticket'] = "";
-$ventas['total'] = 0;
-$where = "";
-if ($_POST['product'] != '') {
-	$where = " and p.name like '%" . $_POST['product'] . "%' ";
-
+if(isset($_POST['inicio'])&&$_POST['inicio']!=""){
+    if($where!=""){
+        $where.=" AND ";
+    }
+    $where.=" DATE(v.fecha)>='".$_POST['inicio']."'";
 }
-$lista = R::getAll("SELECT s.total, s.created_at, p.name  as name from sell as s
-	left join operation as o on o.sell_id=s.id
-	left join product as p on p.id=o.product_id
-	where s.operation_type_id=2 and s.box_id is NULL and s.p_id=1 and s.is_draft=0 and
-	o.stock_id = " . $_POST['stock_id'] . $where . "  and s.user_id =" . $_POST['user_id'] . "
-	order by s.created_at desc");
-if ($lista) {
-	foreach ($lista as $key) {
-		$ventas['lista'] .= ' <tr>
-		<td>' . $key['created_at'] . '</td>
-		<td>' . $key['name'] . '</td>
-		<td>$' . number_format($key['total'], 2) . '</td>
-		</tr>';
-		$ventas['total'] += $key['total'];
-	}
+if(isset($_POST['fin'])&&$_POST['fin']!=""){
+    if($where!=""){
+        $where.=" AND ";
+    }
+    $where.=" DATE(v.fecha)<='".$_POST['fin']."'";
 }
-$lista = R::getAll("SELECT count(p.name) as contador, p.name as name from sell as s
-	left join operation as o on o.sell_id=s.id
-	left join product as p on p.id=o.product_id
-	where s.operation_type_id=2 and s.box_id is NULL and s.p_id=1 and s.is_draft=0 and
-	o.stock_id = " . $_POST['stock_id'] . $where . "  and s.user_id =" . $_POST['user_id'] . "
-	group by p.name order by s.created_at desc");
-if ($lista) {
-	foreach ($lista as $key) {
-		if (strlen($key['name']) > 20) {
-			$key['name'] = substr($key['name'], 0, 20);
-
-		} else {
-			for ($i = strlen($key['name']); $i < 20; $i++) {
-				$key['name'] .= ' ';
-			}
-
-		}
-		$ventas['lista_ticket'] .= $key['name'] . '          ' . $key['contador'] . "\n";
-	}
+$auxiliar=R::getAll( "SELECT SUM(total) as ventas from ventas as v 
+WHERE ".$where);
+$ventas['total']=$auxiliar[0]['ventas'];
+$auxiliar=R::getAll( "SELECT v.*,u.nombre as unombre,u.apellidos as uape,m.nombre as mnombre,m.apellidos as mape, s.nombre as sucursal from ventas as v 
+left join usuarios as u on u.id=v.user_id
+left join usuarios as m on m.id=v.salesman_id
+left join sucursales as s on s.id=v.sucursal_id
+WHERE ".$where);
+$ventas['tabla']="";
+if ($auxiliar) {
+	foreach ($auxiliar as $key) {
+        $ventas['tabla'].="<tr>".
+        "<td>".$key['unombre']." ".$key['uape']."</td>".
+        "<td>".$key['fecha']."</td>".
+        "<td>$".number_format($key['total'], 2)."</td>".
+        "<td>".$key['mnombre']." ".$key['mape']."</td>".
+        "<td>".$key['sucursal']."</td>".
+        "</tr>"
+        ;
+    }
 }
-$lista = R::getAll("SELECT count(*) as contador, SUM(importe) as sumatoria from devoluciones
-	where stock_id = " . $_POST['stock_id'] . "  and user_id =" . $_POST['user_id'] . " and cortado=0");
-$ventas['total_dev'] = 0;
-if ($lista) {
-	foreach ($lista as $key) {
-		if (strlen($key['name']) > 20) {
-			$key['name'] = substr($key['name'], 0, 20);
-
-		} else {
-			for ($i = strlen($key['name']); $i < 20; $i++) {
-				$key['name'] .= ' ';
-			}
-
-		}
-		$ventas['lista_ticket'] .= 'Devoluciones        ' . '          ' . $key['contador'] . "\n";
-		$ventas['total_dev'] += $key['sumatoria'];
-	}
+$auxiliar=R::getAll( "SELECT SUM(v.total) as ventas from ventas as v 
+WHERE DATE(v.fecha)=DATE('".date('Y-m-d')."') and v.sucursal_id=".$_SESSION["sucursal_id"]);
+$ventas['hoy']=$auxiliar[0]['ventas'];
+if($ventas['hoy']==null){
+    $ventas['hoy']=0;
 }
+
+
 echo json_encode($ventas);
-
 ?>
