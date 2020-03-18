@@ -51,6 +51,36 @@ and     length(@pv := concat(@pv, ',', id))");
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
 
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.image-upload').attr("style", "background-image: url(" + e.target.result + ");");
+                    $('.image-upload').addClass("overlay-image-upload");
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('.image-upload2').attr("style", "background-image: url(" + e.target.result + ");");
+                    $('.image-upload2').addClass("overlay-image-upload");
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -196,6 +226,9 @@ and     length(@pv := concat(@pv, ',', id))");
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="js/jquery.easypiechart.min.js"></script>
+
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
     <!-- registro scripts -->
     <script src="js/registro-independiente.js"></script>
     
