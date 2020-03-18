@@ -42,6 +42,7 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="registro-sucursal.php">Registrar sucursal</a>
                                             <a class="dropdown-item" href="lista-sucursal.php">Lista sucursales</a>
+                                            <a class="dropdown-item" href="lista-medi.php">Media sucursale</a>
                                         </div>
                                     </div>
                                 </li>

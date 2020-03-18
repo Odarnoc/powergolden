@@ -7,11 +7,16 @@ $querydos = 'SELECT SUM(total) as sumita FROM ventas where fecha = CURRENT_DATE(
 
 $querytres = 'SELECT id FROM visitas where fecha = CURRENT_DATE()';
 
+$querys = 'SELECT * FROM  sucursales Where (id) != 1';
+$sucursal = R::getAll($querys);
+
+$querydoss= 'SELECT SUM(existencia) as existencias FROM inventarios  where sucursal_id != 1';
+
+$producto = R::getAll($querydoss);
+
 $fecha = R::getAll($querydos);
 $usuario = R::getAll($query);
 $visita = R::getAll($querytres);
-
-
 
 ?>
 
@@ -114,7 +119,7 @@ $visita = R::getAll($querytres);
                             <div class="col-lg-6 col-md-6">
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-chart.svg" alt="">
-                                    <p class="t1">2,974</p>
+                                    <p class="t1"><?php echo round($producto[0]['existencias']/count($sucursal))?></p>
                                     <p class="t2">Media</p>
                                 </div>
                             </div>
