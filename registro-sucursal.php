@@ -49,7 +49,7 @@ require 'user_preferences/user-info.php';
 <!-- End Navbar ====
     	======================================= -->
 
-    <section class="sec-gray">
+        <section class="sec-cuenta">
         <div class="container">
             <div class="row">
 
@@ -57,9 +57,10 @@ require 'user_preferences/user-info.php';
                 <?php include("menus/menu_general_admin.php"); ?>
                 <!-- End Admin Menu -->
 
-                <div class="col-lg-8 col-md-8 bg-gray" >
+                <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
-                        <div class="row">
+                        
+                    <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Nueva Sucursal.</p>
@@ -158,6 +159,13 @@ require 'user_preferences/user-info.php';
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <input type="text" id="motivacion" class="form-control input-form-underline" required />
+                                                        <label class="floating-label-underline">Mensaje de motivación</label>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group" style="text-align: right;">
                                                     <button type="button" id="registrar_suc" style="width: 50%" class="btn btn-lg-blue">Guardar</button>
                                                 </div>
@@ -166,7 +174,7 @@ require 'user_preferences/user-info.php';
                                     </div>
                             </div>
                         </div>
-
+                        
                     </div>
                 </div>
             </div>

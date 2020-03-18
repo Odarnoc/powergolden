@@ -14,6 +14,7 @@ function registrari() {
     var col = $("#colo").val();
     var mun = $("#muni").val();
     var est = $("#estado").val();
+    var motivacion = $("#motivacion").val();
 
     let datos = {
         nombre: nom,
@@ -21,7 +22,8 @@ function registrari() {
         cp: cp,
         colonia: col,
         munici: mun,
-        estado: est
+        estado: est,
+        motivacion:motivacion
 
     }
 
@@ -88,6 +90,7 @@ function registrar() {
     var mun = $("#muni").val();
     var est = $("#estado").val();
     var idd = $("#id").val();
+    var motivacion = $("#motivacion").val();
 
     let datos = {
         nombre: nom,
@@ -96,7 +99,8 @@ function registrar() {
         colonia: col,
         munici: mun,
         estado: est,
-        id: idd
+        id: idd,
+        motivacion:motivacion
 
     }
 

@@ -37,12 +37,18 @@ if(empty($_POST['estado'])){
     return;
 }
 
+if(empty($_POST['motivacion'])){
+    error_mensaje('Llenar el campo mensaje de motivación.');
+    return;
+}
+
     $nom = $_POST['nombre'];
     $dir = $_POST['direccion'];
     $cp = $_POST['cp'];
     $col = $_POST['colonia'];
     $mun = $_POST['munici'];
     $est = $_POST['estado'];
+    $motivacion = $_POST['motivacion'];
 
             if(strlen($cp) == 5 ){ 
         
@@ -54,6 +60,7 @@ if(empty($_POST['estado'])){
             $registro->colonia = $col;
             $registro->ciudad = $mun;
             $registro->estado = $est;
+            $registro->frase = $motivacion;
 
 
             $id = R::store($registro);
