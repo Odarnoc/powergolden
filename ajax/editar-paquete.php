@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -74,5 +75,5 @@ if(!file_exists($_FILES['img-producto']['tmp_name']) || !is_uploaded_file($_FILE
             }
             }
 }
-
+include 'registros-administrador.php';
 ?>

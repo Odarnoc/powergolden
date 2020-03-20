@@ -52,5 +52,5 @@ if(empty($_POST['cantidad'])){
         }
         echo json_encode($response);
     }
-    
+    include 'registros-administrador.php';
 ?>

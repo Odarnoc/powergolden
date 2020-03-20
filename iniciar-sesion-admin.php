@@ -55,7 +55,7 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 1) {
                 <div class="form-group">
                   <div class="floating-label-group">
                     <input type="text" class="form-control input-form" required id="email" />
-                    <label class="floating-label">Correo de socio</label>
+                    <label class="floating-label">Codigo de socio</label>
                   </div>
                 </div>
 
