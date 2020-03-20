@@ -1,12 +1,16 @@
 <?php
 
 require ('conexion.php');
-
-R::exec( "insert into ventaspagos (venta_id,tipo_pago,cantidad) values
+if($_POST['referencia']!=null){
+    R::exec( "update  referencias set status=1 where id=".$_POST['referencia']."");
+    $_POST['tipo_pago']="Referencia";
+}
+R::exec( "insert into ventaspagos (venta_id,tipo_pago,cantidad,referencia_id) values
 (
 ". $_POST['venta'].",
 '".$_POST['tipo_pago']."',
-".$_POST['cantidad']."
+".$_POST['cantidad'].",
+".$_POST['referencia']."
 )");
 
 

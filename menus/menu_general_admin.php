@@ -47,6 +47,7 @@
                                 </li>
                                 <li><a href="ventas.php">Ventas</a></li>
                                 <li><a href="facturacion.php">Facturacion</a></li>
+                                <li><a href="referencias.php">Referencias de pago</a></li>
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

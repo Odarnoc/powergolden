@@ -12,12 +12,14 @@ from ventas as v
 WHERE ".$where);
 $ventas['total']=$auxiliar[0]['ventas'];
 $auxiliar=R::getAll( "SELECT SUM(CASE WHEN s.tipo_pago='Efectivo' THEN s.cantidad ELSE 0 END) as efectivo ,SUM(CASE WHEN s.tipo_pago='Tarjeta' THEN s.cantidad ELSE 0 END) as tarjeta
+,SUM(CASE WHEN s.tipo_pago='Referencia' THEN s.cantidad ELSE 0 END) as referencia
 from ventas as v 
 LEFT JOIN ventaspagos as s on s.venta_id=v.id
 WHERE ".$where);
 
 $ventas['efectivo']=$auxiliar[0]['efectivo'];
 $ventas['tarjeta']=$auxiliar[0]['tarjeta'];
+$ventas['referencia']=$auxiliar[0]['referencia'];
 $diferencia=($ventas['efectivo']+$ventas['tarjeta'])-$ventas['total'];
 $ventas['efectivo']-=$diferencia;
 $auxiliar=R::getAll( "SELECT nombre as nombre from sucursales as v 
@@ -41,7 +43,7 @@ if ($auxiliar) {
         ;
     }
 }
-$ventas['tabla'].=$ventas['tabla'];
+//$ventas['tabla'].=$ventas['tabla'];
 
 echo json_encode($ventas);
 
