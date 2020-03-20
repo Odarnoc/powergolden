@@ -95,7 +95,7 @@ $productos=R::getAll($query);
 
                                             <div class="form-group col-lg-4 col-md-4">
                                                 <button type="submit"  style="margin-top: 0rem!important; height: 37px;" class="btn btn-blue mt-2"><i style="color: white" class="fas fa-search"></i></button>
-                                                <a type="button" style="margin-top: 0rem!important; height: 37px;" href="pdf-ventas.php?inicio=<?php echo $_POST['fechauno'] ;  ?>&fin=<?php echo $_POST['fechados'] ;  ?>" target="_blank" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i>Generar reporte</a>
+                                                <a type="button" style="margin-top: 0rem!important; height: 37px;" href="pdf-ventas.php<?php if(isset($_POST['fechauno']) && isset($_POST['fechados'])) {  ?>?inicio=<?php echo $_POST['fechauno'] ;  ?>&fin=<?php echo $_POST['fechados'] ; } ?>" target="_blank" class="btn btn-blue mt-2"><i class="fas fa-arrow-circle-down mr-2"></i>Generar reporte</a>
                                             </div>
 
                                         </div>
@@ -120,7 +120,7 @@ $productos=R::getAll($query);
                                         <tbody>
                                         <?php foreach ($productos as $item) { ?>
                                             <tr>
-                                                <td><?php echo $item['fecha'] ?></td>
+                                                <td><?php echo substr($item['fecha'], 0, 10); ?></td>
                                                 <td><?php echo $item['venta'] ?></td>
                                                 <td><?php echo $item['nombre'] ?></td>
                                                 <td>$<?php echo $item['tottal'] ?><sup>.00</sup></td>
