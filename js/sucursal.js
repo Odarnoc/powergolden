@@ -14,6 +14,7 @@ function registrari() {
     var col = $("#colo").val();
     var mun = $("#muni").val();
     var est = $("#estado").val();
+    var motivacion = $("#motivacion").val();
 
     let datos = {
         nombre: nom,
@@ -21,7 +22,8 @@ function registrari() {
         cp: cp,
         colonia: col,
         munici: mun,
-        estado: est
+        estado: est,
+        motivacion:motivacion
 
     }
 
@@ -88,6 +90,7 @@ function registrar() {
     var mun = $("#muni").val();
     var est = $("#estado").val();
     var idd = $("#id").val();
+    var motivacion = $("#motivacion").val();
 
     let datos = {
         nombre: nom,
@@ -96,7 +99,8 @@ function registrar() {
         colonia: col,
         munici: mun,
         estado: est,
-        id: idd
+        id: idd,
+        motivacion:motivacion
 
     }
 
@@ -156,6 +160,58 @@ function anadir() {
     $.ajax({
         url: 'ajax/sumar-sucursal.php',
         data: {cantidad:$("#cantidad").val(), idd:miid},
+        type: 'POST',
+        success: function (respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                console.log(respuesta);
+                setTimeout(function () {
+                    location.reload();
+                }, 5000);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: json_mensaje.mensaje
+                })
+                    .then((ok) => {
+                        if (ok) {
+                            location.reload();
+                        }
+                    });
+            }
+
+        },
+
+        error: function (er) {
+
+            var json_mensaje = JSON.parse(er.responseText);
+            console.log(json_mensaje);
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: json_mensaje.mensaje
+            });
+        }
+    });
+
+}
+
+function cambiarPrecio() {
+    let data = {
+        usd:$("#newusd").val(),
+        mxn:$("#newmnx").val(),
+        idd:miid
+    }
+    $.ajax({
+        url: 'ajax/cambiar-precio.php',
+        data: data,
         type: 'POST',
         success: function (respuesta) {
             var json_mensaje = JSON.parse(respuesta);

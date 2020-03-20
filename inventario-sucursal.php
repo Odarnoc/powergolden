@@ -160,33 +160,34 @@ $sucursal = R::getAll($query);
         </div>
     </div>
 
-        <!-- Modal Copiar-->
+        <!-- Modal precio-->
         <div class="modal fade" id="modalPrecio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">¿Cuantas existencias deseas agregar al inventario. ?</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">¿Deseas cambiar los precios?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="d-modal-cliente">
-                        <p class="t1">Ingresa la cantidad de existencias deseas agregar.</p>
+                        <p class="t1">Ingresa los nuevos precios para el producto.</p>
+                        <br>
                         <div class="form-group">
+                            <p class="t2">Precio MXN</p>
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
-                                </div>
-                                <input type="number" id="cantidad" class="form-control form-control-sm" value="1" min="1">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
-                                </div>
+                                <input style="text-align:left" type="number" id="newmnx" class="form-control form-control-sm" value="1" min="1">
+                            </div>
+
+                            <p class="t2">Precio USD</p>
+                            <div class="input-group mb-3">
+                                <input style="text-align:left" type="number" id="newusd" class="form-control form-control-sm" value="1" min="1">
                             </div>
 
                             <div class="row mt-30">
                                 <div class="col-lg-6 col-md-6" style="margin: auto;">
-                                    <button style="background-color: #49B7F3; color:white;" onclick="anadir()" type="button" class="btn btn-lg-modal btn-cliente-temporal">Agregar</button>
+                                    <button style="background-color: #49B7F3; color:white;" onclick="cambiarPrecio()" type="button" class="btn btn-lg-modal btn-cliente-temporal">Agregar</button>
                                 </div>
                             </div>
 
@@ -240,6 +241,26 @@ $sucursal = R::getAll($query);
                 $('#cantidad').val(parseInt($('#cantidad').val()) - 1);
                 if ($('#cantidad').val() == 0) {
                     $('#cantidad').val(1);
+                }
+            });
+
+            $('#plus-btn-mxn').click(function() {
+                $('#newmnx').val(parseInt($('#newmnx').val()) + 1);
+            });
+            $('#minus-btn-mxn').click(function() {
+                $('#newmnx').val(parseInt($('#newmnx').val()) - 1);
+                if ($('#newmnx').val() == 0) {
+                    $('#newmnx').val(1);
+                }
+            });
+
+            $('#plus-btn-usd').click(function() {
+                $('#newmnx').val(parseInt($('#newusd').val()) + 1);
+            });
+            $('#minus-btn-usd').click(function() {
+                $('#newmnx').val(parseInt($('#newusd').val()) - 1);
+                if ($('#newmnx').val() == 0) {
+                    $('#newmnx').val(1);
                 }
             });
         });

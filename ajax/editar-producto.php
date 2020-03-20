@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 	require '../bd/conexion.php';
 
@@ -112,5 +113,5 @@
 		echo "OK eliminado".$id;
 
 	}
-
+	include 'registros-administrador.php';
 ?>

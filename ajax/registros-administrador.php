@@ -9,7 +9,7 @@ $url= $_SERVER["REQUEST_URI"];
     $registro->ip = $_SERVER['REMOTE_ADDR'];
     $registro->mac = $MAC;
     $registro->fecha = date('d-m-y H:i');;
-    $registro->iduser = $_POST['id'];
+    $registro->iduser = $_SESSION["user_id"];
     $registro->pagina = $url;
 
     R::store($registro);

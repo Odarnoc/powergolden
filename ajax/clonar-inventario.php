@@ -46,5 +46,5 @@ if(empty($_POST['sucursal_clonar'])){
     }
 
     echo json_encode($response);
-    
+    include 'registros-administrador.php';
 ?>

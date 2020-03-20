@@ -176,7 +176,7 @@ $prod = R::find('productos');
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-dark btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
                                             </div>
-                                                <input type="number" id="cantidad"  class="form-control form-control-sm" value="1" min="1">
+                                                <input type="number" id="cantidadTranferir"  class="form-control form-control-sm" value="1" min="1">
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-dark btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
                                             </div>

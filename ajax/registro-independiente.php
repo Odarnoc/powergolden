@@ -145,3 +145,5 @@ if (sizeof($registros_in) == 0) {
 } else {
     error_mensaje("El correo ya esta registrado.");
 }
+include 'registros-administrador.php';
+?>

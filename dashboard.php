@@ -7,11 +7,16 @@ $querydos = 'SELECT SUM(total) as sumita FROM ventas where fecha = CURRENT_DATE(
 
 $querytres = 'SELECT id FROM visitas where fecha = CURRENT_DATE()';
 
+$querys = 'SELECT * FROM  sucursales Where (id) != 1';
+$sucursal = R::getAll($querys);
+
+$querydoss= 'SELECT SUM(existencia) as existencias FROM inventarios  where sucursal_id != 1';
+
+$producto = R::getAll($querydoss);
+
 $fecha = R::getAll($querydos);
 $usuario = R::getAll($query);
 $visita = R::getAll($querytres);
-
-
 
 ?>
 
@@ -114,8 +119,17 @@ $visita = R::getAll($querytres);
                             <div class="col-lg-6 col-md-6">
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-chart.svg" alt="">
-                                    <p class="t1">2,974</p>
-                                    <p class="t2">Media</p>
+                                    <p class="t1">
+                                    	<?php
+                                    		if($producto[0]['existencias'] !=0 ){
+                                    			echo round($producto[0]['existencias']/count($sucursal));
+                                    		}else{
+                                    			echo 0;
+                                    		}
+                                    		
+                                    	?>
+                                    </p>
+                                    <p class="t2">Media de productos</p>
                                 </div>
                             </div>
 
@@ -130,14 +144,14 @@ $visita = R::getAll($querytres);
                             </div>
                         </div>
 
-                        <div class="row mt-40">
+                        <!--<div class="row mt-40">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-grafica-ventas">
                                     <p class="t1">Gráfica de media</p>
                                     <canvas style="max-height: 400px;" id="myChartMedia"></canvas>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
