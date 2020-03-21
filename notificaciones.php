@@ -1,9 +1,9 @@
 <?php
-    require 'user_preferences/user-info.php';
+require 'user_preferences/user-info.php';
 
-    /*require 'bd/conexion.php';*/ //No se si es necesario //La imagen no se borra al subir el producto
-    
-    $productos = R::find('productos');
+/*require 'bd/conexion.php';*/ //No se si es necesario //La imagen no se borra al subir el producto
+
+$productos = R::find('productos');
 ?>
 
 <!doctype html>
@@ -29,39 +29,27 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
     <!-- responseive menu -->
-  <link rel="stylesheet" href="css/menu-movil.css">
+    <link rel="stylesheet" href="css/menu-movil.css">
+
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 
+    <link rel="stylesheet" href="css/emojionearea.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/emojionearea.min.js"></script>
 
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
-
-    <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('.image-upload').attr("style", "background-image: url(" + e.target.result + ");");
-                    $('.image-upload').addClass("overlay-image-upload");
-
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 
 </head>
 
 <body>
 
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -76,6 +64,7 @@
 
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
@@ -83,48 +72,43 @@
                                     <p class="small-text-cuenta">Aqui puedes enviar nuevas notificaciones.</p>
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="row row-form-perfil">
-
                             <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
-
                                 <div class="d-form-registro-productos">
-                                  <form class="form-registro-productos" >
-                                      <div class="form-group">
-                                          <div class="floating-label-group">
-                                              <input id="titulo" required type="text" class="form-control input-form-underline"/>
-                                              <label class="floating-label-underline">Titulo</label>
-                                          </div>
-                                      </div>
-                                      <div class="form-group">
-                                          <div class="floating-label-group">
-                                              <input id="mensaje" required type="text" class="form-control input-form-underline"/>
-                                              <label class="floating-label-underline">Mensaje</label>
-                                          </div>
-                                      </div>
-                                      <button  type="button" data-toggle="modal" data-target="#exampleModalCenter" onclick="enviar()" class="btn btn-lg-blue mt-3">Enviar</button>
-                                  </form>
+                                    <form class="form-registro-productos">
+                                        <div class="form-group">
+                                            <div >
+                                            <label >Titulo</label>
+                                                <input id="titulo" required type="text" data-toggle="modal" data-target="#modalTitulo" class="form-control input-form-underline" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div >
+                                            <label >Mensaje</label>
+                                                <textarea id="mensaje" required type="text" data-toggle="modal" data-target="#modalMensaje" class="form-control input-form-underline"> </textarea>
+                                            </div>
+                                        </div>
+                                        <button type="button" data-toggle="modal" data-target="#exampleModalCenter" onclick="enviar()" class="btn btn-lg-blue mt-3">Enviar</button>
+                                    </form>
                                 </div>
                             </div>
-
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
 
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
-                    <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,16 +125,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar-modal" onclick="final()" >Aceptar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="final()">Aceptar</button>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <!-- jQuery -->
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/jquery-migrate-3.0.0.min.js"></script>
 
     <!-- popper.min -->
     <script src="js/popper.min.js"></script>
@@ -173,8 +152,21 @@
 
     <script src="js/push.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            $("#titulo").emojioneArea({
+                pickerPosition: "bottom"
+            });
+        });
+        $(document).ready(function() {
+            $("#mensaje").emojioneArea({
+                pickerPosition: "bottom"
+            });
+        });
+    </script>
 
 
+</body>
 
 
-</body></html>
+</html>
