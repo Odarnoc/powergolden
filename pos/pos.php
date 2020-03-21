@@ -285,6 +285,10 @@
 								<p class="t1" >Cliente: <b id="nombre_cliente">Brayam Morando</b></p>
 								<p class="t1" >Teléfono cliente: <b id="telefono_cliente">33 2269 2108</b></p>
 							</div>
+							<div id="referencia_ticket">
+								<p class="t1" >Referencia: <b id="referencia_cliente">Brayam Morando</b></p>
+							</div>
+
                         </div>
 
                         <div class="d-table-ticket">
@@ -464,13 +468,13 @@
 					<p class="p-metodo-pago">Metodo de pago</p>
 
 					<div class="row">
-						<div class="col-lg-4 col-md-4 col-4" style="display:none;">
-							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalTarjeta"><i class="fas fa-credit-card mr-2"></i> Pago con T. Electronica</button>
+						<div class="col-lg-4 col-md-4 col-4" >
+							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalGenerarReferencia"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
 						</div>
-						<div class="col-lg-6 col-md-6 col-6">
+						<div class="col-lg-4 col-md-4 col-4">
 							<button type="button" class="btn btn-lg-modal" onclick="card_pay();"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
 						</div>
-						<div class="col-lg-6 col-md-6 col-6">
+						<div class="col-lg-4 col-md-4 col-4">
 							<button type="button" class="btn btn-lg-modal" onclick="efective_pay();"><i class="fas fa-coins mr-2"></i> Pago en efectivo</button>
 						</div>
 
@@ -492,6 +496,29 @@
 	</div>
 
 	<!-- Modal Metodo de pago -->
+	<div class="modal fade" id="modalGenerarReferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Referencia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body pt-5 pb-5">
+                <form id="payment_reference">
+                
+                    
+                    <input type="text" id="n_referencia" style="margin-top:15px;"class="form-control input-pos" placeholder="Referencia" required>
+                    
+                    <button type="submit" class="btn btn-lg-blue mt-4" >Validar referencia de pago</button>
+                            </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 	<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
