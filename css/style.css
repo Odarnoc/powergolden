@@ -2734,6 +2734,19 @@ right connector from last child*/
     margin-bottom: 20px;
 }
 
+.item-product-list.disabled > img{
+    filter: grayscale(100%);
+    opacity: .8;
+}
+
+.item-product-list.disabled .t1{
+    color: rgba(0,0,0,.4);
+}
+
+.item-product-list.disabled .t2{
+    color: rgba(0,0,0,.4);
+}
+
 .item-product-list {
     background-color: #FFFFFF;
     border-radius: 5px;

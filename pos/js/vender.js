@@ -898,6 +898,7 @@ function sale() {
   $("#modalPagar").modal("hide");
   $("#sector").val("0");
   get_data_chart();
+  get_products_list();
   cleanSale();
 }
 

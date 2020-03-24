@@ -46,11 +46,11 @@ foreach ($lista as $key) {
 	$clase="";
 	$posible="1";
 	if($key['has_inventary']==0){
-		$clase="disable";
+		$clase="disabled";
 		$posible=0;
 	}
-	$products['list'] .= '<div class="col-lg-3 col-md-3 d-items-product-list '.$clase.'" onclick="agregarProducto(\'' . $key['nombre'] . '\',\'' . $key['precio'] . '\',\'' . $key['id'] . '\','.$posible.')">
-	<div class="item-product-list">
+	$products['list'] .= '<div class="col-lg-3 col-md-3 d-items-product-list " onclick="agregarProducto(\'' . $key['nombre'] . '\',\'' . $key['precio'] . '\',\'' . $key['id'] . '\','.$posible.')">
+	<div class="item-product-list '.$clase.'">
 		<img src="https://powergolden.com.mx/productos_img/'.$key['imagen'].'" alt="">
 		<p class="t1">'.$key['nombre'].'</p>
 		<p class="t2 two-lines">'.$key['descripcion'].'</p>
