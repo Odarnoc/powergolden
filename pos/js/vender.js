@@ -9,6 +9,7 @@ var type = 0;
 var descuento = 0;
 var arreglo = [];
 var arreglo2 = [];
+var p_arre=[];
 var paquetes = null;
 var total_a = 0;
 var kits = [];
@@ -63,7 +64,7 @@ function get_data_chart() {
               <span class="percent"></span>\
           </span>\
       </div>\
-      <p class="t1">Ventas</p>\
+      <p class="t1">V/M</p>\
       <p class="t2">' +
             data.hoy +
             "/" +
@@ -98,7 +99,7 @@ function get_data_chart() {
               <span class="percent"></span>\
           </span>\
       </div>\
-      <p class="t1">Inventario</p>\
+      <p class="t1">I/LI</p>\
       <p class="t2">' +
             data.inventario +
             "/" +
@@ -208,6 +209,7 @@ function get_products_list() {
     },
     success: function(data) {
       swal.close();
+      p_arre=data.arreglo;
       $("#rowproductos")
         .empty()
         .append(data.list);
@@ -239,8 +241,9 @@ function cleanSale() {
   cambio_tipo_venta();
   show_total();
 }
-function agregarProducto(name, price_out, id) {
+function agregarProducto(name, price_out, id,posible) {
   ////console.log("Aqui ando");
+  if(posible!=0){
   if (arreglo2[id] != 1) {
     $("#tablacarrito > tbody").append(
       ' <tr id="' +
@@ -288,6 +291,14 @@ function agregarProducto(name, price_out, id) {
       "info"
     );
   }
+}else{
+  swal(
+    "Este producto no cuenta con inventario suficiente.",
+    "",
+    "error"
+  );
+
+}
 }
 $("#input-descuento").change(function() {
   $("#alerta").hide();
@@ -358,12 +369,23 @@ function show_total() {
 }
 function cambiar_cantidad(id, price_out) {
   var anterior = arreglo[id];
+  console.log(p_arre[id].existencia);
+  console.log(parseFloat($("#" + id + "input").val()));
+  if(p_arre[id].existencia>=parseInt($("#" + id + "input").val())){
   arreglo[id] = $("#" + id + "input").val();
   cuenta -= price_out * anterior;
   cantidades =
     parseFloat(cantidades) - parseFloat(anterior) + parseFloat(arreglo[id]);
   cuenta += parseFloat(price_out * arreglo[id]);
   show_total();
+  }else{
+    swal(
+      "Este producto no cuenta con inventario suficiente.",
+      "",
+      "error"
+    );
+    $("#" + id + "input").val(anterior);
+  }
 }
 function eliminar_carrito(elemento, id, price_out) {
   arreglo2[elemento] = 0;

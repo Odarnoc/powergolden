@@ -55,14 +55,20 @@
                         <li class="nav-item">
                             <p class="nav-link mb-0" id="frase"></p>
                         </li>
-						<li class="nav-item">
-                            <p class="nav-link mb-0"><b>(<span id="meta"></span>)</b> Meta de venta</p>
+						<!--<li class="nav-item">
+                            <div id="inv_chart"></div>
                         </li>
                         <li class="nav-item">
                             <p class="nav-link mb-0"><b>(<span id="venta"></span>)</b> Prod. Vendidos</p>
                         </li>
                         <li class="nav-item">
                             <p class="nav-link mb-0"><b>(<span id="cantidad"></span>)</b> Prod. en Inventario</p>
+                        </li>-->
+						<li class="nav-item">
+                            <div id="inv_chart"></div>
+                        </li>
+						<li class="nav-item">
+                            <div id="ventas_chart"></div>
                         </li>
                     </ul>
 
