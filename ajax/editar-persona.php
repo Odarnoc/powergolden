@@ -69,5 +69,6 @@ if($_POST['rol']==2){
         }
     }else{
         error_mensaje("El correo ya esta registrado.");
-    }  
+    } 
+    include 'registros-administrador.php'; 
 ?>

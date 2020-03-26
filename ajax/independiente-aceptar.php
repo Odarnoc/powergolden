@@ -64,7 +64,7 @@ $id = $_POST['id'];
                                                 <div> 
                                                     <h1>PowerGolden le da la bienvenida a nuestro apartado electrónico de compras.</h1>
                                                     <h3>Estimado cliente. Su solicitud ha sido aprobada por uno de nuestro administrador.</h3>
-                                                    <h3>Agrádensenos su interés por nuestra para y nuestros productos.</h3>
+                                                    <h3>Agradecemos su interés en nuestros servicios y productos. </h3>
                                                     <h1>Gracias por su preferencia en los mejores productos de herbolaria.</h1>
                                                 </div>
                                             </center>
@@ -75,8 +75,9 @@ $id = $_POST['id'];
 
                 $mail->send();
             } catch (Exception $e) {
-                echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
+                echo "No se pudo enviar el correo.";
             }
         }
-    
+        include 'registros-administrador.php';
+    ?>
 

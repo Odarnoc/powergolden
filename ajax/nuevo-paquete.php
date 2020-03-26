@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -52,6 +53,6 @@ if(empty($_POST['cantidad'])){
             }
             }
 
-
+            include 'registros-administrador.php';
 
 ?>

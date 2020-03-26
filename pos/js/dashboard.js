@@ -72,7 +72,7 @@ $("#corte_parcial").submit(function(event) {
                 "</b></p>",
               "success"
             );
-            create_ticket(data.nombre,data.total,data.tarjeta,data.efectivo,data.tabla,"De "+$("#hora1").val()+" hasta "+$("#hora2").val());
+            create_ticket(data.nombre,data.total,data.tarjeta,data.efectivo,data.referencia,data.tabla,"De "+$("#hora1").val()+" hasta "+$("#hora2").val());
             $("#modalHoras").modal("hide");
           }
         });
@@ -112,7 +112,7 @@ function corte_diario() {
                 "</b></p>",
               "success"
             );
-            create_ticket(data.nombre,data.total,data.tarjeta,data.efectivo,data.tabla);
+            create_ticket(data.nombre,data.total,data.tarjeta,data.efectivo,data.referencia,data.tabla);
           }
         });
       }
@@ -141,7 +141,7 @@ function get_actual_date() {
   today = dd + "/" + mm + "/" + yyyy;
   return today + " " + time;
 }
-function create_ticket(sucursal,total,tarjeta,efectivo, tabla,horas="") {
+function create_ticket(sucursal,total,tarjeta,efectivo,referencia, tabla,horas="") {
   $("#fecha_ticket")
     .empty()
     .append(get_actual_date());
@@ -165,6 +165,9 @@ function create_ticket(sucursal,total,tarjeta,efectivo, tabla,horas="") {
   $("#efectivo_ticket")
     .empty()
     .append("$" + addCommas(parseFloat(efectivo).toFixed(2)));
+    $("#referencia_ticket")
+    .empty()
+    .append("$" + addCommas(parseFloat(referencia).toFixed(2)));
   $("#tabla_ticket > tbody")
     .empty()
     .append(tabla);

@@ -20,6 +20,12 @@ if($ventas['mes']==null){
 }else{
     $ventas['mes']=intval(($ventas['mes']/50)+2);
 }
+$auxiliar=R::getAll( "SELECT meta as ventas from sucursales as v 
+WHERE id=".$_SESSION["sucursal_id"]);
+$ventas['mes']=$auxiliar[0]['ventas'];
+if($ventas['mes']==null){
+    $ventas['mes']=50;
+}
 $auxiliar=R::getAll( "SELECT SUM(v.existencia) as inventario, SUM(v.limite_inventario) as limite from inventarios as v
 WHERE v.sucursal_id=".$_SESSION["sucursal_id"]);
 

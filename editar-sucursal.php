@@ -124,6 +124,16 @@ $item=R::findOne('sucursales','id ='.$id );
 
                                                 <div class="form-group col-lg-6 col-md-6">
                                                     <div class="floating-label-group">
+                                                        <select autocomplete="false" style="height:60%;" class="form-control" id="pais" name="pais">
+                                                            <option value="mex">México</option>
+                                                            <option value="eua">Estados Unidos</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            
+                                            <div class="form-group col-lg-6 col-md-6">
+                                                    <div class="floating-label-group">
                                                         <select autocomplete="false" style="height:60%;" class="form-control" id="estado" name="estado">
                                                             <option value="Aguascalientes">Aguascalientes</option>
                                                             <option value="Baja California Norte">Baja California Norte</option>
@@ -160,14 +170,21 @@ $item=R::findOne('sucursales','id ='.$id );
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="form-group col-lg-6 col-md-6">
+                                                    <div class="floating-label-group">
+                                                        <input type="number" id="meta" class="form-control input-form-underline"  value="<?php echo $item['meta'] ?>" required />
+                                                        <label class="floating-label-underline">Meta de venta</label>
+                                                    </div>
+                                                </div>
                                             </div>
-
+                                           
                                             <div class="form-group">
                                                 <div class="floating-label-group">
                                                     <input type="text" id="motivacion" class="form-control input-form-underline" required value="<?php echo $item['frase'] ?>" />
                                                     <label class="floating-label-underline">Mensaje de motivación</label>
                                                 </div>
                                             </div>
+                                            
 
                                             <div class="form-group" style="text-align: right;">
                                                 <button type="button" id="editar_suc" style="width: 50%" class="btn btn-lg-blue">Guardar</button>
@@ -220,6 +237,9 @@ $item=R::findOne('sucursales','id ='.$id );
             var temp="<?php echo $item['estado']; ?>"; 
                 console.log(temp);
             $("#estado").val(temp);
+            temp="<?php echo $item['pais']; ?>"; 
+                console.log(temp);
+            $("#pais").val(temp);
         });
     </script>
 

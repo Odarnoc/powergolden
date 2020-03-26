@@ -11,7 +11,6 @@ $querydos = 'SELECT SUM(i.existencia) as existencias, i.producto_id,p.nombre FRO
 
 $producto = R::getAll($querydos);
 
-
 ?>
 
 

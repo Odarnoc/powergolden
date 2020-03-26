@@ -9,6 +9,7 @@ var type = 0;
 var descuento = 0;
 var arreglo = [];
 var arreglo2 = [];
+var p_arre=[];
 var paquetes = null;
 var total_a = 0;
 var kits = [];
@@ -63,7 +64,7 @@ function get_data_chart() {
               <span class="percent"></span>\
           </span>\
       </div>\
-      <p class="t1">Ventas</p>\
+      <p class="t1">V/M</p>\
       <p class="t2">' +
             data.hoy +
             "/" +
@@ -98,7 +99,7 @@ function get_data_chart() {
               <span class="percent"></span>\
           </span>\
       </div>\
-      <p class="t1">Inventario</p>\
+      <p class="t1">I/LI</p>\
       <p class="t2">' +
             data.inventario +
             "/" +
@@ -180,7 +181,9 @@ function get_paquetes_info() {
     beforeSend: function() {},
     success: function(data) {
       paquetes = data.arreglo;
-      $("#frase").empty().append(data.frase);
+      $("#frase")
+        .empty()
+        .append(data.frase);
       console.log(data.arreglo[2]);
       $("#tipo_kit").append(data.list);
     }
@@ -206,6 +209,7 @@ function get_products_list() {
     },
     success: function(data) {
       swal.close();
+      p_arre=data.arreglo;
       $("#rowproductos")
         .empty()
         .append(data.list);
@@ -237,8 +241,9 @@ function cleanSale() {
   cambio_tipo_venta();
   show_total();
 }
-function agregarProducto(name, price_out, id) {
+function agregarProducto(name, price_out, id,posible) {
   ////console.log("Aqui ando");
+  if(posible!=0){
   if (arreglo2[id] != 1) {
     $("#tablacarrito > tbody").append(
       ' <tr id="' +
@@ -286,6 +291,14 @@ function agregarProducto(name, price_out, id) {
       "info"
     );
   }
+}else{
+  swal(
+    "Este producto no cuenta con inventario suficiente.",
+    "",
+    "error"
+  );
+
+}
 }
 $("#input-descuento").change(function() {
   $("#alerta").hide();
@@ -356,12 +369,23 @@ function show_total() {
 }
 function cambiar_cantidad(id, price_out) {
   var anterior = arreglo[id];
+  console.log(p_arre[id].existencia);
+  console.log(parseFloat($("#" + id + "input").val()));
+  if(p_arre[id].existencia>=parseInt($("#" + id + "input").val())){
   arreglo[id] = $("#" + id + "input").val();
   cuenta -= price_out * anterior;
   cantidades =
     parseFloat(cantidades) - parseFloat(anterior) + parseFloat(arreglo[id]);
   cuenta += parseFloat(price_out * arreglo[id]);
   show_total();
+  }else{
+    swal(
+      "Este producto no cuenta con inventario suficiente.",
+      "",
+      "error"
+    );
+    $("#" + id + "input").val(anterior);
+  }
 }
 function eliminar_carrito(elemento, id, price_out) {
   arreglo2[elemento] = 0;
@@ -389,13 +413,22 @@ function get_actual_date() {
   today = dd + "/" + mm + "/" + yyyy;
   return today + " " + time;
 }
-function create_ticket(folio, cliente = null, total, recibido, cambio, tabla) {
+function create_ticket(folio, cliente = null, total, recibido, cambio, tabla,referencia=null) {
   $("#fecha_ticket")
     .empty()
     .append(get_actual_date());
   $("#folio_ticket")
     .empty()
     .append(folio);
+    console.log(referencia);
+    if (referencia == null) {
+      $("#referencia_ticket").hide();
+    } else {
+      $("#referencia_ticket").show();
+      $("#referencia_cliente")
+        .empty()
+        .append(referencia);
+    }
   if (cliente == null) {
     $("#cliente_ticket").hide();
   } else {
@@ -463,6 +496,46 @@ function create_ticket(folio, cliente = null, total, recibido, cambio, tabla) {
     }
   });
 }
+$("#payment_reference").submit(function(event) {
+  event.preventDefault();
+  var cliente = clientes[$("#sector").val()];
+  $.ajax({
+    url: server + "webserviceapp/validate_reference.php",
+    type: "post",
+    data: { referencia: $("#n_referencia").val() },
+    dataType: "json",
+    beforeSend() {
+      swal({
+        title: "Cargando...",
+        showConfirmButton: false,
+        imageUrl: "pos/resources/loader.gif"
+      });
+    },
+    success(data) {
+      console.log(data);
+      if (data.resultado!=0) {
+        swal.close();
+        $("#modalGenerarReferencia").modal("hide");
+        $("#payment_reference")[0].reset();
+        console.log(data.cantidad);
+        check_quantities("Referencia: "+data.referencia, data.cantidad,"",data.id,data.referencia,data.tipo);
+      } else {
+        swal(
+          "<p id='pswalerror'> Error </p>",
+          "<p id='psswalerror'>" + data.mensaje + "</p> ",
+          "error"
+        );
+      }
+    },
+    error(error) {
+      swal(
+        "<p id='pswalerror'> Error </p>",
+        "<p id='psswalerror'>La referencia de pago no ha podido ser procesada. Intente de nuevo, por favor.</p> ",
+        "error"
+      );
+    }
+  });
+});
 function sale_modal() {
   var countrows = $("#tablacarrito tr").length;
   var rows = countrows - 1;
@@ -527,7 +600,7 @@ function sale_modal() {
     }
   }
 }
-function check_quantities(tipo, cantidad_pago, tarjeta = "") {
+function check_quantities(tipo, cantidad_pago, tarjeta = "",referencia_id=null,referencia=null,tipo_referencia=null) {
   total_a += parseFloat(cantidad_pago);
   var auxiliar = $("#totalcarrito").html();
   auxiliar = auxiliar.replace("$", "");
@@ -551,7 +624,7 @@ function check_quantities(tipo, cantidad_pago, tarjeta = "") {
       tarjeta +
       "</td></tr>"
   );
-  pagos.push({'tipo_pago':tipo,'cantidad_pago':cantidad_pago});
+  pagos.push({ tipo_pago: tipo, cantidad_pago: cantidad_pago,referencia_id:referencia_id ,referencia:referencia,tipo_referencia:tipo_referencia  });
 }
 function efective_pay() {
   $("#modalPagar").modal("hide");
@@ -784,7 +857,16 @@ function sale() {
       success() {}
     });
   });
+  var referencias="";
   pagos.forEach(function(element, index) {
+    console.log(element);
+    if(element.referencia_id!=null){
+      if(element.tipo_referencia==1){
+        referencias+="Pago en tienda "+element.referencia;
+      }else{
+        referencias+="Pago en banco "+element.referencia;
+      }
+    }
     $.ajax({
       url: server + "webserviceapp/sale_pagos.php",
       type: "post",
@@ -792,6 +874,7 @@ function sale() {
       data: {
         tipo_pago: element.tipo_pago,
         cantidad: element.cantidad_pago,
+        referencia: element.referencia_id,
         venta: venta_id
       },
       dataType: "html",
@@ -803,7 +886,7 @@ function sale() {
   if (cliente_sel != "") {
     cliente = clientes[cliente_sel];
   }
-  create_ticket(venta_id, cliente, total, total_a, cambio, regreso);
+  create_ticket(venta_id, cliente, total, total_a, cambio,regreso, referencias);
   ticket += "\n";
   swal(
     "<p id='pswal'>Venta realizada</p>",
@@ -815,6 +898,7 @@ function sale() {
   $("#modalPagar").modal("hide");
   $("#sector").val("0");
   get_data_chart();
+  get_products_list();
   cleanSale();
 }
 

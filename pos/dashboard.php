@@ -274,11 +274,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4 col-md-6 col-4 pr-0">
+                                <div class="col-lg-4 col-md-4 col-4 pr-0">
                                     <p class="t1 text-center">Tarjeta: <b id="tarjeta_ticket"></b></p>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-4 pl-0 pr-0">
+                                <div class="col-lg-4 col-md-4 col-4 pl-0 pr-0">
                                     <p class="t1 text-center">Efectivo: <b id="efectivo_ticket"></b></p>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-4 pl-0 pr-0">
+                                    <p class="t1 text-center">Referencia: <b id="referencia_ticket"></b></p>
                                 </div>
                                
                             </div>

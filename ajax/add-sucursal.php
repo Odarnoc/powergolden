@@ -45,6 +45,14 @@ if(empty($_POST['motivacion'])){
     error_mensaje('Llenar el campo mensaje de motivación.');
     return;
 }
+if(empty($_POST['meta'])){
+    error_mensaje('Llenar el campo meta de venta.');
+    return;
+}
+if(empty($_POST['pais'])){
+    error_mensaje('Llenar el campo pais.');
+    return;
+}
 
         $nom = $_POST['nombre'];
         $dir = $_POST['direccion'];
@@ -53,6 +61,8 @@ if(empty($_POST['motivacion'])){
         $mun = $_POST['munici'];
         $est = $_POST['estado'];
         $motivacion = $_POST['motivacion'];
+        $meta = $_POST['meta'];
+        $pais = $_POST['pais'];
     
                 if(strlen($cp) == 5 ){ 
             
@@ -65,7 +75,8 @@ if(empty($_POST['motivacion'])){
                 $registro->ciudad = $mun;
                 $registro->estado = $est;
                 $registro->frase = $motivacion;
-    
+                $registro->meta = $meta;
+                $registro->pais = $pais;
                 $id = R::store($registro);
     
                 if(empty($id)){
@@ -77,9 +88,5 @@ if(empty($_POST['motivacion'])){
             }else{
                 error_mensaje("El codigo postal es incorrecto");
             }
-    
-
-
-
-
+            include 'registros-administrador.php';
 ?>

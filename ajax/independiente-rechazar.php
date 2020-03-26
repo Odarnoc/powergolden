@@ -66,6 +66,6 @@ $correo = $_POST['correo'];
             } catch (Exception $e) {
                 echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
             }
-        
-    
+            include 'registros-administrador.php';
+    ?>
 

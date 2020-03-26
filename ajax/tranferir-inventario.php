@@ -67,6 +67,6 @@ if(empty($_POST['productos'])){
         
     }
     echo json_encode($response);
+    include 'registros-administrador.php';
 
-    
 ?>

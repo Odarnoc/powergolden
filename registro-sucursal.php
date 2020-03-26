@@ -117,7 +117,16 @@ require 'user_preferences/user-info.php';
                                                             <label class="floating-label-underline">Ciudad</label>
                                                         </div>
                                                     </div>
-
+                                                    <div class="form-group col-lg-6 col-md-6">
+                                                    <div class="floating-label-group">
+                                                        <select autocomplete="false" style="height:60%;" class="form-control" id="pais" name="pais">
+                                                            <option select hidden>Pais</option>
+                                                            <option value="mex">México</option>
+                                                            <option value="eua">Estados Unidos</option>
+                                                           
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                     <div class="form-group col-lg-6 col-md-6">
                                                         <div class="floating-label-group">
                                                             <select autocomplete="false" style="height:60%;" class="form-control" id="estado" name="estado" required>
@@ -157,8 +166,17 @@ require 'user_preferences/user-info.php';
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    
+                                                <div class="form-group col-lg-6 col-md-6">
+                                                    <div class="floating-label-group">
+                                                        <input type="number" id="meta" class="form-control input-form-underline" required />
+                                                        <label class="floating-label-underline">Meta de venta</label>
+                                                    </div>
+                                                </div>
                                                 </div>
 
+                                                
+                                                
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
                                                         <input type="text" id="motivacion" class="form-control input-form-underline" required />

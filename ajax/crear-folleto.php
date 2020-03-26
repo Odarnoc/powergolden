@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -43,5 +44,5 @@ if(empty($_POST['description'])){
                 echo json_encode($response);
             }
         }
-
+        include 'registros-administrador.php';
 ?>
