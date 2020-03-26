@@ -32,7 +32,7 @@ $ventas['tabla']="";
 if ($auxiliar) {
 	foreach ($auxiliar as $key) {
         $ventas['tabla'].="<tr>".
-        "<td>".$key['unombre']." ".$key['uape']."</td>".
+        "<td>".$key['user_id']." - ".$key['unombre']." ".$key['uape']."</td>".
         "<td>".$key['fecha']."</td>".
         "<td>$".number_format($key['total'], 2)."</td>".
         "<td>".$key['mnombre']." ".$key['mape']."</td>".
@@ -46,6 +46,24 @@ WHERE DATE(v.fecha)=DATE('".date('Y-m-d')."') and v.sucursal_id=".$_SESSION["suc
 $ventas['hoy']=$auxiliar[0]['ventas'];
 if($ventas['hoy']==null){
     $ventas['hoy']=0;
+}
+$auxiliar=R::getAll( "SELECT SUM(p.cantidad) as cantidad,pro.imagen,pro.nombre from ventas as v 
+left join productosxventas as p on v.id=p.venta_id 
+left join productos as pro on pro.id=p.producto_id 
+WHERE ".$where.
+" group by pro.imagen,pro.nombre
+order by cantidad desc
+limit 1");
+if($auxiliar){
+$ventas['popular']='<div class="col-lg-6 col-md-6 d-items-product-list " >
+<div class="item-product-list ">
+<img src="https://powergolden.com.mx/productos_img/'.$auxiliar[0]['imagen'].'" alt="">
+<p class="t1">'.$auxiliar[0]['nombre'].'</p>
+<p class="t2 ">Producto mas popular con: '.$auxiliar[0]['cantidad'].' Ventas</p>
+</div>
+</div>';
+}else{
+    $ventas['popular']='';
 }
 
 

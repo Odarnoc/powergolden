@@ -7,7 +7,7 @@ $url="application/storage/products/";
 $user = $_POST['username'];
 $pass = $_POST['password'];
 
-$lista=R::find( 'usuarios', "(correo= \"".$user."\")  and rol!=2 and pass= \"".$pass."\"" );
+$lista=R::find( 'usuarios', "(id= ".$user.")  and rol!=2 and pass= \"".$pass."\"" );
 $usuario="false";
 if($lista){
 	foreach ($lista as $key ) {

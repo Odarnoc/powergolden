@@ -4,7 +4,7 @@ require 'conexion.php';
 $ventas['lista'] = "true";
 $where =" v.salesman_id=".$_SESSION["user_id"]." AND  DATE(fecha)=DATE('".date('Y-m-d')."') and sucursal_id=".$_SESSION["sucursal_id"];
 if(isset($_POST['desde'])){
-	$where.= " AND TIME(fecha)>= TIME('".$_POST['desde']."') AND TIME(fecha)<= TIME('".$_POST['hasta']."')";
+	//$where.= " AND TIME(fecha)>= TIME('".$_POST['desde']."') AND TIME(fecha)<= TIME('".$_POST['hasta']."')";
 }
 $auxiliar=R::getAll( "SELECT SUM(total) as ventas from ventas as v 
 WHERE ".$where);
