@@ -32,9 +32,23 @@ $(document).ready(function() {
   );
 });
 function initialize_charts() {
-  $(".chart").easyPieChart({
+  
+  $("#mv").easyPieChart({
     size: 80,
     barColor: "#49B7F3",
+    trackColor: "#F4F4F4",
+    lineWidth: 2,
+    lineCap: "circle",
+    animate: 2000,
+    onStep: function(from, to, percent) {
+      $(this.el)
+        .find(".percent")
+        .text(Math.round(percent));
+    }
+  });
+  $("#ili").easyPieChart({
+    size: 80,
+    barColor: "#CA9F21",
     trackColor: "#F4F4F4",
     lineWidth: 2,
     lineCap: "circle",
@@ -58,7 +72,7 @@ function get_data_chart() {
         .append(
           '<div class="d-item-chart-pie-nav">\
       <div class="d-chart-pie">\
-          <span class="chart" data-percent="' +
+          <span class="chart" id="mv" data-percent="' +
             parseFloat((data.hoy / data.mes) * 100) +
             '">\
               <span class="percent"></span>\
@@ -93,7 +107,7 @@ function get_data_chart() {
         .append(
           '<div class="d-item-chart-pie-nav">\
       <div class="d-chart-pie">\
-          <span class="chart" data-percent="' +
+          <span class="chart" id="ili" data-percent="' +
             porcentaje +
             '">\
               <span class="percent"></span>\
@@ -888,18 +902,24 @@ function sale() {
   }
   create_ticket(venta_id, cliente, total, total_a, cambio,regreso, referencias);
   ticket += "\n";
-  swal(
-    "<p id='pswal'>Venta realizada</p>",
-    "<p id='psswal'> El cambio a entregar es de: <br> <b id='psbswal'>$" +
-      addCommas(cambio) +
-      ".<sup id='supswal'>00</sup></b></p>",
-    "success"
-  );
-  $("#modalPagar").modal("hide");
+  swal({
+    type: "success",
+    title:  "<p id='pswal'>Venta realizada</p>",
+    html:  "<p id='psswal'> El cambio a entregar es de: <br> <b id='psbswal'>$" +
+    addCommas(cambio) +
+    ".<sup id='supswal'>00</sup></b></p>",
+    confirmButtonText: "Aceptar",
+    showCancelButton: false,
+    cancelButtonText: "Cancelar"
+  }).then(result => {
+    $("#modalPagar").modal("hide");
   $("#sector").val("0");
   get_data_chart();
   get_products_list();
   cleanSale();
+  });
+
+  
 }
 
 $(".swal2-input").on("input", function() {
