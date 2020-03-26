@@ -79,10 +79,14 @@ $prod = R::find('productos');
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
                         <div class="row">
-                            <div class="col-lg-12 col-md-12">
+                            <div class="col-lg-8 col-md-8">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Lista de sucursales.</p>
                                 </div>
+                            </div>
+
+                            <div class="form-group col-lg-4 col-md-4" style="text-align: end;">
+                                <a type="button" href="productos-inventarios.php" style="margin-top: 0rem!important; height: 37px;" class="btn btn-blue mt-2"><i class="fas fa-plus mr-2"></i>Agregar producto a inventario</a>
                             </div>
                         </div>
                         <br>
@@ -104,7 +108,11 @@ $prod = R::find('productos');
                                         <td style="vertical-align: middle"><?php echo $item['estado'] ?></td>
                                         <td style="vertical-align: middle">
                                             <div>
-                                                <a href="editar-sucursal.php?id=<?php echo $item['id'] ?>"><i class="far fa-edit"></i></a>
+                                                <?php if($item['id'] != 1) { ?>
+                                                    <a href="traspaso-inventario.php?id=<?php echo $item['id'] ?>" type="button"><i class="fas fa-exchange-alt"></i></a>
+                                                    <a href type="button" data-toggle="modal" data-target="#modalClonar" onclick="selectSucursal('<?php echo $item['id'] ?>')"><i class="fas fa-clone"></i></a>
+                                                <?php } ?>
+                                                <a href="inventario-sucursal.php?id=<?php echo $item['id'] ?>"><i class="far fa-eye"></i></a>
                                             </div>
                                         </td>
                                     </tr>

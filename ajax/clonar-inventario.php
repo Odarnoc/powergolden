@@ -34,13 +34,12 @@ if(empty($_POST['sucursal_clonar'])){
             $registro->sucursal_id = $sucursal;
             $registro->limite_inventario = $minimo;
             $registro->producto_id = $producto;
-            $registro->existencia = $existencias;
+            $registro->existencia = 0;
             $id = R::store($registro);
         }else{
             $existe->sucursal_id = $sucursal;
             $existe->limite_inventario = $minimo;
             $existe->producto_id = $producto;
-            $existe->existencia += $existencias;
             $id = R::store($existe);
         }
     }
