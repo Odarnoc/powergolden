@@ -1,9 +1,8 @@
 <?php
 session_start();
-if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=0){
-    header("Location: oficina-virtual.php");
+if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
+  header("Location: oficina-virtual.php");
 }
-
 
 ?>
 
@@ -54,14 +53,14 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=0){
 
                 <div class="form-group">
                   <div class="floating-label-group">
-                    <input type="text" class="form-control input-form" required id="email"/>
-                    <label class="floating-label">Correo de socio</label>
+                    <input type="text" class="form-control input-form" required id="email" />
+                    <label class="floating-label">Codigo socio</label>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="floating-label-group">
-                    <input type="password" class="form-control input-form" required id="pass"/>
+                    <input type="password" class="form-control input-form" required id="pass" />
                     <label class="floating-label">Contraseña</label>
                   </div>
                 </div>
@@ -73,8 +72,8 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=0){
               <div class="d-footer-form">
                 <div class="row row-links-form">
                   <div class="col-lg-6 col-md-6">
-                    <p class="t4"><a href="registro-independiente.php" class="btn-link">Registrarme como socio</a></p>
-
+                    <p class="t4" style="text-align: left"><a href="registro-oficina.php" class="btn-link">Registrarme como socio</a></p>
+                    <p class="t4" style="text-align: left"><a href data-toggle="modal" data-target="#modalRecuperar" class="btn-link">Recuperar cuenta</a></p>
                   </div>
                 </div>
               </div>
@@ -86,8 +85,39 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=0){
   </header>
 
 
+  <!-- Modal Recuperar-->
+  <div class="modal fade" id="modalRecuperar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">¿Deseas recuperar su cuenta? </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-modal-cliente">
+            <p class="t1">Para la recuperacion de su cuenta se cobrara un monto de $500.00 MX</p>
+            <div class="form-group">
+            <p>Codigo de socio.</p>
+            <input type="text" id="codigore" class="form-control input-form" required />
+            <p>Correo electronico.</p>
+            <input type="text" id="correore" class="form-control input-form" required />
+            </div>
+            <div class="row mt-30">
+              <div class="col-lg-6 col-md-6" style="margin: auto;">
+                <button style="background-color: #49B7F3; color:white;"type="button" onclick="infocliente()" class="btn btn-lg-modal btn-cliente-temporal">Recuperar cuenta</button>
+              </div>
+            </div>
 
-
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- jQuery -->
   <script src="js/jquery-3.0.0.min.js"></script>
   <script src="js/jquery-migrate-3.0.0.min.js"></script>
@@ -109,7 +139,12 @@ if(isset($_SESSION["user_id"]) && $_SESSION["rol"]=0){
   <!-- sesion scripts -->
   <script src="js/sesion.js"></script>
 
-      <!-- sweetalert scripts -->
-      <script src="js/sweetalert2.js"></script>
+  <!-- sweetalert scripts -->
+  <script src="js/sweetalert2.js"></script>
 
-</body></html>
+  <script src="js/recuperar-cuenta.js"></script>
+
+
+</body>
+
+</html>

@@ -633,10 +633,8 @@
 
 	<!-- jQuery -->
 	<script src="../js/jquery-3.0.0.min.js"></script>
-	<script type="text/javascript" 
-        src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
-<script type='text/javascript' 
-  src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
+	<script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
+	<script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 	
