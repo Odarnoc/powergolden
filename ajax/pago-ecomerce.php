@@ -3,6 +3,8 @@ require '../bd/conexion.php';
 require '../utils/error.php';
 require ('../pos/webserviceapp/openpay/Openpay.php');
 
+$response['mensaje'] = "Exito al realizar la compra";
+
 if(empty($_POST['carrito'])){
     error_mensaje('El carrito no puede estar vacio.');
     return;
@@ -61,7 +63,7 @@ $chargeData = array(
     $usuario->pass = '0000000000';
     $usuario->apellidos = $_POST["apellido"];
     $usuario->rol = 1;
-    $iduser = R::store($registro);
+    $iduser = R::store($usuario);
 
             $venta = R::dispense('ventas');
             $venta->user_id = $iduser;
@@ -76,9 +78,11 @@ $chargeData = array(
                 $registro->cantidad = $item['cant'];
                 $id = R::store($registro);
 
-                $producto = R::load('productos',$item['id']);
-                $producto->inventario -= $item['cant'];
+
+                $producto = R::findOne( 'inventarios', 'sucursal_id = 1 && producto_id = ?', [$item['id']]);
+                $producto->existencia -= $item['cant'];
                 R::store($producto);
+
             }
             echo json_encode($response);
         
