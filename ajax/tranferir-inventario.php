@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 

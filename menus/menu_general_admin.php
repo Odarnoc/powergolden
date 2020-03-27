@@ -31,7 +31,7 @@
                                         </div>
                                     </div>
                                 </li>
-
+                                <li><a href="livechat/php/app.php?login">Servicio de chat</a></li>
                                 
                                 <li>
                                     <div class="dropdown show">

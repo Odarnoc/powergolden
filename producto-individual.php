@@ -8,8 +8,12 @@ $user_id=-1;
 if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
 }
-$query1='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id WHERE p.id = '.$id_prod.' LIMIT 1';
+$query1='SELECT p.*, i.existencia,l.nombre as linea,l.color,IF(i.precio_mxn=0,p.precio_mxn,i.precio_mxn) as precio_mxn, IF(i.precio_usd=0,p.precio_usd,i.precio_usd) as precio_usd FROM inventarios as i LEFT JOIN productos as p ON i.producto_id = p.id LEFT JOIN lineas as l ON p.categoria = l.id WHERE i.sucursal_id = 1 AND p.id = '.$id_prod.' LIMIT 1';
 $res=R::getAll($query1);
+if(empty($res)){
+    $query1='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id WHERE p.id = '.$id_prod.' LIMIT 1';
+    $res=R::getAll($query1);
+}
 $prodIndividual = $res[0];
 
 $query2='SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id where p.id!='.$prodIndividual['id'].' and p.categoria='.$prodIndividual['categoria'].' ORDER BY RAND() LIMIT 2';
@@ -17,10 +21,17 @@ $prodsRelacionados=R::getAll($query2);
 
 $fragmaneto;
 $color;
+$abiable = false;
 
-if($prodIndividual['inventario'] != 0){
-    $fragmaneto = 'Disponibles: '.$prodIndividual['inventario'].'pz';
-    $color = 'style = "background-color:#3CC16F"';
+if(isset($prodIndividual['existencia'])){
+    if($prodIndividual['existencia'] > 0){
+        $fragmaneto = 'Disponibles: '.$prodIndividual['existencia'].'pz';
+        $color = 'style = "background-color:#3CC16F"';
+        $abiable = true;
+    }else{
+        $fragmaneto = 'No disponible';
+        $color =  'style = "background-color:#ff4c4c"';
+    }
 }else{
     $fragmaneto = 'No disponible';
     $color =  'style = "background-color:#ff4c4c"';
@@ -126,7 +137,7 @@ if($prodIndividual['inventario'] != 0){
                                                 </div>
 
                                                 <div class="col-lg-4 col-md-4">
-                                                    <p class="price-pro-ind">$<?php echo $prodIndividual['precio'] ?></p>
+                                                    <p class="price-pro-ind">$<?php echo $prodIndividual['precio_mxn'] ?></p>
                                                 </div>
                                             </div>
 
@@ -143,7 +154,7 @@ if($prodIndividual['inventario'] != 0){
                                             <div class="row row-cant-pro-ind">
                                                 <div class="col-lg-12 col-md-12">
 
-                                                    <div class="form-cant-pro-ind">
+                                                    <div class="form-cant-pro-ind" <?php if(!$abiable) echo 'hidden' ?>>
                                                        <p class="t1"><b>Cantidad</b></p>
                                                         <div class="form-row">
                                                             <div class="form-group col-lg-4 col-md-4">

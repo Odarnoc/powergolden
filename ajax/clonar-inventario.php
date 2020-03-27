@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -34,12 +35,16 @@ if(empty($_POST['sucursal_clonar'])){
             $registro->sucursal_id = $sucursal;
             $registro->limite_inventario = $minimo;
             $registro->producto_id = $producto;
+            $registro->precio_mxn = $valor->precio_mxn;
+            $registro->precio_usd = $valor->precio_usd;
             $registro->existencia = 0;
             $id = R::store($registro);
         }else{
             $existe->sucursal_id = $sucursal;
             $existe->limite_inventario = $minimo;
             $existe->producto_id = $producto;
+            $existe->precio_mxn = $valor->precio_mxn;
+            $existe->precio_usd = $valor->precio_usd;
             $id = R::store($existe);
         }
     }

@@ -85,7 +85,10 @@ $cliente = $res[0];
                                                 <a class="btn btn-blue" onclick="registrar()" style="color: white" role="button"><i class="fas fa-check"></i> Aprobar</a>
                                             </div>
                                             <div class="col-sm-3">
-                                                <button class="btn btn-blue"  onclick="rechazar()"style="background-color: #e4605e; color:white"><i class="fas fa-ban"></i> Rechazar</butt>
+                                                <button class="btn btn-blue"  onclick="rechazar()"style="background-color: #e4605e; color:white"><i class="fas fa-ban"></i> Rechazar</button>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <a class="btn btn-blue" href="firmas/firma-<?php echo $cliente['id'] ?>.pdf" style="color: white" role="button"><i class="fas fa-check"></i> Ver firma</a>
                                             </div>
                                         </div>
 
