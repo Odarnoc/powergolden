@@ -36,6 +36,8 @@ function pintarCarrito() {
         total += totalTemp;
     });
     superior += sup;
+    localStorage.setItem('totalgen',total);
+    $('#totalgeneral').text(total);
     $('#lista-productos').empty();
     $('#lista-superior').append(superior);
     $('#lista-productos').append(listaProds);

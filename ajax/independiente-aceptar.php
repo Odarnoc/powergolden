@@ -17,7 +17,8 @@ $nombre = $_POST['name'];
 $correo = $_POST['correo'];
 $id = $_POST['id'];
 
-
+        $datos = R::findOne('independientes','usuario_id ='.$id);
+        $datodos = R::findOne('usuarios','id ='.$id);
         $registro = R::findOne('independientes','usuario_id ='.$id);
 
         $registro->status = 1;
@@ -65,6 +66,7 @@ $id = $_POST['id'];
                                                     <h1>PowerGolden le da la bienvenida a nuestro apartado electrónico de compras.</h1>
                                                     <h3>Estimado cliente. Su solicitud ha sido aprobada por uno de nuestro administrador.</h3>
                                                     <h3>Agradecemos su interés en nuestros servicios y productos. </h3>
+                                                    <h3>Su codigo de usuario es: '.$datos['usuario_id'].'. Su contraseña es:'.$datodos['pass'].'</h3>
                                                     <h1>Gracias por su preferencia en los mejores productos de herbolaria.</h1>
                                                 </div>
                                             </center>

@@ -28,11 +28,7 @@
 
   <!-- OpenPay -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-
-
 
   <title>Power Golden | El Mundo de la Herbolaria</title>
 
@@ -73,7 +69,7 @@
             <p class="t2">¡Ingresa los pdatos para hacer el pago de recuperacion!</p>
 
 
-            <form class="form-contacto"  method="POST" id="payment-form">
+            <form class="form-contacto" method="POST" id="payment-form">
 
               <input type="hidden" name="token_id" id="token_id">
               <input type="hidden" name="use_card_points" id="use_card_points" value="false">
@@ -114,7 +110,7 @@
               </div>
 
               <button type="submit" id="pay-button" class="btn btn-lg-blue mt-20">Pagar</button>
-            </form>  
+            </form>
           </div>
         </div>
       </div>
@@ -129,10 +125,8 @@
 
   <!-- jQuery -->
   <script src="js/jquery-3.0.0.min.js"></script>
-  <script type="text/javascript" 
-        src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
-<script type='text/javascript' 
-  src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
+  <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
+  <script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
   <script src="js/jquery-migrate-3.0.0.min.js"></script>
 
   <!-- popper.min -->
@@ -152,7 +146,7 @@
   <script src="js/contacto.js"></script>
   <!-- sweetalert scripts -->
   <script src="js/sweetalert2.js"></script>
-  
+
   <script src="js/recuperar-cuenta.js"></script>
 
 
