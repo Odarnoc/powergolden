@@ -16,6 +16,7 @@ var clientes = [];
 var conta_kits = 0;
 var deviceSessionId = "";
 var total_ventas = 0;
+var actual=1;
 $(document).ready(function() {
   get_clientes_info();
   get_sales();
@@ -23,16 +24,24 @@ $(document).ready(function() {
 function corte_de_caja() {
   $("#modalCorte").modal("toggle");
 }
-function corte_parcial() {
-  $("#modalCorte").modal("hide");
-  $("#modalHoras").modal("toggle");
+function show_modal(tipo){
+  if(tipo==1 && actual!=1){
+    $("#productos").hide();
+    $("#ventas").show();
+    get_sales();
+    actual=1;
+  }else if(tipo==2 && actual!=2){
+    $("#productos").show();
+    $("#ventas").hide();
+    actual=2;
+    get_productos();
+  }
 }
-$("#corte_parcial").submit(function(event) {
+function corte_parcial() {
   var total_parcial = 0;
   $.ajax({
     url: server + "webserviceapp/get_total_parcial.php",
     type: "POST",
-    data: { desde: $("#hora1").val(), hasta: $("#hora2").val() },
     dataType: "json",
     async: false,
     success: function(data) {
@@ -62,7 +71,7 @@ $("#corte_parcial").submit(function(event) {
         $.ajax({
           url: server + "webserviceapp/corte.php",
           type: "POST",
-          data: { desde: $("#hora1").val(), hasta: $("#hora2").val() },
+
           dataType: "json",
           success: function(data) {
             swal(
@@ -72,13 +81,16 @@ $("#corte_parcial").submit(function(event) {
                 "</b></p>",
               "success"
             );
-            create_ticket(data.nombre,data.total,data.tarjeta,data.efectivo,data.referencia,data.tabla,"De "+$("#hora1").val()+" hasta "+$("#hora2").val());
-            $("#modalHoras").modal("hide");
+            create_ticket(data.nombre,data.total,data.tarjeta,data.efectivo,data.referencia,data.tabla);
+            $("#modalCorte").modal("hide");
           }
         });
       }
     }
   });
+}
+$("#corte_parcial").submit(function(event) {
+
 });
 function corte_diario() {
   $("#modalCorte").modal("hide");
@@ -183,6 +195,26 @@ function create_ticket(sucursal,total,tarjeta,efectivo,referencia, tabla,horas="
     }
   });
 }
+$("#buscar").change(function(event) {
+  get_productos();
+});
+function get_productos() {
+  var data = {
+    buscar: $("#buscar").val()
+  };
+  $.ajax({
+    url: server + "webserviceapp/get_inventario.php",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    beforeSend: function() {},
+    success: function(data) {
+      $("#tabla_productos tbody")
+        .empty()
+        .append(data.tabla);
+    }
+  });
+}
 function get_sales() {
   var data = {
     inicio: $("#inicio").val(),
@@ -199,6 +231,9 @@ function get_sales() {
       $("#total")
         .empty()
         .append("$" + addCommas(parseFloat(data.total).toFixed(2)));
+        $("#popular")
+        .empty()
+        .append(data.popular);
       $("#tabla_ventas tbody")
         .empty()
         .append(data.tabla);

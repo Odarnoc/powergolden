@@ -2502,6 +2502,7 @@ right connector from last child*/
 
 .td-producto-pos {
     font-weight: 700;
+    vertical-align: middle!important;
 }
 
 .td-producto-pos b {
@@ -3789,4 +3790,18 @@ select.select-cliente-modal {
     font-size: 20px;
     font-family: "Poppins";
     padding-bottom: 20px;
+}
+
+.th-img{
+    width: 60px;
+
+}
+
+.td-img{
+    width: 60px;
+    vertical-align: middle!important;
+}
+
+.td-img > img{
+    width: 40px;
 }

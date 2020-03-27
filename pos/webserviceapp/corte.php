@@ -25,16 +25,16 @@ $ventas['efectivo']-=$diferencia;
 $auxiliar=R::getAll( "SELECT nombre as nombre from sucursales as v 
 WHERE id=".$_SESSION["sucursal_id"]);
 $ventas['nombre']=$auxiliar[0]['nombre'];
-$auxiliar=R::getAll( "SELECT v.fecha,u.nombre as unombre,u.apellidos as uape,v.total, sum(p.cantidad) as cantidad
+$auxiliar=R::getAll( "SELECT v.fecha,u.nombre as unombre,u.apellidos as uape,v.user_id,v.total, sum(p.cantidad) as cantidad
 from ventas as v 
 left join usuarios as u on u.id=v.user_id
 left join productosxventas as p on p.venta_id=v.id
-WHERE ".$where." group by v.fecha,u.nombre,u.apellidos,v.total");
+WHERE ".$where." group by v.fecha,u.nombre,u.apellidos,v.user_id,v.total");
 $ventas['tabla']="";
 if ($auxiliar) {
 	foreach ($auxiliar as $key) {
         $ventas['tabla'].="<tr>".
-        "<td>".$key['unombre']." ".$key['uape']."</td>".
+        "<td>".$key['user_id']." - ".$key['unombre']." ".$key['uape']."</td>".
 		"<td>".$key['fecha']."</td>".
 		"<td>".$key['cantidad']."</td>".
         "<td>$".number_format($key['total'], 2)."</td>".

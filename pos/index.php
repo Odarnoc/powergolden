@@ -54,8 +54,8 @@
 
                             <div class="form-group">
                                 <div class="floating-label-group">
-                                    <input type="email" id="userlogin" class="form-control input-form" required />
-                                    <label class="floating-label">Correo electrónico</label>
+                                    <input type="number" id="userlogin" class="form-control input-form" required />
+                                    <label class="floating-label">Código Socio</label>
                                 </div>
                             </div>
 
