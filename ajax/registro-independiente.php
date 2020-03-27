@@ -3,6 +3,7 @@ session_start();
 
 require '../bd/conexion.php';
 require '../utils/error.php';
+require 'firma-digital.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -91,6 +92,7 @@ if (sizeof($registros_in) == 0) {
                 error_mensaje("Error al crear el usuario.");
             } else {
                 echo json_encode($response);
+                generarPDFFirma(getRealIP(),$direccion,$nombre,$paterno,$materno,$telefono,$correo,$id);
 
                 $mail = new PHPMailer(true);
 

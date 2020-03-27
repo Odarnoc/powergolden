@@ -16,6 +16,7 @@ require 'user_preferences/user-info.php';
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/secundary-style.css">
     <link rel="stylesheet" href="css/responsive.css">
 
     <!-- Fonts -->

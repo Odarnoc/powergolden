@@ -33,25 +33,9 @@
 
     <section class="sec-oficina-home">
         <div class="container">
-            <div class="row">
+            <div class="row" style="justify-content: center;">
 
-                <div class="col-lg-3 col-md-3 mb-3">
-                    <div class="d-item-oficina-home">
-                        <img src="images/company.svg" alt="">
-                        <p class="t1">POS <br> Sucursales</p>
-                        <button onclick="login('pos/')" class="btn btn-lg-blue">Entrar</button>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-3 mb-3">
-                    <div class="d-item-oficina-home">
-                        <img src="images/company.svg" alt="">
-                        <p class="t1">Back <br> Oficce</p>
-                        <button onclick="login('iniciar-sesion-admin.php')" class="btn btn-lg-blue">Entrar</button>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-3 mb-3">
+                <div class="col-lg-4 col-md-4 mb-4">
                     <div class="d-item-oficina-home">
                         <img src="images/professions-and-jobs%20(1).svg" alt="">
                         <p class="t1">Oficina Virtual</p>
@@ -59,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-3 mb-3">
+                <div class="col-lg-4 col-md-4 mb-4">
                     <div class="d-item-oficina-home">
                         <img src="images/professions-and-jobs.svg" alt="">
                         <p class="t1">Página Personal</p>

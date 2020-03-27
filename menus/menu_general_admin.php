@@ -31,7 +31,7 @@
                                         </div>
                                     </div>
                                 </li>
-
+                                <li><a href="livechat/php/app.php?login">Servicio de chat</a></li>
                                 
                                 <li>
                                     <div class="dropdown show">
@@ -42,7 +42,19 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="registro-sucursal.php">Registrar sucursal</a>
                                             <a class="dropdown-item" href="lista-sucursal.php">Lista sucursales</a>
-                                            <a class="dropdown-item" href="lista-medi.php">Media sucursale</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Almacen
+                                        </a>
+                                        
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="almacen.php">Inventarios</a>
+                                            <a class="dropdown-item" href="productos-inventarios.php">Agregar productos a inventario</a>
+                                            <a class="dropdown-item" href="lista-medi.php">Media sucursales</a>
                                         </div>
                                     </div>
                                 </li>
@@ -111,7 +123,8 @@
 
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="reportes-productos.php">Reporte productos</a>
-                                            <a class="dropdown-item" href="reportes-ventas.php">Reportes ventas</a>
+                                            <a class="dropdown-item" href="reportes-ventas.php">Reporte ventas</a>
+                                            <a class="dropdown-item" href="reporte-trasnferencia.php">Reporte transferencias</a>
                                         </div>
                                     </div>
                                 </li>

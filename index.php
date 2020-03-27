@@ -30,9 +30,9 @@ R::store($visita);
 <!doctype html>
 <html lang="es">
 
-<head>
+<head><meta charset="gb18030">
   <!-- Required meta tags -->
-  <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
@@ -344,6 +344,8 @@ R::store($visita);
       $('#inicio-active').addClass("active");
     });
   </script>
+  
+  <script type="text/javascript" src="http://powergolden.com.mx/livechat/php/app.php?widget-init.js"></script>
 
 </body>
 

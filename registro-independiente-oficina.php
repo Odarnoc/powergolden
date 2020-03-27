@@ -34,6 +34,7 @@ and     length(@pv := concat(@pv, ',', id))");
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/secundary-style.css">
     <link rel="stylesheet" href="css/responsive.css">
 
     <!-- Fonts -->

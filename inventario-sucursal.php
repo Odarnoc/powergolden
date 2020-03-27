@@ -105,7 +105,7 @@ $sucursal = R::getAll($query);
                                         <td style="vertical-align: middle">
                                             <div>
                                                 <a href type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalPrecio"><i class="fas fa-dollar-sign"></i></a>
-                                                <a href type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalAgregar"><i class="fas fa-plus"></i></a>
+                                                <?php if($id == 1){ ?><a href type="button" data-toggle="modal" onclick="sel(<?php echo $item['id'] ?>)" data-target="#modalAgregar"><i class="fas fa-plus"></i></a><?php } ?>
                                             </div>
                                         </td>
                                     </tr>

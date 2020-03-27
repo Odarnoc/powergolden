@@ -1,12 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 1) {
-  header("Location: dashboard.php");
-}
-
-
-?>
-
 <!doctype html>
 <html lang="es">
 
@@ -55,7 +46,7 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 1) {
                 <div class="form-group">
                   <div class="floating-label-group">
                     <input type="text" class="form-control input-form" required id="email" />
-                    <label class="floating-label">Codigo de socio</label>
+                    <label class="floating-label">Código de administrador</label>
                   </div>
                 </div>
 
@@ -67,6 +58,8 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 1) {
                 </div>
 
                 <button class="btn btn-lg-blue mt-10">Entrar</button>
+                <br>
+                <br><br>
 
               </form>
 

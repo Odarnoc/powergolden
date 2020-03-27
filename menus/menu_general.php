@@ -60,7 +60,7 @@
 <div class="overlay"></div>
 <script type="text/javascript">
 function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'es,en'}, 'google_translate_element');
+  new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
 }
 
 </script>
