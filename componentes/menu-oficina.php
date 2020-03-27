@@ -32,7 +32,7 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
         <!---<li><a href="#0">Página personal</li>-->
         <li><a href="mis-ventas-oficina.php">Ventas directas</li>
         <li><a href="historial-ecomerce.php">Compras</li>
-        <li><a href="matriz-cliente.php">Mi organización</li>
+        <li><a href="matriz.php?id=<?php echo $_SESSION["user_id"]?>">Mi organización</li>
         <!-- <li><a href="#0">Empresa</li> -->
         <li><a href="reporte-venta-oficina.php">Reportes</li>
         <li><a href="contacto.php">Contacto</a></li>

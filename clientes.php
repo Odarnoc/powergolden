@@ -2,7 +2,7 @@
 
 require 'user_preferences/user-info.php';
 
-$clientes=R::find('usuarios','rol = 1');
+$clientes=R::find('usuarios','rol = 2');
 
 ?>
 <!doctype html>
@@ -102,7 +102,7 @@ $clientes=R::find('usuarios','rol = 1');
                                         <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
-                                        <td><a href="matriz-admin.php?id=<?php echo $item['id']?>"><i class="fas fa-sitemap"></i></a></td>
+                                        <td><a href="matriz.php?id=<?php echo $item['id']?>"><i class="fas fa-sitemap"></i></a></td>
                                         <td><a href="editar-usuario.php?id=<?php echo $item['id']?>"><i class="fas fa-user-edit"></i></a></td>
                                     </tr> 
                                 <?php } ?>    
