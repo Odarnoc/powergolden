@@ -25,7 +25,7 @@ if (sizeof($registros_in) == 0) {
             $registro->telefono = $telefono;
             $registro->pass = $pass;
             $registro->correo = $correo;
-            $registro->rol = 2;
+            $registro->rol = 1;
             $registro->apellidos = $paterno.' '.$materno;
             $registro->referido = null;
             $id = R::store($registro);

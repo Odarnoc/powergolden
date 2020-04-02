@@ -35,7 +35,11 @@ $(document).ready(function(){
 						data.stock_id="admin";
 
 					}
-					window.location.replace("dashboard.php");
+					if(data.rol==3){
+						window.location.replace("pos.php");
+					}else{
+						window.location.replace("dashboard.php");
+					}
 
 				}
 			}

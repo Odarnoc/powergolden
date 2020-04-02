@@ -38,6 +38,10 @@
 	<title>POS Power Golden | El Mundo de la Herbolaria</title>
 
 </head>
+<style>
+.gpay-button.long{
+	width:100% !important;
+}</style>
 
 <body class="bg-gray" id="cuerpo">
 
@@ -156,24 +160,14 @@
 					<div class="d-payment-pos">
 					<select class="form-control input-pos select-venta-pos" id="tipo_venta" onchange="cambio_tipo_venta()">
 							<option hidden value="">Seleccionar tipo de venta</option>
-							<option value="0">Venta General</option>
-							<option value="1">Kits</option>
+							<option value="0">Cliente Temporal</option>
+							<option value="1">Empresario Independiente</option>
 						</select>
-						<div class="row" id="row_add_kits" style="display:none;">
-						<div class="col-lg-6 col-md-6 col-6 pr-0">
-						<select class="form-control input-pos mt-3" id="tipo_kit">
+						<div  id="row_add_kits" style="display:none;">
+						<select class="form-control input-pos mt-3" id="tipo_kit" onchange="agregar_kit()">
 							<option hidden value="">Seleccionar tipo de kit</option>
 						</select>
-
-</div>
-<div class="col-lg-3 col-md-3 col-3">
-								<button type="button" class="btn btn-lg-pos btn-bg-blue mt-3" onclick="agregar_kit()" >Agregar</button>
-							</div>
-							<div class="col-lg-3 col-md-3 col-3">
-								<button type="button" class="btn btn-lg-pos btn-bg-blue mt-3" onclick="quita_kits()" >Control</button>
-							</div>
-							</div>
-
+						</div>
 						<div class="row">
 							<div class="col-lg-8 col-md-8 col-8 pr-0">
 
@@ -486,9 +480,27 @@
 
 					</div>
 					<br>
+					<div class="row">
+					<div class="col-lg-12 col-md-12 col-12" >
+					<div id="paypal-button-container"></div>
+					</div>
+					</div>
+					<br>
+					<div class="row">
+					<div class="col-lg-12 col-md-12 col-12" id="container"></div>
+					
+					</div>
+					<br>
 					<div class="row mt-1" id="div_pago" style="display:none;">
 						<div class="col-lg-12 col-md-12 col-12">
 							<button type="button" onclick="sale();" class="btn btn-lg-blue btn-bg-blue">Completar pago</button>
+							
+						</div>
+					</div>
+					<div class="row mt-1" >
+						<div class="col-lg-12 col-md-12 col-12">
+							<button type="button" onclick="sale_externo();" class="btn btn-lg-blue btn-bg-blue">Pago Externo</button>
+							
 						</div>
 					</div>
 
@@ -630,6 +642,40 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="modalGenerarPagoTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pago con tarjeta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<form id="pago_tarjeta" class="form-tarjeta-modal">
+                <div class="modal-body pt-5 pb-5">
+
+                    <select class="form-control input-pos-modal mb-3" name="" id="tipo_tarjeta" required>
+                        <option hidden value="">Tipo de Tarjeta</option>
+                        <option value="1">Tarjeta de Credito</option>
+                        <option value="2">Tarjeta de Debito</option>
+                    </select>
+
+                    <select class="form-control input-pos-modal mb-3" name="" id="tipo_banco" required>
+                        <option hidden value="">Banco</option>
+                        <option value="1">Banorte</option>
+                        <option value="2">BBVA</option>
+                    </select>
+
+                    <input type="number" class="form-control input-pos-modal" id="cantidad_tarjetas" placeholder="Cantidad" required>
+
+                    <button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+
+                </div>
+                <div class="modal-footer">
+					<button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+</form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<!-- jQuery -->
 	<script src="../js/jquery-3.0.0.min.js"></script>
@@ -659,6 +705,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="../js/jquery.easypiechart.min.js"></script>
+
+  
+<script src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX" data-sdk-integration-source="button-factory"></script>
+
+
 
 	<script>
 		$(document).ready(function() {
@@ -708,5 +759,11 @@
 			$(this).addClass('active-product-list');
 		});
 	</script>
+	<script>
+
+	</script>
+	<script async
+  src="https://pay.google.com/gp/p/js/pay.js"
+  onload="onGooglePayLoaded()"></script>
 
 </body></html>

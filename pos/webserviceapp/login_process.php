@@ -16,6 +16,7 @@ if($lista){
 		//$_SESSION['username'] = $key['nombre'].' '.$key['ape_paterno'].' '.$key['ape_materno'];
 		$_SESSION['username'] = $key['nombre'].' '.$key['apellidos'];
 		$_SESSION['user_id']=$key['id'] ;
+		$_SESSION['rol']=$key['rol'] ;
 		$_SESSION['sucursal_id']=$key['sucursal_id'] ;
 		$usuario=$key;
 		break;

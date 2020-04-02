@@ -2,7 +2,11 @@
  session_start();
 
  if(isset($_SESSION["user_id"])){
-    header('Location: dashboard.php');
+     if($_SESSION["user_id"]==3){
+        header('Location: pos.php');
+     }else{
+        header('Location: dashboard.php');
+     }
  }
 ?>
 <!doctype html>

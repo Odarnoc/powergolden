@@ -4,6 +4,12 @@
  if(!isset($_SESSION["user_id"])){
     header('Location: index.php');
  }
+ $rol=3;
+ $clase="block";
+ if($_SESSION["rol"]==$rol){
+     $clase="none";
+ }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,22 +64,22 @@
                     <a class="active" href="dashboard.html">Dashboard</a>
                 </li>
                 <li>
-                    <a onclick="corte_de_caja()">Corte de Caja</a>
+                    <a onclick="corte_de_caja()" style="display:<?php echo $clase;?>">Corte de Caja</a>
                 </li>
-                <li onclick="show_modal(1)">
-                    <a >Reportes</a>
+                <li onclick="show_modal(1)" style="display:<?php echo $clase;?>">
+                    <a>Reportes</a>
                 </li>
-                <li>
-                    <a >Gastos</a>
+                <li onclick="show_modal(3)">
+                    <a>Clientes</a>
                 </li>
                 <li>
                     <a href="pos.php">POS</a>
                 </li>
                 <li onclick="show_modal(2)">
-                    <a >Productos</a>
+                    <a>Productos</a>
                 </li>
                 <li>
-                    <a >Configuración</a>
+                    <a>Configuración</a>
                 </li>
             </ul>
 
@@ -128,45 +134,44 @@
                             </div>
                         </a>
                     </div>
-
-                    <div class="col-lg-2 col-md-2" onclick="corte_de_caja()" ;>
+                    <div class="col-lg-2 col-md-2" onclick="corte_de_caja()" style="display:<?php echo $clase;?>">
                         <div class="d-item-dashboard">
                             <i class="fas fa-dollar-sign icon-dash"></i>
-                            <p class="t1"><a >Corte de Caja</a></p>
+                            <p class="t1"><a>Corte de Caja</a></p>
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-2" onclick="show_modal(1)">
+                    <div class="col-lg-2 col-md-2" onclick="show_modal(1)" style="display:<?php echo $clase;?>">
                         <div class="d-item-dashboard">
                             <i class="fas fa-chart-pie icon-dash"></i>
-                            <p class="t1"><a >Reportes</a></p>
+                            <p class="t1"><a>Reportes</a></p>
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-2">
+                    <div class="col-lg-2 col-md-2" onclick="show_modal(3)">
                         <div class="d-item-dashboard">
                             <i class="fas fa-hand-holding-usd icon-dash"></i>
-                            <p class="t1"><a >Gastos</a></p>
+                            <p class="t1"><a>Clientes</a></p>
                         </div>
                     </div>
 
                     <div class="col-lg-2 col-md-2" onclick="show_modal(2)">
                         <div class="d-item-dashboard">
                             <i class="fas fa-shopping-basket icon-dash"></i>
-                            <p class="t1"><a >Productos</a></p>
+                            <p class="t1"><a>Productos</a></p>
                         </div>
                     </div>
 
                     <div class="col-lg-2 col-md-2">
                         <div class="d-item-dashboard">
                             <i class="fas fa-cog icon-dash"></i>
-                            <p class="t1"><a >Configuración</a></p>
+                            <p class="t1"><a>Configuración</a></p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="row mt-2 mb-4" id="ventas" >
+                <div class="row mt-2 mb-4" id="ventas" style="display: none;">
                     <div class="col-lg-12 col-md-12">
                         <div class="d-grafica-ventas">
                             <p class="t1">Historico de ventas</p>
@@ -195,8 +200,8 @@
                             <br>
                             <div class="row">
                                 <div id="popular">
-                                
-</div>
+
+                                </div>
                                 <div class="col-lg-6 col-md-6 col-6 pt-2 " style="text-align:right;">
                                     <p class="p-total-pos">Total: <span id="total"></span></p>
                                 </div>
@@ -226,29 +231,71 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-2 mb-4" id="productos" style="display: none;">
+                <div class="row mt-2 mb-4" id="productos">
                     <div class="col-lg-12 col-md-12">
                         <div class="d-grafica-ventas">
                             <p class="t1">Productos en Inventario</p>
                             <!--<canvas height="400" id="myChart"></canvas>-->
                             <div class="row">
                                 <div class="col-md-6">
-                            <input type="text" class="form-control input-product" id="buscar" placeholder="Buscar producto por Nombre o Código">
-                            </div>    
-                        </div>
+                                    <input type="text" class="form-control input-product" id="buscar"
+                                        placeholder="Buscar producto por Nombre o Código">
+                                </div>
+                            </div>
                             <br>
                             <div class="row">
-                                
+
                             </div>
                             <div class="d-table-ticket">
                                 <div class="table-responsive">
                                     <table class="table table-borderless table-ticket" id="tabla_productos">
                                         <thead>
                                             <tr>
-                                            <th class="th-img">Producto</th>
+                                                <th class="th-img">Producto</th>
                                                 <th>Producto</th>
                                                 <th>Existencias</th>
                                                 <th>Minimo Sugerido</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2 mb-4" id="clientes" style="display:none;">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="d-grafica-ventas">
+                            <p class="t1">Clientes</p>
+                            <!--<canvas height="400" id="myChart"></canvas>-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control input-product" id="buscar_c"
+                                        placeholder="Buscar Cliente por Nombre o Código">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+
+                            </div>
+                            <div class="d-table-ticket">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless table-ticket" id="tabla_clientes">
+                                        <thead>
+                                            <tr>
+                                                <th># - Nombre</th>
+                                                <th>Tipo de cliente</th>
+                                                <th>Correo</th>
+                                                <th>Dirección</th>
+                                                <th>Telefono</th>
+                                                <th>Matriz</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -318,7 +365,7 @@
                             </div>
 
                         </div>
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-lg-12 col-md-12 col-12">
                                 <p class="t2">Firma de Satisfacción</p>
                             </div>
@@ -327,7 +374,7 @@
                             <div
                                 style=" margin-left:20px;margin-right:20px; width:1320px; height:120px; background-color:#F4F1BB;">
                             </div>
-                        </div>
+                        </div>-->
                         <br><br>
 
                         <div class="d-footer-ticket">
@@ -477,6 +524,7 @@
     <script src="../js/Chart.js"></script>
     <script src="js/sweetalert2.all.js"></script>
     <script src="js/dashboard.js"></script>
+    <script src="js/app_main.js"></script>
     <script src="../js/chart-dashboard-pos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
