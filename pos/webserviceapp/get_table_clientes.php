@@ -23,7 +23,7 @@ if ($auxiliar) {
 		"<td>".$key['correo']."</td>".
 		"<td>".$key['direccion']."</td>".
 		"<td>".$key['telefono']."</td>".
-        
+		"<td><a href='https://powergolden.com.mx/matriz.php?id=".$key['id']."' target='_blank'><i class='fas fa-sitemap'><i></a></td>".
         "</tr>"
         ;
     }

@@ -663,7 +663,6 @@ function sale_modal() {
   }
 }
 function check_quantities(tipo, cantidad_pago, tarjeta = "",referencia_id=null,referencia=null,tipo_referencia=null) {
-  console.log("Tu perra madre");
   total_a += parseFloat(cantidad_pago);
   var auxiliar = $("#totalcarrito").html();
   auxiliar = auxiliar.replace("$", "");
@@ -1089,7 +1088,7 @@ function sale_externo() {
     type: "info",
     title:  "<p id='pswal'>Venta con pago externo</p>",
     html:  "<p id='psswal'> Por favor has extensiva la siguiente url con tu cliente para continuar con el proceso de pago:<br>\
-<a href='https://powergolden.com.mx/pos/external_pay.php?venta="+venta_id+"'>http://powergolden.local:8890/pos/external_pay.php?venta="+venta_id+"</a></p>",
+<a href='https://powergolden.com.mx/pos/external_pay.php?venta="+venta_id+"'>https://powergolden.com.mx/os/external_pay.php?venta="+venta_id+"</a></p>",
     confirmButtonText: "Aceptar",
     showCancelButton: false,
     cancelButtonText: "Cancelar"
