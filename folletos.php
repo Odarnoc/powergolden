@@ -2,15 +2,15 @@
 
 require 'user_preferences/user-info.php';
 
-if(!isset($_POST['busqueda'])){
+if (!isset($_POST['busqueda'])) {
     $query = 'SELECT * FROM folletos';
     $filtro = "Buscar paquete";
-}else{
-    $query = 'SELECT * FROM folletos where  (nombre LIKE "%'.$_POST['busqueda'].'%")' ;
+} else {
+    $query = 'SELECT * FROM folletos where  (nombre LIKE "%' . $_POST['busqueda'] . '%")';
     $filtro = $_POST['busqueda'];
 }
 
-$paquetes=R::getAll($query); 
+$paquetes = R::getAll($query);
 var_dump($paquetes);
 
 ?>
@@ -47,9 +47,9 @@ var_dump($paquetes);
 
 <body>
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -65,7 +65,7 @@ var_dump($paquetes);
 
 
 
-                <div class="col-lg-8 col-md-8 bg-gray" >
+                <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right" style="padding-top: 6rem">
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
@@ -91,16 +91,16 @@ var_dump($paquetes);
                                             <p class="t2 two-lines mt-1"><?php echo $item['descripcion'] ?></p>
                                             <div class="row">
                                                 <div class="col">
-                                                    <a class="btn btn-ver-mas mt-3" href="folleto-individual.php?id=<?php echo $item['id']?>" role="button"><i class="fas fa-eye"></i> Ver más</a>
+                                                    <a class="btn btn-ver-mas mt-3" href="folleto-individual.php?id=<?php echo $item['id'] ?>" role="button"><i class="fas fa-eye"></i> Ver más</a>
                                                 </div>
                                                 <div class="col" style="text-align: right">
-                                                    <a style="" class="btn btn-blue mt-2"  href="editar-folleto.php?id=<?php echo $item['id']?>" role="button" ><i style="color: white" class="far fa-edit"></i></a>
+                                                    <a style="" class="btn btn-blue mt-2" href="editar-folleto.php?id=<?php echo $item['id'] ?>" role="button"><i style="color: white" class="far fa-edit"></i></a>
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
-                            <?php } ?> 
+                            <?php } ?>
 
                         </div>
                     </div>
@@ -126,16 +126,16 @@ var_dump($paquetes);
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()" >Aceptar</button>
+                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()">Aceptar</button>
                 </div>
             </div>
         </div>
     </div>
 
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -159,4 +159,6 @@ var_dump($paquetes);
 
     <script src="js/nuevo-folleto.js"></script>
 
-</body></html>
+</body>
+
+</html>

@@ -37,7 +37,7 @@ function clonar(){
                 }) 
                 .then((ok) => {
                     if (ok) {
-                        location.href="lista-sucursal.php";
+                        location.reload();
                     }
                 }); 
             }
@@ -96,7 +96,7 @@ function tranferir(){
                 }) 
                 .then((ok) => {
                     if (ok) {
-                        location.href="lista-sucursal.php";
+                        location.reload();
                     }
                 }); 
             }

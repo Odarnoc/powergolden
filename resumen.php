@@ -1,14 +1,7 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"])){
-    header("Location: iniciar-sesion.php");
-}
-
 require 'bd/conexion.php';
-
-$information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
-$direccion  = R::findOne( 'direcciones', ' id = '.$_POST["iddir"]);
-$tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
+$user_id = $_SESSION["user_id"];
 
 ?>
 
@@ -41,13 +34,18 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 
+    <!-- OpenPay -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <style>
-    .margen{
-        margin-left: 3rem !important;
-    }
-    .margend{
-        margin-left: 3rem !important;
-    }
+        .margen {
+            margin-left: 3rem !important;
+        }
+
+        .margend {
+            margin-left: 3rem !important;
+        }
     </style>
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
@@ -56,9 +54,9 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
 
 <body>
 
-            <!-- Menu -->
-            <?php include("menus/menu_general.php"); ?>
-            <!-- End Menu -->
+    <!-- Menu -->
+    <?php include("menus/menu_general.php"); ?>
+    <!-- End Menu -->
 
     <!-- End Navbar ====
     	======================================= -->
@@ -67,65 +65,66 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
         <div class="container">
             <div class="row">
 
-            <?php include 'menus/lineas_asistencia.php'; ?>
+                <?php include 'menus/lineas_asistencia.php'; ?>
 
-            <div class="col-lg-9 col-md-6 bg-gray lista-productos-movil">
-            
-                <div class="">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="d-title-cuenta">
-                                <p class="title-cuenta">Resumen</p>
-                                <p class="small-text-cuenta">Revisa tu orden antes de confirmar el pago. </p>
-                            </div>
-                        </div>  
-                    </div>
+                <div class="col-lg-9 col-md-6 bg-gray lista-productos-movil">
 
-                    <div class="row"> 
-                        <div class="col">
-                            <div class="d-tabla-review">
-                                <div class="table-responsive">
-                                    <div class="d-title-cuenta">
-                                        <h6>Datos de envio</h6>
-                                        <p class="margen" style="margin-bottom: 1px"><?php echo ($direccion['direccion'])?> </p>
-                                        <a hidden value="<?php echo ($direccion['direccion'])?>" id="direccion"></a> <a hidden value="<?php echo ($direccion['codigo'])?>" id="codigo"></a>
-                                        <a hidden value="<?php echo ($direccion['colonia'])?>" id="col"></a> <a hidden value="<?php echo ($direccion['estado'])?>" id="estado"></a>
-                                        <a hidden value="<?php echo ($direccion['ciudad'])?>" id="ciudad"></a> <a hidden value="<?php echo ($information['nombre'])?> <?php echo ($information['apellidos'])?>" id="nombre"></a><a hidden value="<?php echo ($information['telefono'])?>" id="telefono"></a>
-                                        <p class="small-text-cuenta ml-4 margend"><?php echo ($direccion['colonia'])?>, <?php echo ($direccion['ciudad'])?>, <?php echo ($direccion['estado'])?>, <?php echo ($direccion['codigo'])?></p>
-                                    </div>
-                                </div>  
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="d-title-cuenta">
+                                    <p class="title-cuenta">Resumen</p>
+                                    <p class="small-text-cuenta">Revisa tu orden antes de confirmar el pago. </p>
+                                </div>
                             </div>
                         </div>
-                        
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="d-tabla-review">
+                                    <div class="table-responsive">
+                                        <div class="d-title-cuenta">
+                                            <h6>Datos de envio</h6>
+                                            <p class="margen" style="margin-bottom: 1px"></p>
+                                            <p id="nombreuser"></p>
+                                            <a class="small-text-cuenta" id="direccion"></a>
+                                            <div><a class="small-text-cuenta" id="col"></a>, <a class="small-text-cuenta" id="ciudad"></a></div>
+                                            <div><a class="small-text-cuenta" id="psotal"></a>,<a class="small-text-cuenta" id="estados"></a> </div>
+                                            <p class="small-text-cuenta ml-4 margend"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col">
                                 <div class="d-tabla-review">
                                     <div class="table-responsive">
                                         <div class="d-title-cuenta">
                                             <h6>Datos de tarjeta</h6>
-                                                <div class="">
-                                                    <div class="form-group" style="margin-bottom: 1px">
-                                                        <div class="form-check">
-                                                            <label class="form-check-label" for="exampleRadios1">
-                                                                <p style="margin-bottom: 0;" class="t2">XXXX - XXXX - XXXX - <?php echo substr ($tarjeta['numerotar'],12,15) ?></p>
-                                                            </label>
-                                                        </div>
-                                                        <p style="padding-left: 1rem; " class="small-text-cuenta ml-4">Expiracion: <a class="small-text-cuenta ml-4"><?php echo $tarjeta['fecha'] ?></a></p>
+                                            <div class="">
+                                                <div class="form-group" style="margin-bottom: 1px">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label" for="exampleRadios1">
+                                                            <p style="margin-bottom: 0;" class="t2">XXXX - XXXX - XXXX - <a id="tarnumero"></a> </p>
+                                                        </label>
                                                     </div>
+                                                    <p style="padding-left: 3px " class="small-text-cuenta ml-3">Expiracion: <a class="small-text-cuenta" id="mestar"></a>/<a class="small-text-cuenta" id="anotar"></a></p>
+                                                    <br>
+                                                    <h6 style="padding-left: 3px " class="ml-3">Monto total: $<a id="totalgeneral"></a></h6>
                                                 </div>
+                                            </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                 </div>
                             </div>
 
-                    </div>
-
-
+                        </div>
 
 
                         <div class="d-tabla-review">
                             <div class="table-responsive">
                                 <table class="table table-borderless table-review">
-                                <h6>Articulos.</h6>
+                                    <h6>Articulos.</h6>
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -140,18 +139,32 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
                                 </table>
                             </div>
 
-                            <div class="row row-btns-checkout mt-40">
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <a href="tarjetas.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
-                                </div>
+                            <form method="POST" id="payment-formfinal">
+                                <div class="row row-btns-checkout mt-40">
+                                    <div class="col-lg-6 col-md-6 col-6">
+                                        <a href="tarjetas-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
+                                    </div>
+                                    <input type="hidden" name="token_id" id="token_id">
 
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <button type="button" onclick="confirmarCompra()" class="btn btn-lg-blue">Comprar <i class="fas fa-chevron-right"></i></button>
+                                    <input type="hidden" name="use_card_points" id="use_card_points" value="false">
+
+                                    <input type="hidden" id="nomtarenv" class="form-control input-form" required type="text" autocomplete="off" data-openpay-card="holder_name" />
+
+                                    <input type="hidden" id="numtarenv" class="form-control input-form" required type="text" autocomplete="off" data-openpay-card="card_number" />
+
+                                    <input type="hidden" id="mestarenv" class="form-control input-form" required type="text" data-openpay-card="expiration_month" />
+
+                                    <input type="hidden" id="anotarenv" class="form-control input-form" required type="text" data-openpay-card="expiration_year"></input>
+
+                                    <input type="hidden" id="ccvtar" class="form-control input-form" required type="text" autocomplete="off" data-openpay-card="cvv2"></input>
+
+                                    <div class="col-lg-6 col-md-6 col-6">
+                                        <button type="submit" id="pay-button" class="btn btn-lg-blue">Comprar <i class="fas fa-chevron-right"></i></button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
 
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -161,13 +174,15 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
     </section>
 
 
-            <!-- Admin Menu -->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Admin Menu -->
+    <!-- Admin Menu -->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Admin Menu -->
 
 
     <!-- jQuery -->
     <script src="js/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
+    <script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.min.js"></script>
 
     <!-- popper.min -->
@@ -182,14 +197,23 @@ $tarjeta  = R::findOne( 'tarjetas', ' id = '.$_POST["idtar"]);
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
 
+    <script>
+        var iduser = <?php echo $user_id ?>;
+    </script>
+
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
     <script src="js/menu-movil.js"></script>
     <script src="js/resumen.js"></script>
     <script src="js/finalizar-compra.js"></script>
+    <script src="js/metodo-pago-ecomerce.js"></script>
+
+
 
     <script>
         var radioValue = $("input[name='id']:checked").val();
     </script>
 
-</body></html>
+</body>
+
+</html>

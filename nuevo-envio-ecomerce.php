@@ -142,7 +142,7 @@ require 'bd/conexion.php';
                                             <a href="carrito-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                         </div>
                                         <div class=" col-lg-6 col-md-6 col-6">
-                                            <a><button type="submit" id="boton" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button></a>
+                                            <a><button type="button" onclick="datosDireccion()" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button></a>
                                         </div>
                                     </div>
                                 </form>
@@ -180,6 +180,6 @@ require 'bd/conexion.php';
     <!-- perfil scripts -->
     <script src="js/perfil.js"></script>
     <!-- billetera js -->
-    <script src="js/add-direccion.js"></script>
+    <script src="js/metodo-pago-ecomerce.js"></script>
 
 </body></html>
