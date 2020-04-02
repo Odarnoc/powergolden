@@ -1,6 +1,11 @@
 var deviceSessionId = "";
 var total;
+var nombre;
+var apellidos;
+var correo;
+var telefono;
 $(document).ready(function () {
+    datosuser();
     mostrar();
     OpenPay.setId('m1ob7biidxpcjepkiqw1');
     OpenPay.setApiKey('pk_c6f578b1dd4a463ca07f2b7a8ea0e87e');
@@ -9,19 +14,41 @@ $(document).ready(function () {
         "payment-form",
         "deviceIdHiddenFieldName"
     );
-    console.log(deviceSessionId);
-    console.log("REady");
 });
 
-$("#payment-form").submit(function (event) {
+$("#payment-forms").submit(function (event) {
     event.preventDefault();
-    console.log(deviceSessionId);
     OpenPay.token.extractFormAndCreate(
-        "payment-form",
+        "payment-forms",
+        success_callbakdos,
+        error_callbak
+    );
+});
+
+$("#payment-formfinal").submit(function (event) {
+    event.preventDefault();
+    OpenPay.token.extractFormAndCreate(
+        "payment-formfinal",
         success_callbak,
         error_callbak
     );
 });
+
+function datosuser() {
+    $.ajax({
+        url: "ajax/getdatos.php",
+        type: "post",
+        data: { id: iduser },
+        success: function (respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
+            nombre = json_mensaje['nombre'];
+            apellidos = json_mensaje['apellidos'];
+            correo = json_mensaje['correo'];
+            telefono = json_mensaje['telefono'];
+            iduse = json_mensaje['id'];
+        },
+    });
+}
 
 function datostTar() {
     var nombret = $('#nombre_tarjeta').val();
@@ -62,7 +89,7 @@ function mostrar() {
     $('#ciudad').text(localStorage.getItem('municipio'));
     $('#psotal').text(localStorage.getItem('codigop'));
     $('#estados').text(localStorage.getItem('estado'));
-    $('#nombreuser').text(localStorage.getItem('nombretar'));
+    $('#nombreuser').text(nombre);
     $('#tarnumero').text(localStorage.getItem('numerotar').substring(12, 16));
     $('#mestar').text(localStorage.getItem('mescadtar'));
     $('#anotar').text(localStorage.getItem('anocadtar'));
@@ -85,10 +112,11 @@ var success_callbak = function (response) {
         data: {
             carrito: JSON.parse(localStorage.getItem('carrito')),
             total: localStorage.getItem('totalgen'),
-            nombre: localStorage.getItem('nombretar'),
-            apellido: localStorage.getItem('nombretar'),
-            telefono: '0000000000',
-            correo: 'powergolden01@gmail.com',
+            id: iduse,
+            nombre: nombre,
+            apellido: apellidos,
+            telefono: telefono,
+            correo: correo,
             token_id: token_id,
             deviceIdHiddenFieldName: deviceSessionId
         },
@@ -103,7 +131,9 @@ var success_callbak = function (response) {
                 });
             } else {
                 setTimeout(function () {
-                    location.reload();
+                    localStorage.clear();
+                    localStorage.setItem('carito', JSON.stringify([]));
+                    location.href = "carrito-ecomerce.php";
                 }, 5000);
                 Swal.fire({
                     icon: 'success',
@@ -112,7 +142,9 @@ var success_callbak = function (response) {
                 })
                     .then((ok) => {
                         if (ok) {
-                            location.reload();
+                            localStorage.clear();
+                            localStorage.setItem('carito', JSON.stringify([]));
+                            location.href = "carrito-ecomerce.php";
                         }
                     });
             }
@@ -135,64 +167,63 @@ var success_callbak = function (response) {
 var error_callbak = function (response) {
     var desc = response.data.description != undefined ?
         response.data.description : response.message;
-        if (desc = "holder_name is required, card_number is required, expiration_year expiration_month is required") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Ingrese todos los campos correctamente'
-            })
-                .then((ok) => {
-                    if (ok) {
-                        location.reload();
-                    }
-                });
-        }
-        if (desc = "The CVV2 security code is required") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Ingrese el codigo de seguridad de la tarjeta'
-            })
-                .then((ok) => {
-                    if (ok) {
-                        location.reload();
-                    }
-                });
-        }
-        if (desc = "card_number must contain only digits") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'El numero de la tarjeta solo debe contener digitos'
-            })
-                .then((ok) => {
-                    if (ok) {
-                        location.reload();
-                    }
-                });
-        }
-        if (desc = "card_number length is invalid") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'La cantidad de numero de la tarjeta es incorrecto'
-            })
-                .then((ok) => {
-                    if (ok) {
-                        location.reload();
-                    }
-                });
-        }
-        if (desc = "The card number verification digit is invalid") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'La tarjeta no es valida'
-            })
-                .then((ok) => {
-                    if (ok) {
-                        location.reload();
-                    }
-                });
-        }
+    if (desc = "holder_name is required, card_number is required, expiration_year expiration_month is required") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ingrese todos los campos correctamente'
+        })
+            .then((ok) => {
+                if (ok) {
+                }
+            });
+    }
+    if (desc = "The CVV2 security code is required") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ingrese el codigo de seguridad de la tarjeta'
+        })
+            .then((ok) => {
+                if (ok) {
+                }
+            });
+    }
+    if (desc = "card_number must contain only digits") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El numero de la tarjeta solo debe contener digitos'
+        })
+            .then((ok) => {
+                if (ok) {
+                }
+            });
+    }
+    if (desc = "card_number length is invalid") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'La cantidad de numero de la tarjeta es incorrecto'
+        })
+            .then((ok) => {
+                if (ok) {
+                }
+            });
+    }
+    if (desc = "The card number verification digit is invalid") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'La tarjeta no es valida'
+        })
+            .then((ok) => {
+                if (ok) {
+                }
+            });
+    }
 };
+
+var success_callbakdos = function (response) {
+    datostTar();
+}

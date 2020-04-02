@@ -30,6 +30,10 @@ require 'bd/conexion.php';
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 
+    <!-- OpenPay -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
 
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
@@ -71,7 +75,7 @@ require 'bd/conexion.php';
                         <div class="row row-form-perfil footer-movil">
                             <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
 
-                                <form method="POST" id="payment-form">
+                                <form method="POST" id="payment-forms">
                                     <input type="hidden" name="token_id" id="token_id">
                                     <input type="hidden" name="use_card_points" id="use_card_points" value="false">
 
@@ -90,7 +94,7 @@ require 'bd/conexion.php';
                                     <div class="form-row">
                                         <div class="form-group col-lg-6 col-md-6">
                                             <div class="floating-label-group">
-                                                <input required type="text" data-openpay-card="expiration_month"  id="mes_vencimiento_tarjeta" class="form-control input-form-underline" required />
+                                                <input required type="text" data-openpay-card="expiration_month" id="mes_vencimiento_tarjeta" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Mes Vencimiento</label>
                                             </div>
                                         </div>
@@ -113,7 +117,7 @@ require 'bd/conexion.php';
                                             <a href="nuevo-envio-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                         </div>
                                         <div class=" col-lg-6 col-md-6 col-6">
-                                            <button  onclick="datostTar()" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button>
+                                            <button type="submit" id="pay-button" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -126,34 +130,13 @@ require 'bd/conexion.php';
         </div>
     </section>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center mb">
-                    <img class="img-mb" src="images/icon-atencion.png" alt="">
-                    <p class="title-mb mt-20">Atención</p>
-                    <p class="sub-title-mb">¿Desea eliminar el metodo de pago?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-aceptar-modal" onclick="confirmar()">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Admin Menu -->
     <?php include("menus/footer_general.php"); ?>
     <!-- End Admin Menu -->
 
-    <!-- jQuery -->
     <script src="js/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
+    <script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.min.js"></script>
 
     <!-- popper.min -->
@@ -172,7 +155,7 @@ require 'bd/conexion.php';
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
     <!-- responseive menu -->
-    <script src="js/metodo-pago-ecomerce.js"></script>
+    <script src="js/confirmar-tarjeta-ecomerce.js"></script>
 
 
 </body>

@@ -109,7 +109,7 @@ require 'bd/conexion.php';
                                             <p class="t2" id="total"></p>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-6">
-                                          <a href="nuevo-envio-ecomerce.php"><button class="btn btn-lg-link" type="button" role="button">Continuar</button></a>
+                                          <a onclick="comrpaslindas()"><button class="btn btn-lg-link" type="button" role="button">Continuar</button></a>
                                         </div>
                                     </div>
 
@@ -151,6 +151,10 @@ require 'bd/conexion.php';
   <script src="js/bootstrap-input-spinner.js"></script>
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
+
+        <script>
+        var iduser = "<?php echo $_SESSION['user_id']?>";
+        </script>
 
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>

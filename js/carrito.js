@@ -1,5 +1,6 @@
 var carrito = JSON.parse(localStorage.getItem('carrito'));
 var total = 0;
+var iduser;
 $(document).ready(function() {
     pintarCarrito();
 });
@@ -114,4 +115,17 @@ function res(index){
         pintarCarrito();
     }
     
+}
+
+function comrpaslindas(){ 
+    console.log(iduser);
+    if(iduser == undefined){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Iniciar secion para continuar la compra."
+        });
+    }else{
+        location.href="nuevo-envio-ecomerce.php";
+    }
 }

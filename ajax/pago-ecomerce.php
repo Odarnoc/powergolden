@@ -56,17 +56,8 @@ $chargeData = array(
     $charge =false;
     $charge = $openpay->charges->create($chargeData);
 
-    $usuario = R::dispense('usuarios');
-    $usuario->nombre = $_POST["nombre"];
-    $usuario->telefono = $_POST["telefono"];
-    $usuario->correo = $_POST["correo"];
-    $usuario->pass = '0000000000';
-    $usuario->apellidos = $_POST["apellido"];
-    $usuario->rol = 1;
-    $iduser = R::store($usuario);
-
             $venta = R::dispense('ventas');
-            $venta->user_id = $iduser;
+            $venta->user_id = $_POST['id'];
             $venta->fecha = new DateTime();
             $venta->total = $_POST['total'];
             $id_venta = R::store($venta);
@@ -85,7 +76,4 @@ $chargeData = array(
 
             }
             echo json_encode($response);
-        
-
-        
 ?>

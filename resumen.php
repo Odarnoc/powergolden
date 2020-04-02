@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'bd/conexion.php';
+$user_id = $_SESSION["user_id"];
 
 ?>
 
@@ -138,7 +139,7 @@ require 'bd/conexion.php';
                                 </table>
                             </div>
 
-                            <form method="POST" id="payment-form">
+                            <form method="POST" id="payment-formfinal">
                                 <div class="row row-btns-checkout mt-40">
                                     <div class="col-lg-6 col-md-6 col-6">
                                         <a href="tarjetas-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
@@ -195,6 +196,10 @@ require 'bd/conexion.php';
 
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
+
+    <script>
+        var iduser = <?php echo $user_id ?>;
+    </script>
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>

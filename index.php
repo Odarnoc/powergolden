@@ -30,9 +30,10 @@ R::store($visita);
 <!doctype html>
 <html lang="es">
 
-<head><meta charset="gb18030">
+<head>
+  <meta charset="gb18030">
   <!-- Required meta tags -->
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
@@ -298,7 +299,7 @@ R::store($visita);
 
             <div class="row mt-30">
               <div class="col-lg-6 col-md-6">
-                <button type="button" data-dismiss="modal" class="btn btn-lg-modal btn-cliente-temporal">Cliente temporal</button>
+                <a href="iniciar-sesion-cliente.php"><button type="button" class="btn btn-lg-modal btn-cliente-temporal">Cliente temporal</button></a>
               </div>
               <div class="col-lg-6 col-md-6">
                 <a href="iniciar-sesion-oficina.php"><button type="button" class="btn btn-lg-modal btn-empresario">Empresario independiente</button></a>
@@ -333,6 +334,11 @@ R::store($visita);
   <!-- scrollIt -->
   <script src="js/scrollIt.min.js"></script>
 
+  <script>
+    var id = <?php echo $user_id ?>;
+    
+  </script>
+
   <!-- custom scripts -->
   <script src="js/scripts.js"></script>
 
@@ -344,7 +350,7 @@ R::store($visita);
       $('#inicio-active').addClass("active");
     });
   </script>
-  
+
   <script type="text/javascript" src="http://powergolden.com.mx/livechat/php/app.php?widget-init.js"></script>
 
 </body>
