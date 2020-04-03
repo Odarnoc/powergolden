@@ -99,14 +99,14 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
           <div class="d-modal-cliente">
             <p class="t1">Para la recuperacion de su cuenta se cobrara un monto de $500.00 MX</p>
             <div class="form-group">
-            <p>Codigo de socio.</p>
-            <input type="text" id="codigore" class="form-control input-form" required />
-            <p>Correo electronico.</p>
-            <input type="text" id="correore" class="form-control input-form" required />
+              <p>Codigo de socio.</p>
+              <input type="text" id="codigore" class="form-control input-form" required />
+              <p>Correo electronico.</p>
+              <input type="text" id="correore" class="form-control input-form" required />
             </div>
             <div class="row mt-30">
               <div class="col-lg-6 col-md-6" style="margin: auto;">
-                <button style="background-color: #49B7F3; color:white;"type="button" onclick="infocliente()" class="btn btn-lg-modal btn-cliente-temporal">Recuperar cuenta</button>
+                <button style="background-color: #49B7F3; color:white;" type="button" data-toggle="modal" data-target="#modalPagar" class="btn btn-lg-modal btn-cliente-temporal">Recuperar cuenta</button>
               </div>
             </div>
 
@@ -118,9 +118,71 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
       </div>
     </div>
   </div>
+
+  <!-- Modal Metodo de pago -->
+  <div class="modal fade" id="modalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Metodos de pago.</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-6">
+              <button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalGenerarReferencia"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-6">
+              <button type="button" class="btn btn-lg-modal" onclick="infocliente()"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
+            </div>
+
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <div id="paypal-button-container"></div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12" id="container"></div>
+
+          </div>
+
+
+          <br>
+          <div class="row mt-1" id="div_pago" style="display:none;">
+            <div class="col-lg-12 col-md-12 col-12">
+              <button type="button" onclick="sale();" class="btn btn-lg-blue btn-bg-blue">Completar pago</button>
+
+            </div>
+          </div>
+          <div class="row mt-1">
+            <div class="col-lg-12 col-md-12 col-12">
+              <button type="button" onclick="sale_externo();" class="btn btn-lg-blue btn-bg-blue">Pago Externo</button>
+
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <!-- jQuery -->
   <script src="js/jquery-3.0.0.min.js"></script>
   <script src="js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
   <!-- popper.min -->
   <script src="js/popper.min.js"></script>
@@ -143,6 +205,9 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
   <script src="js/sweetalert2.js"></script>
 
   <script src="js/recuperar-cuenta.js"></script>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX" data-sdk-integration-source="button-factory"></script>
+  <script async   src="https://pay.google.com/gp/p/js/pay.js"   onload="onGooglePayLoaded()"></script>
 
 
 </body>

@@ -109,8 +109,9 @@ $user_id = $_SESSION["user_id"];
                                                         </label>
                                                     </div>
                                                     <p style="padding-left: 3px " class="small-text-cuenta ml-3">Expiracion: <a class="small-text-cuenta" id="mestar"></a>/<a class="small-text-cuenta" id="anotar"></a></p>
-                                                    <br>
-                                                    <h6 style="padding-left: 3px " class="ml-3">Monto total: $<a id="totalgeneral"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="ml-3">Monto total: $<a id="ton"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="ml-3">Descuento: $<a id="tdesc"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="ml-3">Monto total con IVA: $<a id="totalgeneral"></a></h6>
                                                 </div>
                                             </div>
                                         </div>
