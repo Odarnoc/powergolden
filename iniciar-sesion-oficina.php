@@ -20,6 +20,7 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/secundary-style.css">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
@@ -33,6 +34,10 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+
+  <!-- OpenPay -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
   <title>Power Golden | El Mundo de la Herbolaria</title>
 
@@ -106,7 +111,7 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
             </div>
             <div class="row mt-30">
               <div class="col-lg-6 col-md-6" style="margin: auto;">
-                <button style="background-color: #49B7F3; color:white;" type="button" data-toggle="modal" data-target="#modalPagar" class="btn btn-lg-modal btn-cliente-temporal">Recuperar cuenta</button>
+                <button style="background-color: #49B7F3; color:white;" onclick="infocliente()" type="button" data-toggle="modal" data-target="#modalPagar" class="btn btn-lg-modal btn-cliente-temporal">Recuperar cuenta</button>
               </div>
             </div>
 
@@ -124,7 +129,7 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Metodos de pago.</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Metodo de pago</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -132,24 +137,29 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
         <div class="modal-body">
 
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-6">
-              <button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalGenerarReferencia"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
+            <div class="col-lg-4 col-md-4 col-4">
+              <button type="button" class="btn btn-lg-modal btn-pago-tarjeta" onclick="referencia()"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
             </div>
-            <div class="col-lg-6 col-md-6 col-6">
-              <button type="button" class="btn btn-lg-modal" onclick="infocliente()"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
+            <div class="col-lg-4 col-md-4 col-4">
+              <button type="button" class="btn btn-lg-modal" onclick="enviar()"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
             </div>
-
+            <div class="col-lg-4 col-md-4 col-4">
+              <button type="button" class="btn btn-lg-modal" onclick="referenciaBanco()"><i class="fas fa-credit-card mr-2"></i>Referencia Bancaria</button>
+            </div>
           </div>
           <br>
           <div class="row">
             <div class="col-lg-12 col-md-12 col-12">
-              <div id="paypal-button-container"></div>
+              <div id="paypal-button-container">
+
+              </div>
             </div>
           </div>
           <br>
           <div class="row">
-            <div class="col-lg-12 col-md-12 col-12" id="container"></div>
+            <div class="col-lg-12 col-md-12 col-12 botonGooglePay" id="container">
 
+            </div>
           </div>
 
 
@@ -160,13 +170,6 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
 
             </div>
           </div>
-          <div class="row mt-1">
-            <div class="col-lg-12 col-md-12 col-12">
-              <button type="button" onclick="sale_externo();" class="btn btn-lg-blue btn-bg-blue">Pago Externo</button>
-
-            </div>
-          </div>
-
 
         </div>
         <div class="modal-footer">
@@ -180,8 +183,10 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
 
   <!-- jQuery -->
   <script src="js/jquery-3.0.0.min.js"></script>
+  <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
+  <script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
   <script src="js/jquery-migrate-3.0.0.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
   <!-- popper.min -->
@@ -193,8 +198,12 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
   <!-- scrollIt -->
   <script src="js/scrollIt.min.js"></script>
 
+  <!-- PayPal -->
+  <script src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX" data-sdk-integration-source="button-factory"></script>
+
   <!-- custom scripts -->
   <script src="js/scripts.js"></script>
+
   <!-- responseive menu -->
   <script src="js/menu-movil.js"></script>
 
@@ -206,9 +215,8 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
 
   <script src="js/recuperar-cuenta.js"></script>
 
-  <script src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX" data-sdk-integration-source="button-factory"></script>
-  <script async   src="https://pay.google.com/gp/p/js/pay.js"   onload="onGooglePayLoaded()"></script>
-
+  <!-- GooglePay -->
+  <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
 
 </body>
 

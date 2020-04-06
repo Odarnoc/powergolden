@@ -1,9 +1,9 @@
 <?php
- session_start();
+session_start();
 
- if(!isset($_SESSION["user_id"])){
-    header('Location: index.php');
- }
+if (!isset($_SESSION["user_id"])) {
+	header('Location: index.php');
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -32,16 +32,17 @@
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-	
+
 
 
 	<title>POS Power Golden | El Mundo de la Herbolaria</title>
 
 </head>
 <style>
-.gpay-button.long{
-	width:100% !important;
-}</style>
+	.gpay-button.long {
+		width: 100% !important;
+	}
+</style>
 
 <body class="bg-gray" id="cuerpo">
 
@@ -55,10 +56,10 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <p class="nav-link mb-0" id="frase"></p>
-                        </li>
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<p class="nav-link mb-0" id="frase"></p>
+						</li>
 						<!--<li class="nav-item">
                             <div id="inv_chart"></div>
                         </li>
@@ -69,12 +70,12 @@
                             <p class="nav-link mb-0"><b>(<span id="cantidad"></span>)</b> Prod. en Inventario</p>
                         </li>-->
 						<li class="nav-item">
-                            <div id="inv_chart"></div>
-                        </li>
+							<div id="inv_chart"></div>
+						</li>
 						<li class="nav-item">
-                            <div id="ventas_chart"></div>
-                        </li>
-                    </ul>
+							<div id="ventas_chart"></div>
+						</li>
+					</ul>
 
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
@@ -82,7 +83,7 @@
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-user-circle mr-2"></i><?php echo $_SESSION['username']?>
+								<i class="fas fa-user-circle mr-2"></i><?php echo $_SESSION['username'] ?>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<!--<a class="dropdown-item" href="#"><i class="fas fa-star mr-2"></i>Opción uno</a>
@@ -96,8 +97,8 @@
 
 		</div>
 	</section>
-<input type="hidden" id="user_id" value="<?php $_SESSION["user_id"]?>">
-<input type="hidden" id="sucursal_id" value="<?php $_SESSION["sucursal_id"]?>">
+	<input type="hidden" id="user_id" value="<?php $_SESSION["user_id"] ?>">
+	<input type="hidden" id="sucursal_id" value="<?php $_SESSION["sucursal_id"] ?>">
 
 	<section class="sec-body-pos">
 
@@ -116,28 +117,28 @@
 
 							<div class="owl-carousel owl-theme">
 								<div class="item">
-									<a class="btn btn-menu-slide active-slide" onclick="change_category(0);"  role="button"><i class="fas fa-star ying-yang mr-3"></i>Todos</a>
+									<a class="btn btn-menu-slide active-slide" onclick="change_category(0);" role="button"><i class="fas fa-star ying-yang mr-3"></i>Todos</a>
 								</div>
 								<div class="item">
 									<a class="btn btn-menu-slide" onclick="change_category(1);" role="button"><i class="fas fa-circle cafe mr-3"></i>Línea Café</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide"  onclick="change_category(2);" role="button"><i class="fas fa-circle amarilla mr-3"></i>Línea Amarilla</a>
+									<a class="btn btn-menu-slide" onclick="change_category(2);" role="button"><i class="fas fa-circle amarilla mr-3"></i>Línea Amarilla</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide"  onclick="change_category(3);" role="button"><i class="fas fa-circle rosa mr-3"></i>Línea Rosa</a>
+									<a class="btn btn-menu-slide" onclick="change_category(3);" role="button"><i class="fas fa-circle rosa mr-3"></i>Línea Rosa</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide"  onclick="change_category(4);" role="button"><i class="fas fa-circle tinta mr-3"></i>Línea Tinta</a>
+									<a class="btn btn-menu-slide" onclick="change_category(4);" role="button"><i class="fas fa-circle tinta mr-3"></i>Línea Tinta</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide"  onclick="change_category(5);" role="button"><i class="fas fa-circle verde mr-3"></i>Línea Verde</a>
+									<a class="btn btn-menu-slide" onclick="change_category(5);" role="button"><i class="fas fa-circle verde mr-3"></i>Línea Verde</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide"  onclick="change_category(6);" role="button"><i class="fas fa-circle ying-yang mr-3"></i>Línea Yin Yang</a>
+									<a class="btn btn-menu-slide" onclick="change_category(6);" role="button"><i class="fas fa-circle ying-yang mr-3"></i>Línea Yin Yang</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide"  onclick="change_category(7);" role="button"><i class="fas fa-circle estrella mr-3"></i>Línea Estrella</a>
+									<a class="btn btn-menu-slide" onclick="change_category(7);" role="button"><i class="fas fa-circle estrella mr-3"></i>Línea Estrella</a>
 								</div>
 
 							</div>
@@ -146,8 +147,8 @@
 
 						<div class="d-products-list">
 							<div class="row" id="rowproductos">
-								
-								
+
+
 							</div>
 						</div>
 
@@ -158,22 +159,22 @@
 
 				<div class="col-lg-4 col-md-4">
 					<div class="d-payment-pos">
-					<select class="form-control input-pos select-venta-pos" id="tipo_venta" onchange="cambio_tipo_venta()">
+						<select class="form-control input-pos select-venta-pos" id="tipo_venta" onchange="cambio_tipo_venta()">
 							<option hidden value="">Seleccionar tipo de venta</option>
 							<option value="0">Cliente Temporal</option>
 							<option value="1">Empresario Independiente</option>
 						</select>
-						<div  id="row_add_kits" style="display:none;">
-						<select class="form-control input-pos mt-3" id="tipo_kit" onchange="agregar_kit()">
-							<option hidden value="">Seleccionar tipo de kit</option>
-						</select>
+						<div id="row_add_kits" style="display:none;">
+							<select class="form-control input-pos mt-3" id="tipo_kit" onchange="agregar_kit()">
+								<option hidden value="">Seleccionar tipo de kit</option>
+							</select>
 						</div>
 						<div class="row">
 							<div class="col-lg-8 col-md-8 col-8 pr-0">
 
-								<select id="sector" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+								<select id="sector" data-live-search="true" class=" selectpicker form-control input-pos select-cliente-pos mt-3">
 									<option value="0">Seleccionar cliente</option>
-									
+
 
 								</select>
 							</div>
@@ -214,7 +215,7 @@
 									<p class="t1">Subtotal: <b id="subtotalcarrito">$0.00</b></p>
 								</div>
 
-								<div class="col-lg-6 col-md-6 col-6" >
+								<div class="col-lg-6 col-md-6 col-6">
 									<div class="form-group row mb-0" style="display:none">
 										<label for="input-descuento" class="col-sm-7 col-7 col-form-label">Descuento(%):</label>
 										<div class="col-sm-5 pl-0 pr-0 col-5">
@@ -249,7 +250,7 @@
 								</div>
 
 								<div class="col-lg-6 col-md-6 col-6">
-								<button type="button" class="btn btn-lg-pos btn-bg-blue" onclick="sale_modal()">Pagar</button>
+									<button type="button" class="btn btn-lg-pos btn-bg-blue" onclick="sale_modal()">Pagar</button>
 								</div>
 
 							</div>
@@ -262,104 +263,104 @@
 			</div>
 		</div>
 	</section>
-	<section class="sec-ticket" style="width:1440px !important; display:none;"  id="sec-ticket" >
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10" >
-                    <div class="d-ticket">
+	<section class="sec-ticket" style="width:1440px !important; display:none;" id="sec-ticket">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-10">
+					<div class="d-ticket">
 
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-6">
-                                <p class="title-ticket">Ticket</p>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-6">
-                                <img class="img-ticket" src="../images/logo-navbar.png" alt="">
-                            </div>
-                        </div>
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-6">
+								<p class="title-ticket">Ticket</p>
+							</div>
+							<div class="col-lg-6 col-md-6 col-6">
+								<img class="img-ticket" src="../images/logo-navbar.png" alt="">
+							</div>
+						</div>
 
-                        <div class="d-info-top">
+						<div class="d-info-top">
 
-                            <p class="t1">Fecha: <b id="fecha_ticket">30/11/2020 13:12 PM</b> </p>
-                            <p class="t1">Folio: <b id="folio_ticket">0357</b></p>
+							<p class="t1">Fecha: <b id="fecha_ticket">30/11/2020 13:12 PM</b> </p>
+							<p class="t1">Folio: <b id="folio_ticket">0357</b></p>
 							<div id="cliente_ticket">
-								<p class="t1" >Cliente: <b id="nombre_cliente">Brayam Morando</b></p>
-								<p class="t1" >Teléfono cliente: <b id="telefono_cliente">33 2269 2108</b></p>
+								<p class="t1">Cliente: <b id="nombre_cliente">Brayam Morando</b></p>
+								<p class="t1">Teléfono cliente: <b id="telefono_cliente">33 2269 2108</b></p>
 							</div>
 							<div id="referencia_ticket">
-								<p class="t1" >Referencia: <b id="referencia_cliente">Brayam Morando</b></p>
+								<p class="t1">Referencia: <b id="referencia_cliente">Brayam Morando</b></p>
 							</div>
 
-                        </div>
+						</div>
 
-                        <div class="d-table-ticket">
-                            <div class="table-responsive">
-                                <table class="table table-borderless table-ticket" id="tabla_ticket">
-                                    <thead>
-                                        <tr>
-                                            <th >Producto</th>
-                                            <th >Cant.</th>
-                                            <th id="row_precio_table" >Precio</th>
-                                            <th id="row_total_table">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        
-                        <div class="d-footer-ticket">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-4 pr-0">
-                                    <p class="t1 text-center">Productos: <b id="productos_ticket"></b></p>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-4 pl-0 pr-0">
-                                    <p class="t1 text-center">Subtotal: <b id="subtotal_ticket"></b></p>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-4 pl-0">
-                                    <p class="t1 text-center">IVA: <b id="iva_ticket"> </b></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 col-12">
-                                    <p class="t2">Total: <span id="total_ticket"></span></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-4 pr-0">
-                                    <p class="t1 text-center">Pago: <b id="recibido_ticket"></b></p>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-4 pl-0 pr-0">
-                                    <p class="t1 text-center">Cambio: <b id="cambio_ticket"></b></p>
-                                </div>
-                               
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <div class="row mt-3">
-                            <div class="col-lg-12 col-md-12">
-                                <p class="t1 text-center">¡Gracias por tu preferencia!</p>
-                                <p class="t1 text-center"><b>Power Golden</b></p>
-                            </div>
-                        </div>
-                        
-                       
+						<div class="d-table-ticket">
+							<div class="table-responsive">
+								<table class="table table-borderless table-ticket" id="tabla_ticket">
+									<thead>
+										<tr>
+											<th>Producto</th>
+											<th>Cant.</th>
+											<th id="row_precio_table">Precio</th>
+											<th id="row_total_table">Total</th>
+										</tr>
+									</thead>
+									<tbody>
 
 
-                    </div>
-                </div>
+									</tbody>
+								</table>
+							</div>
 
-            </div>
-        </div>
+						</div>
 
-    </section>
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="d-footer-ticket">
+							<div class="row">
+								<div class="col-lg-4 col-md-6 col-4 pr-0">
+									<p class="t1 text-center">Productos: <b id="productos_ticket"></b></p>
+								</div>
+								<div class="col-lg-4 col-md-6 col-4 pl-0 pr-0">
+									<p class="t1 text-center">Subtotal: <b id="subtotal_ticket"></b></p>
+								</div>
+								<div class="col-lg-4 col-md-6 col-4 pl-0">
+									<p class="t1 text-center">IVA: <b id="iva_ticket"> </b></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 col-md-12 col-12">
+									<p class="t2">Total: <span id="total_ticket"></span></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4 col-md-6 col-4 pr-0">
+									<p class="t1 text-center">Pago: <b id="recibido_ticket"></b></p>
+								</div>
+								<div class="col-lg-4 col-md-6 col-4 pl-0 pr-0">
+									<p class="t1 text-center">Cambio: <b id="cambio_ticket"></b></p>
+								</div>
+
+							</div>
+						</div>
+
+
+
+						<div class="row mt-3">
+							<div class="col-lg-12 col-md-12">
+								<p class="t1 text-center">¡Gracias por tu preferencia!</p>
+								<p class="t1 text-center"><b>Power Golden</b></p>
+							</div>
+						</div>
+
+
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</section>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -389,14 +390,14 @@
 								<label class="floating-label">Apellido Materno</label>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<div class="floating-label-group">
-								<input type="text" class="form-control input-form" name="email"  required />
+								<input type="text" class="form-control input-form" name="email" required />
 								<label class="floating-label">Correo electrónico</label>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<div class="floating-label-group">
 								<input type="text" class="form-control input-form" name="direccion" required />
@@ -410,7 +411,7 @@
 								<label class="floating-label">Teléfono</label>
 							</div>
 						</div>
-					
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
@@ -420,8 +421,8 @@
 			</div>
 		</div>
 	</div>
-		<!-- Modal Metodo de pago -->
-		<div class="modal fade" id="modalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<!-- Modal Metodo de pago -->
+	<div class="modal fade" id="modalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -457,7 +458,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									
+
 
 								</tbody>
 							</table>
@@ -468,7 +469,7 @@
 					<p class="p-metodo-pago">Metodo de pago</p>
 
 					<div class="row">
-						<div class="col-lg-4 col-md-4 col-4" >
+						<div class="col-lg-4 col-md-4 col-4">
 							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalGenerarReferencia"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
 						</div>
 						<div class="col-lg-4 col-md-4 col-4">
@@ -481,28 +482,28 @@
 					</div>
 					<br>
 					<div class="row">
-					<div class="col-lg-12 col-md-12 col-12" >
-					<div id="paypal-button-container"></div>
-					</div>
+						<div class="col-lg-12 col-md-12 col-12">
+							<div id="paypal-button-container"></div>
+						</div>
 					</div>
 					<br>
 					<div class="row">
-					<div class="col-lg-12 col-md-12 col-12" id="container"></div>
-					
+						<div class="col-lg-12 col-md-12 col-12" id="container"></div>
+
 					</div>
-				
-					
+
+
 					<br>
 					<div class="row mt-1" id="div_pago" style="display:none;">
 						<div class="col-lg-12 col-md-12 col-12">
 							<button type="button" onclick="sale();" class="btn btn-lg-blue btn-bg-blue">Completar pago</button>
-							
+
 						</div>
 					</div>
-					<div class="row mt-1" >
+					<div class="row mt-1">
 						<div class="col-lg-12 col-md-12 col-12">
 							<button type="button" onclick="sale_externo();" class="btn btn-lg-blue btn-bg-blue">Pago Externo</button>
-							
+
 						</div>
 					</div>
 
@@ -517,28 +518,29 @@
 
 	<!-- Modal Metodo de pago -->
 	<div class="modal fade" id="modalGenerarReferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Referencia</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body pt-5 pb-5">
-                <form id="payment_reference">
-                
-                    
-                    <input type="text" id="n_referencia" style="margin-top:15px;"class="form-control input-pos" placeholder="Referencia" required>
-                    
-                    <button type="submit" class="btn btn-lg-blue mt-4" >Validar referencia de pago</button>
-                            </form>
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Referencia</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body pt-5 pb-5">
+					<form id="payment_reference">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+						<input type="text" id="n_referencia" style="margin-top:15px;" class="form-control input-pos" placeholder="Referencia" required>
+
+						<button type="submit" class="btn btn-lg-blue mt-4">Validar referencia de pago</button>
+					</form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
@@ -553,7 +555,7 @@
 					<p class="p-metodo-pago">Datos bancarios</p>
 
 					<form id="card_payment" class="form-tarjeta-modal">
-					<input type="hidden" name="token_id" id="token_id">
+						<input type="hidden" name="token_id" id="token_id">
 
 						<div class="form-group">
 							<div class="floating-label-group">
@@ -592,22 +594,22 @@
 						<div class="form-group">
 							<div class="floating-label-group">
 								<input type="number" class="form-control input-form-border" id="cantidad_tarjeta" required />
-								<label class="floating-label" >Cantidad a cobrar</label>
+								<label class="floating-label">Cantidad a cobrar</label>
 							</div>
 						</div>
-					
-
-
 				</div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-cancelar-modal btn-cancelar-tarjeta" data-dismiss="modal">Cancelar</button>
 					<button type="submit" id="pay-button" class="btn btn-aceptar-modal">Aceptar</button>
-					<button type="button"  style="display:none;" class="btn btn-aceptar-modal">Aceptar</button>
+					<button type="button" style="display:none;" class="btn btn-aceptar-modal">Aceptar</button>
 					</form>
 				</div>
+
 			</div>
 		</div>
 	</div>
+
 	<div class="modal fade" id="modalDeleteKits" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
@@ -620,23 +622,23 @@
 				<div class="modal-body">
 
 					<p class="p-metodo-pago">Eliminar Kit</p>
-						<div class="form-group">
-							<div class="floating-label-group">
+					<div class="form-group">
+						<div class="floating-label-group">
 							<div class="table-responsive table-pos mt-3">
-							<table class="table table-borderless" id="tablakits">
-								<thead>
-									<tr>
-										<th >Kit</th>
-										<th >Precio</th>
-										<th ><i class="fas fa-times"></i></th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
-						</div>
+								<table class="table table-borderless" id="tablakits">
+									<thead>
+										<tr>
+											<th>Kit</th>
+											<th>Precio</th>
+											<th><i class="fas fa-times"></i></th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
 							</div>
 						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-cancelar-modal btn-cancelar-tarjeta" data-dismiss="modal">Cancelar</button>
@@ -644,40 +646,41 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="modal fade" id="modalGenerarPagoTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pago con tarjeta</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pago con tarjeta</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<form id="pago_tarjeta" class="form-tarjeta-modal">
-                <div class="modal-body pt-5 pb-5">
+					<div class="modal-body pt-5 pb-5">
 
-                    <select class="form-control input-pos-modal mb-3" name="" id="tipo_tarjeta" required>
-                        <option hidden value="">Tipo de Tarjeta</option>
-                        <option value="1">Tarjeta de Credito</option>
-                        <option value="2">Tarjeta de Debito</option>
-                    </select>
+						<select class="form-control input-pos-modal mb-3" name="" id="tipo_tarjeta" required>
+							<option hidden value="">Tipo de Tarjeta</option>
+							<option value="1">Tarjeta de Credito</option>
+							<option value="2">Tarjeta de Debito</option>
+						</select>
 
-                    <select class="form-control input-pos-modal mb-3" name="" id="tipo_banco" required>
-                        <option hidden value="">Banco</option>
-                        <option value="1">Banorte</option>
-                        <option value="2">BBVA</option>
-                    </select>
+						<select class="form-control input-pos-modal mb-3" name="" id="tipo_banco" required>
+							<option hidden value="">Banco</option>
+							<option value="1">Banorte</option>
+							<option value="2">BBVA</option>
+						</select>
 
-                    <input type="number" class="form-control input-pos-modal" id="cantidad_tarjetas" placeholder="Cantidad" required>
+						<input type="number" class="form-control input-pos-modal" id="cantidad_tarjetas" placeholder="Cantidad" required>
 
-                    <button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+						<button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
 
-                </div>
-                <div class="modal-footer">
-					<button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
-</form>
-                </div>
-            </div>
-        </div>
-    </div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
 
 	<!-- jQuery -->
 	<script src="../js/jquery-3.0.0.min.js"></script>
@@ -685,7 +688,7 @@
 	<script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-	
+
 	<script src="../js/jquery-migrate-3.0.0.min.js"></script>
 
 	<!-- popper.min -->
@@ -704,10 +707,10 @@
 	<script src="js/vender.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="../js/jquery.easypiechart.min.js"></script>
+	<script src="../js/jquery.easypiechart.min.js"></script>
 
-  
-<script src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX" data-sdk-integration-source="button-factory"></script>
+
+	<script src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX" data-sdk-integration-source="button-factory"></script>
 
 
 
@@ -715,7 +718,7 @@
 		$(document).ready(function() {
 			$('.owl-carousel').owlCarousel();
 		});
-		
+
 
 
 		var owl = $('.owl-carousel');
@@ -762,8 +765,8 @@
 	<script>
 
 	</script>
-	<script async
-  src="https://pay.google.com/gp/p/js/pay.js"
-  onload="onGooglePayLoaded()"></script>
+	<script async   src="https://pay.google.com/gp/p/js/pay.js"   onload="onGooglePayLoaded()"></script>
 
-</body></html>
+</body>
+
+</html>
