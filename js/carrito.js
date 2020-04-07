@@ -1,7 +1,8 @@
 var carrito = JSON.parse(localStorage.getItem('carrito'));
 var total = 0;
 var iduser;
-$(document).ready(function() {
+var can = 0;
+$(document).ready(function () {
     pintarCarrito();
 });
 
@@ -10,7 +11,9 @@ function pintarCarrito() {
 
     var listaProds = "";
     total = 0;
-    carrito.forEach(function(item, index) {
+    var canprodp = 0;
+    var descuento = 0;
+    carrito.forEach(function (item, index) {
         var totalTemp = parseFloat(item.precio) * parseInt(item.cant);
         var html = '<div class="d-item-carrito">' +
             '<div class="row">' +
@@ -26,15 +29,15 @@ function pintarCarrito() {
             '<p class="t3">$' + item.precio + '</p>' +
             '<div class="row">' +
             '<div class="col-lg-6 col-md-6 col-6 col-8">' +
-            '<div class="input-group mb-3">'+
-            '<div class="input-group-prepend">'+
-            '<button class="btn btn-dark btn-sm" id="minus-btn" onclick="res(\'' + index + '\')"><i class="fa fa-minus"></i></button>'+
-            '</div>'+
-            '<input type="number" id="cantProdsEdit' + index + '" onchange="editarCant(\'' + index + '\')" class="form-control form-control-sm" value="' + item.cant + '" min="1">'+
-            '<div class="input-group-prepend">'+
-            '<button class="btn btn-dark btn-sm" id="plus-btn" onclick="sum(\'' + index + '\')"><i class="fa fa-plus"></i></button>'+
-            '</div>'+
-            '</div>'+
+            '<div class="input-group mb-3">' +
+            '<div class="input-group-prepend">' +
+            '<button class="btn btn-dark btn-sm" id="minus-btn" onclick="res(\'' + index + '\')"><i class="fa fa-minus"></i></button>' +
+            '</div>' +
+            '<input type="number" id="cantProdsEdit' + index + '" onchange="editarCant(\'' + index + '\')" class="form-control form-control-sm" value="' + item.cant + '" min="1">' +
+            '<div class="input-group-prepend">' +
+            '<button class="btn btn-dark btn-sm" id="plus-btn" onclick="sum(\'' + index + '\')"><i class="fa fa-plus"></i></button>' +
+            '</div>' +
+            '</div>' +
             '</div>' +
             '</div>' +
             '<button class="btn btn-link-carrito" onclick="eliminar(\'' + index + '\')" role="button">Eliminar producto</button>' +
@@ -43,13 +46,40 @@ function pintarCarrito() {
             '</div>' +
             '</div>';
         listaProds += html;
+        canprodp += item.cant;
         total += totalTemp;
+        var conteop = 0;
+        var restarc = 0;
+        for (var i = canprodp; i > 0; i--) {
+            conteop++;
+            console.log(canprodp);
+            if (conteop == 5) {
+                total -= item.precio;
+                restarc += 5;
+                conteop = 0;
+                descuento += parseInt(item.precio);
+                console.log(descuento);
+            }
+        }
+        canprodp -= restarc;
+
     });
+
+    if (canprodp == 4) {
+        $('#bcompra').prop('disabled', true);
+        $('#ptext').show();
+    } else {
+        $('#bcompra').prop('disabled', false);
+        $('#ptext').hide();;
+    }
+
     $('#lista-productos').empty();
     $('#lista-productos').append(listaProds);
     $('#cantProds').text('(' + carrito.length + ')');
     $('#total').text('$' + total);
     $('#total2').text('$' + total);
+    console.log(descuento);
+    localStorage.setItem("descuento",descuento);
 }
 
 function editarCant(index) {
@@ -72,7 +102,7 @@ function confirmarCompra() {
         url: 'ajax/realizarCompra.php',
         data: { carrito: carrito, total: total },
         type: 'POST',
-        success: function(respuesta) {
+        success: function (respuesta) {
             var json_mensaje = JSON.parse(respuesta);
             if (json_mensaje.error != undefined) {
                 Swal.fire({
@@ -92,7 +122,7 @@ function confirmarCompra() {
                 pintarCarrito();
             }
         },
-        error: function(er) {
+        error: function (er) {
             var json_mensaje = JSON.parse(er.responseText);
             console.log(json_mensaje);
             Swal.fire({
@@ -104,28 +134,30 @@ function confirmarCompra() {
     });
 }
 
-function sum(index){
-        carrito[index].cant = parseInt(carrito[index].cant)+1;
-        pintarCarrito();
+function sum(index) {
+    carrito[index].cant = parseInt(carrito[index].cant) + 1;
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    pintarCarrito();
 }
 
-function res(index){
-    if(carrito[index].cant > 1){
-        carrito[index].cant = parseInt(carrito[index].cant)-1;
+function res(index) {
+    if (carrito[index].cant > 1) {
+        carrito[index].cant = parseInt(carrito[index].cant) - 1;
+        localStorage.setItem('carrito', JSON.stringify(carrito));
         pintarCarrito();
     }
-    
+
 }
 
-function comrpaslindas(){ 
+function comrpaslindas() {
     console.log(iduser);
-    if(iduser == undefined){
+    if (iduser == undefined) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: "Iniciar secion para continuar la compra."
         });
-    }else{
-        location.href="nuevo-envio-ecomerce.php";
+    } else {
+        location.href = "nuevo-envio-ecomerce.php";
     }
 }

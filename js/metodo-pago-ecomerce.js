@@ -4,6 +4,7 @@ var nombre;
 var apellidos;
 var correo;
 var telefono;
+var id = 0;
 $(document).ready(function () {
     datosuser();
     mostrar();
@@ -13,15 +14,6 @@ $(document).ready(function () {
     deviceSessionId = OpenPay.deviceData.setup(
         "payment-form",
         "deviceIdHiddenFieldName"
-    );
-});
-
-$("#payment-forms").submit(function (event) {
-    event.preventDefault();
-    OpenPay.token.extractFormAndCreate(
-        "payment-forms",
-        success_callbakdos,
-        error_callbak
     );
 });
 
@@ -41,6 +33,7 @@ function datosuser() {
         data: { id: iduser },
         success: function (respuesta) {
             var json_mensaje = JSON.parse(respuesta);
+            id = json_mensaje['id'];
             nombre = json_mensaje['nombre'];
             apellidos = json_mensaje['apellidos'];
             correo = json_mensaje['correo'];
@@ -48,22 +41,6 @@ function datosuser() {
             iduse = json_mensaje['id'];
         },
     });
-}
-
-function datostTar() {
-    var nombret = $('#nombre_tarjeta').val();
-    var numt = $('#numero_tarjeta').val();
-    var mest = $('#mes_vencimiento_tarjeta').val();
-    var añot = $('#ano_vencimiento_tarjeta').val();
-    var codigost = $('#cvv_tarjeta').val();
-
-    localStorage.setItem('nombretar', nombret);
-    localStorage.setItem('numerotar', numt);
-    localStorage.setItem('mescadtar', mest);
-    localStorage.setItem('anocadtar', añot);
-    localStorage.setItem('codsegtar', codigost);
-
-    location.href = "resumen.php"
 }
 
 function datosDireccion() {
@@ -79,7 +56,7 @@ function datosDireccion() {
     localStorage.setItem('municipio', mun);
     localStorage.setItem('estado', est);
 
-    location.href = "tarjetas-ecomerce.php"
+    location.href = "resumen.php"
 
 }
 
@@ -90,16 +67,6 @@ function mostrar() {
     $('#psotal').text(localStorage.getItem('codigop'));
     $('#estados').text(localStorage.getItem('estado'));
     $('#nombreuser').text(nombre);
-    $('#tarnumero').text(localStorage.getItem('numerotar').substring(12, 16));
-    $('#mestar').text(localStorage.getItem('mescadtar'));
-    $('#anotar').text(localStorage.getItem('anocadtar'));
-
-    $('#nomtarenv').val(localStorage.getItem('anocadtar'));
-    $('#numtarenv').val(localStorage.getItem('numerotar'));
-    $('#mestarenv').val(localStorage.getItem('mescadtar'));
-    $('#anotarenv').val(localStorage.getItem('anocadtar'));
-    $('#ccvtar').val(localStorage.getItem('codsegtar'));
-
 }
 
 var success_callbak = function (response) {
@@ -224,6 +191,194 @@ var error_callbak = function (response) {
     }
 };
 
-var success_callbakdos = function (response) {
-    datostTar();
+//Aqui empieza  google
+var transaccion_google;
+const baseRequest = {
+    apiVersion: 2,
+    apiVersionMinor: 0
+};
+
+const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
+const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
+const tokenizationSpecification = {
+    type: 'PAYMENT_GATEWAY',
+    parameters: {
+        'gateway': 'example',
+        'gatewayMerchantId': 'exampleGatewayMerchantId'
+    }
+};
+
+const baseCardPaymentMethod = {
+    type: 'CARD',
+    parameters: {
+        allowedAuthMethods: allowedCardAuthMethods,
+        allowedCardNetworks: allowedCardNetworks
+    }
+};
+
+/**
+ * Describe your site's support for the CARD payment method including optional
+ * fields
+ *
+ * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#CardParameters|CardParameters}
+ */
+const cardPaymentMethod = Object.assign(
+    {},
+    baseCardPaymentMethod,
+    {
+        tokenizationSpecification: tokenizationSpecification
+    }
+);
+
+let paymentsClient = null;
+
+function getGoogleIsReadyToPayRequest() {
+    return Object.assign(
+        {},
+        baseRequest,
+        {
+            allowedPaymentMethods: [baseCardPaymentMethod]
+        }
+    );
+}
+function getGooglePaymentDataRequest() {
+    const paymentDataRequest = Object.assign({}, baseRequest);
+    paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
+    paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
+    paymentDataRequest.merchantInfo = {
+        merchantName: 'Productos Power Golden'
+    };
+
+    paymentDataRequest.callbackIntents = ["PAYMENT_AUTHORIZATION"];
+
+    return paymentDataRequest;
+}
+function getGooglePaymentsClient() {
+    if (paymentsClient === null) {
+        paymentsClient = new google.payments.api.PaymentsClient({
+            environment: 'TEST',
+            paymentDataCallbacks: {
+                onPaymentAuthorized: onPaymentAuthorized
+            }
+        });
+    }
+    return paymentsClient;
+}
+
+function onPaymentAuthorized(paymentData) {
+    return new Promise(function (resolve, reject) {
+        // handle the response
+        processPayment(paymentData)
+            .then(function () {
+                resolve({ transactionState: 'SUCCESS' });
+                console.log("Pedos");
+                check_quantities("Google", total_google);
+            })
+            .catch(function () {
+                resolve({
+                    transactionState: 'ERROR',
+                    error: {
+                        intent: 'PAYMENT_AUTHORIZATION',
+                        message: 'Insufficient funds, try again. Next attempt should work.',
+                        reason: 'PAYMENT_DATA_INVALID'
+                    }
+                });
+            });
+    });
+}
+
+function onGooglePayLoaded() {
+    const paymentsClient = getGooglePaymentsClient();
+    paymentsClient.isReadyToPay(getGoogleIsReadyToPayRequest())
+        .then(function (response) {
+            if (response.result) {
+                addGooglePayButton();
+            }
+        })
+        .catch(function (err) {
+            // show error in developer console for debugging
+            console.error(err);
+        });
+}
+
+function addGooglePayButton() {
+    const paymentsClient = getGooglePaymentsClient();
+    const button =
+        paymentsClient.createButton({ onClick: onGooglePaymentButtonClicked });
+    document.getElementById('container').appendChild(button);
+}
+
+function getGoogleTransactionInfo() {
+
+    return transaccion_google;
+}
+
+function onGooglePaymentButtonClicked() {
+    const paymentDataRequest = getGooglePaymentDataRequest();
+    paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
+
+    const paymentsClient = getGooglePaymentsClient();
+    paymentsClient.loadPaymentData(paymentDataRequest);
+}
+
+let attempts = 0;
+
+function processPayment(paymentData) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            // @todo pass payment token to your gateway to process payment
+            paymentToken = paymentData.paymentMethodData.tokenizationData.token;
+
+            if (attempts++ % 2 == 0) {
+                reject(new Error('Every other attempt fails, next one should succeed'));
+            } else {
+                resolve({
+
+                });
+            }
+        }, 500);
+    });
+}
+
+function referencia() {
+    $.ajax({
+        url: 'ajax/pago-referencia-ecomerce.php',
+        type: "post",
+        data: {
+            usuariid: id,
+            nombre: nombre,
+            apellido: apellidos,
+            telefono: telefono,
+            correo: correo,
+            total: localStorage.getItem('totalgen'),
+        },
+        success(data) {
+            console.log(data);
+            swal.close();
+            var datajson = JSON.parse(data)
+            window.open(datajson.url_recibo);
+            $("#modalGenerarReferencia").modal("hide");
+        },
+    });
+}
+
+function referenciaBanco() {
+    $.ajax({
+        url: 'ajax/pago-referencia-banco.php',
+        type: "post",
+        data: {
+            usuariid: localStorage.getItem('id'),
+            nombre: localStorage.getItem('nombre'),
+            apellido: localStorage.getItem('apellidos'),
+            telefono: localStorage.getItem('telefono'),
+            correo: localStorage.getItem('correo'),
+        },
+        success(data) {
+            console.log(data);
+            swal.close();
+            var datajson = JSON.parse(data)
+            window.open(datajson.url_recibo);
+            $("#modalGenerarReferencia").modal("hide");
+        },
+    });
 }
