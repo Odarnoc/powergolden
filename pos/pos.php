@@ -4,6 +4,7 @@
  if(!isset($_SESSION["user_id"])){
     header('Location: index.php');
  }
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -422,7 +423,7 @@
 	</div>
 		<!-- Modal Metodo de pago -->
 		<div class="modal fade" id="modalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLongTitle">Pagar</h5>
@@ -465,33 +466,38 @@
 
 					</div>
 
-					<p class="p-metodo-pago">Metodo de pago</p>
+					<p class="p-metodo-pago">Metodos de pago</p>
 
 					<div class="row">
-						<div class="col-lg-4 col-md-4 col-4" >
-							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" data-toggle="modal" data-target="#modalGenerarReferencia"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
+						<div class="col-sm" >
+							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" onclick='$("#modalPagar").modal("hide");' data-toggle="modal" data-target="#modalGenerarReferencia"><i class="fas fa-credit-card mr-2"></i> Referencia</button>
 						</div>
-						<div class="col-lg-4 col-md-4 col-4">
-							<button type="button" class="btn btn-lg-modal" onclick="card_pay();"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
+						<div class="col-sm">
+							<button type="button" class="btn btn-lg-modal" onclick='card_pay()'><i class="fas fa-credit-card mr-2"></i> Tarjeta</button>
 						</div>
-						<div class="col-lg-4 col-md-4 col-4">
-							<button type="button" class="btn btn-lg-modal" onclick="efective_pay();"><i class="fas fa-coins mr-2"></i> Pago en efectivo</button>
+						<div class="col-sm">
+							<button type="button" class="btn btn-lg-modal" onclick="efective_pay();"><i class="fas fa-coins mr-2"></i> Efectivo</button>
 						</div>
+						<div class="col-sm">
+                            <button type="button" class="btn btn-lg-modal" onclick="transfer_pay();"><i class="fas fa-university mr-2"></i>Transferencia</button>
+                        </div>
+                        <div class="col-sm">
+                            <button type="button" class="btn btn-lg-modal"  onclick="deposito_pay();"><i class="fas fa-university mr-2"></i>Deposito</button>
+                        </div>
 
 					</div>
 					<br>
 					<div class="row">
-					<div class="col-lg-12 col-md-12 col-12" >
+					<div class="col-lg-6 col-md-6 col-6" >
 					<div id="paypal-button-container"></div>
 					</div>
+					<div class="col-lg-6 col-md-6 col-6">
+							<button type="button" onclick='$("#modalTarjeta").modal("toggle");' class="btn btn-lg-blue btn-bg-blue">Pagar con mercado pago</button>	
+						</div>
+						<div class="col-lg-3 col-md-3 col-3" style="display:none;">
+							<button type="button" onclick='enviar_pago_oxxo()' class="btn btn-lg-blue btn-bg-blue">Pagar con oxxo</button>	
+						</div>
 					</div>
-					<br>
-					<div class="row">
-					<div class="col-lg-12 col-md-12 col-12" id="container"></div>
-					
-					</div>
-				
-					
 					<br>
 					<div class="row mt-1" id="div_pago" style="display:none;">
 						<div class="col-lg-12 col-md-12 col-12">
@@ -521,7 +527,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Referencia</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");' aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body pt-5 pb-5">
                 <form id="payment_reference">
@@ -534,12 +540,77 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");'  data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
-    </div>
+	</div>
 	<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Pago con tarjeta</h5>
+					<button type="button" class="close btn-close-tarjeta" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<p class="p-metodo-pago">Datos bancarios</p>
+
+					<form method="post" id="pay" name="pay" >
+                <fieldset>
+					<input type="hidden" name="transaction_amount" id="transaction_amount" value="100">
+					<input type="hidden" name="token" id="token" value="100">
+				<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="cardNumber" data-checkout="cardNumber" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+								<label class="floating-label">Número de la tarjeta</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="cardholderName" data-checkout="cardholderName" />
+								<label class="floating-label">Nombre y apellido</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="cardExpirationMonth" data-checkout="cardExpirationMonth" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+								<label class="floating-label">Mes de vencimiento</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="cardExpirationYear" data-checkout="cardExpirationYear" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+								<label class="floating-label">Año de vencimiento</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="securityCode" data-checkout="securityCode" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+								<label class="floating-label">Código de seguridad</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<select class="form-control input-form-border"  id="installments" class="form-control" name="installments"></select>
+								<label class="floating-label">Cuotas</label>
+							</div>
+						</div>
+                  
+                    
+                    <input type="hidden" name="payment_method_id" id="payment_method_id"/>
+                   
+					<button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+					
+                </fieldset>
+            </form>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -607,7 +678,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<div class="modal fade" id="modalDeleteKits" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
@@ -649,7 +720,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pago con tarjeta</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");' aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<form id="pago_tarjeta" class="form-tarjeta-modal">
                 <div class="modal-body pt-5 pb-5">
@@ -659,20 +730,66 @@
                         <option value="1">Tarjeta de Credito</option>
                         <option value="2">Tarjeta de Debito</option>
                     </select>
-
-                    <select class="form-control input-pos-modal mb-3" name="" id="tipo_banco" required>
-                        <option hidden value="">Banco</option>
-                        <option value="1">Banorte</option>
-                        <option value="2">BBVA</option>
-                    </select>
-
-                    <input type="number" class="form-control input-pos-modal" id="cantidad_tarjetas" placeholder="Cantidad" required>
+					<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_tarjetas" placeholder="Cantidad" required>
+					<input type="text" class="form-control input-pos-modal" id="referencia_tarjetas" placeholder="Referencia" required>
 
                     <button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
 
                 </div>
                 <div class="modal-footer">
-					<button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");' data-dismiss="modal">Cancelar</button>
+</form>
+                </div>
+			</div>
+			<div class="modal fade" id="modalGenerarPagoDeposito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pago con Deposito</h5>
+                    <button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<form id="pago_deposito" class="form-tarjeta-modal">
+                <div class="modal-body pt-5 pb-5">
+
+                    <select class="form-control input-pos-modal mb-3" name="" id="banco_deposito" required>
+                        <option hidden value="">Banco</option>
+                        <option value="1">BBVA</option>
+                        <option value="2">Banorte</option>
+                    </select>
+					<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_deposito" placeholder="Cantidad" required>
+					<input type="text" class="form-control input-pos-modal" id="referencia_deposito" placeholder="Referencia" required>
+
+                    <button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+
+                </div>
+                <div class="modal-footer">
+					<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");' data-dismiss="modal">Cancelar</button>
+</form>
+                </div>
+			</div>
+			<div class="modal fade" id="modalGenerarPagoTransfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pago con Transferencia</h5>
+                    <button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<form id="pago_transfer" class="form-tarjeta-modal">
+                <div class="modal-body pt-5 pb-5">
+
+                    <select class="form-control input-pos-modal mb-3" name="" id="banco_transfer" required>
+                        <option hidden value="">Banco</option>
+                        <option value="1">BBVA</option>
+                        <option value="2">Banorte</option>
+                    </select>
+					<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_transfer" placeholder="Cantidad" required>
+					<input type="text" class="form-control input-pos-modal" id="referencia_transfer" placeholder="Referencia" required>
+
+                    <button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+
+                </div>
+                <div class="modal-footer">
+					<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");' data-dismiss="modal">Cancelar</button>
 </form>
                 </div>
             </div>
@@ -762,8 +879,13 @@
 	<script>
 
 	</script>
+	
+	<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+	<script src="js/mercadopago.js"></script>
+	
 	<script async
   src="https://pay.google.com/gp/p/js/pay.js"
   onload="onGooglePayLoaded()"></script>
+          
 
 </body></html>

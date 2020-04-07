@@ -15,5 +15,9 @@ $lista=R::getAll( "SELECT * from ventas"
 
 
 $products=$lista[0];
+if($lista){
+	$lista=R::getAll( "SELECT * from usuarios WHERE id=".$lista[0]['user_id']);
+	$products['cliente']=$lista[0];
+}
 echo json_encode($products);
 ?>

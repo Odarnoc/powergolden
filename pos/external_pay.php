@@ -70,14 +70,15 @@
 
 					<br>
 					<div class="row">
-					<div class="col-lg-12 col-md-12 col-12" >
+					<div class="col-lg-6 col-md-6 col-6" >
 					<div id="paypal-button-container"></div>
 					</div>
-					</div>
-					<br>
-					<div class="row">
-					<div class="col-lg-12 col-md-12 col-12" id="container"></div>
-					
+					<div class="col-lg-6 col-md-6 col-6">
+							<button type="button" onclick='$("#modalTarjeta").modal("toggle");' class="btn btn-lg-blue btn-bg-blue">Pagar con mercado pago</button>	
+						</div>
+						<div class="col-lg-3 col-md-3 col-3" style="display:none;">
+							<button type="button" onclick='enviar_pago_oxxo()' class="btn btn-lg-blue btn-bg-blue">Pagar con oxxo</button>	
+						</div>
 					</div>
 					<br>
 					<div class="row mt-1" id="div_pago" style="display:none;">
@@ -189,7 +190,73 @@
 
     </section>
 <!-- Modal -->
+
 </form>
+<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Pago con tarjeta</h5>
+					<button type="button" class="close btn-close-tarjeta" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<p class="p-metodo-pago">Datos bancarios</p>
+
+					<form method="post" id="pay" name="pay" >
+                <fieldset>
+					<input type="hidden" name="transaction_amount" id="transaction_amount" value="100">
+					<input type="hidden" name="token" id="token" value="100">
+				<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="cardNumber" data-checkout="cardNumber" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+								<label class="floating-label">Número de la tarjeta</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="cardholderName" data-checkout="cardholderName" />
+								<label class="floating-label">Nombre y apellido</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="cardExpirationMonth" data-checkout="cardExpirationMonth" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+								<label class="floating-label">Mes de vencimiento</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="cardExpirationYear" data-checkout="cardExpirationYear" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+								<label class="floating-label">Año de vencimiento</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<input type="text" class="form-control input-form-border" id="securityCode" data-checkout="securityCode" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+								<label class="floating-label">Código de seguridad</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="floating-label-group">
+								<select class="form-control input-form-border"  id="installments" class="form-control" name="installments"></select>
+								<label class="floating-label">Cuotas</label>
+							</div>
+						</div>
+                  
+                    
+                    <input type="hidden" name="payment_method_id" id="payment_method_id"/>
+                   
+					<button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+					
+                </fieldset>
+            </form>
+				</div>
+			</div>
+		</div>
+	</div>
                 </div>
             </div>
         </div>
@@ -279,7 +346,9 @@
 	</script>
 	<script>
 
-	</script>
+    </script>
+    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+	<script src="js/mercadopago.js"></script>
 	<script async
   src="https://pay.google.com/gp/p/js/pay.js"
   onload="onGooglePayLoaded()"></script>

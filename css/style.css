@@ -3523,11 +3523,13 @@ select.select-cliente-modal {
 .btn-lg-modal {
     width: 100%;
     height: 55px;
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(0, 0, 0, .8);
     border: 1px solid rgba(0, 0, 0, .4);
     transition: .4s;
     border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .btn-lg-modal:hover {
@@ -3804,4 +3806,32 @@ select.select-cliente-modal {
 
 .td-img > img{
     width: 40px;
+}
+
+
+.form-control:active, .form-control:focus{
+    box-shadow: none;
+    outline: 0;
+}
+
+.input-pos-modal {
+    height: 40px;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    font-weight: 400;
+    transition: .4s;
+    color: #000000!important;
+}
+
+.input-pos-modal:active,
+.input-pos-mdoal:focus {
+    border: 1px solid #49B7F3;
+    box-shadow: none;
+    outline: 0;
+}
+
+.input-pos-modal::placeholder {
+    color: #000000;
 }

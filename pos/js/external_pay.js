@@ -19,6 +19,7 @@ var conta_kits = 0;
 var deviceSessionId = "";
 var tipo_clientes=0; 
 var total_google=0;
+var cliente_external=null;
 $(document).ready(function() {
     $.ajax({
         url: server + "webserviceapp/get_info_sale.php",
@@ -28,6 +29,7 @@ $(document).ready(function() {
         beforeSend: function() {},
         success: function(data) {
             if(data!=null){
+                cliente_external=data.cliente;
                 if(data.is_payed==0){
                     $("#totalcarrito")
       .empty()

@@ -538,6 +538,7 @@ $("#payment_reference").submit(function(event) {
       if (data.resultado!=0) {
         swal.close();
         $("#modalGenerarReferencia").modal("hide");
+        $("#modalPagar").modal("toggle");
         $("#payment_reference")[0].reset();
         console.log(data.cantidad);
         check_quantities("Referencia: "+data.referencia, data.cantidad,"",data.id,data.referencia,data.tipo);
@@ -708,8 +709,16 @@ function efective_pay() {
   });
 }
 function card_pay() {
-  //$("#modalPagar").modal("hide");
+  $("#modalPagar").modal("hide");
   $("#modalGenerarPagoTarjeta").modal("toggle");
+}
+function transfer_pay() {
+  $("#modalPagar").modal("hide");
+  $("#modalGenerarPagoTransfer").modal("toggle");
+}
+function deposito_pay() {
+  $("#modalPagar").modal("hide");
+  $("#modalGenerarPagoDeposito").modal("toggle");
 }
 $("#add_clients_form").submit(function(event) {
   event.preventDefault();
@@ -751,7 +760,22 @@ $("#pago_tarjeta").submit(function(event) {
   event.preventDefault();
   check_quantities("Tarjeta", $("#cantidad_tarjetas").val());
   $("#modalGenerarPagoTarjeta").modal("hide");
+  $("#modalPagar").modal("toggle");
   $("#pago_tarjeta")[0].reset();
+});
+$("#pago_deposito").submit(function(event) {
+  event.preventDefault();
+  check_quantities("Deposito", $("#cantidad_deposito").val());
+  $("#modalGenerarPagoDeposito").modal("hide");
+  $("#modalPagar").modal("toggle");
+  $("#pago_deposito")[0].reset();
+});
+$("#pago_transfer").submit(function(event) {
+  event.preventDefault();
+  check_quantities("Transferencia", $("#cantidad_transfer").val());
+  $("#modalGenerarPagoTransfer").modal("hide");
+  $("#modalPagar").modal("toggle");
+  $("#pago_transfer")[0].reset();
 });
 $("#card_payment").submit(function(event) {
   event.preventDefault();
