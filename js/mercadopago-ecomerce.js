@@ -84,15 +84,7 @@ function sdkResponseHandler(status, response) {
 
     } else {
         $("#token").val(response.id);
-        $("#transaction_amount").val(total_google);
-        if ($("#sector").length) {
-            cliente_sel = $("#sector").val();
-            if (cliente_sel != "") {
-                cliente = clientes[cliente_sel];
-            }
-        } else {
-            cliente = cliente_external;
-        }
+        $("#transaction_amount").val(10);
         var data = $("#pay").serializeArray();
         data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito')), 'usuariid': id, "email": localStorage.getItem('correo') });
         $.ajax({
@@ -102,19 +94,6 @@ function sdkResponseHandler(status, response) {
             dataType: "html",
             success(data) {
                 console.log(data);
-                swal.close();
-                if (data == "approved") {
-                    check_quantities("Mercado Pago", total_google);
-                    $("#pay")[0].reset();
-                    $("#modalTarjeta").modal("hide");
-
-                } else {
-                    swal(
-                        "<p id='pswalerror'> Error </p>",
-                        "<p id='psswalerror'>" + data + ".</p> ",
-                        "error"
-                    );
-                }
                 Mercadopago.clearSession();
                 Swal.fire({
                     icon: 'success',
@@ -130,11 +109,11 @@ function sdkResponseHandler(status, response) {
                     });
             },
             error(error) {
-                swal(
-                    "<p id='pswalerror'> Error </p>",
-                    "<p id='psswalerror'>El pago no ha podido ser procesado. Intente de nuevo, por favor.</p> ",
-                    "error"
-                );
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error al realizar la compra!'
+                });
             }
         });
     }
@@ -165,11 +144,11 @@ function enviar_pago_oxxo() {
                 });
         },
         error(error) {
-            swal(
-                "<p id='pswalerror'> Error </p>",
-                "<p id='psswalerror'>El pago no ha podido ser procesado. Intente de nuevo, por favor.</p> ",
-                "error"
-            );
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Error al realizar la compra!'
+            });
         }
     });
 }
