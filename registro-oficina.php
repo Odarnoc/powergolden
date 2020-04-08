@@ -1,3 +1,9 @@
+<?php
+$user_id = 0;
+if (isset($_GET['ui'])) {
+  $user_id = $_GET['ui'];
+}
+?>
 <!doctype html>
 <html lang="es">
 
@@ -159,9 +165,13 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <select name="ref" id="sector" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
-                                                    <option value="0">Seleccionar cliente</option>
-                                                </select>
+                                                <?php if($user_id != 0){ ?>
+                                                    <input value="<?php echo $user_id ?>" type="tel" class="form-control input-form-underline" name="ref" hidden/>
+                                                <?php }else{ ?>
+                                                    <select name="ref" id="sector" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+                                                        <option value="0">Seleccionar cliente</option>
+                                                    </select>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                         <div class="form-check">

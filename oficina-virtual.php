@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if(!isset($_SESSION["user_id"])){
@@ -267,10 +266,7 @@ and     length(@pv := concat(@pv, ',', id))");
                                     <p class="sub-title-chart-oficina mb-3">Direcciones importantes</p>
                                     
                                     <p class="t2">Tu página personal</p>
-                                    <a href="">http://powergolden.club/link/page</a>
-                                    
-                                    <p class="t2 mt-2">Tu tienda virtual</p>
-                                    <a href="">http://powergolden.club/link/page</a>
+                                    <a href="<?php echo "http://" .$_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?>"><?php echo "http://" .$_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?></a>
 
                                 </div>
                             </div>
