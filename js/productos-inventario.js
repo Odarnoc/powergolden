@@ -9,13 +9,11 @@ function registrar() {
     var producto = $("#prod").val();
     var sucursal = $("#sucursal").val();
     var minimo = $("#minimo").val();
-    var existencias = $("#existencias").val();
 
     let datos = {
         producto: producto,
         sucursal: sucursal,
-        minimo: minimo,
-        existencias: existencias
+        minimo: minimo
     }
     
     console.log(datos);

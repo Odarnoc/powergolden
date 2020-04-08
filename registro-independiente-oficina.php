@@ -185,6 +185,7 @@ and     length(@pv := concat(@pv, ',', id))");
                                                 Firmar contrato electronicamente. <a href="docs/politicas.pdf">Contrato.</a>
                                             </label>
                                         </div>
+                                        <input name="ref" value="<?php echo $id; ?>">
                                         <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
                                     </form>
                                 </div>

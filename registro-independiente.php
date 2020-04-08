@@ -28,6 +28,7 @@ require 'user_preferences/user-info.php';
     <link rel="stylesheet" href="css/helper.css">
     <!-- responseive menu -->
     <link rel="stylesheet" href="css/menu-movil.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -163,6 +164,13 @@ require 'user_preferences/user-info.php';
                                                 <label class="floating-label">Direccion</label>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <select name="ref" id="sector" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+                                                    <option value="0">Seleccionar cliente</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
                                             <label class="form-check-label" for="defaultCheck1">
@@ -212,6 +220,9 @@ require 'user_preferences/user-info.php';
 
     <!-- registro scripts -->
     <script src="js/registro-independiente.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
 </body>
 
