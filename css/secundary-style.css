@@ -41,3 +41,7 @@
 .image-upload2 input {
     display: none;
 }
+
+.botonGooglePay button{
+    width: 100% !important;
+}

@@ -17,6 +17,8 @@ var pagos = [];
 var clientes = [];
 var conta_kits = 0;
 var deviceSessionId = "";
+var tipo_clientes=0; 
+var total_google=0;
 $(document).ready(function() {
   get_products_list();
   get_paquetes_info();
@@ -157,9 +159,12 @@ function quitar_kit(element) {
 function cambio_tipo_venta() {
   if ($("#tipo_venta").val() != "1") {
     $("#row_add_kits").hide();
+    tipo_clientes=0;
   } else {
     $("#row_add_kits").show();
+    tipo_clientes=1;
   }
+  get_clientes_info();
   if (cantidades != 0) {
     show_total();
   }
@@ -167,14 +172,17 @@ function cambio_tipo_venta() {
 function agregar_kit() {
   if ($("#tipo_kit").val() != "") {
     kits[conta_kits] = $("#tipo_kit").val();
-    conta_kits++;
+
     show_total();
+  }else{
+    kits[conta_kits] = null;
   }
 }
 function get_clientes_info() {
   $.ajax({
     url: server + "webserviceapp/get_clientes.php",
     type: "POST",
+    data:{tipo:tipo_clientes},
     dataType: "json",
     beforeSend: function() {},
     success: function(data) {
@@ -251,7 +259,7 @@ function cleanSale() {
   $("#sector").val("0");
   $(".selectpicker").selectpicker("refresh");
   $(".dropdown-select").trigger("keydown");
-
+  $("#tipo_kit").val("");
   cambio_tipo_venta();
   show_total();
 }
@@ -530,6 +538,7 @@ $("#payment_reference").submit(function(event) {
       if (data.resultado!=0) {
         swal.close();
         $("#modalGenerarReferencia").modal("hide");
+        $("#modalPagar").modal("toggle");
         $("#payment_reference")[0].reset();
         console.log(data.cantidad);
         check_quantities("Referencia: "+data.referencia, data.cantidad,"",data.id,data.referencia,data.tipo);
@@ -551,6 +560,7 @@ $("#payment_reference").submit(function(event) {
   });
 });
 function sale_modal() {
+  $('#paypal-button-container').empty();
   var countrows = $("#tablacarrito tr").length;
   var rows = countrows - 1;
 
@@ -567,11 +577,17 @@ function sale_modal() {
     if (tipo_venta != "" && tipo_venta != "0") {
       var cantidad_productos = get_total_kits("p");
       if (cantidades != cantidad_productos) {
+        console.log($("#tipo_kit").val());
+        if($("#tipo_kit").val()==""){
+          mensaje +=
+          "Para la venta a Empresario Independiente debes seleccionar un KIT.";
+        }else{
         mensaje +=
-          "La cantidad de productos seleccionadas debe ser igual a la cantidad sumada de productos de los KITS agregados " +
+          "La cantidad de productos seleccionadas debe ser igual a la cantidad que ofrece el  "+$("#tipo_kit option:selected").html()+" " +
           " (" +
           cantidad_productos +
           ").";
+        }
 
         valid = false;
       }
@@ -580,12 +596,12 @@ function sale_modal() {
           mensaje += "<br>";
         }
         mensaje +=
-          "Para la venta de uno o mas KITS debes seleccionar a un cliente activo.";
+          "Para la venta de KITS debes seleccionar a un Empresario Independiente.";
         valid = false;
       }
     } else {
       if ($("#sector").val() == "0") {
-        mensaje += "Para la venta de productos debes seleccionar a un cliente.";
+        mensaje += "Para la venta de productos debes seleccionar a un Cliente Temporal.";
         valid = false;
       }
     }
@@ -605,6 +621,39 @@ function sale_modal() {
       $("#tabla_metodos > tbody").empty();
       $("#modalPagar").modal("toggle");
       //efective_pay();
+      total_google=total;
+      transaccion_google={
+        countryCode: 'MX',
+        currencyCode: "MXN",
+        totalPriceStatus: "FINAL",
+        totalPrice: parseFloat(total).toFixed(2),
+        totalPriceLabel: "Total"
+      };
+      paypal.Buttons({
+        locale:'es-MX',
+          style: {
+              shape: 'rect',
+              color: 'gold',
+              layout: 'vertical',
+              label: 'paypal',
+              
+          },
+          createOrder: function(data, actions) {
+              return actions.order.create({
+                  purchase_units: [{
+                      amount: {
+                          value: total
+                      }
+                  }]
+              });
+          },
+          onApprove: function(data, actions) {
+              return actions.order.capture().then(function(details) {
+                  //alert('Se ha completado la transacción ' + details.payer.name.given_name + '!');
+                  check_quantities("Paypal", total);
+              });
+          }
+      }).render('#paypal-button-container');
     } else {
       swal(
         "<p id='pswalerror'> Error </p>",
@@ -661,22 +710,15 @@ function efective_pay() {
 }
 function card_pay() {
   $("#modalPagar").modal("hide");
-  swal({
-    type: "info",
-    title: "<p id='prealizarventa'>Realizar Cobro con Tarjeta</i>",
-    html: "<p id='psswal'>¿Cantidad a cobrar?</p>",
-    input: "number",
-    confirmButtonText: "Aceptar",
-    showCancelButton: true,
-    cancelButtonText: "Cancelar"
-  }).then(result => {
-    $("#modalPagar").modal("toggle");
-    if (result.value) {
-      var inputValue = result.value;
-
-      check_quantities("Tarjeta", inputValue);
-    }
-  });
+  $("#modalGenerarPagoTarjeta").modal("toggle");
+}
+function transfer_pay() {
+  $("#modalPagar").modal("hide");
+  $("#modalGenerarPagoTransfer").modal("toggle");
+}
+function deposito_pay() {
+  $("#modalPagar").modal("hide");
+  $("#modalGenerarPagoDeposito").modal("toggle");
 }
 $("#add_clients_form").submit(function(event) {
   event.preventDefault();
@@ -713,6 +755,27 @@ $("#add_clients_form").submit(function(event) {
     },
     error(error) {}
   });
+});
+$("#pago_tarjeta").submit(function(event) {
+  event.preventDefault();
+  check_quantities("Tarjeta", $("#cantidad_tarjetas").val());
+  $("#modalGenerarPagoTarjeta").modal("hide");
+  $("#modalPagar").modal("toggle");
+  $("#pago_tarjeta")[0].reset();
+});
+$("#pago_deposito").submit(function(event) {
+  event.preventDefault();
+  check_quantities("Deposito", $("#cantidad_deposito").val());
+  $("#modalGenerarPagoDeposito").modal("hide");
+  $("#modalPagar").modal("toggle");
+  $("#pago_deposito")[0].reset();
+});
+$("#pago_transfer").submit(function(event) {
+  event.preventDefault();
+  check_quantities("Transferencia", $("#cantidad_transfer").val());
+  $("#modalGenerarPagoTransfer").modal("hide");
+  $("#modalPagar").modal("toggle");
+  $("#pago_transfer")[0].reset();
 });
 $("#card_payment").submit(function(event) {
   event.preventDefault();
@@ -921,6 +984,148 @@ function sale() {
 
   
 }
+function sale_externo() {
+  var auxiliar = $("#totalcarrito").html();
+  auxiliar = auxiliar.replace("$", "");
+  auxiliar = auxiliar.replace(",", "");
+  var total = parseFloat(auxiliar);
+  var cambio = parseFloat(total_a) - total;
+
+  var product = "";
+  var price_out = "";
+  var ticket = "";
+  var cualquierCadena = "";
+  var regreso = "";
+  var tipo_venta = $("#tipo_venta").val();
+  var estilo = "";
+  if (tipo_venta != "" && tipo_venta != "0") {
+    estilo = "display:none;";
+  }
+  var venta_id = 0;
+  $.ajax({
+    url: server + "webserviceapp/create_sale.php",
+    type: "post",
+    async: false,
+    data: {
+      user_id: $("#user_id").val(),
+      sucursal_id: $("#sucursal_id").val(),
+      total: total,
+      is_payed:0,
+      cliente_id: $("#sector").val()
+    },
+    dataType: "json",
+    beforeSend: function() {
+      swal({
+        title: "Cargando...",
+        showConfirmButton: false,
+        imageUrl: "resources/loader.gif"
+      });
+    },
+    success: function(data) {
+      venta_id = data.id;
+    }
+  });
+  $("#tablacarrito > tbody  > tr").each(function(index) {
+    product = $(this)
+      .find("td:eq(0)")
+      .text();
+    product = product.trim();
+    cualquierCadena = $(this)
+      .find("td:eq(2)")
+      .text();
+    price_out = $(this)
+      .find("td:eq(1)")
+      .text();
+    price_out = price_out.trim();
+    regreso +=
+      "<tr><td>" +
+      cualquierCadena.trim() +
+      "</td><td>" +
+      arreglo[this.id] +
+      "</td><td style='" +
+      estilo +
+      "'>$" +
+      addCommas(parseFloat(price_out).toFixed(2)) +
+      "</td><td style='" +
+      estilo +
+      "'>" +
+      addCommas(parseFloat(arreglo[this.id] * price_out).toFixed(2)) +
+      "</td></tr>";
+    $.ajax({
+      url: server + "webserviceapp/sale.php",
+      type: "post",
+      async: false,
+      data: {
+        product: product,
+        cantidad: arreglo[this.id],
+        venta: venta_id
+      },
+      dataType: "html",
+      success() {}
+    });
+  });
+  kits.forEach(function(element, index) {
+    $.ajax({
+      url: server + "webserviceapp/sale_kits.php",
+      type: "post",
+      async: false,
+      data: {
+        paquete: element,
+        venta: venta_id
+      },
+      dataType: "html",
+      success() {}
+    });
+  });
+  var referencias="";
+  pagos.forEach(function(element, index) {
+    console.log(element);
+    if(element.referencia_id!=null){
+      if(element.tipo_referencia==1){
+        referencias+="Pago en tienda "+element.referencia;
+      }else{
+        referencias+="Pago en banco "+element.referencia;
+      }
+    }
+    $.ajax({
+      url: server + "webserviceapp/sale_pagos.php",
+      type: "post",
+      async: false,
+      data: {
+        tipo_pago: element.tipo_pago,
+        cantidad: element.cantidad_pago,
+        referencia: element.referencia_id,
+        venta: venta_id
+      },
+      dataType: "html",
+      success() {}
+    });
+  });
+  cliente = null;
+  cliente_sel = $("#sector").val();
+  if (cliente_sel != "") {
+    cliente = clientes[cliente_sel];
+  }
+  //create_ticket(venta_id, cliente, total, total_a, cambio,regreso, referencias);
+  ticket += "\n";
+  swal({
+    type: "info",
+    title:  "<p id='pswal'>Venta con pago externo</p>",
+    html:  "<p id='psswal'> Por favor has extensiva la siguiente url con tu cliente para continuar con el proceso de pago:<br>\
+<a href='https://powergolden.com.mx/pos/external_pay.php?venta="+venta_id+"'>https://powergolden.com.mx/os/external_pay.php?venta="+venta_id+"</a></p>",
+    confirmButtonText: "Aceptar",
+    showCancelButton: false,
+    cancelButtonText: "Cancelar"
+  }).then(result => {
+    $("#modalPagar").modal("hide");
+    $("#sector").val("0");
+    get_data_chart();
+    get_products_list();
+    cleanSale();
+  });
+
+  
+}
 
 $(".swal2-input").on("input", function() {
   this.value = this.value.replace(/[^0-9]/g, "");
@@ -956,4 +1161,155 @@ function iniciodevoluciones() {
 function inicioinicio() {
   window.location.href =
     "inicio.html?id=" + userid + "&name=" + username + "&stock=" + stock;
+}
+
+
+
+//Aqui empieza  google
+var transaccion_google;
+const baseRequest = {
+  apiVersion: 2,
+  apiVersionMinor: 0
+};
+
+const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
+const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
+const tokenizationSpecification = {
+  type: 'PAYMENT_GATEWAY',
+  parameters: {
+    'gateway': 'example',
+    'gatewayMerchantId': 'exampleGatewayMerchantId'
+  }
+};
+
+const baseCardPaymentMethod = {
+  type: 'CARD',
+  parameters: {
+    allowedAuthMethods: allowedCardAuthMethods,
+    allowedCardNetworks: allowedCardNetworks
+  }
+};
+
+/**
+ * Describe your site's support for the CARD payment method including optional
+ * fields
+ *
+ * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#CardParameters|CardParameters}
+ */
+const cardPaymentMethod = Object.assign(
+  {},
+  baseCardPaymentMethod,
+  {
+    tokenizationSpecification: tokenizationSpecification
+  }
+);
+
+let paymentsClient = null;
+
+function getGoogleIsReadyToPayRequest() {
+  return Object.assign(
+      {},
+      baseRequest,
+      {
+        allowedPaymentMethods: [baseCardPaymentMethod]
+      }
+  );
+}
+function getGooglePaymentDataRequest() {
+  const paymentDataRequest = Object.assign({}, baseRequest);
+  paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
+  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
+  paymentDataRequest.merchantInfo = {
+    merchantName: 'Productos Power Golden'
+  };
+
+  paymentDataRequest.callbackIntents = ["PAYMENT_AUTHORIZATION"];
+
+  return paymentDataRequest;
+}
+function getGooglePaymentsClient() {
+  if ( paymentsClient === null ) {
+    paymentsClient = new google.payments.api.PaymentsClient({
+        environment: 'TEST',
+      paymentDataCallbacks: {
+        onPaymentAuthorized: onPaymentAuthorized
+      }
+    });
+  }
+  return paymentsClient;
+}
+
+function onPaymentAuthorized(paymentData) {
+  return new Promise(function(resolve, reject){
+    // handle the response
+    processPayment(paymentData)
+      .then(function() {
+		resolve({transactionState: 'SUCCESS'});
+		console.log("Pedos");
+		check_quantities("Google", total_google);
+      })
+      .catch(function() {
+        resolve({
+          transactionState: 'ERROR',
+          error: {
+            intent: 'PAYMENT_AUTHORIZATION',
+            message: 'Insufficient funds, try again. Next attempt should work.',
+            reason: 'PAYMENT_DATA_INVALID'
+          }
+        });
+	    });
+  });
+}
+
+function onGooglePayLoaded() {
+  const paymentsClient = getGooglePaymentsClient();
+  paymentsClient.isReadyToPay(getGoogleIsReadyToPayRequest())
+    .then(function(response) {
+      if (response.result) {
+        addGooglePayButton();
+      }
+    })
+    .catch(function(err) {
+      // show error in developer console for debugging
+      console.error(err);
+    });
+}
+
+function addGooglePayButton() {
+  const paymentsClient = getGooglePaymentsClient();
+  const button =
+      paymentsClient.createButton({onClick: onGooglePaymentButtonClicked});
+  document.getElementById('container').appendChild(button);
+}
+
+function getGoogleTransactionInfo() {
+	
+  return transaccion_google;
+}
+
+function onGooglePaymentButtonClicked() {
+  const paymentDataRequest = getGooglePaymentDataRequest();
+  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
+
+  const paymentsClient = getGooglePaymentsClient();
+  paymentsClient.loadPaymentData(paymentDataRequest);
+}
+
+let attempts = 0;
+
+function processPayment(paymentData) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      // @todo pass payment token to your gateway to process payment
+      paymentToken = paymentData.paymentMethodData.tokenizationData.token;
+
+			if (attempts++ % 2 == 0) {
+	      reject(new Error('Every other attempt fails, next one should succeed'));      
+      } else {
+	      resolve({
+			 
+		  });      
+      }
+    }, 500);
+  });
 }

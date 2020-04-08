@@ -16,25 +16,52 @@ var clientes = [];
 var conta_kits = 0;
 var deviceSessionId = "";
 var total_ventas = 0;
-var actual=1;
+var actual=2;
 $(document).ready(function() {
   get_clientes_info();
   get_sales();
+  get_productos();
 });
 function corte_de_caja() {
   $("#modalCorte").modal("toggle");
+}
+function get_clientes() {
+  var data = {
+    buscar: $("#buscar_c").val()
+  };
+  $.ajax({
+    url: server + "webserviceapp/get_table_clientes.php",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    beforeSend: function() {},
+    success: function(data) {
+      $("#tabla_clientes tbody")
+        .empty()
+        .append(data.tabla);
+    }
+  });
 }
 function show_modal(tipo){
   if(tipo==1 && actual!=1){
     $("#productos").hide();
     $("#ventas").show();
+    $("#clientes").hide();
     get_sales();
     actual=1;
   }else if(tipo==2 && actual!=2){
     $("#productos").show();
     $("#ventas").hide();
+    $("#clientes").hide();
     actual=2;
     get_productos();
+  }
+  else if(tipo==3 && actual!=3){
+    $("#productos").hide();
+    $("#ventas").hide();
+    $("#clientes").show();
+    actual=3;
+    get_clientes();
   }
 }
 function corte_parcial() {
@@ -197,6 +224,9 @@ function create_ticket(sucursal,total,tarjeta,efectivo,referencia, tabla,horas="
 }
 $("#buscar").change(function(event) {
   get_productos();
+});
+$("#buscar_c").change(function(event) {
+  get_clientes();
 });
 function get_productos() {
   var data = {

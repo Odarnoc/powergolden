@@ -1,5 +1,7 @@
 $(document).ready(function () {
+    if(id == -1){ 
     $("#modalIndex").modal("show");
+    }
 });
 
 $(function () {

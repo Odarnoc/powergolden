@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'bd/conexion.php';
+$user_id = $_SESSION["user_id"];
 
 ?>
 
@@ -18,6 +19,7 @@ require 'bd/conexion.php';
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/secundary-style.css">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
@@ -99,17 +101,13 @@ require 'bd/conexion.php';
                                 <div class="d-tabla-review">
                                     <div class="table-responsive">
                                         <div class="d-title-cuenta">
-                                            <h6>Datos de tarjeta</h6>
+                                            <h6>Desglose de total</h6>
                                             <div class="">
                                                 <div class="form-group" style="margin-bottom: 1px">
-                                                    <div class="form-check">
-                                                        <label class="form-check-label" for="exampleRadios1">
-                                                            <p style="margin-bottom: 0;" class="t2">XXXX - XXXX - XXXX - <a id="tarnumero"></a> </p>
-                                                        </label>
-                                                    </div>
-                                                    <p style="padding-left: 3px " class="small-text-cuenta ml-3">Expiracion: <a class="small-text-cuenta" id="mestar"></a>/<a class="small-text-cuenta" id="anotar"></a></p>
-                                                    <br>
-                                                    <h6 style="padding-left: 3px " class="ml-3">Monto total: $<a id="totalgeneral"></a></h6>
+                                                    <p id="nombreuser"></p>
+                                                    <h6 style="padding-left: 3px " class="small-text-cuenta" ">Monto total: $<a id=" ton"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">Descuento: $<a id="tdesc"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">Monto total con IVA: $<a id="totalgeneral"></a></h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,30 +136,14 @@ require 'bd/conexion.php';
                                 </table>
                             </div>
 
-                            <form method="POST" id="payment-form">
-                                <div class="row row-btns-checkout mt-40">
-                                    <div class="col-lg-6 col-md-6 col-6">
-                                        <a href="tarjetas-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
-                                    </div>
-                                    <input type="hidden" name="token_id" id="token_id">
-
-                                    <input type="hidden" name="use_card_points" id="use_card_points" value="false">
-
-                                    <input type="hidden" id="nomtarenv" class="form-control input-form" required type="text" autocomplete="off" data-openpay-card="holder_name" />
-
-                                    <input type="hidden" id="numtarenv" class="form-control input-form" required type="text" autocomplete="off" data-openpay-card="card_number" />
-
-                                    <input type="hidden" id="mestarenv" class="form-control input-form" required type="text" data-openpay-card="expiration_month" />
-
-                                    <input type="hidden" id="anotarenv" class="form-control input-form" required type="text" data-openpay-card="expiration_year"></input>
-
-                                    <input type="hidden" id="ccvtar" class="form-control input-form" required type="text" autocomplete="off" data-openpay-card="cvv2"></input>
-
-                                    <div class="col-lg-6 col-md-6 col-6">
-                                        <button type="submit" id="pay-button" class="btn btn-lg-blue">Comprar <i class="fas fa-chevron-right"></i></button>
-                                    </div>
+                            <div class="row row-btns-checkout mt-40">
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <a href="tarjetas-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                 </div>
-                            </form>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <button type="submit" data-toggle="modal" data-target="#modalPagar" class="btn btn-lg-blue">Comprar <i class="fas fa-chevron-right"></i></button>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -169,7 +151,124 @@ require 'bd/conexion.php';
             </div>
         </div>
 
+        <!-- Modal Metodo de pago -->
+        <div class="modal fade" id="modalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Metodo de pago</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <button type="button" class="btn btn-lg-modal btn-pago-tarjeta" onclick="referencia()"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <button type="button" class="btn btn-lg-modal" data-toggle="modal" data-target="#modalTarjeta"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <button type="button" class="btn btn-lg-modal" onclick="referenciaBanco()"><i class="fas fa-credit-card mr-2"></i>Referencia Bancaria</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <div id="paypal-button-container">
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12 botonGooglePay" id="container">
+
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <div class="row mt-1" id="div_pago" style="display:none;">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <button type="button" onclick="sale();" class="btn btn-lg-blue btn-bg-blue">Completar pago</button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form method="POST" id="payment-formfinal">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Pago con tarjeta</h5>
+                            <button type="button" class="close btn-close-tarjeta" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="p-metodo-pago">Datos bancarios</p>
+                            <input type="hidden" name="token_id" id="token_id">
+
+                            <div class="form-group">
+                                <div class="floating-label-group">
+                                    <input required type="text" autocomplete="off" data-openpay-card="holder_name" class="form-control input-form-border" />
+                                    <label class="floating-label">Nombre en la tarjeta</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="floating-label-group">
+                                    <input required type="text" autocomplete="off" data-openpay-card="card_number" class="form-control input-form-border" />
+                                    <label class="floating-label">Número de tarjeta</label>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-lg-4 col-md-4 col-4">
+                                    <div class="floating-label-group">
+                                        <input required type="text" autocomplete="off" data-openpay-card="expiration_month" class="form-control input-form-border" />
+                                        <label class="floating-label">Mes Vencimiento</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-4 col-4">
+                                    <div class="floating-label-group">
+                                        <input type="text" class="form-control input-form-border" data-openpay-card="expiration_year" required />
+                                        <label class="floating-label">Año Vencimiento</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-4 col-md-4 col-4">
+                                    <div class="floating-label-group">
+                                        <input type="text" class="form-control input-form-border" data-openpay-card="cvv2" required />
+                                        <label class="floating-label">CVV</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-cancelar-modal btn-cancelar-tarjeta" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-aceptar-modal">Aceptar</button>
+                    </form>
+                </div>
+                </form>
+            </div>
+        </div>
+        </div>
     </section>
 
 
@@ -183,6 +282,8 @@ require 'bd/conexion.php';
     <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
     <script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 
     <!-- popper.min -->
     <script src="js/popper.min.js"></script>
@@ -193,8 +294,15 @@ require 'bd/conexion.php';
     <!-- scrollIt -->
     <script src="js/scrollIt.min.js"></script>
 
+    <!-- PayPal -->
+    <script src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX" data-sdk-integration-source="button-factory"></script>
+
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
+
+    <script>
+        var iduser = <?php echo $user_id ?>;
+    </script>
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
@@ -203,11 +311,12 @@ require 'bd/conexion.php';
     <script src="js/finalizar-compra.js"></script>
     <script src="js/metodo-pago-ecomerce.js"></script>
 
-
-
     <script>
         var radioValue = $("input[name='id']:checked").val();
     </script>
+
+    <!-- GooglePay -->
+    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
 
 </body>
 
