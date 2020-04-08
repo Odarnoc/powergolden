@@ -125,13 +125,6 @@ $prod = R::find('productos');
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <div class="floating-label-group">
-                                                            <input type="number" class="form-control input-form-underline" id="existencias" value="28" required />
-                                                            <label class="floating-label">Existencias</label>
-                                                        </div>
-                                                    </div>
-
                                                     <button class="btn btn-lg-blue mt-30" id="but-inventario">Aceptar</button>
 
                                                 </form>

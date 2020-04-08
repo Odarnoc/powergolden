@@ -1,9 +1,7 @@
 <?php
 require 'user_preferences/user-info.php';
-$id = $_GET['id'];
-$query = 'SELECT p.nombre,p.imagen,i.id,i.limite_inventario,i.existencia, IF(i.precio_mxn=0,p.precio_mxn,i.precio_mxn) as mxn, IF(i.precio_usd=0,p.precio_usd,i.precio_usd) as usd FROM inventarios as i LEFT JOIN productos as p ON i.producto_id = p.id where i.sucursal_id = ' . $id;
-$prods = R::getAll($query);
-
+$suc = R::find('sucursales');
+$movs = R::find('tiposmovimientosalmacen');
 ?>
 
 <!doctype html>
@@ -68,9 +66,75 @@ $prods = R::getAll($query);
                                     <p class="small-text-cuenta">Traspasa productos del almacen a una sucursal.</p>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-lg-2 col-md-2">
-
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                            <div class="d-form">
+                                                <form class="form-registro">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <div class="floating-label-group">
+                                                                    <label class="label-select">Origen</label>
+                                                                    <select id="origen" onchange="getProductosOrigen()" class="form-control input-form-underline">
+                                                                        <option value="-1" hidden>Seleccionar sucursal</option>
+                                                                        <?php
+                                                                        foreach ($suc as $valor) {
+                                                                        ?>
+                                                                            <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?>, <?php echo $valor->estado; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <div class="floating-label-group">
+                                                                    <label class="label-select">Destino</label>
+                                                                    <select id="destino" class="form-control input-form-underline">
+                                                                        <option value="-1" hidden>Seleccionar sucursal</option>
+                                                                        <?php
+                                                                        foreach ($suc as $valor) {
+                                                                        ?>
+                                                                            <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?>, <?php echo $valor->estado; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <div class="floating-label-group">
+                                                                    <label class="label-select">Movimiento</label>
+                                                                    <select id="movs" class="form-control input-form-underline">
+                                                                        <option value="-1" hidden>Seleccionar tipo movimiento</option>
+                                                                        <?php
+                                                                        foreach ($movs as $valor) {
+                                                                        ?>
+                                                                            <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <div class="floating-label-group">
+                                                                    <input type="text" class="form-control input-form-underline" id="folio" required />
+                                                                    <label class="floating-label">Folio</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                             </div>
                         </div>
 
@@ -91,30 +155,6 @@ $prods = R::getAll($query);
                     </div>
 
                                 <div class="row" id="lista-productos">
-                                        <?php foreach ($prods as $item) { ?>
-                                            <div class="col-lg-6 d-all-item-pro">
-                                                <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
-                                                <div class="row">
-                                                    <div class="col-lg-5 col-md-5 col-5">
-                                                    <div class="d-img-pro">
-                                                        <img src="productos_img/<?php echo $item['imagen'] ?>" alt="">
-
-                                                    </div>
-                                                    </div>
-
-                                                    <div class="col-lg-7 col-md-7 col-7">
-                                                    <div class="d-info-pro">
-                                                        <p class="t2"><?php echo $item['nombre'] ?></p>
-                                                        <p class="t1">Existencias: <?php echo $item['existencia'] ?></p>
-                                                        <a class="btn btn-blue mt-3" style="background-color:49B7F3;" onclick="" role="button"><i style="color:white;" class="fas fa-check"></i></a>
-                                                        <a class="btn btn-blue mt-3" style="background-color:red;" onclick="" role="button"><i style="color:white;" class="fas fa-times"></i></a>
-                                                    </div>
-                                                    </div>
-
-                                                </div>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
                                     </div>
                                     
 
@@ -178,9 +218,6 @@ $prods = R::getAll($query);
     <script src="js/menu-movil.js"></script>
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
-    <script>
-        var sucursal = '<?php echo $id ?>';
-    </script>
     <script src="js/traspasos.js"></script>
 
 

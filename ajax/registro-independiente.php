@@ -52,6 +52,7 @@ $materno = $_POST['materno'];
 $telefono = $_POST['phone'];
 $correo = $_POST['email'];
 $direccion = $_POST['direccion'];
+$ref = $_POST['ref'];
 
 
 $query = 'SELECT correo FROM `usuarios` WHERE correo= "' . $correo . '"';
@@ -75,7 +76,7 @@ if (sizeof($registros_in) == 0) {
             $registro->correo = $correo;
             $registro->rol = 2;
             $registro->apellidos = $paterno.' '.$materno;
-            $registro->referido = null;
+            $registro->referido = $ref;
             $id = R::store($registro);
             
             $registro2 = R::dispense('independientes');
@@ -147,5 +148,5 @@ if (sizeof($registros_in) == 0) {
 } else {
     error_mensaje("El correo ya esta registrado.");
 }
-include 'registros-administrador.php';
+
 ?>

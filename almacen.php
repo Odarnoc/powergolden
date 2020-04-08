@@ -109,7 +109,6 @@ $prod = R::find('productos');
                                         <td style="vertical-align: middle">
                                             <div>
                                                 <?php if($item['id'] != 1) { ?>
-                                                    <a href="traspaso-inventario.php?id=<?php echo $item['id'] ?>" type="button"><i class="fas fa-exchange-alt"></i></a>
                                                     <a href type="button" data-toggle="modal" data-target="#modalClonar" onclick="selectSucursal('<?php echo $item['id'] ?>')"><i class="fas fa-clone"></i></a>
                                                 <?php } ?>
                                                 <a href="inventario-sucursal.php?id=<?php echo $item['id'] ?>"><i class="far fa-eye"></i></a>

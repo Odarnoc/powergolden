@@ -350,9 +350,7 @@ R::store($visita);
       $('#inicio-active').addClass("active");
     });
   </script>
-
-  <script type="text/javascript" src="http://powergolden.com.mx/livechat/php/app.php?widget-init.js"></script>
-
+  <script type="text/javascript" src="https://powergolden.com.mx/livechat/php/app.php?widget-init.js"></script>
 </body>
 
 </html>

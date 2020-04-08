@@ -24,15 +24,11 @@ if(empty($_POST['minimo'])){
     return;
 }
 
-if(empty($_POST['existencias'])){
-    error_mensaje('Llenar el campo existencias.');
-    return;
-}
 
     $producto = $_POST['producto'];
     $sucursal = $_POST['sucursal'];
     $minimo = $_POST['minimo'];
-    $existencias = $_POST['existencias'];
+    $existencias = 0;
 
     if($sucursal == -2){
         $suc = R::find('sucursales');

@@ -53,7 +53,8 @@
                                         
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <a class="dropdown-item" href="almacen.php">Inventarios</a>
-                                            <a class="dropdown-item" href="productos-inventarios.php">Agregar productos a inventario</a>
+                                            <a class="dropdown-item" href="traspaso-inventario.php">Movimientos inventario</a>
+                                            <a class="dropdown-item" href="productos-inventarios.php">Agregar productos a inventarios</a>
                                             <a class="dropdown-item" href="lista-medi.php">Media sucursales</a>
                                         </div>
                                     </div>

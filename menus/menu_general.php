@@ -2,7 +2,7 @@
 <?php include("menus/menu_bottom.php"); ?>
 <!-- End Menu-bottom -->
 
-<nav class="navbar navbar-solid navbar-expand-lg bg-dark fixed-top" style="z-index: 1030;">
+<nav class="navbar navbar-solid navbar-expand-lg bg-dark fixed-top" style="z-index: 1030;position: sticky;">
 
 <div class="container">
     <a class="logo" href="index.php">
