@@ -45,7 +45,15 @@ use PHPMailer\PHPMailer\Exception;
 
     R::store($registro);
 
-    $mail = new PHPMailer(true);
+    $ventas = R::dispense('ventas');
+
+    $ventas->user_id = $_POST["usuariid"];
+    $ventas->fecha = date('Y-m-d');
+    $ventas->total = 500;
+
+    $id = R::store($ventas);
+
+   /* $mail = new PHPMailer(true);
 
                 try {
                     //Server settings
@@ -91,7 +99,7 @@ use PHPMailer\PHPMailer\Exception;
                     $mail->send();
                 } catch (Exception $e) {
                     echo "No se pudo enviar el correo: {$mail->ErrorInfo}";
-                
-                }
+            
+                }*/
                 echo json_encode($data);
 ?>

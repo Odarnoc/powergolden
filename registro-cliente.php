@@ -4,17 +4,6 @@ session_start();
 
 require 'bd/conexion.php';
 
-$id = $_SESSION["user_id"];
-
-$usuario = R::getAll("select  id,
-        nombre,
-        referido 
-from    (select * from usuarios
-         order by referido, id) clientes_sorted,
-        (select @pv := '$id') initialisation
-where   find_in_set(referido, @pv)
-and     length(@pv := concat(@pv, ',', id))");
-
 ?>
 
 <!doctype html>

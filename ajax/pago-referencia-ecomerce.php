@@ -1,6 +1,8 @@
 <?php
+require '../bd/conexion.php';
+require '../utils/error.php';
+
 require ('../pos/webserviceapp/openpay/Openpay.php');
-require '../pos/webserviceapp/conexion.php';
 
 require '../phpMailer/Exception.php';
 require '../phpMailer/PHPMailer.php';
@@ -35,17 +37,53 @@ use PHPMailer\PHPMailer\Exception;
     $data['url_recibo']=$server."/".$identificador."/".$charge->payment_method->reference;
     $referencia=$charge->payment_method->reference;
 
-    $registro = R::dispense('referencias');
+    $carrito = $_POST['carrito'];
+    $errores=array();
     
-    $registro->referencia = $referencia;
-    $registro->tipo = 1;
-    $registro->status = 0;
-    $registro->cantidad = 500;
-    $registro->direccionusuario_id = $_POST['usuariid'];
+    if(sizeof($carrito) < 0){
+    error_mensaje('El carrito no puede estar vacio.');
+    return;
+    } 
+    
+    foreach ($carrito as $valor) {
+        $almacen = R::findOne( 'inventarios', 'sucursal_id = 1 && existencia >= ? && producto_id = ?', [ $valor['cant'],$valor['id'] ]);
+        if(empty($almacen)){
+            array_push($errores,$valor);
+        }
+    
+    }
 
-    R::store($registro);
+    if(!empty($errores)){
+        $prodsErr='';
+        foreach ($errores as $valor) {
+            $prodsErr.=$valor['nombre'].', ';
+        }
+        $msjErr='Los productos ( '.$prodsErr.' ) no tienen suficientes existencias';
+        error_mensaje($msjErr);
+        return;
+    }
 
-  /*  $mail = new PHPMailer(true);
+    $venta = R::dispense('ventas');
+    $venta->user_id = $_POST['usuariid'];
+    $venta->fecha = new DateTime();
+    $venta->total = $_POST['total'];
+    $id_venta = R::store($venta);
+
+    foreach ($carrito as $item) {
+        $prod = R::dispense('productosxventas');
+        $prod->venta_id = $id_venta;
+        $prod->producto_id = $item['id'];
+        $prod->cantidad = $item['cant'];
+        $id = R::store($prod);
+
+
+        $producto = R::findOne( 'inventarios', 'sucursal_id = 1 && producto_id = ?', [$item['id']]);
+        $producto->existencia -= $item['cant'];
+        R::store($producto);
+
+    }
+
+    $mail = new PHPMailer(true);
 
                 try {
                     //Server settings
@@ -92,6 +130,6 @@ use PHPMailer\PHPMailer\Exception;
                 } catch (Exception $e) {
                     echo "No se pudo enviar el correo: {$mail->ErrorInfo}";
                 
-                }*/
+                }
                 echo json_encode($data);
 ?>
