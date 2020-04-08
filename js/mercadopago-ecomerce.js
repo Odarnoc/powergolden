@@ -116,9 +116,18 @@ function sdkResponseHandler(status, response) {
                     );
                 }
                 Mercadopago.clearSession();
-                localStorage.clear();
-                localStorage.setItem('carrito', JSON.stringify([]));
-                location.href = "carrito-ecomerce.php";
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Compra exitosa!'
+                })
+                    .then((ok) => {
+                        if (ok) {
+                            localStorage.clear();
+                            localStorage.setItem('carrito', JSON.stringify([]));
+                            location.href = "carrito-ecomerce.php";
+                        }
+                    });
             },
             error(error) {
                 swal(
@@ -142,9 +151,18 @@ function enviar_pago_oxxo() {
             swal.close();
             window.open(data, '_blank');
             Mercadopago.clearSession();
-            localStorage.clear();
-            localStorage.setItem('carrito', JSON.stringify([]));
-            location.href = "carrito-ecomerce.php";
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Compra exitosa!'
+            })
+                .then((ok) => {
+                    if (ok) {
+                        localStorage.clear();
+                        localStorage.setItem('carrito', JSON.stringify([]));
+                        location.href = "carrito-ecomerce.php";
+                    }
+                });
         },
         error(error) {
             swal(
@@ -177,9 +195,18 @@ paypal.Buttons({
     },
     onApprove: function (data, actions) {
         return actions.order.capture().then(function (details) {
-            localStorage.clear();
-            localStorage.setItem('carrito', JSON.stringify([]));
-            location.href = "carrito-ecomerce.php";
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Compra exitosa!'
+            })
+                .then((ok) => {
+                    if (ok) {
+                        localStorage.clear();
+                        localStorage.setItem('carrito', JSON.stringify([]));
+                        location.href = "carrito-ecomerce.php";
+                    }
+                });
         });
     }
 }).render('#paypal-button-container');

@@ -83,7 +83,7 @@ function sdkResponseHandler(status, response) {
             cliente = cliente_external;
         }
         var data = $("#pay").serializeArray();
-        data.push({ name: "email", value: localStorage.getItem('correo')});
+        data.push({ name: "email", value: localStorage.getItem('correo') });
         $.ajax({
             url: "ajax/mercado-pago.php",
             type: "post",
@@ -105,7 +105,16 @@ function sdkResponseHandler(status, response) {
                     );
                 }
                 Mercadopago.clearSession();
-                location.reload();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Restauracion exitosa!'
+                })
+                    .then((ok) => {
+                        if (ok) {
+                            location.reload();
+                        }
+                    });
             },
             error(error) {
                 swal(
@@ -151,7 +160,7 @@ paypal.Buttons({
         layout: 'vertical',
         label: 'paypal',
     },
-    
+
     createOrder: function (data, actions) {
         return actions.order.create({
             purchase_units: [{
@@ -163,7 +172,16 @@ paypal.Buttons({
     },
     onApprove: function (data, actions) {
         return actions.order.capture().then(function (details) {
-            location.reload();
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Restauracion exitosa!'
+            })
+                .then((ok) => {
+                    if (ok) {
+                        location.reload();
+                    }
+                });
         });
     }
 }).render('#paypal-button-container');
