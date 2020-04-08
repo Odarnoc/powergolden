@@ -53,6 +53,16 @@ use PHPMailer\PHPMailer\Exception;
     
     }
 
+    if(!empty($errores)){
+        $prodsErr='';
+        foreach ($errores as $valor) {
+            $prodsErr.=$valor['nombre'].', ';
+        }
+        $msjErr='Los productos ( '.$prodsErr.' ) no tienen suficientes existencias';
+        error_mensaje($msjErr);
+        return;
+    }
+
     $venta = R::dispense('ventas');
     $venta->user_id = $_POST['usuariid'];
     $venta->fecha = new DateTime();

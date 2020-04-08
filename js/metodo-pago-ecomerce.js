@@ -5,6 +5,7 @@ var apellidos;
 var correo;
 var telefono;
 var id = 0;
+var idusuario = 0;
 $(document).ready(function () {
     datosuser();
     mostrar();

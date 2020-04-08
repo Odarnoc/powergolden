@@ -105,6 +105,7 @@ function sdkResponseHandler(status, response) {
                     );
                 }
                 Mercadopago.clearSession();
+                location.reload();
             },
             error(error) {
                 swal(
@@ -129,6 +130,7 @@ function enviar_pago_oxxo() {
             swal.close();
             window.open(data, '_blank');
             Mercadopago.clearSession();
+            location.reload();
         },
         error(error) {
             swal(
@@ -161,6 +163,7 @@ paypal.Buttons({
     },
     onApprove: function (data, actions) {
         return actions.order.capture().then(function (details) {
+            location.reload();
         });
     }
 }).render('#paypal-button-container');

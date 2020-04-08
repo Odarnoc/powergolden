@@ -132,15 +132,11 @@ function sdkResponseHandler(status, response) {
 }
 
 function enviar_pago_oxxo() {
-
+    datosuser();
     $.ajax({
         url: "ajax/pago-ecomerce-oxxo.php",
         type: "post",
-        data: {
-            'carrito': JSON.parse(localStorage.getItem('carrito')),
-            'usuariid': id, 'transaction_amount': localStorage.getItem('totalgen'), email: localStorage.getItem('correo')
-        },
-        dataType: "html",
+        data: { transaction_amount: localStorage.getItem('totalgen'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito')), },
         success(data) {
             console.log(data);
             swal.close();

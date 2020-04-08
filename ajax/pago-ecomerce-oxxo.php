@@ -30,8 +30,17 @@ MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e9869
       if(empty($almacen)){
           array_push($errores,$valor);
       }
-  
   }
+  
+  if(!empty($errores)){
+    $prodsErr='';
+    foreach ($errores as $valor) {
+        $prodsErr.=$valor['nombre'].', ';
+    }
+    $msjErr='Los productos ( '.$prodsErr.' ) no tienen suficientes existencias';
+    error_mensaje($msjErr);
+    return;
+}
 
   $venta = R::dispense('ventas');
   $venta->user_id = $_POST['usuariid'];

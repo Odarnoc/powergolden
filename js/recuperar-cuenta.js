@@ -182,7 +182,7 @@ function referencia() {
             swal.close();
             var datajson = JSON.parse(data);
             window.open(datajson.url_recibo);
-            $("#modalGenerarReferencia").modal("hide");
+            location.reload();
         },
     });
 }
