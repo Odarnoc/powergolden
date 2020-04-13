@@ -104,9 +104,10 @@ $ventas=R::getAll($query);
 
                         </div>
 
-                        <table class="table" style="text-align:center">
+                        <table id="ventas" class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
+                                <th scope="col">ID</th>    
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Total</th>
@@ -116,8 +117,10 @@ $ventas=R::getAll($query);
                             <tbody >
                             <?php foreach ($ventas as $item) { ?>
                                 <tr>
+                                <td><?php echo $item['id'] ?></td>
+                                
                                 <td style="text-align:left"><?php echo $item['nombre'] ?> <?php echo $item['apellido'] ?></td>
-                                <td><?php echo $item['fecha'] ?></td>
+                                <td><?php echo date_format(date_create($item['fecha']),"d/m/Y H:i:s");  ?></td>
                                 <td>$<?php echo $item['total'] ?><sup>.00</sup></td>
                                 <td><a href="detalle-historial.php?id=<?php echo $item['id'] ?>"><i class="fas fa-eye"></i>  </a> </td>
                                 </tr> 
@@ -157,8 +160,30 @@ $ventas=R::getAll($query);
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
+    
+    
+    <!-- datables paginadores -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
+
+
+    
 
     <script>
+   
+$(document).ready(function() {
+    $('#ventas').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        }
+    } );
+} );
+
+
+
         $("input[type='number']").inputSpinner()
     </script>
 

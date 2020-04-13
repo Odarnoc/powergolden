@@ -11,9 +11,9 @@ $productos=R::getAll($queryprodventa);
 <!doctype html>
 <html lang="es">
 
-<head>
+<head><meta charset="gb18030">
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -91,9 +91,10 @@ $productos=R::getAll($queryprodventa);
                             </div>
                         </div>
 
-                        <table class="table" style="text-align:center">
+                        <table id="productos" class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
+                                <th scope="col">ID</th>    
                                 <th style="width: 20%" scope="col">Imagen</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Precio MXN</th>
@@ -104,6 +105,8 @@ $productos=R::getAll($queryprodventa);
                             <tbody >
                             <?php foreach ($productos as $item) { ?>
                                 <tr>
+                                <td style="vertical-align: middle"><?php echo $item['id'] ?></td>
+                                
                                 <td style="vertical-align: middle"><img style="width: 50%" src="productos_img/<?php echo $item['imagen']?>"> </td>
                                 <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
                                 <td style="vertical-align: middle">$<?php echo $item['precio_mxn'] ?></td>
@@ -178,8 +181,29 @@ $productos=R::getAll($queryprodventa);
     <script src="js/sweetalert2.js"></script>
 
     <script src="js/editar-producto.js"></script>
+    
+    
+      
+    <!-- datables paginadores -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
+
+    
+
 
     <script>
+    
+$(document).ready(function() {
+    $('#productos').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        }
+    } );
+} );
+    
         $("input[type='number']").inputSpinner()
     </script>
 

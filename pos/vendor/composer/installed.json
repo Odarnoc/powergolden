@@ -65,33 +65,32 @@
     },
     {
         "name": "doctrine/annotations",
-        "version": "1.10.1",
-        "version_normalized": "1.10.1.0",
+        "version": "v1.4.0",
+        "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/annotations.git",
-            "reference": "5eb79f3dbdffed6544e1fc287572c0f462bd29bb"
+            "reference": "54cacc9b81758b14e3ce750f205a393d52339e97"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/annotations/zipball/5eb79f3dbdffed6544e1fc287572c0f462bd29bb",
-            "reference": "5eb79f3dbdffed6544e1fc287572c0f462bd29bb",
+            "url": "https://api.github.com/repos/doctrine/annotations/zipball/54cacc9b81758b14e3ce750f205a393d52339e97",
+            "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
             "shasum": ""
         },
         "require": {
             "doctrine/lexer": "1.*",
-            "ext-tokenizer": "*",
-            "php": "^7.1"
+            "php": "^5.6 || ^7.0"
         },
         "require-dev": {
             "doctrine/cache": "1.*",
-            "phpunit/phpunit": "^7.5"
+            "phpunit/phpunit": "^5.7"
         },
-        "time": "2020-04-02T12:33:25+00:00",
+        "time": "2017-02-24T16:22:25+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.9.x-dev"
+                "dev-master": "1.4.x-dev"
             }
         },
         "installation-source": "dist",
@@ -106,16 +105,16 @@
         ],
         "authors": [
             {
-                "name": "Guilherme Blanco",
-                "email": "guilhermeblanco@gmail.com"
-            },
-            {
                 "name": "Roman Borschel",
                 "email": "roman@code-factory.org"
             },
             {
                 "name": "Benjamin Eberlei",
                 "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
             },
             {
                 "name": "Jonathan Wage",
@@ -689,23 +688,23 @@
     },
     {
         "name": "mercadopago/dx-php",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "1.8.1",
+        "version_normalized": "1.8.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/mercadopago/dx-php.git",
-            "reference": "83d9d35a002376b0a825967b96c20151bf49c061"
+            "reference": "cb98165fdd4806d0b21a9ef1194b77f5abca31dc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mercadopago/dx-php/zipball/83d9d35a002376b0a825967b96c20151bf49c061",
-            "reference": "83d9d35a002376b0a825967b96c20151bf49c061",
+            "url": "https://api.github.com/repos/mercadopago/dx-php/zipball/cb98165fdd4806d0b21a9ef1194b77f5abca31dc",
+            "reference": "cb98165fdd4806d0b21a9ef1194b77f5abca31dc",
             "shasum": ""
         },
         "require": {
-            "doctrine/annotations": "^1.8",
-            "doctrine/common": "^2.6",
-            "php": ">=7.1.0"
+            "doctrine/annotations": "1.4",
+            "doctrine/common": "~2.6",
+            "php": ">=5.5.0"
         },
         "require-dev": {
             "doctrine/orm": "~2.3",
@@ -716,7 +715,7 @@
             "symfony/yaml": "~2.5",
             "vlucas/phpdotenv": "^2.5"
         },
-        "time": "2020-04-06T17:33:16+00:00",
+        "time": "2020-03-25T16:57:37+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
