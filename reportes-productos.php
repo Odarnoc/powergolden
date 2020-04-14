@@ -86,9 +86,10 @@ $productos=R::getAll($query);
                         <div class="row row-tabla-ventas">
                             <div class="col-lg-12 col-md-12">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table id="reporteproductos" class="table">
                                         <thead style="">
                                             <tr class="table-primary"> 
+                                            <th scope="col">ID</th>
                                                 <th scope="col">Nombre</th>
                                                 <th scope="col" style="text-align: center;">Categoría</th>
                                                 <th scope="col" style="text-align: center;">Estock</th>
@@ -98,6 +99,7 @@ $productos=R::getAll($query);
                                         <tbody>
                                         <?php foreach ($productos as $item) { ?>
                                             <tr>
+                                                <td scope="col"><?php echo $item['id'] ?></td>
                                                 <td scope="col"><?php echo $item['nombre'] ?></td>
                                                 <td scope="col" style="text-align: center;"><?php echo $item['linea'] ?></td>
                                                 <td scope="col" style="text-align: center;"><?php echo $item['inventario'] ?></td>
@@ -140,6 +142,33 @@ $productos=R::getAll($query);
     <!-- custom scripts -->
     <script src="js/main-perfil.js"></script>
     <script src="js/scripts.js"></script>
+    
+    
+      
+    <!-- datables paginadores -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
+
+    
+
+
+    
+
+    <script>
+
+   
+$(document).ready(function() {
+    $('#reporteproductos').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        }
+    } );
+} );
+
+</script>
 
 </body>
 

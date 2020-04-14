@@ -8,9 +8,9 @@ $clientes=R::find('usuarios','rol = 2');
 <!doctype html>
 <html lang="es">
 
-<head>
+<head><meta charset="gb18030">
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -86,9 +86,10 @@ $clientes=R::find('usuarios','rol = 2');
 
                         </div>
 
-                        <table class="table" style="text-align:center">
+                        <table id="usuarios" class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
+                                     <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Telefono</th>
@@ -99,6 +100,8 @@ $clientes=R::find('usuarios','rol = 2');
                             <tbody >
                                 <?php foreach ($clientes as $item) { ?>
                                     <tr>
+                                        <td><?php echo $item['id'] ?></td>
+                                        
                                         <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
@@ -160,8 +163,25 @@ $clientes=R::find('usuarios','rol = 2');
     <script src="js/editar-persona.js"></script>
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
+    
+    <!-- datables paginadores -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
 
     <script>
+    
+
+$(document).ready(function() {
+    $('#usuarios').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        }
+    } );
+} );
+
         $("input[type='number']").inputSpinner();
         $('[data-toggle="tooltip"]').tooltip();
     </script>

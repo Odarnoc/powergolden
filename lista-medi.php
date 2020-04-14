@@ -72,7 +72,7 @@ $producto = R::getAll($querydos);
                         </div>
                         <br>
 
-                        <table class="table" style="text-align:center">
+                        <table id="media" class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
                                     <th scope="col">Nombre</th>
@@ -127,6 +127,33 @@ $producto = R::getAll($querydos);
     <script src="js/sucursal.js"></script>
     <script src="js/sucursal-actions.js"></script>
 
+
+
+<!-- datables paginadores -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
+
+    
+
+
+    
+
+    <script>
+
+   
+$(document).ready(function() {
+    $('#media').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        }
+    } );
+} );
+
+
+</script>
 
 </body>
 

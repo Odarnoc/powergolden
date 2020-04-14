@@ -101,6 +101,22 @@
                                     </div>
                                 </li>
 
+
+                                 <li>
+                                    <div class="dropdown show">
+                                        <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Bonificaciones
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="bonificaciones.php">Corte/Ultimo Corte</a>
+                                            <a class="dropdown-item" href="bonificaciones_consulta.php">Buscar periodo</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                
+                                
                                 <li>
                                     <div class="dropdown show">
                                         <a class="dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

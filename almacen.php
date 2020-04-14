@@ -91,9 +91,10 @@ $prod = R::find('productos');
                         </div>
                         <br>
 
-                        <table class="table" style="text-align:center">
+                        <table id="almacenes" class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Direccion</th>
                                     <th scope="col">Estado</th>
@@ -103,6 +104,7 @@ $prod = R::find('productos');
                             <tbody>
                                 <?php foreach ($sucursal as $item) { ?>
                                     <tr>
+                                        <td style="vertical-align: middle"><?php echo $item['id'] ?></td>
                                         <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
                                         <td style="vertical-align: middle"><?php echo $item['direccion'] ?></td>
                                         <td style="vertical-align: middle"><?php echo $item['estado'] ?></td>
@@ -278,8 +280,33 @@ $prod = R::find('productos');
 
     <script src="js/sucursal.js"></script>
     <script src="js/sucursal-actions.js"></script>
+    
+    
+     <!-- datables paginadores -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
+
+    
+
+
+    
 
     <script>
+
+   
+$(document).ready(function() {
+    $('#almacenes').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        }
+    } );
+} );
+
+
+
     $(document).ready(function(){
     $('#plus-btn').click(function(){
         $('#cantidad').val(parseInt($('#cantidad').val()) + 1 );

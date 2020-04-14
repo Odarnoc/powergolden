@@ -33,7 +33,7 @@ if(empty($_POST['pass'])){
 
     
 
-    if(diferenciaDias($inicio['fecha'], $fin) >= 60){
+    /* if(diferenciaDias($inicio['fecha'], $fin) >= 4){
         error_mensaje('Su cuenta a expirado'); 
     }else{ */
             $query = 'SELECT u.id,u.rol FROM usuarios as u LEFT JOIN independientes as i on u.id = i.usuario_id WHERE u.id='.$correo.'  &&  u.pass= "'.$contrasena.'" && u.rol = 2 && i.status = 1' ;
@@ -53,7 +53,6 @@ if(empty($_POST['pass'])){
                 $_SESSION["rol"] = $login_in[0]['rol'];
                 echo json_encode($login_in[0]);
             }
-        
   //  }
 
    /* function diferenciaDias($inicio, $fin)
