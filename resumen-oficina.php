@@ -376,7 +376,6 @@ $user_id = $_SESSION["user_id"];
     <script src="js/scripts.js"></script>
     <script src="js/menu-movil.js"></script>
     <script src="js/resumen-oficina.js"></script>
-    <script src="js/finalizar-compra.js"></script>
     <script src="js/metodo-pago-oficina.js"></script>
 
     <script>
@@ -384,7 +383,7 @@ $user_id = $_SESSION["user_id"];
     </script>
     <!-- MercadoPago -->
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
-    <script src="js/mercadopago-ecomerce.js"></script>
+    <script src="js/mercadopago-oficina.js"></script>
 
 </body>
 

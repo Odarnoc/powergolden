@@ -6,7 +6,17 @@ $(document).ready(function () {
     carrito = JSON.parse(localStorage.getItem('carrito-oficina'));
     datosuser();
     pintarCarrito();
+    mostrar();
 });
+
+function mostrar() {
+    $('#direccion').text(localStorage.getItem('direccion'));
+    $('#col').text(localStorage.getItem('colonia'));
+    $('#ciudad').text(localStorage.getItem('municipio'));
+    $('#psotal').text(localStorage.getItem('codigop'));
+    $('#estados').text(localStorage.getItem('estado'));
+    $('#nombreuser').text(nombre);
+}
 
 function pintarCarrito() {
     console.log(carrito);

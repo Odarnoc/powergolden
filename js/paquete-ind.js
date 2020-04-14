@@ -21,7 +21,9 @@ $(document).ready(function() {
             } else {
                 json_mensaje.forEach(function(prod,index) {
                     prod.cant = 1;
-                    productos.push(prod)
+                    //borrar esta linea
+                    prod.precio = prod.mxn;
+                    productos.push(prod);
                 });
                 $.ajax({
                     url: 'ajax/lista-paquetes.php',
@@ -39,7 +41,7 @@ $(document).ready(function() {
                         } else {
                             json_mensaje.forEach(function(prod,index) {
                                 prod.cant = 1;
-                                paquetes.push(prod)
+                                paquetes.push(prod);
                             });
                             pintarPacks();
                         }

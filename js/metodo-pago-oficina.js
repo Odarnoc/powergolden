@@ -6,10 +6,6 @@ var correo;
 var telefono;
 var id = 0;
 var idusuario = 0;
-$(document).ready(function () {
-    datosuser();
-    mostrar();
-});
 
 function datosuser() {
     $.ajax({
@@ -33,7 +29,7 @@ function referencia() {
         url: 'ajax/pago-referencia-ecomerce.php',
         type: "post",
         data: {
-            carrito: JSON.parse(localStorage.getItem('carrito')),
+            carrito: JSON.parse(JSON.parse(localStorage.getItem('carrito-oficina')).carrito),
             usuariid: id,
             nombre: nombre,
             apellido: apellidos,
