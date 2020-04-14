@@ -1,9 +1,9 @@
 <?php
 session_start();
 
- if(!isset($_SESSION["user_id"])){
+if (!isset($_SESSION["user_id"])) {
     header('Location: index.php');
- }
+}
 
 ?>
 <!doctype html>
@@ -15,7 +15,8 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="../css/style.css">
@@ -26,13 +27,15 @@ session_start();
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap" rel="stylesheet">
 
 	<!-- Plugin -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link rel="stylesheet" href="../css/owl.carousel.min.css">
 	<link rel="stylesheet" href="../css/owl.theme.default.min.css">
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
 
 
@@ -53,7 +56,8 @@ session_start();
 
 			<nav class="navbar navbar-pos navbar-expand-lg navbar-light bg-light">
 				<a class="navbar-brand logo" href="#"><img src="../images/logo-navbar.png" alt=""></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+					aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -83,13 +87,15 @@ session_start();
 							<a class="nav-link" href="dashboard.php"><i class="fas fa-chart-line mr-2"></i>Dashboard</a>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-user-circle mr-2"></i><?php echo $_SESSION['username'] ?>
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<!--<a class="dropdown-item" href="#"><i class="fas fa-star mr-2"></i>Opción uno</a>
 								<a class="dropdown-item" href="#"><i class="fas fa-star mr-2"></i>Opción dos</a>-->
-								<a class="dropdown-item" id="logout"><i class="fas fa-sign-out-alt mr-2"></i>Cerrar sesión</a>
+								<a class="dropdown-item" id="logout"><i class="fas fa-sign-out-alt mr-2"></i>Cerrar
+									sesión</a>
 							</div>
 						</li>
 					</ul>
@@ -98,8 +104,8 @@ session_start();
 
 		</div>
 	</section>
-	<input type="hidden" id="user_id" value="<?php $_SESSION["user_id"] ?>">
-	<input type="hidden" id="sucursal_id" value="<?php $_SESSION["sucursal_id"] ?>">
+	<input type="hidden" id="user_id" value="<?php $_SESSION["user_id"]?>">
+	<input type="hidden" id="sucursal_id" value="<?php $_SESSION["sucursal_id"]?>">
 
 	<section class="sec-body-pos">
 
@@ -111,35 +117,44 @@ session_start();
 
 						<div class="d-input-product">
 
-							<input type="text" class="form-control input-product" id="buscar" placeholder="Buscar producto por Nombre o Código">
+							<input type="text" class="form-control input-product" id="buscar"
+								placeholder="Buscar producto por Nombre o Código">
 						</div>
 
 						<div class="d-slider-products">
 
 							<div class="owl-carousel owl-theme">
 								<div class="item">
-									<a class="btn btn-menu-slide active-slide" onclick="change_category(0);" role="button"><i class="fas fa-star ying-yang mr-3"></i>Todos</a>
+									<a class="btn btn-menu-slide active-slide" onclick="change_category(0);"
+										role="button"><i class="fas fa-star ying-yang mr-3"></i>Todos</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide" onclick="change_category(1);" role="button"><i class="fas fa-circle cafe mr-3"></i>Línea Café</a>
+									<a class="btn btn-menu-slide" onclick="change_category(1);" role="button"><i
+											class="fas fa-circle cafe mr-3"></i>Línea Café</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide" onclick="change_category(2);" role="button"><i class="fas fa-circle amarilla mr-3"></i>Línea Amarilla</a>
+									<a class="btn btn-menu-slide" onclick="change_category(2);" role="button"><i
+											class="fas fa-circle amarilla mr-3"></i>Línea Amarilla</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide" onclick="change_category(3);" role="button"><i class="fas fa-circle rosa mr-3"></i>Línea Rosa</a>
+									<a class="btn btn-menu-slide" onclick="change_category(3);" role="button"><i
+											class="fas fa-circle rosa mr-3"></i>Línea Rosa</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide" onclick="change_category(4);" role="button"><i class="fas fa-circle tinta mr-3"></i>Línea Tinta</a>
+									<a class="btn btn-menu-slide" onclick="change_category(4);" role="button"><i
+											class="fas fa-circle tinta mr-3"></i>Línea Tinta</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide" onclick="change_category(5);" role="button"><i class="fas fa-circle verde mr-3"></i>Línea Verde</a>
+									<a class="btn btn-menu-slide" onclick="change_category(5);" role="button"><i
+											class="fas fa-circle verde mr-3"></i>Línea Verde</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide" onclick="change_category(6);" role="button"><i class="fas fa-circle ying-yang mr-3"></i>Línea Yin Yang</a>
+									<a class="btn btn-menu-slide" onclick="change_category(6);" role="button"><i
+											class="fas fa-circle ying-yang mr-3"></i>Línea Yin Yang</a>
 								</div>
 								<div class="item">
-									<a class="btn btn-menu-slide" onclick="change_category(7);" role="button"><i class="fas fa-circle estrella mr-3"></i>Línea Estrella</a>
+									<a class="btn btn-menu-slide" onclick="change_category(7);" role="button"><i
+											class="fas fa-circle estrella mr-3"></i>Línea Estrella</a>
 								</div>
 
 							</div>
@@ -160,7 +175,8 @@ session_start();
 
 				<div class="col-lg-4 col-md-4">
 					<div class="d-payment-pos">
-						<select class="form-control input-pos select-venta-pos" id="tipo_venta" onchange="cambio_tipo_venta()">
+						<select class="form-control input-pos select-venta-pos" id="tipo_venta"
+							onchange="cambio_tipo_venta()">
 							<option hidden value="">Seleccionar tipo de venta</option>
 							<option value="0">Cliente Temporal</option>
 							<option value="1">Empresario Independiente</option>
@@ -173,19 +189,22 @@ session_start();
 						<div class="row">
 							<div class="col-lg-8 col-md-8 col-8 pr-0">
 
-								<select id="sector" data-live-search="true" class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+								<select id="sector" data-live-search="true"
+									class=" selectpicker form-control input-pos select-cliente-pos mt-3">
 									<option value="0">Seleccionar cliente</option>
 
 
 								</select>
 							</div>
 							<div class="col-lg-4 col-md-4 col-4">
-								<button type="button" class="btn btn-lg-pos btn-bg-blue mt-3" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-plus mr-2"></i>Nuevo</button>
+								<button type="button" class="btn btn-lg-pos btn-bg-blue mt-3" data-toggle="modal"
+									data-target="#exampleModalCenter"><i class="fas fa-plus mr-2"></i>Nuevo</button>
 							</div>
 						</div>
 
 
-						<input type="text" class="form-control input-pos input-barcode-pos mt-3" placeholder="Escanea el código de barras">
+						<input type="text" class="form-control input-pos input-barcode-pos mt-3"
+							placeholder="Escanea el código de barras">
 
 						<div class="table-responsive table-pos mt-3">
 							<table class="table table-borderless" id="tablacarrito">
@@ -218,10 +237,13 @@ session_start();
 
 								<div class="col-lg-6 col-md-6 col-6">
 									<div class="form-group row mb-0" style="display:none">
-										<label for="input-descuento" class="col-sm-7 col-7 col-form-label">Descuento(%):</label>
+										<label for="input-descuento"
+											class="col-sm-7 col-7 col-form-label">Descuento(%):</label>
 										<div class="col-sm-5 pl-0 pr-0 col-5">
-											<input type="number" id="input-descuento" class="form-control" placeholder="%">
-											<label id="alerta" style="color:red; display:none;">Solo números entre 0 y 100</label>
+											<input type="number" id="input-descuento" class="form-control"
+												placeholder="%">
+											<label id="alerta" style="color:red; display:none;">Solo números entre 0 y
+												100</label>
 										</div>
 									</div>
 								</div>
@@ -247,11 +269,13 @@ session_start();
 						<div class="d-btns-table-pos">
 							<div class="row">
 								<div class="col-lg-6 col-md-6 col-6">
-									<button type="button" onclick="cleanSale()" class="btn btn-lg-pos btn-bg-gray">Cancelar</button>
+									<button type="button" onclick="cleanSale()"
+										class="btn btn-lg-pos btn-bg-gray">Cancelar</button>
 								</div>
 
 								<div class="col-lg-6 col-md-6 col-6">
-									<button type="button" class="btn btn-lg-pos btn-bg-blue" onclick="sale_modal()">Pagar</button>
+									<button type="button" class="btn btn-lg-pos btn-bg-blue"
+										onclick="sale_modal()">Pagar</button>
 								</div>
 
 							</div>
@@ -361,7 +385,8 @@ session_start();
 
 	</section>
 	<!-- Modal -->
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -422,8 +447,9 @@ session_start();
 			</div>
 		</div>
 	</div>
-		<!-- Modal Metodo de pago -->
-		<div class="modal fade" id="modalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<!-- Modal Metodo de pago -->
+	<div class="modal fade" id="modalPagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -470,45 +496,56 @@ session_start();
 					<p class="p-metodo-pago">Metodos de pago</p>
 
 					<div class="row">
-						<div class="col-sm" >
-							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta" onclick='$("#modalPagar").modal("hide");' data-toggle="modal" data-target="#modalGenerarReferencia"><i class="fas fa-credit-card mr-2"></i> Referencia</button>
+						<div class="col-sm">
+							<button type="button" class="btn btn-lg-modal btn-pago-tarjeta"
+								onclick='$("#modalPagar").modal("hide");' data-toggle="modal"
+								data-target="#modalGenerarReferencia"><i class="fas fa-credit-card mr-2"></i>
+								Referencia</button>
 						</div>
 						<div class="col-sm">
-							<button type="button" class="btn btn-lg-modal" onclick='card_pay()'><i class="fas fa-credit-card mr-2"></i> Tarjeta</button>
+							<button type="button" class="btn btn-lg-modal" onclick='card_pay()'><i
+									class="fas fa-credit-card mr-2"></i> Tarjeta</button>
 						</div>
 						<div class="col-sm">
-							<button type="button" class="btn btn-lg-modal" onclick="efective_pay();"><i class="fas fa-coins mr-2"></i> Efectivo</button>
+							<button type="button" class="btn btn-lg-modal" onclick="efective_pay();"><i
+									class="fas fa-coins mr-2"></i> Efectivo</button>
 						</div>
 						<div class="col-sm">
-                            <button type="button" class="btn btn-lg-modal" onclick="transfer_pay();"><i class="fas fa-university mr-2"></i>Transferencia</button>
-                        </div>
-                        <div class="col-sm">
-                            <button type="button" class="btn btn-lg-modal"  onclick="deposito_pay();"><i class="fas fa-university mr-2"></i>Deposito</button>
-                        </div>
+							<button type="button" class="btn btn-lg-modal" onclick="transfer_pay();"><i
+									class="fas fa-university mr-2"></i>Transferencia</button>
+						</div>
+						<div class="col-sm">
+							<button type="button" class="btn btn-lg-modal" onclick="deposito_pay();"><i
+									class="fas fa-university mr-2"></i>Deposito</button>
+						</div>
 
 					</div>
 					<br>
 					<div class="row">
-					<div class="col-lg-6 col-md-6 col-6" >
-					<div id="paypal-button-container"></div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-6">
-							<button type="button" onclick='$("#modalTarjeta").modal("toggle");'  class="btn btn-mercado-pago"><img src="/images/mercadopago.png" alt="">Pago con Mercado Pago</button>
+						<div class="col-lg-6 col-md-6 col-6" style="display:none">
+							<div id="paypal-button-container"></div>
+						</div>
+						<div class="col-lg-12 col-md-12 col-12">
+							<button type="button" onclick='$("#modalTarjeta").modal("toggle");'
+								class="btn btn-mercado-pago">Pago con Tarjeta</button>
 						</div>
 						<div class="col-lg-3 col-md-3 col-3" style="display:none;">
-							<button type="button" onclick='enviar_pago_oxxo()' class="btn btn-oxxo"><img src="/images/oxxo-logo.png" alt="">Pago en OXXO</button>
+							<button type="button" onclick='enviar_pago_oxxo()' class="btn btn-oxxo"><img
+									src="/images/oxxo-logo.png" alt="">Pago en OXXO</button>
 						</div>
 					</div>
 					<br>
 					<div class="row mt-1" id="div_pago" style="display:none;">
 						<div class="col-lg-12 col-md-12 col-12">
-							<button type="button" onclick="sale();" class="btn btn-lg-blue btn-bg-blue">Completar pago</button>
+							<button type="button" onclick="sale();" class="btn btn-lg-blue btn-bg-blue">Completar
+								pago</button>
 
 						</div>
 					</div>
 					<div class="row mt-1">
 						<div class="col-lg-12 col-md-12 col-12">
-							<button type="button" onclick="sale_externo();" class="btn btn-lg-blue btn-bg-blue">Pago Externo</button>
+							<button type="button" onclick="sale_externo();" class="btn btn-lg-blue btn-bg-blue">Pago
+								Externo</button>
 
 						</div>
 					</div>
@@ -523,30 +560,35 @@ session_start();
 	</div>
 
 	<!-- Modal Metodo de pago -->
-	<div class="modal fade" id="modalGenerarReferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Referencia</h5>
-                    <button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");' aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body pt-5 pb-5">
-                <form id="payment_reference">
-                
-                    
-                    <input type="text" id="n_referencia" style="margin-top:15px;"class="form-control input-pos" placeholder="Referencia" required>
-                    
-                    <button type="submit" class="btn btn-lg-blue mt-4" >Validar referencia de pago</button>
-                            </form>
+	<div class="modal fade" id="modalGenerarReferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Referencia</h5>
+					<button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");'
+						aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body pt-5 pb-5">
+					<form id="payment_reference">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");'  data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
-        </div>
+
+						<input type="text" id="n_referencia" style="margin-top:15px;" class="form-control input-pos"
+							placeholder="Referencia" required>
+
+						<button type="submit" class="btn btn-lg-blue mt-4">Validar referencia de pago</button>
+					</form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");'
+						data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -559,59 +601,73 @@ session_start();
 
 					<p class="p-metodo-pago">Datos bancarios</p>
 
-					<form method="post" id="pay" name="pay" >
-                <fieldset>
-					<input type="hidden" name="transaction_amount" id="transaction_amount" value="100">
-					<input type="hidden" name="token" id="token" value="100">
-				<div class="form-group">
-							<div class="floating-label-group">
-								<input type="text" class="form-control input-form-border" id="cardNumber" data-checkout="cardNumber" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
-								<label class="floating-label">Número de la tarjeta</label>
+					<form method="post" id="pay" name="pay">
+						<fieldset>
+							<input type="hidden" name="transaction_amount" id="transaction_amount" value="100">
+							<input type="hidden" name="token" id="token" value="100">
+							<div class="form-group">
+								<div class="floating-label-group">
+									<input type="text" class="form-control input-form-border" id="cardNumber"
+										data-checkout="cardNumber" onselectstart="return false" onpaste="return false"
+										onCopy="return false" onCut="return false" onDrag="return false"
+										onDrop="return false" autocomplete=off />
+									<label class="floating-label">Número de la tarjeta</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="floating-label-group">
-								<input type="text" class="form-control input-form-border" id="cardholderName" data-checkout="cardholderName" />
-								<label class="floating-label">Nombre y apellido</label>
+							<div class="form-group">
+								<div class="floating-label-group">
+									<input type="text" class="form-control input-form-border" id="cardholderName"
+										data-checkout="cardholderName" />
+									<label class="floating-label">Nombre y apellido</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="floating-label-group">
-								<input type="text" class="form-control input-form-border" id="cardExpirationMonth" data-checkout="cardExpirationMonth" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
-								<label class="floating-label">Mes de vencimiento</label>
+							<div class="form-group">
+								<div class="floating-label-group">
+									<input type="text" class="form-control input-form-border" id="cardExpirationMonth"
+										data-checkout="cardExpirationMonth" onselectstart="return false"
+										onpaste="return false" onCopy="return false" onCut="return false"
+										onDrag="return false" onDrop="return false" autocomplete=off />
+									<label class="floating-label">Mes de vencimiento</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="floating-label-group">
-								<input type="text" class="form-control input-form-border" id="cardExpirationYear" data-checkout="cardExpirationYear" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
-								<label class="floating-label">Año de vencimiento</label>
+							<div class="form-group">
+								<div class="floating-label-group">
+									<input type="text" class="form-control input-form-border" id="cardExpirationYear"
+										data-checkout="cardExpirationYear" onselectstart="return false"
+										onpaste="return false" onCopy="return false" onCut="return false"
+										onDrag="return false" onDrop="return false" autocomplete=off />
+									<label class="floating-label">Año de vencimiento</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="floating-label-group">
-								<input type="text" class="form-control input-form-border" id="securityCode" data-checkout="securityCode" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
-								<label class="floating-label">Código de seguridad</label>
+							<div class="form-group">
+								<div class="floating-label-group">
+									<input type="text" class="form-control input-form-border" id="securityCode"
+										data-checkout="securityCode" onselectstart="return false" onpaste="return false"
+										onCopy="return false" onCut="return false" onDrag="return false"
+										onDrop="return false" autocomplete=off />
+									<label class="floating-label">Código de seguridad</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<div class="floating-label-group">
-								<select class="form-control input-form-border"  id="installments" class="form-control" name="installments"></select>
-								<label class="floating-label">Cuotas</label>
+							<div class="form-group">
+								<div class="floating-label-group">
+									<select class="form-control input-form-border" id="installments"
+										class="form-control" name="installments"></select>
+									<label class="floating-label">Cuotas</label>
+								</div>
 							</div>
-						</div>
-                  
-                    
-                    <input type="hidden" name="payment_method_id" id="payment_method_id"/>
-                   
-					<button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
-					
-                </fieldset>
-            </form>
+
+
+							<input type="hidden" name="payment_method_id" id="payment_method_id" />
+
+							<button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+
+						</fieldset>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-<!-- 	<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<!-- 	<div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -679,7 +735,8 @@ session_start();
 			</div>
 		</div>
 	</div> -->
-	<div class="modal fade" id="modalDeleteKits" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal fade" id="modalDeleteKits" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -710,92 +767,112 @@ session_start();
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-cancelar-modal btn-cancelar-tarjeta" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-cancelar-modal btn-cancelar-tarjeta"
+						data-dismiss="modal">Cancelar</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="modalGenerarPagoTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pago con tarjeta</h5>
-                    <button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");' aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<div class="modal fade" id="modalGenerarPagoTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pago con tarjeta</h5>
+					<button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");'
+						aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<form id="pago_tarjeta" class="form-tarjeta-modal">
 					<div class="modal-body pt-5 pb-5">
 
-                    <select class="form-control input-pos-modal mb-3" name="" id="tipo_tarjeta" required>
-                        <option hidden value="">Tipo de Tarjeta</option>
-                        <option value="1">Tarjeta de Credito</option>
-                        <option value="2">Tarjeta de Debito</option>
-                    </select>
-					<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_tarjetas" placeholder="Cantidad" required>
-					<input type="text" class="form-control input-pos-modal" id="referencia_tarjetas" placeholder="Referencia" required>
-
-                    <button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
-
-                </div>
-                <div class="modal-footer">
-					<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");' data-dismiss="modal">Cancelar</button>
-</form>
-                </div>
-			</div>
-			<div class="modal fade" id="modalGenerarPagoDeposito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pago con Deposito</h5>
-                    <button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");' aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<form id="pago_deposito" class="form-tarjeta-modal">
-                <div class="modal-body pt-5 pb-5">
-
-                    <select class="form-control input-pos-modal mb-3" name="" id="banco_deposito" required>
-                        <option hidden value="">Banco</option>
-                        <option value="1">BBVA</option>
-                        <option value="2">Banorte</option>
-                    </select>
-					<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_deposito" placeholder="Cantidad" required>
-					<input type="text" class="form-control input-pos-modal" id="referencia_deposito" placeholder="Referencia" required>
-
-                    <button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
-
-                </div>
-                <div class="modal-footer">
-					<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");' data-dismiss="modal">Cancelar</button>
-</form>
-                </div>
-			</div>
-			<div class="modal fade" id="modalGenerarPagoTransfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pago con Transferencia</h5>
-                    <button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");' aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<form id="pago_transfer" class="form-tarjeta-modal">
-                <div class="modal-body pt-5 pb-5">
-
-                    <select class="form-control input-pos-modal mb-3" name="" id="banco_transfer" required>
-                        <option hidden value="">Banco</option>
-                        <option value="1">BBVA</option>
-                        <option value="2">Banorte</option>
-                    </select>
-					<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_transfer" placeholder="Cantidad" required>
-					<input type="text" class="form-control input-pos-modal" id="referencia_transfer" placeholder="Referencia" required>
+						<select class="form-control input-pos-modal mb-3" name="" id="tipo_tarjeta" required>
+							<option hidden value="">Tipo de Tarjeta</option>
+							<option value="1">Tarjeta de Credito</option>
+							<option value="2">Tarjeta de Debito</option>
+						</select>
+						<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_tarjetas"
+							placeholder="Cantidad" required>
+						<input type="text" class="form-control input-pos-modal" id="referencia_tarjetas"
+							placeholder="Referencia" required>
 
 						<button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
 
-                </div>
-                <div class="modal-footer">
-					<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");' data-dismiss="modal">Cancelar</button>
-</form>
-                </div>
-            </div>
-        </div>
-    </div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");'
+							data-dismiss="modal">Cancelar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="modal fade" id="modalGenerarPagoDeposito" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pago con Deposito</h5>
+					<button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");'
+						aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<form id="pago_deposito" class="form-tarjeta-modal">
+					<div class="modal-body pt-5 pb-5">
+
+						<select class="form-control input-pos-modal mb-3" name="" id="banco_deposito" required>
+							<option hidden value="">Banco</option>
+							<option value="1">BBVA</option>
+							<option value="2">Banorte</option>
+						</select>
+						<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_deposito"
+							placeholder="Cantidad" required>
+						<input type="text" class="form-control input-pos-modal" id="referencia_deposito"
+							placeholder="Referencia" required>
+
+						<button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");'
+							data-dismiss="modal">Cancelar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="modal fade" id="modalGenerarPagoTransfer" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pago con Transferencia</h5>
+					<button type="button" class="close" data-dismiss="modal" onclick='$("#modalPagar").modal("toggle");'
+						aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<form id="pago_transfer" class="form-tarjeta-modal">
+					<div class="modal-body pt-5 pb-5">
+
+						<select class="form-control input-pos-modal mb-3" name="" id="banco_transfer" required>
+							<option hidden value="">Banco</option>
+							<option value="1">BBVA</option>
+							<option value="2">Banorte</option>
+						</select>
+						<input type="number" class="form-control input-pos-modal mb-3" id="cantidad_transfer"
+							placeholder="Cantidad" required>
+						<input type="text" class="form-control input-pos-modal" id="referencia_transfer"
+							placeholder="Referencia" required>
+
+						<button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-cancelar-modal" onclick='$("#modalPagar").modal("toggle");'
+							data-dismiss="modal">Cancelar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
 
 	<!-- jQuery -->
 	<script src="../js/jquery-3.0.0.min.js"></script>
@@ -825,12 +902,14 @@ session_start();
 	<script src="../js/jquery.easypiechart.min.js"></script>
 
 
-	<script src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX" data-sdk-integration-source="button-factory"></script>
+	<script
+		src="https://www.paypal.com/sdk/js?client-id=Afj8W6DoGpUac1ZsvxkGMqt5yoeN3jEEA4DZ-n2Fr-qicsBHWUTcwVlssu1lEDDh3hBnBosC82L4uhXM&currency=MXN&locale=es_MX"
+		data-sdk-integration-source="button-factory"></script>
 
 
 
 	<script>
-		$(document).ready(function() {
+		$(document).ready(function () {
 			$('.owl-carousel').owlCarousel();
 		});
 
@@ -857,7 +936,7 @@ session_start();
 			}
 		});
 
-		owl.on('mousewheel', '.owl-stage', function(e) {
+		owl.on('mousewheel', '.owl-stage', function (e) {
 			if (e.deltaY > 0) {
 				owl.trigger('prev.owl');
 			} else {
@@ -867,12 +946,12 @@ session_start();
 			e.preventDefault();
 		});
 
-		$('.btn-menu-slide').on('click', function() {
+		$('.btn-menu-slide').on('click', function () {
 			$('.btn-menu-slide.active-slide').removeClass('active-slide');
 			$(this).addClass('active-slide');
 		});
 
-		$('.item-product-list').on('click', function() {
+		$('.item-product-list').on('click', function () {
 			$('.item-product-list.active-product-list').removeClass('active-product-list');
 			$(this).addClass('active-product-list');
 		});
@@ -880,13 +959,11 @@ session_start();
 	<script>
 
 	</script>
-	
+
 	<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 	<script src="js/mercadopago.js"></script>
-	
-	<script async
-  src="https://pay.google.com/gp/p/js/pay.js"
-  onload="onGooglePayLoaded()"></script>
-          
+
+	<script async   src="https://pay.google.com/gp/p/js/pay.js"   onload="onGooglePayLoaded()"></script>
+
 
 </html>

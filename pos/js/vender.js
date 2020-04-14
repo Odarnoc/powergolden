@@ -1011,6 +1011,7 @@ function sale_externo() {
       sucursal_id: $("#sucursal_id").val(),
       total: total,
       is_payed:0,
+      external_pay:1,
       cliente_id: $("#sector").val()
     },
     dataType: "json",

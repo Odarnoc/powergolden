@@ -70,11 +70,11 @@
 
 					<br>
 					<div class="row">
-					<div class="col-lg-6 col-md-6 col-6" >
+					<div class="col-lg-6 col-md-6 col-6" style="display:none;" >
 					<div id="paypal-button-container"></div>
 					</div>
-					<div class="col-lg-6 col-md-6 col-6">
-							<button type="button" onclick='$("#modalTarjeta").modal("toggle");' class="btn btn-mercado-pago"><img src="/images/mercadopago.png" alt="">Pago con Mercado Pago</button>
+					<div class="col-lg-12 col-md-12 col-12">
+							<button type="button" onclick='$("#modalTarjeta").modal("toggle");' class="btn btn-mercado-pago">Pago con Tarjeta</button>
 						</div>
 						<div class="col-lg-3 col-md-3 col-3" style="display:none;">
 							<button type="button" onclick='enviar_pago_oxxo()' class="btn btn-lg-blue btn-bg-blue">Pagar con oxxo</button>	

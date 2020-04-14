@@ -76,7 +76,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Nueva promocion</p>
+                                    <p class="title-cuenta">Nueva promoción</p>
                                     <p class="small-text-cuenta">Puedes crear aqui las promociones.</p>
                                 </div>
                             </div>
@@ -90,23 +90,10 @@
                                 <div class="d-form-registro-productos">
 
                                     <form id="form-promocion" class="form-registro-productos" method="post" enctype="multipart/form-data">
-
-                                        <div class="form-group">
-                                            <div class="image-upload " style="background-image: url(images/bg-image-upload.jpg);">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label for="file-input"><i class="fas fa-plus"></i> Subir foto</label>
-                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required hidden/>
-                                            </div>
-                                        </div>
-
                                         <div class="form-group">
                                             <div class="floating-label-group">
                                                 <input name="nombre" type="text" class="form-control input-form-underline" required />
-                                                <label class="floating-label-underline">Nombre de la promocion </label>
+                                                <label class="floating-label-underline">Nombre de la promoción </label>
                                             </div>
                                         </div>
 
@@ -116,25 +103,31 @@
                                                 <label class="floating-label-underline">Descripción </label>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col">
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <label class="">Fecha de inicio</label>
-                                                        <input name="inicio" type="date" class="form-control input-form-underline" required />
+                                                        <label class="">Sucursal</label>
+                                                        <select name="inicio" class="form-control input-form-underline" required >
+                                                        </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col">
+                                           
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
-                                                        <label class="">Fecha de finalizacion</label>
-                                                        <input name="fin" type="date" class="form-control input-form-underline" required />
+                                                        <label class="">Tipo de promoción</label>
+                                                        <select name="tipo" class="form-control input-form-underline" required >
+                                                             <option valiue="1">Productos por kits</option>
+                                                             <option valiue="2">Productos por venta</option>
+                                                             <option valiue="3">Pago de reactivación</option>
+                                                        </select>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input name="descripcion" type="number" class="form-control input-form-underline" required />
+                                                <label class="floating-label-underline">Cantidad de productos incluidos </label>
                                             </div>
                                         </div>
+                                            </div>
                                     <!--<div class="form-group">
                                             <div class="floating-label-group">
                                                 <input name="precio" type="text" class="form-control input-form-underline" required />
