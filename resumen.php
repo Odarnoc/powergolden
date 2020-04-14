@@ -164,30 +164,39 @@ $user_id = $_SESSION["user_id"];
                     <div class="modal-body">
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-6">
-                                <button type="button" class="btn btn-lg-modal btn-pago-tarjeta" onclick="referencia()"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <button type="button" class="btn btn-lg-modal" onclick='$("#modalTarjeta").modal("toggle");'><i class="fas fa-credit-card mr-2"></i> Pago con tarjeta</button>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-4">
-                                <button type="button" class="btn btn-lg-modal" data-toggle="modal" data-target="#modalTarjetaP" ><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
-                            </div>
-                            <!--<div class="col-lg-4 col-md-4 col-4">
-                                <button type="button" class="btn btn-lg-modal" onclick="referenciaBanco()"><i class="fas fa-credit-card mr-2"></i>Referencia Bancaria</button>
-                            </div>-->
                         </div>
-
                         <br>
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-6">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <button type="button" class="btn btn-lg-modal btn-pago-tarjeta" onclick="referencia()"><i class="fas fa-credit-card mr-2"></i> Pago en tienda con referencia</button>
+                            </div>
+                            <!--<div class="col-lg-6 col-md-6 col-4">
+                                <button type="button" class="btn btn-lg-modal" data-toggle="modal" data-target="#modalTarjetaP"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <button type="button" class="btn btn-lg-modal" onclick="referenciaBanco()"><i class="fas fa-credit-card mr-2"></i>Referencia Bancaria</button>
+                            </div>-->
+                        </div>
+                        <br>
+
+                        <!-- <div class="row" hidden>
+                            <div class="col-lg-12 col-md-12 col-12">
                                 <button type="button" onclick='$("#modalTarjeta").modal("toggle");' class="btn btn-mercado-pago"><img src="images/mercadopago.png" alt="">Mercado Pago</button>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-6">
+                        </div> -->
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
                                 <button type="button" onclick='enviar_pago_oxxo()' class="btn btn-oxxo"><img src="images/oxxo-logo.png" alt="">Pago en OXXO</button>
                             </div>
                         </div>
 
                         <br>
-                        <div class="row">
+                        <div class="row" hidden>
                             <div class="col-lg-12 col-md-12 col-12">
                                 <div id="paypal-button-container"></div>
                             </div>

@@ -24,21 +24,22 @@ if(empty($_POST['pass'])){
     $correo = $_POST['email'];
     $contrasena = $_POST['pass'];
 
-    $inicio = R::findOne('ventas','user_id ="'.$correo.'" ORDER BY fecha DESC LIMIT 1');
-    $fin = date('Y-m-d');
+    /*$inicio = R::findOne('ventas','user_id ="'.$correo.'" ORDER BY fecha DESC LIMIT 1');
+    $fin = date('Y-m-d');*/
 
-    if(empty($inicio)){
+   /* if(empty($inicio)){
         $registro = R::findOne('usuarios','id ='.$correo.'');
         $inicio['fecha'] = date("Y-m-d", strtotime($registro['creado']));
 
-    }
+    
 
     if(diferenciaDias($inicio['fecha'], $fin) >= 60){
         error_mensaje('Su cuenta a expirado'); 
-    }else{ 
+    }else{ */
             $query = 'SELECT u.id,u.rol FROM usuarios as u LEFT JOIN independientes as i on u.id = i.usuario_id WHERE u.id='.$correo.'  &&  u.pass= "'.$contrasena.'" && u.rol = 2 && i.status = 1' ;
 
             $login_in=R::getAll($query);
+
             if(sizeof($login_in) == 0){
                 $status = R::findOne('independientes','usuario_id ="'.$correo.'"');
 
@@ -53,14 +54,14 @@ if(empty($_POST['pass'])){
                 echo json_encode($login_in[0]);
             }
         
-    }
+  //  }
 
-    function diferenciaDias($inicio, $fin)
+   /* function diferenciaDias($inicio, $fin)
     {
         $inicio = strtotime($inicio);
         $fin = strtotime($fin);
         $dif = $fin - $inicio;
         $diasFalt = (( ( $dif / 60 ) / 60 ) / 24);
         return ceil($diasFalt);
-    } 
+    } */
 ?>

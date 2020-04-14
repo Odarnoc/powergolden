@@ -78,7 +78,6 @@ if (isset($_SESSION["user_id"]) && $_SESSION["rol"] = 0) {
                 <div class="row row-links-form">
                   <div class="col-lg-6 col-md-6">
                     <p class="t4" style="text-align: left"><a href="registro-oficina.php" class="btn-link">Registrarme como socio</a></p>
-                    <p class="t4" style="text-align: left"><a href data-toggle="modal" data-target="#modalRecuperar" class="btn-link">Recuperar cuenta</a></p>
                   </div>
                 </div>
               </div>
