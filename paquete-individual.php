@@ -2,13 +2,11 @@
 session_start();
 require 'bd/conexion.php';
 
-$id_prod = $_GET['key'];
-
 $user_id=-1;
 if(isset($_SESSION["user_id"])){
   $user_id=$_SESSION["user_id"];
 }
-$query1='SELECT * FROM paquetes WHERE id = '.$id_prod.' LIMIT 1';
+$query1='SELECT * FROM paquetes';
 $res=R::getAll($query1);
 $prodIndividual = $res[0];
 
@@ -81,10 +79,13 @@ $prods=R::getAll($query);
                     <div class="col-lg-12 d-all-item-pro" style="padding: 0;">
                         <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
                             <div class="row">
-                                <div class="col-lg-9 col-md-9 col-9 d-info-pro" style="padding:2rem;">
-                                    <p class="t2"><?php echo $prodIndividual['nombre']; ?></p>
-                                    <p class="t1">Total de productos: <b><?php echo $prodIndividual['productos']; ?></b></p>
+                                <div class="col-lg-3 col-md-3 col-3 d-info-pro" style="padding:2rem;">
+                                    <p class="t1">Total de productos: <b id="prodxpacks"></b></p>
                                     <p class="t1">Productos seleccionados( <span id="seleccion"> 0 </span> )</p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6 d-info-pro" style="padding:2rem;">
+                                    <div class="row" id="lista-packs">
+                                    </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-3 d-info-pro" style="padding:2rem;">
                                     <a class="btn btn-blue mt-3" style="background-color:49B7F3; color:white; width:100%;padding:1rem;" onclick="comprar()" role="button">Continuar</a>
