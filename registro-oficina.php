@@ -1,22 +1,9 @@
 <?php
-
-session_start();
-
-require 'bd/conexion.php';
-
-$id = $_SESSION["user_id"];
-
-$usuario = R::getAll("select  id,
-        nombre,
-        referido 
-from    (select * from usuarios
-         order by referido, id) clientes_sorted,
-        (select @pv := '$id') initialisation
-where   find_in_set(referido, @pv)
-and     length(@pv := concat(@pv, ',', id))");
-
+$user_id = 0;
+if (isset($_GET['ui'])) {
+  $user_id = $_GET['ui'];
+}
 ?>
-
 <!doctype html>
 <html lang="es">
 
@@ -41,6 +28,7 @@ and     length(@pv := concat(@pv, ',', id))");
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
     <link rel="stylesheet" href="css/menu-movil.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -175,6 +163,17 @@ and     length(@pv := concat(@pv, ',', id))");
                                                 <label class="floating-label">Direccion</label>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <?php if($user_id != 0){ ?>
+                                                    <input value="<?php echo $user_id ?>" type="tel" class="form-control input-form-underline" name="ref" hidden/>
+                                                <?php }else{ ?>
+                                                    <select name="ref" id="sector" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+                                                        <option value="0">Seleccionar cliente</option>
+                                                    </select>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
                                             <label class="form-check-label" for="defaultCheck1">
@@ -211,23 +210,15 @@ and     length(@pv := concat(@pv, ',', id))");
     <!-- scrollIt -->
     <script src="js/scrollIt.min.js"></script>
 
-    <!-- custom scripts -->
-    <script src="js/scripts.js"></script>
-    <script src="js/dashboard.js"></script>
-    <script src="js/Chart.js"></script>
-
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
-
-
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="js/jquery.easypiechart.min.js"></script>
 
     <!-- sweetalert scripts -->
     <script src="js/sweetalert2.js"></script>
     <!-- registro scripts -->
     <script src="js/registro-independiente.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     
 
 </body></html>

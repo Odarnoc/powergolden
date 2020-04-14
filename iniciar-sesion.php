@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-4 mb-4">
+                <div class="col-lg-4 col-md-4 mb-4" hidden>
                     <div class="d-item-oficina-home">
                         <img src="images/professions-and-jobs.svg" alt="">
                         <p class="t1">Página Personal</p>

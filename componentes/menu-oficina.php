@@ -21,6 +21,7 @@ $information  = R::findOne( 'usuarios', ' id = '.$_SESSION["user_id"]);
     <ul>
         <li><a href="oficina-virtual.php">Dashboard</a></li>
         <li><a href="registro-independiente-oficina.php">Registro</a></li>
+        <li><a href="registro-landing.php">Página personal</a></li>
         <!-- <li><a href="#0">Mensajes <span class="noti-menu-oficina">5</span></a></li>
         <li><a href="#0">Pedidos de mis clientes <span class="noti-menu-oficina">3</span></a></li>
         <li><a href="#0">Mis pedidos con la empresa <span class="noti-menu-oficina">2</span></a></li>

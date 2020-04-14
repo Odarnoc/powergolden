@@ -105,7 +105,7 @@ $user_id = $_SESSION["user_id"];
                                             <div class="">
                                                 <div class="form-group" style="margin-bottom: 1px">
                                                     <p id="nombreuser"></p>
-                                                    <h6 style="padding-left: 3px " class="small-text-cuenta" ">Monto total: $<a id=" ton"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">Monto total: $<a id="ton"></a></h6>
                                                     <h6 style="padding-left: 3px " class="small-text-cuenta">Descuento: $<a id="tdesc"></a></h6>
                                                     <h6 style="padding-left: 3px " class="small-text-cuenta">Monto total con IVA: $<a id="totalgeneral"></a></h6>
                                                 </div>
@@ -138,7 +138,7 @@ $user_id = $_SESSION["user_id"];
 
                             <div class="row row-btns-checkout mt-40">
                                 <div class="col-lg-6 col-md-6 col-6">
-                                    <a href="tarjetas-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
+                                    <a href="nuevo-envio-ecomerce.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-6">
                                     <button type="submit" data-toggle="modal" data-target="#modalPagar" class="btn btn-lg-blue">Comprar <i class="fas fa-chevron-right"></i></button>
@@ -164,53 +164,54 @@ $user_id = $_SESSION["user_id"];
                     <div class="modal-body">
 
                         <div class="row">
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <button type="button" class="btn btn-lg-modal btn-pago-tarjeta" onclick="referencia()"><i class="fas fa-credit-card mr-2"></i> Pago con Referencia</button>
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <button type="button" class="btn btn-lg-modal" onclick='$("#modalTarjeta").modal("toggle");'><i class="fas fa-credit-card mr-2"></i> Pago con tarjeta</button>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-4">
-                                <button type="button" class="btn btn-lg-modal" data-toggle="modal" data-target="#modalTarjeta"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <button type="button" class="btn btn-lg-modal btn-pago-tarjeta" onclick="referencia()"><i class="fas fa-credit-card mr-2"></i> Pago en tienda con referencia</button>
+                            </div>
+                            <!--<div class="col-lg-6 col-md-6 col-4">
+                                <button type="button" class="btn btn-lg-modal" data-toggle="modal" data-target="#modalTarjetaP"><i class="fas fa-credit-card mr-2"></i> Pago con Tarjeta</button>
                             </div>
                             <div class="col-lg-4 col-md-4 col-4">
                                 <button type="button" class="btn btn-lg-modal" onclick="referenciaBanco()"><i class="fas fa-credit-card mr-2"></i>Referencia Bancaria</button>
-                            </div>
+                            </div>-->
                         </div>
                         <br>
+
+                        <!-- <div class="row" hidden>
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <button type="button" onclick='$("#modalTarjeta").modal("toggle");' class="btn btn-mercado-pago"><img src="images/mercadopago.png" alt="">Mercado Pago</button>
+                            </div>
+                        </div> -->
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-12">
-                                <div id="paypal-button-container">
-
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-12 botonGooglePay" id="container">
-
+                                <button type="button" onclick='enviar_pago_oxxo()' class="btn btn-oxxo"><img src="images/oxxo-logo.png" alt="">Pago en OXXO</button>
                             </div>
                         </div>
 
-
                         <br>
-                        <div class="row mt-1" id="div_pago" style="display:none;">
+                        <div class="row" hidden>
                             <div class="col-lg-12 col-md-12 col-12">
-                                <button type="button" onclick="sale();" class="btn btn-lg-blue btn-bg-blue">Completar pago</button>
-
+                                <div id="paypal-button-container"></div>
                             </div>
                         </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-
-        <div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <form method="POST" id="payment-formfinal">
+            <div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">Pago con tarjeta</h5>
                             <button type="button" class="close btn-close-tarjeta" data-dismiss="modal" aria-label="Close">
@@ -218,56 +219,124 @@ $user_id = $_SESSION["user_id"];
                             </button>
                         </div>
                         <div class="modal-body">
+
                             <p class="p-metodo-pago">Datos bancarios</p>
-                            <input type="hidden" name="token_id" id="token_id">
 
-                            <div class="form-group">
-                                <div class="floating-label-group">
-                                    <input required type="text" autocomplete="off" data-openpay-card="holder_name" class="form-control input-form-border" />
-                                    <label class="floating-label">Nombre en la tarjeta</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="floating-label-group">
-                                    <input required type="text" autocomplete="off" data-openpay-card="card_number" class="form-control input-form-border" />
-                                    <label class="floating-label">Número de tarjeta</label>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-lg-4 col-md-4 col-4">
-                                    <div class="floating-label-group">
-                                        <input required type="text" autocomplete="off" data-openpay-card="expiration_month" class="form-control input-form-border" />
-                                        <label class="floating-label">Mes Vencimiento</label>
+                            <form method="post" id="pay" name="pay">
+                                <fieldset>
+                                    <input type="hidden" name="transaction_amount" id="transaction_amount" value="100">
+                                    <input type="hidden" name="token" id="token" value="100">
+                                    <div class="form-group">
+                                        <div class="floating-label-group">
+                                            <input type="text" class="form-control input-form-border" id="cardNumber" data-checkout="cardNumber" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+                                            <label class="floating-label">Número de la tarjeta</label>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group col-lg-4 col-md-4 col-4">
-                                    <div class="floating-label-group">
-                                        <input type="text" class="form-control input-form-border" data-openpay-card="expiration_year" required />
-                                        <label class="floating-label">Año Vencimiento</label>
+                                    <div class="form-group">
+                                        <div class="floating-label-group">
+                                            <input type="text" class="form-control input-form-border" id="cardholderName" data-checkout="cardholderName" />
+                                            <label class="floating-label">Nombre y apellido</label>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group col-lg-4 col-md-4 col-4">
-                                    <div class="floating-label-group">
-                                        <input type="text" class="form-control input-form-border" data-openpay-card="cvv2" required />
-                                        <label class="floating-label">CVV</label>
+                                    <div class="form-group">
+                                        <div class="floating-label-group">
+                                            <input type="text" class="form-control input-form-border" id="cardExpirationMonth" data-checkout="cardExpirationMonth" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+                                            <label class="floating-label">Mes de vencimiento</label>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        <div class="floating-label-group">
+                                            <input type="text" class="form-control input-form-border" id="cardExpirationYear" data-checkout="cardExpirationYear" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+                                            <label class="floating-label">Año de vencimiento</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="floating-label-group">
+                                            <input type="text" class="form-control input-form-border" id="securityCode" data-checkout="securityCode" onselectstart="return false" onpaste="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off />
+                                            <label class="floating-label">Código de seguridad</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="floating-label-group">
+                                            <select class="form-control input-form-border" id="installments" class="form-control" name="installments"></select>
+                                            <label class="floating-label">Cuotas</label>
+                                        </div>
+                                    </div>
 
+
+                                    <input type="hidden" name="payment_method_id" id="payment_method_id" />
+
+                                    <button type="submit" class="btn btn-lg-blue mt-4">Pagar</button>
+
+                                </fieldset>
+                            </form>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-cancelar-modal btn-cancelar-tarjeta" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-aceptar-modal">Aceptar</button>
+
+            <div class="modal fade" id="modalTarjetaP" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form method="POST" id="payment-formfinal">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Pago con tarjeta</h5>
+                                <button type="button" class="close btn-close-tarjeta" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="p-metodo-pago">Datos bancarios</p>
+                                <input type="hidden" name="token_id" id="token_id">
+
+                                <div class="form-group">
+                                    <div class="floating-label-group">
+                                        <input required type="text" autocomplete="off" data-openpay-card="holder_name" class="form-control input-form-border" />
+                                        <label class="floating-label">Nombre en la tarjeta</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="floating-label-group">
+                                        <input required type="text" autocomplete="off" data-openpay-card="card_number" class="form-control input-form-border" />
+                                        <label class="floating-label">Número de tarjeta</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-lg-4 col-md-4 col-4">
+                                        <div class="floating-label-group">
+                                            <input required type="text" autocomplete="off" data-openpay-card="expiration_month" class="form-control input-form-border" />
+                                            <label class="floating-label">Mes Vencimiento</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-4 col-md-4 col-4">
+                                        <div class="floating-label-group">
+                                            <input type="text" class="form-control input-form-border" data-openpay-card="expiration_year" required />
+                                            <label class="floating-label">Año Vencimiento</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-4 col-md-4 col-4">
+                                        <div class="floating-label-group">
+                                            <input type="text" class="form-control input-form-border" data-openpay-card="cvv2" required />
+                                            <label class="floating-label">CVV</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-cancelar-modal btn-cancelar-tarjeta" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-aceptar-modal">Aceptar</button>
+                        </form>
+                    </div>
                     </form>
                 </div>
-                </form>
             </div>
-        </div>
         </div>
     </section>
 
@@ -314,9 +383,9 @@ $user_id = $_SESSION["user_id"];
     <script>
         var radioValue = $("input[name='id']:checked").val();
     </script>
-
-    <!-- GooglePay -->
-    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+    <!-- MercadoPago -->
+    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+    <script src="js/mercadopago-ecomerce.js"></script>
 
 </body>
 
