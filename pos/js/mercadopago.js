@@ -124,16 +124,18 @@ function sdkResponseHandler(status, response) {
   }
 }
 function enviar_pago_oxxo(){
-    if(("#sector").length>0){
+  if($("#sector").length){
     cliente_sel = $("#sector").val();
     if (cliente_sel != "") {
       cliente = clientes[cliente_sel];
     }
+}else{
+    cliente=cliente_external;
 }
     $.ajax({
         url: server + "webserviceapp/create_oxxo_pay.php",
         type: "post",
-        data: {'transaction_amount':total_google,email:cliente.correo},
+        data: {'transaction_amount':total_google,email:cliente.correo,'venta_id':$("#venta_id").val()},
         dataType: "html",
         beforeSend() {
           swal({

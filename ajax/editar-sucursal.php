@@ -55,6 +55,7 @@ if(empty($_POST['meta'])){
     $motivacion = $_POST['motivacion'];
     $meta = $_POST['meta'];
     $pais = $_POST['pais'];
+    $reinscripcion = $_POST['reinscripcion'];
 
             if(strlen($cp) == 5 ){ 
         
@@ -69,6 +70,7 @@ if(empty($_POST['meta'])){
             $registro->frase = $motivacion;
             $registro->meta = $meta;
             $registro->pais = $pais;
+            $registro->reinscripcion = $reinscripcion;
 
 
             $id = R::store($registro);

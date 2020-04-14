@@ -17,6 +17,7 @@ function registrari() {
     var motivacion = $("#motivacion").val();
     var meta = $("#meta").val();
     var pais = $("#pais").val();
+    var reinscripcion = $('#reinscripcion').is(':checked')? 1 : 0;
 
     let datos = {
         nombre: nom,
@@ -27,7 +28,8 @@ function registrari() {
         estado: est,
         motivacion:motivacion,
         meta:meta,
-        pais:pais
+        pais:pais,
+        reinscripcion:reinscripcion
 
     }
 
@@ -97,7 +99,7 @@ function registrar() {
     var motivacion = $("#motivacion").val();
     var meta = $("#meta").val();
     var pais = $("#pais").val();
-
+    var reinscripcion = $('#reinscripcion').is(':checked')? 1 : 0;
     let datos = {
         nombre: nom,
         direccion: dir,
@@ -108,7 +110,8 @@ function registrar() {
         id: idd,
         motivacion:motivacion,
         meta:meta,
-        pais:pais
+        pais:pais,
+        reinscripcion:reinscripcion
 
     }
 
