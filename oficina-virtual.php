@@ -9,14 +9,20 @@ require 'bd/conexion.php';
 
 $id = $_SESSION["user_id"];
 
-$usuario = R::getAll("select  id,
-        nombre,
-        referido 
-from    (select * from usuarios
-         order by referido, id) clientes_sorted,
-        (select @pv := '$id') initialisation
-where   find_in_set(referido, @pv)
-and     length(@pv := concat(@pv, ',', id))");
+$res=R::getAll( 'select id,idusuario,colorescss,liderazgos,clientestotales,ventasmatriz,mes,puntospersonales,puntosgrupales5nivel,clientesactivos,rollover,porcentajered,fecha,aviones,compensacionn1,compensacionn2,compensacionn3,compensacionn4,compensacionn5,puntos1,puntos2,puntos3,puntos4,puntos5 
+    from matrizvalores where idusuario= :idusuario  order by fecha DESC limit 1' ,
+    array(':idusuario'=>$_SESSION["user_id"]));
+$colorescss1=json_decode($res[0]['colorescss']);
+$rango="Sin liderazgo";
+foreach ($colorescss1 as $co) {
+    foreach ($co as $key => $value) {
+    //echo "$('#".$key."').addClass('".$value."');";
+    if($key== $_SESSION["user_id"] && !empty($value)){
+        $rango=$value;
+        break;
+    }
+    }
+}
 
 ?>
 
@@ -78,28 +84,28 @@ and     length(@pv := concat(@pv, ',', id))");
                         <div class="row row-form-perfil pt-0">
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1">357</p>
+                                    <p class="t1"><?php echo $rango; ?></p>
                                     <p class="t2">Rango obtenido</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1"><?php echo count($usuario) ?></p>
+                                    <p class="t1"><?php echo $res[0]['clientestotales']; ?></p>
                                     <p class="t2">Personas en tu red</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1">4</p>
+                                    <p class="t1"><?php echo $res[0]['puntospersonales']; ?></p>
                                     <p class="t2">Puntos personales</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1">401</p>
+                                    <p class="t1"><?php echo $res[0]['puntosgrupales5nivel']; ?></p>
                                     <p class="t2">Puntos grupales</p>
                                 </div>
                             </div>
@@ -107,37 +113,31 @@ and     length(@pv := concat(@pv, ',', id))");
                         </div>
 
                         <div class="row row-form-perfil pt-0">
+
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1">4</p>
-                                    <p class="t2">Negocio personal</p>
+                                    <p class="t1"><?php echo $res[0]['ventasmatriz']; ?></p>
+                                    <p class="t2">Compras de <?php echo $res[0]['mes']; ?></p>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1">591</p>
-                                    <p class="t2">Negocio grupal</p>
+                                    <p class="t1"><?php if($res[0]['rollover']=='1'){echo 'SI';}else{echo 'NO';}  ?></p>
+                                    <p class="t2">Roll over</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1">74,225</p>
-                                    <p class="t2">Bonificaciones</p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-3 col-md-3">
-                                <div class="clearfix d-item-num-oficina">
-                                    <p class="t1">37%</p>
+                                    <p class="t1"><?php echo 100/floatval($res[0]['clientestotales'])*floatval($res[0]['clientesactivos']); ?>%</p>
                                     <p class="t2">Personas activas</p>
                                 </div>
                             </div>
 
                         </div>
 
-                        <div class="row mt-2">
+                        <div class="row mt-2" hidden>
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-grafica-oficina">
                                     <p class="title-chart-oficina">Indicadores</p>
@@ -214,7 +214,7 @@ and     length(@pv := concat(@pv, ',', id))");
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-12 mb-30">
+                            <div class="col-lg-6 col-md-6 col-12 mb-30" hidden>
                                 <div class="d-grafica-oficina">
                                     <p class="title-chart-oficina">Valor negocio</p>
                                     <p class="sub-title-chart-oficina mb-4">Estadística de compra</p>
@@ -223,7 +223,7 @@ and     length(@pv := concat(@pv, ',', id))");
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-12 mb-30">
+                            <div class="col-lg-6 col-md-6 col-12 mb-30" hidden>
                                 <div class="d-grafica-oficina">
                                     <p class="title-chart-oficina">Incorporaciones personales</p>
                                     <p class="sub-title-chart-oficina mb-4">Estadística</p>
@@ -262,9 +262,7 @@ and     length(@pv := concat(@pv, ',', id))");
                             
                             <div class="col-lg-6 col-md-6 col-12 mb-30">
                                 <div class="d-grafica-oficina">
-                                    <p class="title-chart-oficina">Informativo</p>
-                                    <p class="sub-title-chart-oficina mb-3">Direcciones importantes</p>
-                                    
+                                    <a class="btn btn-afiliado-primary mt-10 mb-30" style="color:white" href="<?php echo "http://" .$_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?>" role="button">Ver página personal</a>
                                     <p class="t2">Tu página personal</p>
                                     <a href="<?php echo "http://" .$_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?>"><?php echo "http://" .$_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?></a>
 
