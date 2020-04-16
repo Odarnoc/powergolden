@@ -1,6 +1,6 @@
 var total = 0;
 
-$(document).ready(function () {
+$(document).ready(function() {
     total = localStorage.getItem('totalgen');
 });
 
@@ -22,8 +22,7 @@ function guessPaymentMethod(event) {
 
     if (cardnumber.length >= 6) {
         let bin = cardnumber.substring(0, 6);
-        window.Mercadopago.getPaymentMethod(
-            {
+        window.Mercadopago.getPaymentMethod({
                 bin: bin
             },
             setPaymentMethod
@@ -43,12 +42,11 @@ function setPaymentMethod(status, response) {
 }
 
 function getInstallments() {
-    window.Mercadopago.getInstallments(
-        {
+    window.Mercadopago.getInstallments({
             payment_method_id: document.getElementById("payment_method_id").value,
             amount: parseFloat(document.getElementById("transaction_amount").value)
         },
-        function (status, response) {
+        function(status, response) {
             if (status == 200) {
                 document.getElementById("installments").options.length = 0;
                 response[0].payer_costs.forEach(installment => {
@@ -64,7 +62,7 @@ function getInstallments() {
     );
 }
 
-$("#pay").submit(function (event) {
+$("#pay").submit(function(event) {
     event.preventDefault();
 
     var $form = document.querySelector("#pay");
@@ -96,10 +94,10 @@ function sdkResponseHandler(status, response) {
                 console.log(data);
                 Mercadopago.clearSession();
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: 'Compra exitosa!'
-                })
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Compra exitosa!'
+                    })
                     .then((ok) => {
                         if (ok) {
                             //localStorage.clear();
@@ -121,27 +119,26 @@ function sdkResponseHandler(status, response) {
 
 function enviar_pago_oxxo() {
     datosuser();
-    console.log(JSON.parse(localStorage.getItem('carrito-oficina')).carrito);
-    
+
     $.ajax({
         url: "ajax/pago-ecomerce-oxxo.php",
         type: "post",
-        data: { transaction_amount: localStorage.getItem('totalgen'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito')), },
+        data: { transaction_amount: localStorage.getItem('totalgen'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito },
         success(data) {
             console.log(data);
             swal.close();
             window.open(data, '_blank');
             Mercadopago.clearSession();
             Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: 'Compra exitosa!'
-            })
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Compra exitosa!'
+                })
                 .then((ok) => {
                     if (ok) {
-                        //localStorage.clear();
-                        //localStorage.setItem('carrito-oficina', JSON.stringify([]));
-                        //location.href = "oficina-virtual.php";
+                        localStorage.clear();
+                        localStorage.setItem('carrito-oficina', JSON.stringify([]));
+                        location.href = "oficina-virtual.php";
                     }
                 });
         },
@@ -156,7 +153,7 @@ function enviar_pago_oxxo() {
 }
 
 
-paypal.Buttons({
+/*paypal.Buttons({
     locale: 'es-MX',
     style: {
         shape: 'rect',
@@ -190,4 +187,4 @@ paypal.Buttons({
                 });
         });
     }
-}).render('#paypal-button-container');
+}).render('#paypal-button-container');*/

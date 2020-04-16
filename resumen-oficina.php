@@ -76,6 +76,7 @@ $user_id = $_SESSION["user_id"];
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Resumen</p>
                                     <p class="small-text-cuenta">Revisa tu orden antes de confirmar el pago. </p>
+                                    <p name="mensajeini" class="small-text-cuenta">Debido a que su cuenta estuvo inactiva por más de 59 días se le cobrara una reactivacion. </p>
                                 </div>
                             </div>
                         </div>
@@ -106,6 +107,7 @@ $user_id = $_SESSION["user_id"];
                                                 <div class="form-group" style="margin-bottom: 1px">
                                                     <p id="nombreuser"></p>
                                                     <h6 style="padding-left: 3px " class="small-text-cuenta">Monto total: $<a id="ton"></a></h6>
+                                                    <h6 id="rectiva" name="recar" style="padding-left: 3px " class="small-text-cuenta">Cargo de reactivacion: $500</h6>
                                                     <h6 style="padding-left: 3px " class="small-text-cuenta">Monto total con IVA: $<a id="totalgeneral"></a></h6>
                                                 </div>
                                             </div>

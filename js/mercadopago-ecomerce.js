@@ -1,6 +1,6 @@
 var total = 0;
 
-$(document).ready(function () {
+$(document).ready(function() {
     total = localStorage.getItem('totalgen');
 });
 
@@ -22,8 +22,7 @@ function guessPaymentMethod(event) {
 
     if (cardnumber.length >= 6) {
         let bin = cardnumber.substring(0, 6);
-        window.Mercadopago.getPaymentMethod(
-            {
+        window.Mercadopago.getPaymentMethod({
                 bin: bin
             },
             setPaymentMethod
@@ -43,12 +42,11 @@ function setPaymentMethod(status, response) {
 }
 
 function getInstallments() {
-    window.Mercadopago.getInstallments(
-        {
+    window.Mercadopago.getInstallments({
             payment_method_id: document.getElementById("payment_method_id").value,
             amount: parseFloat(document.getElementById("transaction_amount").value)
         },
-        function (status, response) {
+        function(status, response) {
             if (status == 200) {
                 document.getElementById("installments").options.length = 0;
                 response[0].payer_costs.forEach(installment => {
@@ -64,7 +62,7 @@ function getInstallments() {
     );
 }
 
-$("#pay").submit(function (event) {
+$("#pay").submit(function(event) {
     event.preventDefault();
 
     var $form = document.querySelector("#pay");
@@ -86,7 +84,7 @@ function sdkResponseHandler(status, response) {
         $("#token").val(response.id);
         $("#transaction_amount").val(10);
         var data = $("#pay").serializeArray();
-        data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito')), 'usuariid': id, "email": localStorage.getItem('correo') });
+        data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito')), 'usuariid': id, "email": localStorage.getItem('correo'), "transaction_amount": localStorage.getItem('totalgen'), });
         $.ajax({
             url: "ajax/mercado-pago.php",
             type: "post",
@@ -96,10 +94,10 @@ function sdkResponseHandler(status, response) {
                 console.log(data);
                 Mercadopago.clearSession();
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: 'Compra exitosa!'
-                })
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Compra exitosa!'
+                    })
                     .then((ok) => {
                         if (ok) {
                             localStorage.clear();
@@ -131,10 +129,10 @@ function enviar_pago_oxxo() {
             window.open(data, '_blank');
             Mercadopago.clearSession();
             Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: 'Compra exitosa!'
-            })
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Compra exitosa!'
+                })
                 .then((ok) => {
                     if (ok) {
                         localStorage.clear();
@@ -163,7 +161,7 @@ paypal.Buttons({
         label: 'paypal',
     },
 
-    createOrder: function (data, actions) {
+    createOrder: function(data, actions) {
         return actions.order.create({
             purchase_units: [{
                 amount: {
@@ -172,13 +170,13 @@ paypal.Buttons({
             }]
         });
     },
-    onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
+    onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
             Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: 'Compra exitosa!'
-            })
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Compra exitosa!'
+                })
                 .then((ok) => {
                     if (ok) {
                         localStorage.clear();
