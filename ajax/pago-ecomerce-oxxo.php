@@ -3,21 +3,8 @@ require '../bd/conexion.php';
 require '../utils/error.php';
 
 require_once '../pos/webserviceapp/vendor/autoload.php';
-MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e98697a4429f7079a92f22-286156172");
 
-  $payment = new MercadoPago\Payment();
-  $payment->transaction_amount = floatval($_POST['transaction_amount']);
-  //$payment->transaction_amount = floatval(20);
-  $payment->description = "Compra online Power Golden.";
-  $payment->payment_method_id = "oxxo";
-  $payment->payer = array(
-    "email" => $_POST['email']
-  );
-
-  $payment->save();
-  echo $payment->transaction_details->external_resource_url;
-
-  $carrito = $_POST['carrito'];
+$carrito = $_POST['carrito'];
   $errores=array();
   
   if(sizeof($carrito) < 0){
@@ -42,11 +29,32 @@ MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e9869
     return;
 }
 
+MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e98697a4429f7079a92f22-286156172");
+
+  $payment = new MercadoPago\Payment();
+  $payment->transaction_amount = floatval($_POST['transaction_amount']);
+  //$payment->transaction_amount = floatval(20);
+  $payment->description = "Compra online Power Golden.";
+  $payment->payment_method_id = "oxxo";
+  $payment->payer = array(
+    "email" => $_POST['email']
+  );
+
+  $payment->save();
+  echo $payment->transaction_details->external_resource_url;
+
   $venta = R::dispense('ventas');
   $venta->user_id = $_POST['usuariid'];
   $venta->fecha = new DateTime();
   $venta->total = $_POST['transaction_amount'];
+  $venta->is_payed = 0;
   $id_venta = R::store($venta);
+
+  $vpagos = R::dispense('ventaspagos');
+  $vpagos->venta_id = $id_venta;
+  $vpagos->tipo_pago = 'Referencia';
+  $vpagos->cantidad = $_POST['transaction_amount'];
+  $id_venta = R::store($vpagos);
 
   foreach ($carrito as $item) {
       $prod = R::dispense('productosxventas');
@@ -61,5 +69,3 @@ MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e9869
       R::store($producto);
 
   }
-
-?>

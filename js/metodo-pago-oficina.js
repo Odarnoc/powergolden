@@ -12,7 +12,7 @@ function datosuser() {
         url: "ajax/getdatos.php",
         type: "post",
         data: { id: iduser },
-        success: function (respuesta) {
+        success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
             id = json_mensaje['id'];
             nombre = json_mensaje['nombre'];
@@ -29,7 +29,7 @@ function referencia() {
         url: 'ajax/pago-referencia-ecomerce.php',
         type: "post",
         data: {
-            carrito: JSON.parse(JSON.parse(localStorage.getItem('carrito-oficina')).carrito),
+            carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito,
             usuariid: id,
             nombre: nombre,
             apellido: apellidos,
@@ -37,13 +37,33 @@ function referencia() {
             correo: correo,
             total: localStorage.getItem('totalgen'),
         },
-        success(data) {
-            console.log(data);
-            swal.close();
-            var datajson = JSON.parse(data)
-            window.open(datajson.url_recibo);
-            //localStorage.clear();
-            //location.href = "oficina-virtual.php";
+        success: function(respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                Swal.close();
+                window.open(json_mensaje.url_recibo);
+                setTimeout(function() {
+                    localStorage.clear();
+                    location.href = "oficina-virtual.php";
+                }, 5000);
+                Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Su compra se realizo correctamente'
+                    })
+                    .then((ok) => {
+                        if (ok) {
+                            localStorage.clear();
+                            location.href = "oficina-virtual.php";
+                        }
+                    });
+            }
         },
     });
 }
