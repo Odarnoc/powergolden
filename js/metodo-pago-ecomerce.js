@@ -266,18 +266,27 @@ function datosDireccionlocal() {
     $.ajax({
         url: "ajax/direccion-sucursal.php",
         type: "post",
-        data: { id: idsuc },
+        data: { id: idsuc, carrito: JSON.parse(localStorage.getItem('carrito')) },
+
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
-            console.log(json_mensaje);
-            localStorage.setItem('direccion', json_mensaje['direccion']);
-            localStorage.setItem('codigop', json_mensaje['codigo']);
-            localStorage.setItem('colonia', json_mensaje['colonia']);
-            localStorage.setItem('municipio', json_mensaje['ciudad']);
-            localStorage.setItem('estado', json_mensaje['estado']);
+            if (json_mensaje.error != undefined) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            } else {
+                var json_mensaje = JSON.parse(respuesta);
+                console.log(json_mensaje);
+                localStorage.setItem('direccion', json_mensaje['direccion']);
+                localStorage.setItem('codigop', json_mensaje['codigo']);
+                localStorage.setItem('colonia', json_mensaje['colonia']);
+                localStorage.setItem('municipio', json_mensaje['ciudad']);
+                localStorage.setItem('estado', json_mensaje['estado']);
 
-            location.href = "resumen.php"
+                location.href = "resumen.php";
+            }
         },
     });
-
 }

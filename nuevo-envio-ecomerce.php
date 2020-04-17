@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'bd/conexion.php';
-$suc = R::find('sucursales');
+$suc = R::find('sucursales','WHERE id != 1');
 
 ?>
 

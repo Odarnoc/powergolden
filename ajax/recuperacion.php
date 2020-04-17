@@ -18,7 +18,7 @@ $response['requiere_reactivacion'] = true;
         $ultima_venta = $inicio['fecha'];
     }
 
-    if(diferenciaDias($ultima_venta, $hoy) >= 1){
+    if(diferenciaDias($ultima_venta, $hoy) >= 2){
         echo json_encode($response);
     }else{
         $response['requiere_reactivacion'] = false;
