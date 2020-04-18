@@ -198,8 +198,8 @@ foreach ($colorescss1 as $co) {
                         <div class="row mt-4">
                             <div class="col-lg-6 col-md-6 col-12 mb-30">
                                 <div class="d-grafica-oficina">
-                                    <p class="title-chart-oficina">Importe</p>
-                                    <p class="sub-title-chart-oficina mb-4">Estadística de compra</p>
+                                    <p class="title-chart-oficina">Ventas</p>
+                                    <p class="sub-title-chart-oficina mb-4">Estadística</p>
                                     <canvas height="300" id="chart-importe"></canvas>
 
                                 </div>
@@ -234,7 +234,7 @@ foreach ($colorescss1 as $co) {
 
                             <div class="col-lg-6 col-md-6 col-12 mb-30">
                                 <div class="d-grafica-oficina">
-                                    <p class="title-chart-oficina">Bonificaciones</p>
+                                    <p class="title-chart-oficina">Mis afiliados</p>
                                     <p class="sub-title-chart-oficina mb-4">Estadística</p>
                                     <canvas height="300" id="chart-bonificaciones"></canvas>
 
@@ -243,19 +243,9 @@ foreach ($colorescss1 as $co) {
 
                             <div class="col-lg-6 col-md-6 col-12 mb-30">
                                 <div class="d-grafica-oficina">
-                                    <p class="title-chart-oficina">Febrero 2020</p>
+                                    <p class="title-chart-oficina">Compras</p>
                                     <p class="sub-title-chart-oficina mb-4">Estadística</p>
                                     <canvas height="300" id="chart-febrero"></canvas>
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-12 mb-30">
-                                <div class="d-grafica-oficina h-100">
-                                    <p class="title-chart-oficina">Informativo</p>
-                                    <p class="sub-title-chart-oficina mb-3">Acumulado historico de bonificaciones</p>
-                                    
-                                    <p class="acumulado">$3,089,655.<sup>00</sup> </p>
 
                                 </div>
                             </div>
