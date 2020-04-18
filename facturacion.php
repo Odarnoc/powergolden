@@ -188,14 +188,17 @@ form.example::after {
   <!-- End Navbar ====
     	======================================= -->
 
-      <section class="sec-gray separar-menu">
+      <section class="sec-cuenta">
         <div class="container">
             <div class="row">
+                <!-- Admin Menu -->
+                <?php include("menus/menu_general_admin.php"); ?>
+                <!-- End Admin Menu -->
 
-                <div class="col-lg-12 col-md-12">
-                    <div class="d-cont-right perfil-movil">
+                <div class="col-lg-8 col-md-8 bg-gray">
+                    <div class="d-cont-right">
                         <div class="row">
-                            <div class="col-lg-9 col-md-9">
+                            <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Facturacion</p>
                                 </div>
