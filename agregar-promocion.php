@@ -1,5 +1,5 @@
 <?php
-    require 'user_preferences/user-info.php';
+require 'user_preferences/user-info.php';
 
 ?>
 
@@ -57,7 +57,7 @@
 
 
             <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
+            <?php include "menus/top_menu.php";?>
             <!-- End Top Menu -->
 
 
@@ -68,7 +68,7 @@
         <div class="container">
             <div class="row">
                 <!-- Admin Menu -->
-                <?php include("menus/menu_general_admin.php"); ?>
+                <?php include "menus/menu_general_admin.php";?>
                 <!-- End Admin Menu -->
 
                 <div class="col-lg-8 col-md-8 bg-gray">
@@ -103,27 +103,53 @@
                                                 <label class="floating-label-underline">Descripción </label>
                                             </div>
                                         </div>
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <label class="">Sucursal</label>
-                                                        <select name="inicio" class="form-control input-form-underline" required >
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                           
+
+
                                                 <div class="form-group">
                                                     <div class="floating-label-group">
                                                         <label class="">Tipo de promoción</label>
-                                                        <select name="tipo" class="form-control input-form-underline" required >
-                                                             <option valiue="1">Productos por kits</option>
-                                                             <option valiue="2">Productos por venta</option>
-                                                             <option valiue="3">Pago de reactivación</option>
+                                                        <select name="tipo" id="tipo" class="form-control input-form-underline" required >
+                                                             <option value="1">Productos por kits</option>
+                                                             <option value="2">Productos por venta</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div id="kits" style="display:">
+                                                <div class="form-group" id="kit_div">
+                                                    <div class="floating-label-group">
+                                                        <label class="">Tipo de Kit</label>
+                                                        <select name="paquete_id" class="form-control input-form-underline"  >
+                                                            <?php
+$lista = R::findAll("paquetes");
+foreach ($lista as $key) {
+    echo '<option value="' . $key['id'] . '">' . $key['nombre'] . '</option>';
+}
+?>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" >
+                                                    <div class="floating-label-group">
+                                                    <label class="">Desde primera compra</label>
+                                                        <input type="checkbox" name="primera" class="form-control input-form-underline"  <?php echo $item['reinscripcion'] == 1 ? 'checked' : '' ?>  />
+
+                                                    </div>
+                                                </div>
+                                                
+                                                        </div>
+                                                        <div id="productos" style="display:none">
+                                                        <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="descripcion" type="number" class="form-control input-form-underline" required />
+                                                <input name="desde" type="number" class="form-control input-form-underline"  />
+                                                <label class="floating-label-underline">A partir de la compra de </label>
+                                            </div>
+                                        </div>
+                                        
+                                                        </div>
+                                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input name="cantidad" type="number" class="form-control input-form-underline"  />
                                                 <label class="floating-label-underline">Cantidad de productos incluidos </label>
                                             </div>
                                         </div>
@@ -154,7 +180,7 @@
 
 
             <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
+            <?php include "menus/footer_general.php";?>
             <!-- End Footer -->
 
 

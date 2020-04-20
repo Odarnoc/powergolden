@@ -173,10 +173,16 @@ $item=R::findOne('sucursales','id ='.$id );
                                                 <div class="form-group col-lg-6 col-md-6">
                                                     <div class="floating-label-group">
                                                         <input type="number" id="meta" class="form-control input-form-underline"  value="<?php echo $item['meta'] ?>" required />
-                                                        <label class="floating-label-underline">Meta de venta</label>
+                                                        <label class="floating-label-underline">Meta de venta Mensual</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-6 col-md-6">
+                                                    <div class="floating-label-group">
+                                                        <input type="number" id="metad" class="form-control input-form-underline"  value="<?php echo $item['metad'] ?>" required />
+                                                        <label class="floating-label-underline">Meta de venta Diaria</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-lg-6 col-md-6" style="display:none;">
                                                     <div class="floating-label-group">
                                                     <label class="">Pago de reinscripción</label>
                                                         <input type="checkbox" id="reinscripcion" class="form-control input-form-underline"  <?php echo $item['reinscripcion']==1?'checked':'' ?> required />

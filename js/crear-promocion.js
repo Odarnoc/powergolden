@@ -3,6 +3,15 @@ var sel;
 function productos(){
     $("#select").append(html);
 }
+$("#tipo").change(function(){
+    if($("#tipo").val()==1){
+        $("#kits").show();
+        $("#productos").hide();
+    }else{
+        $("#kits").hide();
+        $("#productos").show();
+    }
+});
 
 $("#form-promocion").submit(function(e) {
     e.preventDefault();

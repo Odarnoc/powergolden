@@ -470,3 +470,122 @@
 [09-Apr-2020 18:34:51 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'mysqlnd_mysql.so' (tried: /opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysql.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysql.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysql.so.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysql.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
 [09-Apr-2020 18:34:51 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'mysqlnd_mysqli.so' (tried: /opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysqli.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysqli.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysqli.so.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysqli.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
 [09-Apr-2020 18:34:51 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_mysqlnd.so' (tried: /opt/cpanel/ea-php72/root/usr/lib64/php/modules/pdo_mysqlnd.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/pdo_mysqlnd.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php72/root/usr/lib64/php/modules/pdo_mysqlnd.so.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/pdo_mysqlnd.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+[14-Apr-2020 23:43:56 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 5
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1111): RedBeanPHP\Driver\RPDO->runQuery('insert into pag...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4154): RedBeanPHP\Driver\RPDO->Execute('insert into pag...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->exec('insert into pag...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12407): RedBeanPHP\Facade::query('exec', 'insert into pag...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/add_external_reference.php(9): RedBeanPHP\Facade::exec('insert into pag...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[14-Apr-2020 23:45:17 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 5
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1111): RedBeanPHP\Driver\RPDO->runQuery('insert into pag...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4154): RedBeanPHP\Driver\RPDO->Execute('insert into pag...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->exec('insert into pag...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12407): RedBeanPHP\Facade::query('exec', 'insert into pag...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/add_external_reference.php(9): RedBeanPHP\Facade::exec('insert into pag...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[15-Apr-2020 18:55:43 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '18:55:43
+   )' at line 5
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1111): RedBeanPHP\Driver\RPDO->runQuery('insert into pag...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4154): RedBeanPHP\Driver\RPDO->Execute('insert into pag...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->exec('insert into pag...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12407): RedBeanPHP\Facade::query('exec', 'insert into pag...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/add_external_reference.php(10): RedBeanPHP\Facade::exec('insert into pag...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[15-Apr-2020 18:56:27 America/New_York] PHP Fatal error:  Uncaught [HY000] - SQLSTATE[HY000]: General error: 1364 Field 'referencia' doesn't have a default value
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1111): RedBeanPHP\Driver\RPDO->runQuery('insert into pag...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4154): RedBeanPHP\Driver\RPDO->Execute('insert into pag...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->exec('insert into pag...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12407): RedBeanPHP\Facade::query('exec', 'insert into pag...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/add_external_reference.php(10): RedBeanPHP\Facade::exec('insert into pag...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[15-Apr-2020 20:03:27 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+   '2020-04-15 20:03:27'
+   )' at line 4
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1111): RedBeanPHP\Driver\RPDO->runQuery('insert into pag...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4154): RedBeanPHP\Driver\RPDO->Execute('insert into pag...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->exec('insert into pag...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12407): RedBeanPHP\Facade::query('exec', 'insert into pag...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/add_external_reference.php(10): RedBeanPHP\Facade::exec('insert into pag...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[15-Apr-2020 20:03:34 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+   '2020-04-15 20:03:34'
+   )' at line 4
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1111): RedBeanPHP\Driver\RPDO->runQuery('insert into pag...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4154): RedBeanPHP\Driver\RPDO->Execute('insert into pag...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->exec('insert into pag...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12407): RedBeanPHP\Facade::query('exec', 'insert into pag...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/add_external_reference.php(10): RedBeanPHP\Facade::exec('insert into pag...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[15-Apr-2020 20:03:38 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+   '2020-04-15 20:03:38'
+   )' at line 4
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1111): RedBeanPHP\Driver\RPDO->runQuery('insert into pag...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4154): RedBeanPHP\Driver\RPDO->Execute('insert into pag...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->exec('insert into pag...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12407): RedBeanPHP\Facade::query('exec', 'insert into pag...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/add_external_reference.php(10): RedBeanPHP\Facade::exec('insert into pag...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[15-Apr-2020 20:03:41 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '
+   '2020-04-15 20:03:41'
+   )' at line 4
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1111): RedBeanPHP\Driver\RPDO->runQuery('insert into pag...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4154): RedBeanPHP\Driver\RPDO->Execute('insert into pag...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->exec('insert into pag...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12407): RedBeanPHP\Facade::query('exec', 'insert into pag...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/add_external_reference.php(10): RedBeanPHP\Facade::exec('insert into pag...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[19-Apr-2020 00:14:50 America/Mexico_City] PHP Warning:  unlink(uploads/p5e9bde4ac2260.pdf): No such file or directory in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/send_email.php on line 66
+[19-Apr-2020 11:37:27 America/Mexico_City] PHP Warning:  unlink(uploads/p5e9c7e471c23d.pdf): No such file or directory in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/send_email.php on line 66
+[19-Apr-2020 11:38:06 America/Mexico_City] PHP Warning:  unlink(uploads/p5e9c7e6ed9aed.pdf): No such file or directory in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/send_email.php on line 66
+[19-Apr-2020 12:51:27 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1140 In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'pgolden_nueva_web.u.id'; this is incompatible with sql_mode=only_full_group_by
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1035): RedBeanPHP\Driver\RPDO->runQuery('SELECT u.*,SUM(...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4165): RedBeanPHP\Driver\RPDO->GetAll('SELECT u.*,SUM(...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->get('SELECT u.*,SUM(...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12425): RedBeanPHP\Facade::query('get', 'SELECT u.*,SUM(...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/get_clientes.php(10): RedBeanPHP\Facade::getAll('SELECT u.*,SUM(...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[19-Apr-2020 12:51:33 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1140 In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'pgolden_nueva_web.u.id'; this is incompatible with sql_mode=only_full_group_by
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1035): RedBeanPHP\Driver\RPDO->runQuery('SELECT u.*,SUM(...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4165): RedBeanPHP\Driver\RPDO->GetAll('SELECT u.*,SUM(...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->get('SELECT u.*,SUM(...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12425): RedBeanPHP\Facade::query('get', 'SELECT u.*,SUM(...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/get_clientes.php(10): RedBeanPHP\Facade::getAll('SELECT u.*,SUM(...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[19-Apr-2020 12:52:24 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*' at line 5
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1035): RedBeanPHP\Driver\RPDO->runQuery('SELECT u.*,SUM(...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4165): RedBeanPHP\Driver\RPDO->GetAll('SELECT u.*,SUM(...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->get('SELECT u.*,SUM(...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12425): RedBeanPHP\Facade::query('get', 'SELECT u.*,SUM(...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/get_clientes.php(10): RedBeanPHP\Facade::getAll('SELECT u.*,SUM(...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[19-Apr-2020 12:54:17 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.correo,SUM(v.id) as compras from usuarios as u 
+	left join independientes as i ' at line 1
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1035): RedBeanPHP\Driver\RPDO->runQuery('SELECT u.nombre...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4165): RedBeanPHP\Driver\RPDO->GetAll('SELECT u.nombre...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->get('SELECT u.nombre...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12425): RedBeanPHP\Facade::query('get', 'SELECT u.nombre...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/get_clientes.php(10): RedBeanPHP\Facade::getAll('SELECT u.nombre...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[19-Apr-2020 12:54:38 America/New_York] PHP Fatal error:  Uncaught [42000] - SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.correo' at line 5
+trace: #0 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(1035): RedBeanPHP\Driver\RPDO->runQuery('SELECT u.nombre...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(4165): RedBeanPHP\Driver\RPDO->GetAll('SELECT u.nombre...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(11526): RedBeanPHP\Adapter\DBAdapter->get('SELECT u.nombre...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php(12425): RedBeanPHP\Facade::query('get', 'SELECT u.nombre...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/get_clientes.php(10): RedBeanPHP\Facade::getAll('SELECT u.nombre...')
+#5 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/rb.php on line 768
+[19-Apr-2020 12:21:16 America/Mexico_City] PHP Warning:  unlink(uploads/p5e9c888c93d8c.pdf): No such file or directory in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/send_email.php on line 66
+[19-Apr-2020 12:21:51 America/Mexico_City] PHP Warning:  unlink(uploads/p5e9c88afadc0f.pdf): No such file or directory in /Users/oswaldo/Desktop/powergolden/pos/webserviceapp/send_email.php on line 66
