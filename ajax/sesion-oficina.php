@@ -31,8 +31,6 @@ if(empty($_POST['pass'])){
         $registro = R::findOne('usuarios','id ='.$correo.'');
         $inicio['fecha'] = date("Y-m-d", strtotime($registro['creado']));
 
-    
-
     /* if(diferenciaDias($inicio['fecha'], $fin) >= 4){
         error_mensaje('Su cuenta a expirado'); 
     }else{ */

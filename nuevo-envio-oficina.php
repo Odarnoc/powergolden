@@ -236,7 +236,7 @@ $suc = R::find('sucursales','WHERE id != 1');
     <!-- perfil scripts -->
     <script src="js/perfil.js"></script>
     <!-- billetera js -->
-    <script src="js/metodo-pago-ecomerce.js"></script>
+    <script src="js/envio-ofcina.js"></script>
 
 </body>
 

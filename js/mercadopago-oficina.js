@@ -84,7 +84,7 @@ function sdkResponseHandler(status, response) {
         $("#token").val(response.id);
         $("#transaction_amount").val(10);
         var data = $("#pay").serializeArray();
-        data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito')), 'usuariid': id, "email": localStorage.getItem('correo'), "transaction_amount": localStorage.getItem('totalgen'), });
+        data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito-oficina')).carrito, 'usuariid': id, "email": localStorage.getItem('correo') });
         $.ajax({
             url: "ajax/mercado-pago.php",
             type: "post",
@@ -100,9 +100,9 @@ function sdkResponseHandler(status, response) {
                     })
                     .then((ok) => {
                         if (ok) {
-                            localStorage.clear();
-                            localStorage.setItem('carrito', JSON.stringify([]));
-                            location.href = "carrito-ecomerce.php";
+                            //localStorage.clear();
+                            //localStorage.setItem('carrito-oficina', JSON.stringify([]));
+                            //location.href = "oficina-virtual.php";
                         }
                     });
             },
@@ -119,10 +119,11 @@ function sdkResponseHandler(status, response) {
 
 function enviar_pago_oxxo() {
     datosuser();
+
     $.ajax({
         url: "ajax/pago-ecomerce-oxxo.php",
         type: "post",
-        data: { transaction_amount: localStorage.getItem('totalgen'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito')), },
+        data: { transaction_amount: localStorage.getItem('totalgen'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito },
         success(data) {
             console.log(data);
             swal.close();
@@ -136,8 +137,8 @@ function enviar_pago_oxxo() {
                 .then((ok) => {
                     if (ok) {
                         localStorage.clear();
-                        localStorage.setItem('carrito', JSON.stringify([]));
-                        location.href = "carrito-ecomerce.php";
+                        localStorage.setItem('carrito-oficina', JSON.stringify([]));
+                        location.href = "oficina-virtual.php";
                     }
                 });
         },
@@ -152,7 +153,7 @@ function enviar_pago_oxxo() {
 }
 
 
-paypal.Buttons({
+/*paypal.Buttons({
     locale: 'es-MX',
     style: {
         shape: 'rect',
@@ -161,7 +162,7 @@ paypal.Buttons({
         label: 'paypal',
     },
 
-    createOrder: function(data, actions) {
+    createOrder: function (data, actions) {
         return actions.order.create({
             purchase_units: [{
                 amount: {
@@ -170,20 +171,20 @@ paypal.Buttons({
             }]
         });
     },
-    onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
+    onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
             Swal.fire({
-                    icon: 'success',
-                    title: 'Éxito',
-                    text: 'Compra exitosa!'
-                })
+                icon: 'success',
+                title: 'Éxito',
+                text: 'Compra exitosa!'
+            })
                 .then((ok) => {
                     if (ok) {
-                        localStorage.clear();
-                        localStorage.setItem('carrito', JSON.stringify([]));
-                        location.href = "carrito-ecomerce.php";
+                        //localStorage.clear();
+                        //localStorage.setItem('carrito-oficina', JSON.stringify([]));
+                        //location.href = "oficina-virtual.php";
                     }
                 });
         });
     }
-}).render('#paypal-button-container');
+}).render('#paypal-button-container');*/

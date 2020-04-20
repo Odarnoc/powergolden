@@ -8,9 +8,31 @@ require '../phpMailer/Exception.php';
 require '../phpMailer/PHPMailer.php';
 require '../phpMailer/SMTP.php';
 
-/* PHPMailer*/
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+$carrito = $_POST['carrito'];
+$errores=array();
+
+if(sizeof($carrito) < 0){
+error_mensaje('El carrito no puede estar vacio.');
+return;
+} 
+
+foreach ($carrito as $valor) {
+    $almacen = R::findOne( 'inventarios', 'sucursal_id = 1 && existencia >= ? && producto_id = ?', [ $valor['cant'],$valor['id'] ]);
+    if(empty($almacen)){
+        array_push($errores,$valor);
+    }
+
+}
+
+if(!empty($errores)){
+    $prodsErr='';
+    foreach ($errores as $valor) {
+        $prodsErr.=$valor['nombre'].', ';
+    }
+    $msjErr='Los productos ( '.$prodsErr.' ) no tienen suficientes existencias';
+    error_mensaje($msjErr);
+    return;
+}
 
     Openpay::setProductionMode(false);
     $tipo="store";
@@ -37,37 +59,18 @@ use PHPMailer\PHPMailer\Exception;
     $data['url_recibo']=$server."/".$identificador."/".$charge->payment_method->reference;
     $referencia=$charge->payment_method->reference;
 
-    $carrito = $_POST['carrito'];
-    $errores=array();
-    
-    if(sizeof($carrito) < 0){
-    error_mensaje('El carrito no puede estar vacio.');
-    return;
-    } 
-    
-    foreach ($carrito as $valor) {
-        $almacen = R::findOne( 'inventarios', 'sucursal_id = 1 && existencia >= ? && producto_id = ?', [ $valor['cant'],$valor['id'] ]);
-        if(empty($almacen)){
-            array_push($errores,$valor);
-        }
-    
-    }
-
-    if(!empty($errores)){
-        $prodsErr='';
-        foreach ($errores as $valor) {
-            $prodsErr.=$valor['nombre'].', ';
-        }
-        $msjErr='Los productos ( '.$prodsErr.' ) no tienen suficientes existencias';
-        error_mensaje($msjErr);
-        return;
-    }
-
     $venta = R::dispense('ventas');
     $venta->user_id = $_POST['usuariid'];
     $venta->fecha = new DateTime();
     $venta->total = $_POST['total'];
+    $venta->is_payed = 0;
     $id_venta = R::store($venta);
+
+    $vpagos = R::dispense('ventaspagos');
+    $vpagos->venta_id = $id_venta;
+    $vpagos->tipo_pago = 'Efectivo';
+    $vpagos->cantidad = $_POST['total'];
+    R::store($vpagos);
 
     foreach ($carrito as $item) {
         $prod = R::dispense('productosxventas');
@@ -83,7 +86,7 @@ use PHPMailer\PHPMailer\Exception;
 
     }
 
-    $mail = new PHPMailer(true);
+    /*$mail = new PHPMailer(true);
 
                 try {
                     //Server settings
@@ -130,6 +133,6 @@ use PHPMailer\PHPMailer\Exception;
                 } catch (Exception $e) {
                     echo "No se pudo enviar el correo: {$mail->ErrorInfo}";
                 
-                }
+                }*/
                 echo json_encode($data);
 ?>

@@ -7,12 +7,12 @@ $querydos = 'SELECT SUM(total) as sumita FROM ventas where fecha = CURRENT_DATE(
 
 $querytres = 'SELECT id FROM visitas where fecha = CURRENT_DATE()';
 
-$querys = 'SELECT * FROM  sucursales Where (id) != 1';
-$sucursal = R::getAll($querys);
+$querys = 'SELECT SUM(existencia)/COUNT(producto_id) as media FROM `inventarios` WHERE sucursal_id = 1';
+$almacen = R::getAll($querys);
 
-$querydoss= 'SELECT SUM(existencia) as existencias FROM inventarios  where sucursal_id != 1';
+$querytabla = 'SELECT s.nombre as nombre, SUM(i.existencia)/COUNT(producto_id) as media FROM inventarios AS i LEFT JOIN sucursales AS s ON i.sucursal_id = s.id  GROUP BY i.sucursal_id';
 
-$producto = R::getAll($querydoss);
+$sucursal = R::getAll($querytabla);
 
 $fecha = R::getAll($querydos);
 $usuario = R::getAll($query);
@@ -47,6 +47,8 @@ $visita = R::getAll($querytres);
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
 
     <title>Power Golden | El Mundo de la Herbolaria</title>
 
@@ -120,14 +122,14 @@ $visita = R::getAll($querytres);
                                 <div class="clearfix d-item-num">
                                     <img src="images/icon-chart.svg" alt="">
                                     <p class="t1">
-                                    	<?php
-                                    		if($producto[0]['existencias'] !=0 ){
-                                    			echo round($producto[0]['existencias']/count($sucursal));
-                                    		}else{
-                                    			echo 0;
-                                    		}
-                                    		
-                                    	?>
+                                        <?php
+                                        if ($almacen[0]['media'] != 0) {
+                                            echo round($almacen[0]['media']);
+                                        } else {
+                                            echo 0;
+                                        }
+
+                                        ?>
                                     </p>
                                     <p class="t2">Media de productos</p>
                                 </div>
@@ -140,6 +142,29 @@ $visita = R::getAll($querytres);
                                 <div class="d-grafica-ventas">
                                     <p class="t1">Gráfica de ventas</p>
                                     <canvas height="400" id="myChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding-top: 1rem" class="row mt-2">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="d-grafica-ventas">
+                                    <table id="ventas" class="table" style="text-align:center">
+                                        <thead class="table-primary">
+                                            <tr>
+                                                <th scope="col">Nombre sucursal</th>
+                                                <th scope="col">Media de productos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($sucursal as $item) { ?>
+                                                <tr>
+                                                    <td style="text-align:left"><?php echo $item['nombre'] ?></td>
+                                                    <td><?php echo round(($item['media'])) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -185,6 +210,30 @@ $visita = R::getAll($querytres);
     <script src="js/scripts.js"></script>
     <script src="js/Chart.js"></script>
     <script src="js/chart-ventas.js"></script>
+
+    <!-- datables paginadores -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#ventas').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+                }
+            });
+        });
+
+
+
+        $("input[type='number']").inputSpinner()
+    </script>
 
 </body>
 
