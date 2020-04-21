@@ -66,6 +66,15 @@ if(!empty($errores)){
     $venta->is_payed = 0;
     $id_venta = R::store($venta);
 
+    $refer = R::dispense('referencias');
+    $refer->usuario_id = $_POST['usuariid'];
+    $refer->fecha = new DateTime();
+    $refer->referencia = $referencia;
+    $refer->tipo = 1;
+    $refer->cantidad = $_POST['total'];
+    $refer->status = 0;
+    R::store($refer);
+
     $vpagos = R::dispense('ventaspagos');
     $vpagos->venta_id = $id_venta;
     $vpagos->tipo_pago = 'Efectivo';
@@ -85,6 +94,16 @@ if(!empty($errores)){
         R::store($producto);
 
     }
+
+    if($_POST['sucursal'] != 0){
+    $sucur = R::dispense('ventasentregas');
+    $sucur->id_venta = $id_venta;
+    $sucur->id_sucursal = $_POST['sucursal'];
+    $sucur->id_usuario = $_POST['usuariid'];
+    $sucur->status = 0;
+    R::store($sucur); 
+    }
+
 
     /*$mail = new PHPMailer(true);
 

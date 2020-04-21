@@ -54,7 +54,7 @@ MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e9869
   $vpagos->venta_id = $id_venta;
   $vpagos->tipo_pago = 'Referencia';
   $vpagos->cantidad = $_POST['transaction_amount'];
-  $id_venta = R::store($vpagos);
+  R::store($vpagos);
 
   foreach ($carrito as $item) {
       $prod = R::dispense('productosxventas');
@@ -69,3 +69,12 @@ MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e9869
       R::store($producto);
 
   }
+
+  if($_POST['sucursal'] != 0){
+    $sucur = R::dispense('ventasentregas');
+    $sucur->id_venta = $id_venta;
+    $sucur->id_sucursal = $_POST['sucursal'];
+    $sucur->id_usuario = $_POST['usuariid'];
+    $sucur->status = 0;
+    R::store($sucur); 
+    }

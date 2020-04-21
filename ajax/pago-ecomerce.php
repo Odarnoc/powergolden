@@ -75,5 +75,12 @@ $chargeData = array(
                 R::store($producto);
 
             }
+
+            $sucur = R::dispense('ventasentregas');
+            $sucur->id_venta = $id_venta;
+            $sucur->id_sucursal = $_POST['sucursal'];
+            $sucur->status = 0;
+            R::store($sucur);
+
             echo json_encode($response);
 ?>

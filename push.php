@@ -1,4 +1,13 @@
 <?php
+require 'user_preferences/user-info.php';
+
+$registro = R::dispense('notificaciones');
+
+$registro->titulo = $_REQUEST['titulo'];
+$registro->mensaje = $_REQUEST['mensaje'];
+
+$id = R::store($registro);
+
 // API access key from Google API's Console
 define( 'API_ACCESS_KEY', 'AIzaSyDmZjdxNIHJh-0dclX7OdyrIacSx-WorY0' );
 

@@ -70,6 +70,15 @@
     R::store($producto);
 
 }
+
+if($_POST['sucursal'] != 0){
+    $sucur = R::dispense('ventasentregas');
+    $sucur->id_venta = $id_venta;
+    $sucur->id_sucursal = $_POST['sucursal'];
+    $sucur->id_usuario = $_POST['usuariid'];
+    $sucur->status = 0;
+    R::store($sucur); 
+    }
     
     
 ?>
