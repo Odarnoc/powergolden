@@ -98,16 +98,6 @@ require 'user_preferences/user-info.php';
                                         <div class="d-2">
                                             <p class="t1 one-line"><?php echo $item['nombre'] ?></p>
                                             <p class="t3 two-lines"><b><?php echo $item['descripcion'] ?></b></p>
-                                                <div class="row" style="text-align: center">
-                                                    <div class="col" > 
-                                                        <p style="margin-bottom: 0rem">Inicio:</p>
-                                                        <p class="t2"><?php echo $item['inicio'] ?></p>
-                                                    </div>
-                                                    <div class="col">
-                                                        <p style="margin-bottom: 0rem">Finalizacion:</p>
-                                                        <p class="t2"><?php echo $item['fin'] ?></p>
-                                                    </div>
-                                                </div>
                                             <div style="text-align: center">
                                             <!--  <a class="btn btn-blue mt-2" href="listado-producto-individual.html" role="button">Agregar al carrito</a> -->
                                                 <a class="btn btn-blue mt-2" href="editar-promocion.php?id=<?php echo $item['id'] ?>"><i style="color: white;"class="far fa-edit"></i></a>

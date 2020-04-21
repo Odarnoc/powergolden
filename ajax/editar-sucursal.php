@@ -42,7 +42,11 @@ if(empty($_POST['motivacion'])){
     return;
 }
 if(empty($_POST['meta'])){
-    error_mensaje('Llenar el campo meta de venta.');
+    error_mensaje('Llenar el campo meta de venta mensual.');
+    return;
+}
+if(empty($_POST['metad'])){
+    error_mensaje('Llenar el campo meta de venta diaria.');
     return;
 }
 
@@ -54,6 +58,7 @@ if(empty($_POST['meta'])){
     $est = $_POST['estado'];
     $motivacion = $_POST['motivacion'];
     $meta = $_POST['meta'];
+    $metad = $_POST['metad'];
     $pais = $_POST['pais'];
     $reinscripcion = $_POST['reinscripcion'];
 
@@ -69,6 +74,7 @@ if(empty($_POST['meta'])){
             $registro->estado = $est;
             $registro->frase = $motivacion;
             $registro->meta = $meta;
+            $registro->metad = $metad;
             $registro->pais = $pais;
             $registro->reinscripcion = $reinscripcion;
 

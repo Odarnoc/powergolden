@@ -80,6 +80,9 @@ if (!isset($_SESSION["user_id"])) {
 						<li class="nav-item">
 							<div id="ventas_chart"></div>
 						</li>
+						<li class="nav-item">
+							<div id="ventas_m_chart"></div>
+						</li>
 					</ul>
 
 					<ul class="navbar-nav ml-auto">

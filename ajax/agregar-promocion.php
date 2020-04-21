@@ -16,35 +16,29 @@ if(empty($_POST['descripcion'])){
     return;
 }
 
-if(empty($_POST['inicio'])){
-    error_mensaje('Agregar un fecha de inicio a la promocion.');
-    return;
-}
-
-if(empty($_POST['fin'])){
-    error_mensaje('Agregar un fecha de finalizacion a la promocion.');
-    return;
-}
-
-
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
-    $inicio = $_POST['inicio'];
-    $fin = $_POST['fin'];
+    $tipo=$_POST['tipo'];
+    $paquete_id=$_POST['paquete_id'];
+    $desde=$_POST['desde']==''?0:$_POST['desde'];
+    $cantidad=$_POST['cantidad']==''?0:$_POST['cantidad'];
+    if(isset($_POST['primera'])){
+        $primera=1;
+    }else{
+        $primera=0;
+    }
 
         
             $registro = R::dispense('promociones');
 
-            $dir_subida = '../images/promocion/';
-            $fichero_subido = $dir_subida . basename($_FILES['img-producto']['name']);
-
-            if (move_uploaded_file($_FILES['img-producto']['tmp_name'], $fichero_subido)) {
 
             $registro->nombre = $nombre;
             $registro->descripcion = $descripcion;
-            $registro->inicio = $inicio;
-            $registro->fin = $fin;
-            $registro->imagen=basename($_FILES['img-producto']['name']);
+            $registro->tipo = $tipo;
+            $registro->paquete_id = $paquete_id;
+            $registro->desde=$desde;
+            $registro->cantidad=$cantidad;
+            $registro->primera=$primera;
             
             $id = R::store($registro);
 
@@ -53,7 +47,7 @@ if(empty($_POST['fin'])){
             }else{
                 echo json_encode($response);
             }
-            }
+            
 
             include 'registros-administrador.php';
 

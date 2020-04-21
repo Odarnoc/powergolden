@@ -5,24 +5,28 @@ var cuenta = 0;
 var contador = 0;
 var productos = 0;
 var cantidades = 0;
+var gratis = 0;
 var type = 0;
 var descuento = 0;
 var arreglo = [];
 var arreglo2 = [];
-var p_arre=[];
+var p_arre = [];
 var paquetes = null;
 var total_a = 0;
 var kits = [];
 var pagos = [];
 var clientes = [];
+var promociones = [];
 var conta_kits = 0;
 var deviceSessionId = "";
-var tipo_clientes=0; 
-var total_google=0;
-$(document).ready(function() {
+var tipo_clientes = 0;
+var total_google = 0;
+var select_gratis = false;
+$(document).ready(function () {
   get_products_list();
   get_paquetes_info();
   get_clientes_info();
+  get_promociones_info();
   get_data_chart();
   OpenPay.setId("mcy7r4mints0e7y1nbko");
   OpenPay.setApiKey("pk_380557a00f6c4aae820e6b03ddabd20d");
@@ -34,7 +38,6 @@ $(document).ready(function() {
   );
 });
 function initialize_charts() {
-  
   $("#mv").easyPieChart({
     size: 80,
     barColor: "#49B7F3",
@@ -42,11 +45,20 @@ function initialize_charts() {
     lineWidth: 2,
     lineCap: "circle",
     animate: 2000,
-    onStep: function(from, to, percent) {
-      $(this.el)
-        .find(".percent")
-        .text(Math.round(percent));
-    }
+    onStep: function (from, to, percent) {
+      $(this.el).find(".percent").text(Math.round(percent));
+    },
+  });
+  $("#mvm").easyPieChart({
+    size: 80,
+    barColor: "#CA9F21",
+    trackColor: "#F4F4F4",
+    lineWidth: 2,
+    lineCap: "circle",
+    animate: 2000,
+    onStep: function (from, to, percent) {
+      $(this.el).find(".percent").text(Math.round(percent));
+    },
   });
   $("#ili").easyPieChart({
     size: 80,
@@ -55,11 +67,9 @@ function initialize_charts() {
     lineWidth: 2,
     lineCap: "circle",
     animate: 2000,
-    onStep: function(from, to, percent) {
-      $(this.el)
-        .find(".percent")
-        .text(Math.round(percent));
-    }
+    onStep: function (from, to, percent) {
+      $(this.el).find(".percent").text(Math.round(percent));
+    },
   });
 }
 function get_data_chart() {
@@ -67,20 +77,39 @@ function get_data_chart() {
     url: server + "webserviceapp/get_info_chart_sales.php",
     type: "POST",
     dataType: "json",
-    beforeSend: function() {},
-    success: function(data) {
+    beforeSend: function () {},
+    success: function (data) {
       $("#ventas_chart")
         .empty()
         .append(
           '<div class="d-item-chart-pie-nav">\
       <div class="d-chart-pie">\
           <span class="chart" id="mv" data-percent="' +
+            parseFloat((data.mes_ven / data.mesd) * 100) +
+            '">\
+              <span class="percent"></span>\
+          </span>\
+      </div>\
+      <p class="t1">VM/MM</p>\
+      <p class="t2">' +
+            data.mes_ven +
+            "/" +
+            data.mesd +
+            "</p>\
+  </div>"
+        );
+      $("#ventas_m_chart")
+        .empty()
+        .append(
+          '<div class="d-item-chart-pie-nav">\
+      <div class="d-chart-pie">\
+          <span class="chart" id="mvm" data-percent="' +
             parseFloat((data.hoy / data.mes) * 100) +
             '">\
               <span class="percent"></span>\
           </span>\
       </div>\
-      <p class="t1">V/M</p>\
+      <p class="t1">VD/MD</p>\
       <p class="t2">' +
             data.hoy +
             "/" +
@@ -88,15 +117,9 @@ function get_data_chart() {
             "</p>\
   </div>"
         );
-      $("#meta")
-        .empty()
-        .append(data.mes);
-      $("#venta")
-        .empty()
-        .append(data.hoy);
-      $("#cantidad")
-        .empty()
-        .append(data.inventario);
+      $("#meta").empty().append(data.mes);
+      $("#venta").empty().append(data.hoy);
+      $("#cantidad").empty().append(data.inventario);
       var porcentaje = 0;
       if (data.inventario != 0) {
         if (data.limite == 0) {
@@ -124,12 +147,12 @@ function get_data_chart() {
   </div>"
         );
       initialize_charts();
-    }
+    },
   });
 }
 function construct_table_kits() {
   var tabla = "";
-  kits.forEach(function(element, index) {
+  kits.forEach(function (element, index) {
     if (element != null) {
       tabla +=
         "<tr><td>" +
@@ -143,9 +166,7 @@ function construct_table_kits() {
         '\')" class="btn btn-eliminar-pos"><i class="fas fa-times"></i></button></td></tr>';
     }
   });
-  $("#tablakits tbody")
-    .empty()
-    .append(tabla);
+  $("#tablakits tbody").empty().append(tabla);
 }
 function quita_kits() {
   construct_table_kits();
@@ -159,10 +180,10 @@ function quitar_kit(element) {
 function cambio_tipo_venta() {
   if ($("#tipo_venta").val() != "1") {
     $("#row_add_kits").hide();
-    tipo_clientes=0;
+    tipo_clientes = 0;
   } else {
     $("#row_add_kits").show();
-    tipo_clientes=1;
+    tipo_clientes = 1;
   }
   get_clientes_info();
   if (cantidades != 0) {
@@ -174,7 +195,7 @@ function agregar_kit() {
     kits[conta_kits] = $("#tipo_kit").val();
 
     show_total();
-  }else{
+  } else {
     kits[conta_kits] = null;
   }
 }
@@ -182,17 +203,15 @@ function get_clientes_info() {
   $.ajax({
     url: server + "webserviceapp/get_clientes.php",
     type: "POST",
-    data:{tipo:tipo_clientes},
+    data: { tipo: tipo_clientes },
     dataType: "json",
-    beforeSend: function() {},
-    success: function(data) {
+    beforeSend: function () {},
+    success: function (data) {
       clientes = data.arreglo;
       //console.log(data.arreglo[2]);
-      $("#sector")
-        .empty()
-        .append(data.list);
+      $("#sector").empty().append(data.list);
       $(".selectpicker").selectpicker("refresh");
-    }
+    },
   });
 }
 function get_paquetes_info() {
@@ -200,15 +219,24 @@ function get_paquetes_info() {
     url: server + "webserviceapp/get_paquetes.php",
     type: "POST",
     dataType: "json",
-    beforeSend: function() {},
-    success: function(data) {
+    beforeSend: function () {},
+    success: function (data) {
       paquetes = data.arreglo;
-      $("#frase")
-        .empty()
-        .append(data.frase);
+      $("#frase").empty().append(data.frase);
       console.log(data.arreglo[2]);
       $("#tipo_kit").append(data.list);
-    }
+    },
+  });
+}
+function get_promociones_info() {
+  $.ajax({
+    url: server + "webserviceapp/get_promociones.php",
+    type: "POST",
+    dataType: "json",
+    beforeSend: function () {},
+    success: function (data) {
+      promociones = data.arreglo;
+    },
   });
 }
 function change_category(category) {
@@ -222,23 +250,21 @@ function get_products_list() {
     type: "POST",
     data: { product: search, category: type },
     dataType: "json",
-    beforeSend: function() {
+    beforeSend: function () {
       swal({
         title: "Cargando...",
         showConfirmButton: false,
-        imageUrl: "resources/loader.gif"
+        imageUrl: "resources/loader.gif",
       });
     },
-    success: function(data) {
+    success: function (data) {
       swal.close();
-      p_arre=data.arreglo;
-      $("#rowproductos")
-        .empty()
-        .append(data.list);
-    }
+      p_arre = data.arreglo;
+      $("#rowproductos").empty().append(data.list);
+    },
   });
 }
-$("#buscar").change(function(event) {
+$("#buscar").change(function (event) {
   get_products_list();
 });
 function cleanSale() {
@@ -260,69 +286,72 @@ function cleanSale() {
   $(".selectpicker").selectpicker("refresh");
   $(".dropdown-select").trigger("keydown");
   $("#tipo_kit").val("");
+  gratis = 0;
+  select_gratis = false;
   cambio_tipo_venta();
   show_total();
 }
-function agregarProducto(name, price_out, id,posible) {
+function agregarProducto(name, price_out, id, posible) {
   ////console.log("Aqui ando");
-  if(posible!=0){
-  if (arreglo2[id] != 1) {
-    $("#tablacarrito > tbody").append(
-      ' <tr id="' +
-        contador +
-        '">\
+  if (posible != 0) {
+    if (arreglo2[id] != 1) {
+      $("#tablacarrito > tbody").append(
+        ' <tr id="' +
+          contador +
+          '">\
 		<td style="display:none">' +
-        id +
-        '</td>\
+          id +
+          '</td>\
 		<td style="display:none">' +
-        price_out +
-        '</td>\
+          price_out +
+          '</td>\
 		<td class="td-producto-pos">' +
-        name +
-        ' </td>\
+          name +
+          ' </td>\
 		<td class="td-cantidad-pos"><input type="number" id="' +
-        contador +
-        'input" onchange="cambiar_cantidad(\'' +
-        contador +
-        "','" +
-        price_out +
-        '\')" class="form-control input-cant-pos" value="1" min="1" max="500" step="1" /></td>\
+          contador +
+          'input" onchange="cambiar_cantidad(\'' +
+          contador +
+          "','" +
+          price_out +
+          '\')" class="form-control input-cant-pos" value="1" min="1" max="500" step="1" /></td>\
 		<td class="td-precio-pos">$' +
-        parseFloat(price_out).toFixed(2) +
-        '</td>\
+          parseFloat(price_out).toFixed(2) +
+          '</td>\
 		<td class="td-eliminar-pos"><button type="button" onclick="eliminar_carrito(\'' +
-        id +
-        "','" +
-        contador +
-        "','" +
-        price_out +
-        '\')" class="btn btn-eliminar-pos"><i class="fas fa-times"></i></button></td>\
+          id +
+          "','" +
+          contador +
+          "','" +
+          price_out +
+          '\')" class="btn btn-eliminar-pos"><i class="fas fa-times"></i></button></td>\
 		</tr>'
-    );
-    arreglo[contador] = 1;
-    arreglo2[id] = 1;
-    cuenta += parseFloat(price_out);
-    contador++;
-    productos++;
-    cantidades++;
-    show_total();
-  } else {
-    swal(
-      "Este producto ya esta agregado al carrito. Si deseas cambiar la cantidad por favor teclea el numero deseado en la lista.",
-      "",
-      "info"
-    );
-  }
-}else{
-  swal(
-    "Este producto no cuenta con inventario suficiente.",
-    "",
-    "error"
-  );
+      );
 
+      arreglo[contador] = 1;
+      arreglo2[id] = 1;
+      contador++;
+      productos++;
+      if (!select_gratis) {
+        cuenta += parseFloat(price_out);
+
+        cantidades++;
+      } else {
+        gratis++;
+      }
+      show_total();
+    } else {
+      swal(
+        "Este producto ya esta agregado al carrito. Si deseas cambiar la cantidad por favor teclea el numero deseado en la lista.",
+        "",
+        "info"
+      );
+    }
+  } else {
+    swal("Este producto no cuenta con inventario suficiente.", "", "error");
+  }
 }
-}
-$("#input-descuento").change(function() {
+$("#input-descuento").change(function () {
   $("#alerta").hide();
   if ($("#input-descuento").val() != "") {
     if ($("#input-descuento").val() > 100 || $("#input-descuento").val() < 0) {
@@ -339,13 +368,13 @@ $("#input-descuento").change(function() {
 function get_total_kits(tipo = "") {
   var total = 0;
   if (tipo == "") {
-    kits.forEach(function(element, index) {
+    kits.forEach(function (element, index) {
       if (element != null) {
         total += parseFloat(paquetes[element].precio);
       }
     });
   } else {
-    kits.forEach(function(element, index) {
+    kits.forEach(function (element, index) {
       if (element != null) {
         total += parseFloat(paquetes[element].productos);
       }
@@ -385,27 +414,23 @@ function show_total() {
         "$" + parseFloat(((cuenta * (100 - descuento)) / 100) * 0.16).toFixed(2)
       );
   }
-  $("#totalproductos")
-    .empty()
-    .append(cantidades);
+  $("#totalproductos").empty().append(cantidades);
 }
 function cambiar_cantidad(id, price_out) {
   var anterior = arreglo[id];
-  console.log(p_arre[id].existencia);
-  console.log(parseFloat($("#" + id + "input").val()));
-  if(p_arre[id].existencia>=parseInt($("#" + id + "input").val())){
-  arreglo[id] = $("#" + id + "input").val();
-  cuenta -= price_out * anterior;
-  cantidades =
-    parseFloat(cantidades) - parseFloat(anterior) + parseFloat(arreglo[id]);
-  cuenta += parseFloat(price_out * arreglo[id]);
-  show_total();
-  }else{
-    swal(
-      "Este producto no cuenta con inventario suficiente.",
-      "",
-      "error"
-    );
+  if (p_arre[id].existencia >= parseInt($("#" + id + "input").val())) {
+    arreglo[id] = $("#" + id + "input").val();
+    if (select_gratis && anterior < arreglo[id]) {
+      gratis += parseFloat(arreglo[id]) - parseFloat(anterior);
+    } else {
+      cuenta -= price_out * anterior;
+      cantidades =
+        parseFloat(cantidades) - parseFloat(anterior) + parseFloat(arreglo[id]);
+      cuenta += parseFloat(price_out * arreglo[id]);
+    }
+    show_total();
+  } else {
+    swal("Este producto no cuenta con inventario suficiente.", "", "error");
     $("#" + id + "input").val(anterior);
   }
 }
@@ -435,36 +460,32 @@ function get_actual_date() {
   today = dd + "/" + mm + "/" + yyyy;
   return today + " " + time;
 }
-function create_ticket(folio, cliente = null, total, recibido, cambio, tabla,referencia=null) {
-  $("#fecha_ticket")
-    .empty()
-    .append(get_actual_date());
-  $("#folio_ticket")
-    .empty()
-    .append(folio);
-    console.log(referencia);
-    if (referencia == null) {
-      $("#referencia_ticket").hide();
-    } else {
-      $("#referencia_ticket").show();
-      $("#referencia_cliente")
-        .empty()
-        .append(referencia);
-    }
+function create_ticket(
+  folio,
+  cliente = null,
+  total,
+  recibido,
+  cambio,
+  tabla,
+  referencia = null
+) {
+  $("#fecha_ticket").empty().append(get_actual_date());
+  $("#folio_ticket").empty().append(folio);
+  console.log(referencia);
+  if (referencia == null) {
+    $("#referencia_ticket").hide();
+  } else {
+    $("#referencia_ticket").show();
+    $("#referencia_cliente").empty().append(referencia);
+  }
   if (cliente == null) {
     $("#cliente_ticket").hide();
   } else {
     $("#cliente_ticket").show();
-    $("#nombre_cliente")
-      .empty()
-      .append(cliente.nombre);
-    $("#telefono_cliente")
-      .empty()
-      .append(cliente.telefono);
+    $("#nombre_cliente").empty().append(cliente.nombre);
+    $("#telefono_cliente").empty().append(cliente.telefono);
   }
-  $("#productos_ticket")
-    .empty()
-    .append(cantidades);
+  $("#productos_ticket").empty().append(cantidades);
   $("#subtotal_ticket")
     .empty()
     .append("$" + addCommas(parseFloat(total * 0.84).toFixed(2)));
@@ -480,9 +501,7 @@ function create_ticket(folio, cliente = null, total, recibido, cambio, tabla,ref
   $("#cambio_ticket")
     .empty()
     .append("$" + addCommas(parseFloat(cambio).toFixed(2)));
-  $("#tabla_ticket > tbody")
-    .empty()
-    .append(tabla);
+  $("#tabla_ticket > tbody").empty().append(tabla);
   var tipo_venta = $("#tipo_venta").val();
   if (tipo_venta != "" && tipo_venta != "0") {
     $("#row_precio_table").hide();
@@ -494,7 +513,7 @@ function create_ticket(folio, cliente = null, total, recibido, cambio, tabla,ref
   $("#sec-ticket").show();
   var htmlsource = $("#sec-ticket")[0];
   html2canvas(htmlsource, {
-    onrendered: function(canvas) {
+    onrendered: function (canvas) {
       var img = canvas.toDataURL("image/png");
       var doc = new jsPDF();
       doc.addImage(img, "JPEG", -35, -10);
@@ -513,12 +532,12 @@ function create_ticket(folio, cliente = null, total, recibido, cambio, tabla,ref
         processData: false,
         cache: false,
 
-        success(data) {}
+        success(data) {},
       });
-    }
+    },
   });
 }
-$("#payment_reference").submit(function(event) {
+$("#payment_reference").submit(function (event) {
   event.preventDefault();
   var cliente = clientes[$("#sector").val()];
   $.ajax({
@@ -530,18 +549,25 @@ $("#payment_reference").submit(function(event) {
       swal({
         title: "Cargando...",
         showConfirmButton: false,
-        imageUrl: "pos/resources/loader.gif"
+        imageUrl: "pos/resources/loader.gif",
       });
     },
     success(data) {
       console.log(data);
-      if (data.resultado!=0) {
+      if (data.resultado != 0) {
         swal.close();
         $("#modalGenerarReferencia").modal("hide");
         $("#modalPagar").modal("toggle");
         $("#payment_reference")[0].reset();
         console.log(data.cantidad);
-        check_quantities("Referencia: "+data.referencia, data.cantidad,"",data.id,data.referencia,data.tipo);
+        check_quantities(
+          "Referencia: " + data.referencia,
+          data.cantidad,
+          "",
+          data.id,
+          data.referencia,
+          data.tipo
+        );
       } else {
         swal(
           "<p id='pswalerror'> Error </p>",
@@ -556,11 +582,11 @@ $("#payment_reference").submit(function(event) {
         "<p id='psswalerror'>La referencia de pago no ha podido ser procesada. Intente de nuevo, por favor.</p> ",
         "error"
       );
-    }
+    },
   });
 });
 function sale_modal() {
-  $('#paypal-button-container').empty();
+  $("#paypal-button-container").empty();
   var countrows = $("#tablacarrito tr").length;
   var rows = countrows - 1;
 
@@ -578,15 +604,17 @@ function sale_modal() {
       var cantidad_productos = get_total_kits("p");
       if (cantidades != cantidad_productos) {
         console.log($("#tipo_kit").val());
-        if($("#tipo_kit").val()==""){
+        if ($("#tipo_kit").val() == "") {
           mensaje +=
-          "Para la venta a Empresario Independiente debes seleccionar un KIT.";
-        }else{
-        mensaje +=
-          "La cantidad de productos seleccionadas debe ser igual a la cantidad que ofrece el  "+$("#tipo_kit option:selected").html()+" " +
-          " (" +
-          cantidad_productos +
-          ").";
+            "Para la venta a Empresario Independiente debes seleccionar un KIT.";
+        } else {
+          mensaje +=
+            "La cantidad de productos seleccionadas debe ser igual a la cantidad que ofrece el  " +
+            $("#tipo_kit option:selected").html() +
+            " " +
+            " (" +
+            cantidad_productos +
+            ").";
         }
 
         valid = false;
@@ -598,10 +626,49 @@ function sale_modal() {
         mensaje +=
           "Para la venta de KITS debes seleccionar a un Empresario Independiente.";
         valid = false;
+      } else {
+        var productos_descuento = 0;
+        for (promo in promociones) {
+          if (
+            promociones[promo].tipo == 1 &&
+            promociones[promo].paquete_id == $("#tipo_kit").val()
+          ) {
+            cliente = null;
+            cliente_sel = $("#sector").val();
+            if (cliente_sel != "") {
+              cliente = clientes[cliente_sel];
+            }
+            if (promociones[promo].primera == 1 || cliente.compras>=1) {
+              productos_descuento = promociones[promo].cantidad;
+            }
+          }
+        }
+        if (productos_descuento != gratis) {
+          mensaje +=
+            "El cliente tiene (" + productos_descuento + ") productos gratis.";
+          valid = false;
+        }
       }
     } else {
+      var productos_descuento = 0;
+      for (promo in promociones) {
+        if (promociones[promo].tipo == 2) {
+          if (cantidades / promociones[promo].desde >= 1) {
+            productos_descuento =
+              parseInt(cantidades / promociones[promo].desde) *
+              promociones[promo].cantidad;
+          }
+        }
+      }
+
       if ($("#sector").val() == "0") {
-        mensaje += "Para la venta de productos debes seleccionar a un Cliente Temporal.";
+        mensaje +=
+          "Para la venta de productos debes seleccionar a un Cliente Temporal.";
+        valid = false;
+        productos_descuento = 0;
+      } else if (productos_descuento != gratis) {
+        mensaje +=
+          "El cliente tiene (" + productos_descuento + ") productos gratis.";
         valid = false;
       }
     }
@@ -621,49 +688,66 @@ function sale_modal() {
       $("#tabla_metodos > tbody").empty();
       $("#modalPagar").modal("toggle");
       //efective_pay();
-      total_google=total;
-      transaccion_google={
-        countryCode: 'MX',
+      total_google = total;
+      transaccion_google = {
+        countryCode: "MX",
         currencyCode: "MXN",
         totalPriceStatus: "FINAL",
         totalPrice: parseFloat(total).toFixed(2),
-        totalPriceLabel: "Total"
+        totalPriceLabel: "Total",
       };
-      paypal.Buttons({
-        locale:'es-MX',
+      paypal
+        .Buttons({
+          locale: "es-MX",
           style: {
-              shape: 'rect',
-              color: 'gold',
-              layout: 'vertical',
-              label: 'paypal',
-              
+            shape: "rect",
+            color: "gold",
+            layout: "vertical",
+            label: "paypal",
           },
-          createOrder: function(data, actions) {
-              return actions.order.create({
-                  purchase_units: [{
-                      amount: {
-                          value: total
-                      }
-                  }]
-              });
+          createOrder: function (data, actions) {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    value: total,
+                  },
+                },
+              ],
+            });
           },
-          onApprove: function(data, actions) {
-              return actions.order.capture().then(function(details) {
-                  //alert('Se ha completado la transacción ' + details.payer.name.given_name + '!');
-                  check_quantities("Paypal", total);
-              });
-          }
-      }).render('#paypal-button-container');
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+              //alert('Se ha completado la transacción ' + details.payer.name.given_name + '!');
+              check_quantities("Paypal", total);
+            });
+          },
+        })
+        .render("#paypal-button-container");
     } else {
+      var tipo_swal = "error";
+      var text_swal = "Error";
+      if (productos_descuento != 0) {
+        tipo_swal = "info";
+        text_swal = "Productos gratis";
+        select_gratis = true;
+      }
       swal(
-        "<p id='pswalerror'> Error </p>",
+        "<p id='pswalerror'> " + text_swal + " </p>",
         "<p id='psswalerror'>" + mensaje + "</p> ",
-        "error"
+        tipo_swal
       );
     }
   }
 }
-function check_quantities(tipo, cantidad_pago, tarjeta = "",referencia_id=null,referencia=null,tipo_referencia=null) {
+function check_quantities(
+  tipo,
+  cantidad_pago,
+  tarjeta = "",
+  referencia_id = null,
+  referencia = null,
+  tipo_referencia = null
+) {
   total_a += parseFloat(cantidad_pago);
   var auxiliar = $("#totalcarrito").html();
   auxiliar = auxiliar.replace("$", "");
@@ -687,7 +771,13 @@ function check_quantities(tipo, cantidad_pago, tarjeta = "",referencia_id=null,r
       tarjeta +
       "</td></tr>"
   );
-  pagos.push({ tipo_pago: tipo, cantidad_pago: cantidad_pago,referencia_id:referencia_id ,referencia:referencia,tipo_referencia:tipo_referencia  });
+  pagos.push({
+    tipo_pago: tipo,
+    cantidad_pago: cantidad_pago,
+    referencia_id: referencia_id,
+    referencia: referencia,
+    tipo_referencia: tipo_referencia,
+  });
 }
 function efective_pay() {
   $("#modalPagar").modal("hide");
@@ -698,8 +788,8 @@ function efective_pay() {
     input: "number",
     confirmButtonText: "Aceptar",
     showCancelButton: true,
-    cancelButtonText: "Cancelar"
-  }).then(result => {
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
     $("#modalPagar").modal("toggle");
     if (result.value) {
       var inputValue = result.value;
@@ -720,7 +810,7 @@ function deposito_pay() {
   $("#modalPagar").modal("hide");
   $("#modalGenerarPagoDeposito").modal("toggle");
 }
-$("#add_clients_form").submit(function(event) {
+$("#add_clients_form").submit(function (event) {
   event.preventDefault();
   var data = $("#add_clients_form").serializeArray();
   $.ajax({
@@ -732,7 +822,7 @@ $("#add_clients_form").submit(function(event) {
       swal({
         title: "Cargando...",
         showConfirmButton: false,
-        imageUrl: "resources/loader.gif"
+        imageUrl: "resources/loader.gif",
       });
     },
     success(data) {
@@ -753,31 +843,31 @@ $("#add_clients_form").submit(function(event) {
         );
       }
     },
-    error(error) {}
+    error(error) {},
   });
 });
-$("#pago_tarjeta").submit(function(event) {
+$("#pago_tarjeta").submit(function (event) {
   event.preventDefault();
   check_quantities("Tarjeta", $("#cantidad_tarjetas").val());
   $("#modalGenerarPagoTarjeta").modal("hide");
   $("#modalPagar").modal("toggle");
   $("#pago_tarjeta")[0].reset();
 });
-$("#pago_deposito").submit(function(event) {
+$("#pago_deposito").submit(function (event) {
   event.preventDefault();
   check_quantities("Deposito", $("#cantidad_deposito").val());
   $("#modalGenerarPagoDeposito").modal("hide");
   $("#modalPagar").modal("toggle");
   $("#pago_deposito")[0].reset();
 });
-$("#pago_transfer").submit(function(event) {
+$("#pago_transfer").submit(function (event) {
   event.preventDefault();
   check_quantities("Transferencia", $("#cantidad_transfer").val());
   $("#modalGenerarPagoTransfer").modal("hide");
   $("#modalPagar").modal("toggle");
   $("#pago_transfer")[0].reset();
 });
-$("#card_payment").submit(function(event) {
+$("#card_payment").submit(function (event) {
   event.preventDefault();
   cantidad_tarjeta = $("#cantidad_tarjeta").val();
   numero_tarjeta = $("#numero_tarjeta").val();
@@ -788,7 +878,7 @@ $("#card_payment").submit(function(event) {
     error_callbak
   );
 });
-var sucess_callbak = function(response) {
+var sucess_callbak = function (response) {
   var token_id = response.data.id;
   $("#token_id").val(token_id);
   $.ajax({
@@ -799,14 +889,14 @@ var sucess_callbak = function(response) {
       token_id: token_id,
       amount: cantidad_tarjeta,
       description: "Esta es solo prueba",
-      deviceIdHiddenFieldName: deviceSessionId
+      deviceIdHiddenFieldName: deviceSessionId,
     },
     dataType: "html",
     beforeSend() {
       swal({
         title: "Cargando...",
         showConfirmButton: false,
-        imageUrl: "resources/loader.gif"
+        imageUrl: "resources/loader.gif",
       });
     },
     success(data) {
@@ -825,11 +915,11 @@ var sucess_callbak = function(response) {
         "<p id='psswalerror'>El pago no ha podido ser procesado. Intente de nuevo, por favor.</p> ",
         "error"
       );
-    }
+    },
   });
 };
 
-var error_callbak = function(response) {
+var error_callbak = function (response) {
   var desc =
     response.data.description != undefined
       ? response.data.description
@@ -868,31 +958,25 @@ function sale() {
       user_id: $("#user_id").val(),
       sucursal_id: $("#sucursal_id").val(),
       total: total,
-      cliente_id: $("#sector").val()
+      cliente_id: $("#sector").val(),
     },
     dataType: "json",
-    beforeSend: function() {
+    beforeSend: function () {
       swal({
         title: "Cargando...",
         showConfirmButton: false,
-        imageUrl: "resources/loader.gif"
+        imageUrl: "resources/loader.gif",
       });
     },
-    success: function(data) {
+    success: function (data) {
       venta_id = data.id;
-    }
+    },
   });
-  $("#tablacarrito > tbody  > tr").each(function(index) {
-    product = $(this)
-      .find("td:eq(0)")
-      .text();
+  $("#tablacarrito > tbody  > tr").each(function (index) {
+    product = $(this).find("td:eq(0)").text();
     product = product.trim();
-    cualquierCadena = $(this)
-      .find("td:eq(2)")
-      .text();
-    price_out = $(this)
-      .find("td:eq(1)")
-      .text();
+    cualquierCadena = $(this).find("td:eq(2)").text();
+    price_out = $(this).find("td:eq(1)").text();
     price_out = price_out.trim();
     regreso +=
       "<tr><td>" +
@@ -915,33 +999,33 @@ function sale() {
       data: {
         product: product,
         cantidad: arreglo[this.id],
-        venta: venta_id
+        venta: venta_id,
       },
       dataType: "html",
-      success() {}
+      success() {},
     });
   });
-  kits.forEach(function(element, index) {
+  kits.forEach(function (element, index) {
     $.ajax({
       url: server + "webserviceapp/sale_kits.php",
       type: "post",
       async: false,
       data: {
         paquete: element,
-        venta: venta_id
+        venta: venta_id,
       },
       dataType: "html",
-      success() {}
+      success() {},
     });
   });
-  var referencias="";
-  pagos.forEach(function(element, index) {
+  var referencias = "";
+  pagos.forEach(function (element, index) {
     console.log(element);
-    if(element.referencia_id!=null){
-      if(element.tipo_referencia==1){
-        referencias+="Pago en tienda "+element.referencia;
-      }else{
-        referencias+="Pago en banco "+element.referencia;
+    if (element.referencia_id != null) {
+      if (element.tipo_referencia == 1) {
+        referencias += "Pago en tienda " + element.referencia;
+      } else {
+        referencias += "Pago en banco " + element.referencia;
       }
     }
     $.ajax({
@@ -952,10 +1036,10 @@ function sale() {
         tipo_pago: element.tipo_pago,
         cantidad: element.cantidad_pago,
         referencia: element.referencia_id,
-        venta: venta_id
+        venta: venta_id,
       },
       dataType: "html",
-      success() {}
+      success() {},
     });
   });
   cliente = null;
@@ -963,26 +1047,33 @@ function sale() {
   if (cliente_sel != "") {
     cliente = clientes[cliente_sel];
   }
-  create_ticket(venta_id, cliente, total, total_a, cambio,regreso, referencias);
+  create_ticket(
+    venta_id,
+    cliente,
+    total,
+    total_a,
+    cambio,
+    regreso,
+    referencias
+  );
   ticket += "\n";
   swal({
     type: "success",
-    title:  "<p id='pswal'>Venta realizada</p>",
-    html:  "<p id='psswal'> El cambio a entregar es de: <br> <b id='psbswal'>$" +
-    addCommas(cambio) +
-    ".<sup id='supswal'>00</sup></b></p>",
+    title: "<p id='pswal'>Venta realizada</p>",
+    html:
+      "<p id='psswal'> El cambio a entregar es de: <br> <b id='psbswal'>$" +
+      addCommas(cambio) +
+      ".<sup id='supswal'>00</sup></b></p>",
     confirmButtonText: "Aceptar",
     showCancelButton: false,
-    cancelButtonText: "Cancelar"
-  }).then(result => {
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
     $("#modalPagar").modal("hide");
-  $("#sector").val("0");
-  get_data_chart();
-  get_products_list();
-  cleanSale();
+    $("#sector").val("0");
+    get_data_chart();
+    get_products_list();
+    cleanSale();
   });
-
-  
 }
 function sale_externo() {
   var auxiliar = $("#totalcarrito").html();
@@ -1010,33 +1101,27 @@ function sale_externo() {
       user_id: $("#user_id").val(),
       sucursal_id: $("#sucursal_id").val(),
       total: total,
-      is_payed:0,
-      external_pay:1,
-      cliente_id: $("#sector").val()
+      is_payed: 0,
+      external_pay: 1,
+      cliente_id: $("#sector").val(),
     },
     dataType: "json",
-    beforeSend: function() {
+    beforeSend: function () {
       swal({
         title: "Cargando...",
         showConfirmButton: false,
-        imageUrl: "resources/loader.gif"
+        imageUrl: "resources/loader.gif",
       });
     },
-    success: function(data) {
+    success: function (data) {
       venta_id = data.id;
-    }
+    },
   });
-  $("#tablacarrito > tbody  > tr").each(function(index) {
-    product = $(this)
-      .find("td:eq(0)")
-      .text();
+  $("#tablacarrito > tbody  > tr").each(function (index) {
+    product = $(this).find("td:eq(0)").text();
     product = product.trim();
-    cualquierCadena = $(this)
-      .find("td:eq(2)")
-      .text();
-    price_out = $(this)
-      .find("td:eq(1)")
-      .text();
+    cualquierCadena = $(this).find("td:eq(2)").text();
+    price_out = $(this).find("td:eq(1)").text();
     price_out = price_out.trim();
     regreso +=
       "<tr><td>" +
@@ -1059,33 +1144,33 @@ function sale_externo() {
       data: {
         product: product,
         cantidad: arreglo[this.id],
-        venta: venta_id
+        venta: venta_id,
       },
       dataType: "html",
-      success() {}
+      success() {},
     });
   });
-  kits.forEach(function(element, index) {
+  kits.forEach(function (element, index) {
     $.ajax({
       url: server + "webserviceapp/sale_kits.php",
       type: "post",
       async: false,
       data: {
         paquete: element,
-        venta: venta_id
+        venta: venta_id,
       },
       dataType: "html",
-      success() {}
+      success() {},
     });
   });
-  var referencias="";
-  pagos.forEach(function(element, index) {
+  var referencias = "";
+  pagos.forEach(function (element, index) {
     console.log(element);
-    if(element.referencia_id!=null){
-      if(element.tipo_referencia==1){
-        referencias+="Pago en tienda "+element.referencia;
-      }else{
-        referencias+="Pago en banco "+element.referencia;
+    if (element.referencia_id != null) {
+      if (element.tipo_referencia == 1) {
+        referencias += "Pago en tienda " + element.referencia;
+      } else {
+        referencias += "Pago en banco " + element.referencia;
       }
     }
     $.ajax({
@@ -1096,10 +1181,10 @@ function sale_externo() {
         tipo_pago: element.tipo_pago,
         cantidad: element.cantidad_pago,
         referencia: element.referencia_id,
-        venta: venta_id
+        venta: venta_id,
       },
       dataType: "html",
-      success() {}
+      success() {},
     });
   });
   cliente = null;
@@ -1111,24 +1196,27 @@ function sale_externo() {
   ticket += "\n";
   swal({
     type: "info",
-    title:  "<p id='pswal'>Venta con pago externo</p>",
-    html:  "<p id='psswal'> Por favor has extensiva la siguiente url con tu cliente para continuar con el proceso de pago:<br>\
-<a href='https://powergolden.com.mx/pos/external_pay.php?venta="+venta_id+"'>https://powergolden.com.mx/os/external_pay.php?venta="+venta_id+"</a></p>",
+    title: "<p id='pswal'>Venta con pago externo</p>",
+    html:
+      "<p id='psswal'> Por favor has extensiva la siguiente url con tu cliente para continuar con el proceso de pago:<br>\
+<a href='https://powergolden.com.mx/pos/external_pay.php?venta=" +
+      venta_id +
+      "'>https://powergolden.com.mx/os/external_pay.php?venta=" +
+      venta_id +
+      "</a></p>",
     confirmButtonText: "Aceptar",
     showCancelButton: false,
-    cancelButtonText: "Cancelar"
-  }).then(result => {
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
     $("#modalPagar").modal("hide");
     $("#sector").val("0");
     get_data_chart();
     get_products_list();
     cleanSale();
   });
-
-  
 }
 
-$(".swal2-input").on("input", function() {
+$(".swal2-input").on("input", function () {
   this.value = this.value.replace(/[^0-9]/g, "");
 });
 
@@ -1164,153 +1252,149 @@ function inicioinicio() {
     "inicio.html?id=" + userid + "&name=" + username + "&stock=" + stock;
 }
 
-
-
 //Aqui empieza  google
 var transaccion_google;
 const baseRequest = {
-  apiVersion: 2,
-  apiVersionMinor: 0
+  apiVersion: 2,
+  apiVersionMinor: 0,
 };
 
-const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
+const allowedCardNetworks = [
+  "AMEX",
+  "DISCOVER",
+  "INTERAC",
+  "JCB",
+  "MASTERCARD",
+  "VISA",
+];
 const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
 const tokenizationSpecification = {
-  type: 'PAYMENT_GATEWAY',
-  parameters: {
-    'gateway': 'example',
-    'gatewayMerchantId': 'exampleGatewayMerchantId'
-  }
+  type: "PAYMENT_GATEWAY",
+  parameters: {
+    gateway: "example",
+    gatewayMerchantId: "exampleGatewayMerchantId",
+  },
 };
 
 const baseCardPaymentMethod = {
-  type: 'CARD',
-  parameters: {
-    allowedAuthMethods: allowedCardAuthMethods,
-    allowedCardNetworks: allowedCardNetworks
-  }
+  type: "CARD",
+  parameters: {
+    allowedAuthMethods: allowedCardAuthMethods,
+    allowedCardNetworks: allowedCardNetworks,
+  },
 };
 
 /**
- * Describe your site's support for the CARD payment method including optional
- * fields
- *
- * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#CardParameters|CardParameters}
- */
-const cardPaymentMethod = Object.assign(
-  {},
-  baseCardPaymentMethod,
-  {
-    tokenizationSpecification: tokenizationSpecification
-  }
-);
+ * Describe your site's support for the CARD payment method including optional
+ * fields
+ *
+ * @see {@link https://developers.google.com/pay/api/web/reference/request-objects#CardParameters|CardParameters}
+ */
+const cardPaymentMethod = Object.assign({}, baseCardPaymentMethod, {
+  tokenizationSpecification: tokenizationSpecification,
+});
 
 let paymentsClient = null;
 
 function getGoogleIsReadyToPayRequest() {
-  return Object.assign(
-      {},
-      baseRequest,
-      {
-        allowedPaymentMethods: [baseCardPaymentMethod]
-      }
-  );
+  return Object.assign({}, baseRequest, {
+    allowedPaymentMethods: [baseCardPaymentMethod],
+  });
 }
 function getGooglePaymentDataRequest() {
-  const paymentDataRequest = Object.assign({}, baseRequest);
-  paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
-  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
-  paymentDataRequest.merchantInfo = {
-    merchantName: 'Productos Power Golden'
-  };
+  const paymentDataRequest = Object.assign({}, baseRequest);
+  paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
+  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
+  paymentDataRequest.merchantInfo = {
+    merchantName: "Productos Power Golden",
+  };
 
-  paymentDataRequest.callbackIntents = ["PAYMENT_AUTHORIZATION"];
+  paymentDataRequest.callbackIntents = ["PAYMENT_AUTHORIZATION"];
 
-  return paymentDataRequest;
+  return paymentDataRequest;
 }
 function getGooglePaymentsClient() {
-  if ( paymentsClient === null ) {
-    paymentsClient = new google.payments.api.PaymentsClient({
-        environment: 'TEST',
-      paymentDataCallbacks: {
-        onPaymentAuthorized: onPaymentAuthorized
-      }
-    });
-  }
-  return paymentsClient;
+  if (paymentsClient === null) {
+    paymentsClient = new google.payments.api.PaymentsClient({
+      environment: "TEST",
+      paymentDataCallbacks: {
+        onPaymentAuthorized: onPaymentAuthorized,
+      },
+    });
+  }
+  return paymentsClient;
 }
 
 function onPaymentAuthorized(paymentData) {
-  return new Promise(function(resolve, reject){
-    // handle the response
-    processPayment(paymentData)
-      .then(function() {
-		resolve({transactionState: 'SUCCESS'});
-		console.log("Pedos");
-		check_quantities("Google", total_google);
+  return new Promise(function (resolve, reject) {
+    // handle the response
+    processPayment(paymentData)
+      .then(function () {
+        resolve({ transactionState: "SUCCESS" });
+        console.log("Pedos");
+        check_quantities("Google", total_google);
       })
-      .catch(function() {
+      .catch(function () {
         resolve({
-          transactionState: 'ERROR',
+          transactionState: "ERROR",
           error: {
-            intent: 'PAYMENT_AUTHORIZATION',
-            message: 'Insufficient funds, try again. Next attempt should work.',
-            reason: 'PAYMENT_DATA_INVALID'
-          }
+            intent: "PAYMENT_AUTHORIZATION",
+            message: "Insufficient funds, try again. Next attempt should work.",
+            reason: "PAYMENT_DATA_INVALID",
+          },
         });
-	    });
-  });
+      });
+  });
 }
 
 function onGooglePayLoaded() {
-  const paymentsClient = getGooglePaymentsClient();
-  paymentsClient.isReadyToPay(getGoogleIsReadyToPayRequest())
-    .then(function(response) {
+  const paymentsClient = getGooglePaymentsClient();
+  paymentsClient
+    .isReadyToPay(getGoogleIsReadyToPayRequest())
+    .then(function (response) {
       if (response.result) {
         addGooglePayButton();
       }
     })
-    .catch(function(err) {
+    .catch(function (err) {
       // show error in developer console for debugging
       console.error(err);
     });
 }
 
 function addGooglePayButton() {
-  const paymentsClient = getGooglePaymentsClient();
-  const button =
-      paymentsClient.createButton({onClick: onGooglePaymentButtonClicked});
-  document.getElementById('container').appendChild(button);
+  const paymentsClient = getGooglePaymentsClient();
+  const button = paymentsClient.createButton({
+    onClick: onGooglePaymentButtonClicked,
+  });
+  document.getElementById("container").appendChild(button);
 }
 
 function getGoogleTransactionInfo() {
-	
-  return transaccion_google;
+  return transaccion_google;
 }
 
 function onGooglePaymentButtonClicked() {
-  const paymentDataRequest = getGooglePaymentDataRequest();
-  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
+  const paymentDataRequest = getGooglePaymentDataRequest();
+  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
 
-  const paymentsClient = getGooglePaymentsClient();
-  paymentsClient.loadPaymentData(paymentDataRequest);
+  const paymentsClient = getGooglePaymentsClient();
+  paymentsClient.loadPaymentData(paymentDataRequest);
 }
 
 let attempts = 0;
 
 function processPayment(paymentData) {
-  return new Promise(function(resolve, reject) {
-    setTimeout(function() {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
       // @todo pass payment token to your gateway to process payment
       paymentToken = paymentData.paymentMethodData.tokenizationData.token;
 
-			if (attempts++ % 2 == 0) {
-	      reject(new Error('Every other attempt fails, next one should succeed'));      
+      if (attempts++ % 2 == 0) {
+        reject(new Error("Every other attempt fails, next one should succeed"));
       } else {
-	      resolve({
-			 
-		  });      
+        resolve({});
       }
-    }, 500);
-  });
+    }, 500);
+  });
 }

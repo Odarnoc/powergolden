@@ -49,6 +49,11 @@ if(empty($_POST['meta'])){
     error_mensaje('Llenar el campo meta de venta.');
     return;
 }
+if(empty($_POST['metad'])){
+    error_mensaje('Llenar el campo meta de venta diaria.');
+    return;
+}
+
 if(empty($_POST['pais'])){
     error_mensaje('Llenar el campo pais.');
     return;
@@ -62,6 +67,7 @@ if(empty($_POST['pais'])){
         $est = $_POST['estado'];
         $motivacion = $_POST['motivacion'];
         $meta = $_POST['meta'];
+        $metad = $_POST['metad'];
         $pais = $_POST['pais'];
         $reinscripcion = $_POST['reinscripcion'];
     
@@ -77,6 +83,7 @@ if(empty($_POST['pais'])){
                 $registro->estado = $est;
                 $registro->frase = $motivacion;
                 $registro->meta = $meta;
+                $registro->metad = $metad;
                 $registro->pais = $pais;
                 $registro->reinscripcion = $reinscripcion;
                 $id = R::store($registro);
