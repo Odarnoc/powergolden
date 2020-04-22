@@ -10,6 +10,7 @@ $url= $_SERVER["REQUEST_URI"];
     $registro->mac = $MAC;
     $registro->fecha = date('d-m-y H:i');;
     $registro->iduser = $_SESSION["user_id"];
+    $registro->descripcion = '';
     $registro->pagina = $url;
 
     R::store($registro);
