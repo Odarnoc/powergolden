@@ -76,8 +76,12 @@
 					<div class="col-lg-12 col-md-12 col-12">
 							<button type="button" onclick='$("#modalTarjeta").modal("toggle");' class="btn btn-mercado-pago">Pago con Tarjeta</button>
 						</div>
-						<div class="col-lg-3 col-md-3 col-3" style="display:none;">
-							<button type="button" onclick='enviar_pago_oxxo()' class="btn btn-lg-blue btn-bg-blue">Pagar con oxxo</button>	
+						</div>
+						<br><br>
+						<div class="row">
+						<div class="col-lg-12 col-md-12 col-12" >
+						<button type="button" onclick='enviar_pago_oxxo()' class="btn btn-oxxo"><img
+									src="/images/oxxo-logo.png" alt="">Pago en OXXO</button>
 						</div>
 					</div>
 					<br>

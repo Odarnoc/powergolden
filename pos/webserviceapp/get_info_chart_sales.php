@@ -13,18 +13,17 @@ if($ventas['hoy']==null){
 $auxiliar=R::getAll( "SELECT SUM(p.cantidad) as ventas from ventas as v 
 LEFT JOIN productosxventas as p on p.venta_id=v.id
 WHERE DATE(v.fecha)<DATE('".date('Y-m-d')."') and DATE(v.fecha)>=DATE('".date('Y-m-d',strtotime("-1 month"))."') and v.sucursal_id=".$_SESSION["sucursal_id"]);
-
-$ventas['mes']=$auxiliar[0]['ventas'];
-if($ventas['mes']==null){
-    $ventas['mes']=50;
-}else{
-    $ventas['mes']=intval(($ventas['mes']/50)+2);
+$ventas['mes_ven']=$auxiliar[0]['ventas'];
+if($ventas['mes_ven']==null){
+    $ventas['mes_ven']=0;
 }
-$auxiliar=R::getAll( "SELECT meta as ventas from sucursales as v 
+$auxiliar=R::getAll( "SELECT meta as ventas,metad as ventasd from sucursales as v 
 WHERE id=".$_SESSION["sucursal_id"]);
 $ventas['mes']=$auxiliar[0]['ventas'];
+$ventas['mesd']=$auxiliar[0]['ventasd'];
 if($ventas['mes']==null){
     $ventas['mes']=50;
+    $ventas['mesd']=50;
 }
 $auxiliar=R::getAll( "SELECT SUM(v.existencia) as inventario, SUM(v.limite_inventario) as limite from inventarios as v
 WHERE v.sucursal_id=".$_SESSION["sucursal_id"]);

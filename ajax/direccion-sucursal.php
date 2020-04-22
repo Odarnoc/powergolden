@@ -17,8 +17,8 @@ foreach ($carrito as $valor) {
     if(empty($almacen)){
         array_push($errores,$valor);
     }
-
 }
+
 if(!empty($errores)){
     $prodsErr='';
     foreach ($errores as $valor) {

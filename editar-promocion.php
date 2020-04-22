@@ -95,17 +95,7 @@
 
                                     <form id="edit-promocion" class="form-registro-productos" method="post" enctype="multipart/form-data">
 
-                                        <div class="form-group">
-                                            <div class="image-upload " style="background-image: url(images/promocion/<?php echo $item['imagen'] ?>);">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label for="file-input"><i class="fas fa-plus"></i> Subir foto</label>
-                                                <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" required hidden/>
-                                            </div>
-                                        </div>
+                                       
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
@@ -121,25 +111,63 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label class="">Fecha de inicio</label>
-                                                <input name="inicio" value="<?php echo $item['inicio'] ?>" type="date" class="form-control input-form-underline" required />
-                                            </div>
-                                        </div>
-
+                                        
                                         <div class="form-group" hidden>
                                             <div class="floating-label-group">
                                                 <input name="id" value="<?php echo $item['id'] ?>" type="text" class="form-control input-form-underline"  />
                                             </div>
                                         </div>
 
+                                        
                                         <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <label class="">Tipo de promoción</label>
+                                                        <select name="tipo" id="tipo" class="form-control input-form-underline" required >
+                                                             <option value="1">Productos por kits</option>
+                                                             <option value="2">Productos por venta</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div id="kits" style="display:">
+                                                <div class="form-group" id="kit_div">
+                                                    <div class="floating-label-group">
+                                                        <label class="">Tipo de Kit</label>
+                                                        <select name="paquete_id" class="form-control input-form-underline"  >
+                                                            <?php
+$lista = R::findAll("paquetes");
+foreach ($lista as $key) {
+    echo '<option value="' . $key['id'] . '">' . $key['nombre'] . '</option>';
+}
+?>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" >
+                                                    <div class="floating-label-group">
+                                                    <label class="">Desde primera compra</label>
+                                                        <input type="checkbox" name="primera" class="form-control input-form-underline"  <?php echo $item['primera'] == 1 ? 'checked' : '' ?>  />
+
+                                                    </div>
+                                                </div>
+                                                
+                                                        </div>
+                                                        <div id="productos" style="display:none">
+                                                        <div class="form-group">
                                             <div class="floating-label-group">
-                                                <label class="">Fecha de finalizacion</label>
-                                                <input name="fin" type="date" value="<?php echo $item['fin'] ?>" class="form-control input-form-underline" required />
+                                                <input name="desde" type="number" class="form-control input-form-underline" value="<?php echo $item['desde'] ?>" />
+                                                <label class="floating-label-underline">A partir de la compra de </label>
                                             </div>
                                         </div>
+                                        
+                                                        </div>
+                                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input name="cantidad" type="number" class="form-control input-form-underline" value="<?php echo $item['cantidad'] ?>"  />
+                                                <label class="floating-label-underline">Cantidad de productos incluidos </label>
+                                            </div>
+                                        </div>
+                                            </div>
 
                                     <!--<div class="form-group">
                                             <div class="floating-label-group">
@@ -164,6 +192,7 @@
         </div>
 
     </section>
+    
 
 
             <!-- Footer-->
@@ -195,6 +224,11 @@
     <script src="js/sweetalert2.js"></script>
 
     <script src="js/crear-promocion.js"></script>
+    <script>
+        $("#tipo").val(<?php echo $item['tipo'] ?>);
+        $("#paquete_id").val(<?php echo $item['paquete_id'] ?>);
+        $("#tipo").trigger("change");
+    </script>
 
 
 

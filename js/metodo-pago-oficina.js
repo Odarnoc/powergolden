@@ -36,6 +36,7 @@ function referencia() {
             telefono: telefono,
             correo: correo,
             total: localStorage.getItem('totalgen'),
+            sucursal: localStorage.getItem('sucursal_id')
         },
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);

@@ -10,6 +10,7 @@ function datosDireccion() {
     localStorage.setItem('colonia', col);
     localStorage.setItem('municipio', mun);
     localStorage.setItem('estado', est);
+    localStorage.setItem('sucursal_id', 0);
 
     location.href = "resumen-oficina.php"
 
@@ -48,7 +49,7 @@ function datosDireccionlocal() {
     $.ajax({
         url: "ajax/direccion-sucursal.php",
         type: "post",
-        data: { id: idsuc, carrito: JSON.parse(localStorage.getItem('carrito')) },
+        data: { id: idsuc, carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito },
 
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
@@ -66,6 +67,7 @@ function datosDireccionlocal() {
                 localStorage.setItem('colonia', json_mensaje['colonia']);
                 localStorage.setItem('municipio', json_mensaje['ciudad']);
                 localStorage.setItem('estado', json_mensaje['estado']);
+                localStorage.setItem('sucursal_id', idsuc);
 
                 location.href = "resumen-oficina.php";
             }

@@ -56,6 +56,7 @@ function datosDireccion() {
     localStorage.setItem('colonia', col);
     localStorage.setItem('municipio', mun);
     localStorage.setItem('estado', est);
+    localStorage.setItem('sucursal_id', 0);
 
     location.href = "resumen.php"
 
@@ -84,6 +85,7 @@ var success_callbak = function(response) {
             nombre: nombre,
             apellido: apellidos,
             telefono: telefono,
+            sucursal: localStorage.getItem('sucursal_id'),
             correo: correo,
             token_id: token_id,
             deviceIdHiddenFieldName: deviceSessionId
@@ -199,6 +201,7 @@ function referencia() {
             telefono: telefono,
             correo: correo,
             total: localStorage.getItem('totalgen'),
+            sucursal: localStorage.getItem('sucursal_id')
         },
         success(data) {
             console.log(data);
@@ -284,6 +287,7 @@ function datosDireccionlocal() {
                 localStorage.setItem('colonia', json_mensaje['colonia']);
                 localStorage.setItem('municipio', json_mensaje['ciudad']);
                 localStorage.setItem('estado', json_mensaje['estado']);
+                localStorage.setItem('sucursal_id', idsuc);
 
                 location.href = "resumen.php";
             }

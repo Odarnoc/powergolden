@@ -84,7 +84,7 @@ function sdkResponseHandler(status, response) {
         $("#token").val(response.id);
         $("#transaction_amount").val(10);
         var data = $("#pay").serializeArray();
-        data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito-oficina')).carrito, 'usuariid': id, "email": localStorage.getItem('correo') });
+        data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito-oficina')).carrito, 'sucursal': localStorage.getItem('sucursal_id'), 'usuariid': id, "email": localStorage.getItem('correo') });
         $.ajax({
             url: "ajax/mercado-pago.php",
             type: "post",
@@ -100,9 +100,9 @@ function sdkResponseHandler(status, response) {
                     })
                     .then((ok) => {
                         if (ok) {
-                            //localStorage.clear();
-                            //localStorage.setItem('carrito-oficina', JSON.stringify([]));
-                            //location.href = "oficina-virtual.php";
+                            localStorage.clear();
+                            localStorage.setItem('carrito-oficina', JSON.stringify([]));
+                            location.href = "oficina-virtual.php";
                         }
                     });
             },
@@ -123,7 +123,7 @@ function enviar_pago_oxxo() {
     $.ajax({
         url: "ajax/pago-ecomerce-oxxo.php",
         type: "post",
-        data: { transaction_amount: localStorage.getItem('totalgen'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito },
+        data: { transaction_amount: localStorage.getItem('totalgen'), sucursal: localStorage.getItem('sucursal_id'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito },
         success(data) {
             console.log(data);
             swal.close();
