@@ -2,8 +2,16 @@ var carrito = JSON.parse(localStorage.getItem('carrito'));
 var total = 0;
 var iduser;
 var can = 0;
-$(document).ready(function () {
+var promociones = [];
+var mensaje = "";
+var can_prod_final = 0;
+var gratis = 0;
+var prodcantidad;
+var prodcant;
+$(document).ready(function() {
     pintarCarrito();
+    get_promociones_info();
+
 });
 
 function pintarCarrito() {
@@ -13,7 +21,8 @@ function pintarCarrito() {
     total = 0;
     var canprodp = 0;
     var descuento = 0;
-    carrito.forEach(function (item, index) {
+    var sumatorio = parseInt(prodcantidad) + parseInt(prodcant);
+    carrito.forEach(function(item, index) {
         var totalTemp = parseFloat(item.precio) * parseInt(item.cant);
         var html = '<div class="d-item-carrito">' +
             '<div class="row">' +
@@ -53,11 +62,12 @@ function pintarCarrito() {
         for (var i = canprodp; i > 0; i--) {
             conteop++;
             console.log(canprodp);
-            if (conteop == 5) {
-                total -= item.precio;
-                restarc += 5;
+            console.log("puto" + sumatorio);
+            if (conteop == sumatorio) {
+                total -= parseInt(item.precio) * parseInt(prodcant);
+                restarc += sumatorio;
                 conteop = 0;
-                descuento += parseInt(item.precio);
+                descuento += parseInt(item.precio) * parseInt(prodcant);
                 console.log(descuento);
             }
         }
@@ -65,7 +75,8 @@ function pintarCarrito() {
 
     });
 
-    if (canprodp == 4) {
+
+    if (canprodp >= prodcantidad && canprodp < sumatorio) {
         $('#bcompra').prop('disabled', true);
         $('#ptext').show();
     } else {
@@ -78,14 +89,24 @@ function pintarCarrito() {
     $('#cantProds').text('(' + carrito.length + ')');
     $('#total').text('$' + total);
     $('#total2').text('$' + total);
+    $('#gratis').text(prodcant);
     console.log(descuento);
-    localStorage.setItem("descuento",descuento);
+    localStorage.setItem("descuento", descuento);
+    can_prod_final = canprodp;
 }
 
 function editarCant(index) {
     console.log(index);
     var nuevaCantidad = $('#cantProdsEdit' + index).val();
     carrito[index].cant = nuevaCantidad;
+    if (select_gratis && anterior < arreglo[id]) {
+        gratis += parseFloat(arreglo[id]) - parseFloat(anterior);
+    } else {
+        cuenta -= price_out * anterior;
+        cantidades =
+            parseFloat(cantidades) - parseFloat(anterior) + parseFloat(arreglo[id]);
+        cuenta += parseFloat(price_out * arreglo[id]);
+    }
     localStorage.setItem('carrito', JSON.stringify(carrito));
     pintarCarrito();
 }
@@ -102,7 +123,7 @@ function confirmarCompra() {
         url: 'ajax/realizarCompra.php',
         data: { carrito: carrito, total: total },
         type: 'POST',
-        success: function (respuesta) {
+        success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
             if (json_mensaje.error != undefined) {
                 Swal.fire({
@@ -122,7 +143,7 @@ function confirmarCompra() {
                 pintarCarrito();
             }
         },
-        error: function (er) {
+        error: function(er) {
             var json_mensaje = JSON.parse(er.responseText);
             console.log(json_mensaje);
             Swal.fire({
@@ -150,7 +171,27 @@ function res(index) {
 }
 
 function comrpaslindas() {
-    console.log(iduser);
+    console.log(promociones);
+
+    var productos_descuento = 0;
+    for (promo in promociones) {
+        if (promociones[promo].tipo == 2) {
+            if (can_prod_final / promociones[promo].desde >= 1) {
+                productos_descuento =
+                    parseInt(can_prod_final / promociones[promo].desde) *
+                    promociones[promo].cantidad;
+            }
+        }
+    }
+
+    if (productos_descuento != gratis) {
+        mensaje +=
+            "El cliente tiene (" + productos_descuento + ") productos gratis.";
+        console.log(mensaje);
+
+        valid = false;
+    }
+
     if (iduser == undefined) {
         Swal.fire({
             icon: 'error',
@@ -160,4 +201,19 @@ function comrpaslindas() {
     } else {
         location.href = "nuevo-envio-ecomerce.php";
     }
+}
+
+function get_promociones_info() {
+    $.ajax({
+        url: "ajax/infor_promo.php",
+        type: "POST",
+        dataType: "json",
+        beforeSend: function() {},
+        success: function(data) {
+            console.log(data);
+            prodcantidad = data['desde'];
+            prodcant = data['cantidad'];
+
+        },
+    });
 }
