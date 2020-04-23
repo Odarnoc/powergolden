@@ -89,6 +89,9 @@ if (!isset($_SESSION["user_id"])) {
 						<li class="nav-item">
 							<a class="nav-link" href="dashboard.php"><i class="fas fa-chart-line mr-2"></i>Dashboard</a>
 						</li>
+						<li class="nav-item">
+                            <a class="nav-link" target="_blank" href="entregas.php">Entregas </a>
+                        </li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
