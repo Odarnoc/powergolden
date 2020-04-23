@@ -2,7 +2,7 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM  roles';
+$query = 'SELECT * FROM  roles where id != 1 && id != 2';
 $sucursal = R::getAll($query);
 
 $suc = R::find('sucursales');
