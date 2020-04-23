@@ -27,7 +27,7 @@ $("#form-roles").submit(function(event) {
                 }); 
             } else {
                 setTimeout(function(){
-                        location.reload();
+                        location.href = 'lista-roles.php';
                 }, 5000);
                 Swal.fire({
                     icon: 'success',
@@ -36,7 +36,7 @@ $("#form-roles").submit(function(event) {
                 }) 
                 .then((ok) => {
                     if (ok) {
-                        location.reload();
+                        location.href = 'lista-roles.php';
                     }
                 });
             }
