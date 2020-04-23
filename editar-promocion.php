@@ -132,7 +132,7 @@
                                                 <div class="form-group" id="kit_div">
                                                     <div class="floating-label-group">
                                                         <label class="">Tipo de Kit</label>
-                                                        <select name="paquete_id" class="form-control input-form-underline"  >
+                                                        <select name="paquete_id" id="paquete_id" class="form-control input-form-underline"  >
                                                             <?php
 $lista = R::findAll("paquetes");
 foreach ($lista as $key) {
