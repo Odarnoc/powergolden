@@ -103,7 +103,7 @@ var success_callbak = function(response) {
                 setTimeout(function() {
                     localStorage.clear();
                     localStorage.setItem('carrito', JSON.stringify([]));
-                    location.href = "carrito-ecomerce.php";
+                    location.href = "index.php";
                 }, 5000);
                 Swal.fire({
                         icon: 'success',
@@ -114,7 +114,7 @@ var success_callbak = function(response) {
                         if (ok) {
                             localStorage.clear();
                             localStorage.setItem('carrito', JSON.stringify([]));
-                            location.href = "carrito-ecomerce.php";
+                            location.href = "index.php";
                         }
                     });
             }
@@ -210,7 +210,7 @@ function referencia() {
             window.open(datajson.url_recibo);
             localStorage.clear();
             localStorage.setItem('carrito', JSON.stringify([]));
-            location.href = "carrito-ecomerce.php";
+            location.href = "index.php";
         },
     });
 }

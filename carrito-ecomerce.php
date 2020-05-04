@@ -115,7 +115,7 @@ $item = R::find('productos');
                                     </div>
                                 </div>
                                 <div id="ptext">
-                                    <p>Selecciona un producto extra para recibirlo de regalo.</p>
+                                    <p>Selecciona <span id='gratis'></span> producto/s extra para recibirlo de regalo.</p>
                                 </div>
 
                             </div>

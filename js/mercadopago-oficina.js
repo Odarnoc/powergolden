@@ -84,7 +84,14 @@ function sdkResponseHandler(status, response) {
         $("#token").val(response.id);
         $("#transaction_amount").val(10);
         var data = $("#pay").serializeArray();
-        data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito-oficina')).carrito, 'sucursal': localStorage.getItem('sucursal_id'), 'usuariid': id, "email": localStorage.getItem('correo'), pack_id: JSON.parse(localStorage.getItem('carrito-oficina')).paquetes[0].id });
+        data.push({
+            'carrito': JSON.parse(localStorage.getItem('carrito-oficina')).carrito,
+            'pack_id': JSON.parse(localStorage.getItem('carrito-oficina')).paquetes[0].id,
+            'sucursal': localStorage.getItem('sucursal_id'),
+            'usuariid': id,
+            "email": localStorage.getItem('correo'),
+            "transaction_amount": localStorage.getItem('totalgen')
+        });
         $.ajax({
             url: "ajax/mercado-pago.php",
             type: "post",
@@ -123,7 +130,19 @@ function enviar_pago_oxxo() {
     $.ajax({
         url: "ajax/pago-ecomerce-oxxo.php",
         type: "post",
-        data: { transaction_amount: localStorage.getItem('totalgen'), sucursal: localStorage.getItem('sucursal_id'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito, pack_id: JSON.parse(localStorage.getItem('carrito-oficina')).paquetes[0].id },
+        data: {
+            transaction_amount: localStorage.getItem('totalgen'),
+            sucursal: localStorage.getItem('sucursal_id'),
+            email: correo,
+            usuariid: id,
+            carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito,
+            pack_id: JSON.parse(localStorage.getItem('carrito-oficina')).paquetes[0].id,
+            direccion: localStorage.getItem('direccion'),
+            estado: localStorage.getItem('estado'),
+            cp: localStorage.getItem('codigop'),
+            ciudad: localStorage.getItem('municipio'),
+            colonia: localStorage.getItem('colonia')
+        },
         success(data) {
             console.log(data);
             swal.close();
@@ -136,9 +155,9 @@ function enviar_pago_oxxo() {
                 })
                 .then((ok) => {
                     if (ok) {
-                        /* localStorage.clear();
+                        localStorage.clear();
                         localStorage.setItem('carrito-oficina', JSON.stringify([]));
-                        location.href = "oficina-virtual.php"; */
+                        location.href = "oficina-virtual.php";
                     }
                 });
         },

@@ -102,7 +102,7 @@ function sdkResponseHandler(status, response) {
                         if (ok) {
                             localStorage.clear();
                             localStorage.setItem('carrito', JSON.stringify([]));
-                            location.href = "carrito-ecomerce.php";
+                            location.href = "index.php";
                         }
                     });
             },
@@ -137,7 +137,7 @@ function enviar_pago_oxxo() {
                     if (ok) {
                         localStorage.clear();
                         localStorage.setItem('carrito', JSON.stringify([]));
-                        location.href = "carrito-ecomerce.php";
+                        location.href = "index.php";
                     }
                 });
         },
@@ -181,7 +181,7 @@ paypal.Buttons({
                     if (ok) {
                         localStorage.clear();
                         localStorage.setItem('carrito', JSON.stringify([]));
-                        location.href = "carrito-ecomerce.php";
+                        location.href = "index.php";
                     }
                 });
         });

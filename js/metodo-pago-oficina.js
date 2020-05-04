@@ -37,7 +37,12 @@ function referencia() {
             telefono: telefono,
             correo: correo,
             total: localStorage.getItem('totalgen'),
-            sucursal: localStorage.getItem('sucursal_id')
+            sucursal: localStorage.getItem('sucursal_id'),
+            direccion: localStorage.getItem('direccion'),
+            estado: localStorage.getItem('estado'),
+            cp: localStorage.getItem('codigop'),
+            ciudad: localStorage.getItem('municipio'),
+            colonia: localStorage.getItem('colonia')
         },
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
