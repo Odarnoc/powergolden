@@ -78,3 +78,10 @@ MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e9869
     $sucur->status = 0;
     R::store($sucur); 
     }
+
+  if(isset($_POST['pack_id'])){
+    $sucur = R::dispense('ventaspaquetes');
+    $sucur->venta_id = $id_venta;
+    $sucur->paquete_id = $_POST['pack_id'];
+    R::store($sucur); 
+  }

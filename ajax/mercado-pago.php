@@ -78,7 +78,13 @@ if($_POST['sucursal'] != 0){
     $sucur->id_usuario = $_POST['usuariid'];
     $sucur->status = 0;
     R::store($sucur); 
-    }
+}
+if(isset($_POST['pack_id'])){
+    $sucur = R::dispense('ventaspaquetes');
+    $sucur->venta_id = $id_venta;
+    $sucur->paquete_id = $_POST['pack_id'];
+    R::store($sucur); 
+}
     
     
 ?>

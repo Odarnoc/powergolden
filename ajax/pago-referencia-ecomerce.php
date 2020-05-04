@@ -104,6 +104,13 @@ if(!empty($errores)){
     R::store($sucur); 
     }
 
+    if(isset($_POST['pack_id'])){
+        $sucur = R::dispense('ventaspaquetes');
+        $sucur->venta_id = $id_venta;
+        $sucur->paquete_id = $_POST['pack_id'];
+        R::store($sucur); 
+    }
+
 
     /*$mail = new PHPMailer(true);
 

@@ -30,6 +30,7 @@ function referencia() {
         type: "post",
         data: {
             carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito,
+            pack_id: JSON.parse(localStorage.getItem('carrito-oficina')).paquetes[0].id,
             usuariid: id,
             nombre: nombre,
             apellido: apellidos,

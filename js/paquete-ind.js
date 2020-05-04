@@ -141,8 +141,7 @@ function pintarPacks() {
                         '<div class="col-lg-7 col-md-7 col-7">'+
                         '<div class="d-info-pro">'+
                             '<p class="t2">'+prod.nombre+'</p>'+
-                            '<p class="t1">$'+prod.precio+'</p>'+
-                            '<br><input type="number" id="'+index+'packinput" onchange="modificarCantidadPack('+index+')" class="form-control input-cant-pos" value="'+prod.cant+'" min="1" max="500" step="1">';
+                            '<p class="t1">$'+prod.precio+'</p>';
 
                             if(seleccionPaquetes.length == 0){
                                 html+='<a class="btn btn-blue mt-3" style="background-color:49B7F3;margin-right: 6px;" onclick="agregarPack('+index+')" role="button"><i style="color:white;" class="fas fa-check"></i></a>';
@@ -200,14 +199,10 @@ function eliminar(index) {
 
 function agregarPack(index) {
     console.log(index);
-    seleccionPaquetes.push(index);
-    pintarPacks()
-}
-
-function modificarCantidadPack(index) {
-    console.log(index);
-    paquetes[index].cant = parseInt($('#'+index+'packinput').val());
-    pintarPacks()
+    if (seleccionPaquetes.length==0) {
+        seleccionPaquetes.push(index);
+        pintarPacks()
+    }
 }
 
 function eliminarPack(index) {
@@ -226,33 +221,67 @@ function eliminarPack(index) {
 function comprar() {
 
     if(seleccionPaquetes.length>0){
-        if(cantProdSelected == cantProdxPacks){
-            let compra = {
-                carrito: [],
-                paquetes: []
-            }
-            seleccion.forEach(function(sel) {
-                compra.carrito.push(productos[sel]);
-            });
-
-            seleccionPaquetes.forEach(function(sel) {
-                compra.paquetes.push(paquetes[sel]);
-            });
-
-            console.log(compra);
-
-            localStorage.setItem('carrito-oficina', JSON.stringify(compra));
-
-            location.href = 'nuevo-envio-oficina.php';
-            
-            
-        }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "Debes seleccionar "+cantProdxPacks+" productos"
-            });
+        let compra = {
+            carrito: [],
+            paquetes: []
         }
+        seleccion.forEach(function(sel) {
+            compra.carrito.push(productos[sel]);
+        });
+
+        seleccionPaquetes.forEach(function(sel) {
+            compra.paquetes.push(paquetes[sel]);
+        });
+
+        console.log(compra);
+        $.ajax({
+            url: 'ajax/promocionDisponibleEI.php',
+            data: {
+                user_id:user_id,
+                pack_id:compra.paquetes[0].id
+            },
+            type: 'GET',
+            success: function(respuesta) {
+                var json_mensaje = JSON.parse(respuesta);
+                console.log(json_mensaje);
+                var extras=0;
+                if(json_mensaje.promocion){
+                    extras = parseInt(json_mensaje.gratis) + cantProdxPacks
+                    if(cantProdSelected == extras){
+                        localStorage.setItem('carrito-oficina', JSON.stringify(compra));
+                        location.href = 'nuevo-envio-oficina.php';
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: "Debes seleccionar "+cantProdxPacks+" productos más "+json_mensaje.gratis+" gratis"
+                        });
+                    }
+                }else{
+                    if(cantProdSelected == cantProdxPacks){
+                        localStorage.setItem('carrito-oficina', JSON.stringify(compra));
+                        location.href = 'nuevo-envio-oficina.php';
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: "Debes seleccionar "+cantProdxPacks+" productos"
+                        });
+                    }
+                }
+            },
+            error: function(er) {
+    
+                var json_mensaje = JSON.parse(er.responseText);
+                console.log(json_mensaje);
+    
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: json_mensaje.mensaje
+                });
+            }
+        });
     }else{
         Swal.fire({
             icon: 'error',
