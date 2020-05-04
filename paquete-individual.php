@@ -189,6 +189,7 @@ $prods=R::getAll($query);
 
     <script>
         var cant="<?php echo $prodIndividual['productos']; ?>";
+        var user_id="<?php echo $user_id; ?>";
     </script>
 
     <script src="js/paquete-ind.js"></script>
