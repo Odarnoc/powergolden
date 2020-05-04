@@ -386,6 +386,7 @@ $user_id = $_SESSION["user_id"];
     <!-- MercadoPago -->
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
     <script src="js/mercadopago-ecomerce.js"></script>
+    <script src="js/envios.js"></script>
 
 </body>
 

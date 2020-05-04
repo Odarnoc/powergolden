@@ -67,6 +67,13 @@ foreach ($carrito as $item) {
     R::store($producto);
 }
 
+if (isset($_POST['pack_id'])) {
+    $sucur = R::dispense('ventaspaquetes');
+    $sucur->venta_id = $id_venta;
+    $sucur->paquete_id = $_POST['pack_id'];
+    R::store($sucur);
+}
+
 $randome = rand();
 $ventasreferecnia  = R::find('ventasentregas', 'referencia=?', [$randome]);
 

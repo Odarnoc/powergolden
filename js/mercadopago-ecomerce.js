@@ -84,7 +84,13 @@ function sdkResponseHandler(status, response) {
         $("#token").val(response.id);
         $("#transaction_amount").val(10);
         var data = $("#pay").serializeArray();
-        data.push({ 'carrito': JSON.parse(localStorage.getItem('carrito')), 'usuariid': id, sucursal: localStorage.getItem('sucursal_id'), "email": localStorage.getItem('correo'), "transaction_amount": localStorage.getItem('totalgen'), });
+        data.push({
+            'carrito': JSON.parse(localStorage.getItem('carrito')),
+            'usuariid': id,
+            sucursal: localStorage.getItem('sucursal_id'),
+            "email": localStorage.getItem('correo'),
+            "transaction_amount": localStorage.getItem('totalgen'),
+        });
         $.ajax({
             url: "ajax/mercado-pago.php",
             type: "post",
@@ -122,7 +128,18 @@ function enviar_pago_oxxo() {
     $.ajax({
         url: "ajax/pago-ecomerce-oxxo.php",
         type: "post",
-        data: { transaction_amount: localStorage.getItem('totalgen'), sucursal: localStorage.getItem('sucursal_id'), email: correo, usuariid: id, carrito: JSON.parse(localStorage.getItem('carrito')), },
+        data: {
+            transaction_amount: localStorage.getItem('totalgen'),
+            sucursal: localStorage.getItem('sucursal_id'),
+            email: correo,
+            usuariid: id,
+            carrito: JSON.parse(localStorage.getItem('carrito')),
+            direccion: localStorage.getItem('direccion'),
+            estado: localStorage.getItem('estado'),
+            cp: localStorage.getItem('codigop'),
+            ciudad: localStorage.getItem('municipio'),
+            colonia: localStorage.getItem('colonia')
+        },
         success(data) {
             console.log(data);
             swal.close();

@@ -40,7 +40,10 @@ function datosuser() {
             correo = json_mensaje['correo'];
             telefono = json_mensaje['telefono'];
             iduse = json_mensaje['id'];
+            localStorage.setItem('usuario_nombre', nombre + " " + apellidos);
+            localStorage.setItem('usuario_telefono', telefono);
         },
+
     });
 }
 
@@ -201,11 +204,16 @@ function referencia() {
             telefono: telefono,
             correo: correo,
             total: localStorage.getItem('totalgen'),
-            sucursal: localStorage.getItem('sucursal_id')
+            sucursal: localStorage.getItem('sucursal_id'),
+            direccion: localStorage.getItem('direccion'),
+            estado: localStorage.getItem('estado'),
+            cp: localStorage.getItem('codigop'),
+            ciudad: localStorage.getItem('municipio'),
+            colonia: localStorage.getItem('colonia')
+
         },
         success(data) {
             console.log(data);
-            swal.close();
             var datajson = JSON.parse(data)
             window.open(datajson.url_recibo);
             localStorage.clear();

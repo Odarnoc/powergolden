@@ -1,5 +1,6 @@
 <?php
 require_once '../pos/webserviceapp/vendor/autoload.php';
+require 'envios.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -76,9 +77,16 @@ foreach ($carrito as $item) {
     R::store($producto);
 }
 
+if (isset($_POST['pack_id'])) {
+    $sucur = R::dispense('ventaspaquetes');
+    $sucur->venta_id = $id_venta;
+    $sucur->paquete_id = $_POST['pack_id'];
+    R::store($sucur);
+}
+
 $randome = rand();
 $ventasreferecnia  = R::find('ventasentregas', 'referencia=?', [$randome]);
-$datousuario = R::find('usuarios','id=?',[$_POST["usuariid"]]);
+$datousuario = R::find('usuarios', 'id=?', [$_POST["usuariid"]]);
 
 if ($ventasreferecnia == null) {
     if ($_POST['sucursal'] != 0) {
@@ -201,7 +209,39 @@ if ($ventasreferecnia == null) {
     }
 }
 
-function enviar(){
+$envio_respuesta = generarEnvio($id_venta, $_POST['usuariid'], $_POST['nombre'] . ' ' . $_POST['apellido'], $_POST['telefono'], $_POST['direccion'], $_POST['cp'], $_POST['ciudad'], $_POST['estado']);
+$respuesta = json_decode($envio_respuesta);
 
-    
+$enviodatos  = R::findOne('datosenvio', 'direccion=?  AND user_id=?', [$_POST['direccion'], $_POST['usuariid']]);
+
+if (empty($enviodatos)) {
+    $datos = R::dispense('datosenvio');
+    $datos->user_id = $_POST['usuariid'];
+    $datos->ciudad = $_POST['ciudad'];
+    $datos->cp = $_POST['cp'];
+    $datos->direccion = $_POST['direccion'];
+    $datos->estado = $_POST['estado'];
+    $envio_id = R::store($datos);
+
+    $envio = R::dispense('envios');
+    $envio->venta_id = $id_venta;
+    $envio->numero_seguimiento = $respuesta->carrier_shipment_number;
+    $envio->usuario_id = $_POST['usuariid'];
+    $envio->datos_envio_id = $envio_id;
+    $envio->status = $respuesta->shipment_status;
+    $envio->estado = 0;
+    $envio->etiqueta = $respuesta->label_share_link;
+    R::store($envio);
+} else {
+    $var_id = $enviodatos->id;
+
+    $envio = R::dispense('envios');
+    $envio->venta_id = $id_venta;
+    $envio->numero_seguimiento = $respuesta->carrier_shipment_number;
+    $envio->usuario_id = $_POST['usuariid'];
+    $envio->datos_envio_id = $var_id;
+    $envio->status = $respuesta->shipment_status;
+    $envio->estado = 0;
+    $envio->etiqueta = $respuesta->label_share_link;
+    R::store($envio);
 }
