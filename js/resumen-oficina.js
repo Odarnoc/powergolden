@@ -5,6 +5,7 @@ var totalOri = 0;
 var cargo = 0;
 var envcos = 0;
 
+
 $(document).ready(function() {
     tiempo();
     carrito = JSON.parse(localStorage.getItem('carrito-oficina'));
@@ -19,7 +20,6 @@ function mostrar() {
     $('#psotal').text(localStorage.getItem('codigop'));
     $('#estados').text(localStorage.getItem('estado'));
     $('#nombreuser').text(nombre);
-    envio();
 }
 
 function tiempo() {
@@ -92,9 +92,9 @@ function pintarCarrito() {
 function envio() {
     kit = JSON.parse(localStorage.getItem('carrito-oficina')).paquetes;
     console.log(kit[0]['id']);
-    if (kit[0]['id'] != 2) {
-        envcos = 300;
+    if (localStorage.getItem('sucursal_id') != 0) {
+        document.getElementById("txenv").style.display = "none";
     } else {
-        envcos = 200;
+        envcos = 300;
     }
 }

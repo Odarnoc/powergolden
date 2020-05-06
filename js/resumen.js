@@ -2,7 +2,9 @@ var carrito = JSON.parse(localStorage.getItem('carrito'));
 var total = 0;
 var descuento = localStorage.getItem("descuento");
 var totalOri = 0;
-$(document).ready(function () {
+var envcos = 0;
+
+$(document).ready(function() {
     pintarCarrito();
 });
 
@@ -21,7 +23,7 @@ function pintarCarrito() {
         '<th class="th-total-review">Total</th>' +
         '</tr>';
     var categorio = "";
-    carrito.forEach(function (item, index) {
+    carrito.forEach(function(item, index) {
 
         var totalTemp = parseFloat(item.precio) * parseInt(item.cant);
         var html =
@@ -38,13 +40,23 @@ function pintarCarrito() {
         total += totalTemp;
         totalOri += totalTemp;
     });
+    enviar()
     superior += sup;
     total -= descuento;
-    localStorage.setItem('totalgen', total + total * 16 / 100);
-    $('#totalgeneral').text(total + total * 16 / 100);
+    localStorage.setItem('totalgen', total + envcos + total * 16 / 100);
+    $('#totalgeneral').text(total + envcos + total * 16 / 100);
     $('#lista-productos').empty();
     $('#lista-superior').append(superior);
     $('#lista-productos').append(listaProds);
     $('#tdesc').text(descuento);
     $('#ton').text(totalOri);
+    $('#env').text(envcos);
+}
+
+function enviar() {
+    if (localStorage.getItem('sucursal_id') != 0) {
+        document.getElementById("txenv").style.display = "none";
+    } else {
+        envcos = 300;
+    }
 }

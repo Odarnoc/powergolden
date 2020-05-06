@@ -1,6 +1,6 @@
 <?php
 
-function generarEnvio($venta_id, $usuario_id, $nombre, $telefono, $direccion, $cp, $ciudad, $estado)
+function generarEnvio($venta_id, $usuario_id, $nombre, $telefono, $direccion, $cp, $ciudad, $estado, $largo, $alto, $ancho, $peso, $cantidad)
 {
     $fields = array(
         "enviaya_account" => "J83OOX7Q",
@@ -34,11 +34,11 @@ function generarEnvio($venta_id, $usuario_id, $nombre, $telefono, $direccion, $c
             "insured_value_currency" => "mxn",
             "content" => "Productos PowerGolden",
             "parcels" => array(array(
-                "quantity" => 2,
-                "weight" => 1.5,
-                "length" => 10,
-                "height" => 10,
-                "width" => 10,
+                "quantity" => $cantidad,
+                "weight" => $peso,
+                "length" => $largo,
+                "height" => $alto,
+                "width" => $ancho,
                 "weight_unit" => "kg"
             ))
         ),
@@ -60,5 +60,3 @@ function generarEnvio($venta_id, $usuario_id, $nombre, $telefono, $direccion, $c
     curl_close($ch);
     return $result;
 }
-
-

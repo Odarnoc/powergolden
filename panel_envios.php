@@ -1,7 +1,7 @@
 <?php
 require 'user_preferences/user-info.php';
 
-$querytabla = 'SELECT * FROM envios WHERE `status` = "Recolección pendiente"';
+$querytabla = 'SELECT v.id AS id, v.fecha AS fecha, e.etiqueta AS etiqueta, re.estado AS estado, v.id AS venta_id, re.id AS id_referencia FROM referenciaenvios AS re LEFT JOIN ventas AS v ON re.venta_id = v.id LEFT JOIN envios AS e ON e.venta_id = re.venta_id WHERE v.is_payed = 1';
 
 $envios = R::getAll($querytabla);
 
@@ -71,7 +71,7 @@ $envios = R::getAll($querytabla);
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Panel de envios.</p>
+                                    <p class="title-cuenta">Envios en preparacion.</p>
                                     <p class="small-text-cuenta">En esta pantalla puedes gestionar el estado de preparación de los envíos. Cuando el pedido esté listo para ser enviado presiona el icono: <i style="color:green" class="fas fa-check-circle"></i></p>
                                 </div>
                             </div>
@@ -87,19 +87,19 @@ $envios = R::getAll($querytabla);
                                                 <th scope="col">Fecha de compra</th>
                                                 <th scope="col">Estado</th>
                                                 <th scope="col">Etiqueta</th>
-                                                <th scope="col">Detalles de pedido</th>
-                                                <th scope="col">Estado</th>
+                                                <th scope="col">Detalles</th>
+                                                <th scope="col">Accion</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($envios as $item) { ?>
                                                 <tr>
-                                                    <td style="text-align:left"><?php echo $item['numero_seguimiento'] ?></td>
+                                                    <td style="text-align:left"><?php echo $item['id'] ?></td>
                                                     <td><?php echo substr($item['fecha'], 0, 10) ?></td>
                                                     <td style="text-align: center"><?php if ($item['estado'] == 0) { ?>Pendiente<?php } else { ?>Preparado<?php } ?></td>
-                                                    <td><a href="<?php echo $item['etiqueta'] ?>"><i class="fas fa-tag"></i></a></td>
+                                                    <td><?php if (empty($item['etiqueta'])) { ?><i style="color:red" class="fas fa-ban"></i><?php } else { ?><a href="<?php echo $item['etiqueta'] ?>"><i class="fas fa-tag"></i></a><?php } ?></td>
                                                     <td><a href="detalle-pedido.php?id=<?php echo $item['venta_id'] ?>"><i class="fas fa-list-ul"></i></a><a href=""></a></td>
-                                                    <td><a href="" onclick="confirmar(<?php echo $item['id'] ?>)"><i style="color:green" class="fas fa-check-circle"></i></a></td>
+                                                    <td><?php if (empty($item['etiqueta'])) { ?><i style="color:red" class="fas fa-ban"></i><?php } else { ?><a type="button" onclick="confirmar(<?php echo $item['id_referencia'] ?>)"><i style="color:green" class="fas fa-check-circle"></i></a><?php } ?></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
@@ -169,7 +169,7 @@ $envios = R::getAll($querytabla);
                 url: "ajax/envio-preparar.php",
                 type: "post",
                 data: {
-                    id:id
+                    id: id
                 },
                 success(data) {
                     location.reload();

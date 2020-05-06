@@ -226,7 +226,7 @@ if ($enviodatos == null) {
 
   $datosReferencia = R::dispense('referenciaenvios');
   $datosReferencia->user_id = $_POST['usuariid'];
-  $datosReferencia->enviodatos_id =  $var_id;
+  $datosReferencia->enviodatos_id = $var_id;
   $datosReferencia->venta_id = $id_venta;
   R::store($datosReferencia);
 }

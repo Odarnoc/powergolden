@@ -4,12 +4,14 @@ require 'user_preferences/user-info.php';
 
 $id_venta = $_GET['id'];
 
-$query = 'SELECT * FROM ventas where id = '.$id_venta;
-$ventas=R::getAll($query);
+$query = 'SELECT * FROM ventas where id = ' . $id_venta;
+$ventas = R::getAll($query);
 
-$queryprodventa = 'SELECT p.nombre,p.precio,p.imagen,px.cantidad FROM productosxventas as px LEFT JOIN productos as p on px.producto_id = p.id where venta_id = '.$id_venta;
-$productos=R::getAll($queryprodventa);
+$queryprodventa = 'SELECT p.nombre,p.precio,p.imagen,px.cantidad FROM productosxventas as px LEFT JOIN productos as p on px.producto_id = p.id where venta_id = ' . $id_venta;
+$productos = R::getAll($queryprodventa);
 
+$queryvalida = 'SELECT * FROM envios WHERE venta_id =' . $id_venta;
+$validacio = R::getAll($queryvalida);
 ?>
 
 
@@ -47,9 +49,9 @@ $productos=R::getAll($queryprodventa);
 
 <body>
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
     <section class="sec-cuenta">
         <div class="container">
@@ -59,56 +61,80 @@ $productos=R::getAll($queryprodventa);
                 <?php include("menus/menu_general_admin.php"); ?>
                 <!-- End Admin Menu -->
 
-                <div class="col-lg-8 col-md-8 bg-gray" >
+                <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="d-title-cuenta">
-                                    <p class="title-cuenta">Detalle de pedido</p>
-                                    <div class="row small-text-cuenta">
-                                        <div class="col">
-                                            <p class="small-text-cuenta" style="margin-bottom: 0px; padding-top: 10px">Numero de productos <b>(<?php echo sizeof($productos)?>)</b></p> 
-                                        </div>
-                                        <div style="text-align: right; padding-top: 10px" class="col">
-                                            <p>Fecha de pedido: <?php echo $ventas[0]['fecha'] ?></p>
-                                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="d-title-cuenta">
+                                <p class="title-cuenta">Detalle de pedido</p>
+                                <?php if (empty($validacio)) { ?><p class="small-text-cuenta">En esta pantalla puedes generar los envíos acordes a los productos solicitados y generar el tamaño del paquete dependiendo las necesidades del envió.</p><?php } else { ?><p class="small-text-cuenta">Esta pantalla muestra los productos seleccionados para la venta seleccionada.</p><?php } ?>
+                                <div class="row small-text-cuenta">
+                                    <div class="col">
+                                        <p class="small-text-cuenta" style="margin-bottom: 0px; padding-top: 10px">Numero de productos <b>(<?php echo sizeof($productos) ?>)</b></p>
+                                    </div>
+                                    <div style="text-align: right; padding-top: 10px" class="col">
+                                        <p>Fecha de pedido: <?php echo $ventas[0]['fecha'] ?></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="row">
                         <table class="table" style="text-align:center">
                             <thead class="table-primary">
                                 <tr>
-                                <th style="width: 20%" scope="col">Imagen</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Cantidad</th>
+                                    <th style="width: 20%" scope="col">Imagen</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Cantidad</th>
                                 </tr>
                             </thead>
-                            <tbody >
-                            <?php foreach ($productos as $item) { ?>
-                                <tr>
-                                <td style="vertical-align: middle"><img style="width: 50%" src="productos_img/<?php echo $item['imagen']?>"> </td>
-                                <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
-                                <td style="vertical-align: middle"><?php echo $item['cantidad'] ?></td>
-                                </tr> 
-                                <?php } ?> 
+                            <tbody>
+                                <?php foreach ($productos as $item) { ?>
+                                    <tr>
+                                        <td style="vertical-align: middle"><img style="width: 50%" src="productos_img/<?php echo $item['imagen'] ?>"> </td>
+                                        <td style="vertical-align: middle"><?php echo $item['nombre'] ?></td>
+                                        <td style="vertical-align: middle"><?php echo $item['cantidad'] ?></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin-left: 100px; margin-right: 100px; margin-bottom: 50px">
-                        <a class="btn btn-lg-blue mt-30" href="panel_envios.php" style="padding-top: 18px">Atras</a>
-                    </div>
+
+                    <?php if (empty($validacio)) { ?>
+                        <div class="row" style="margin-top: 20px">
+                            <p class="small-text-cuenta" style="margin-bottom: 0px; padding-top: 10px; margin-left: 20px">Las medidas a proporcionar deben estar en escala de centímetro(cm.) y el peso en kilogramos(kg).</p>
+                            <div style="margin-top: 15px" class="col-lg-4 col-md-4">
+                                <span>Alto: </span><input id="alto" type="text" size="5"><span>cm.</span>
+                            </div>
+                            <div style="margin-top: 15px" class="col-lg-4 col-md-4">
+                                <span>Largo: </span><input id="largo" type="text" size="5"><span>cm.</span>
+                            </div>
+                            <div style="margin-top: 15px" class="col-lg-4 col-md-4">
+                                <span>Ancho: </span><input id="ancho" type="text" size="5"><span>cm.</span>
+                            </div>
+                            <div style="margin-top: 15px" class="col-lg-4 col-md-4">
+                                <span>Peso: </span><input id="peso" type="text" size="8"> <span>KG.</span>
+                            </div>
+                            <input type="text" id="id" value="<?php echo $_GET['id'] ?>" hidden>
+                        </div>
+                        <?php } else { ?><?php } ?>
+
+                        <div style="margin-top: 30px; margin-left: 100px; margin-right: 100px; margin-bottom: 50px">
+                            <?php if (empty($validacio)) { ?><a class="btn btn-lg-blue mt-30" onclick="generar_envio()" style="padding-top: 18px; color: white">Crear Envio</a><?php } else { ?><?php } ?>
+                                <a class="btn btn-lg-blue mt-30" href="panel_envios.php" style="padding-top: 18px">Atras</a>
+                        </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </section>
 
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -130,10 +156,16 @@ $productos=R::getAll($queryprodventa);
     <script src="js/scripts.js"></script>
     <script src="js/bootstrap-input-spinner.js"></script>
     <!-- responseive menu -->
-  <script src="js/menu-movil.js"></script>
+    <script src="js/menu-movil.js"></script>
+    <!-- sweetalert scripts -->
+    <script src="js/sweetalert2.js"></script>
+
+    <script src="js/generar-pedido.js"></script>
 
     <script>
         $("input[type='number']").inputSpinner()
     </script>
 
-</body></html>
+</body>
+
+</html>
