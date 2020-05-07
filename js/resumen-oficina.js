@@ -3,6 +3,8 @@ var total = 0;
 var descuento = 0;
 var totalOri = 0;
 var cargo = 0;
+var envcos = 0;
+
 
 $(document).ready(function() {
     tiempo();
@@ -75,12 +77,24 @@ function pintarCarrito() {
         total += totalTemp;
         totalOri += totalTemp;
     });
+    envio();
     superior += sup;
     total -= descuento;
-    localStorage.setItem('totalgen', total + cargo + total * 16 / 100);
-    $('#totalgeneral').text(total + cargo + total * 16 / 100);
+    localStorage.setItem('totalgen', total + envcos + cargo + total * 16 / 100);
+    $('#totalgeneral').text(total + envcos + cargo + total * 16 / 100);
     $('#lista-productos').empty();
     $('#lista-superior').append(superior);
     $('#lista-productos').append(listaProds);
     $('#ton').text(totalOri);
+    $('#env').text(envcos);
+}
+
+function envio() {
+    kit = JSON.parse(localStorage.getItem('carrito-oficina')).paquetes;
+    console.log(kit[0]['id']);
+    if (localStorage.getItem('sucursal_id') != 0) {
+        document.getElementById("txenv").style.display = "none";
+    } else {
+        envcos = 300;
+    }
 }

@@ -209,12 +209,9 @@ if ($ventasreferecnia == null) {
     }
 }
 
-$envio_respuesta = generarEnvio($id_venta, $_POST['usuariid'], $_POST['nombre'] . ' ' . $_POST['apellido'], $_POST['telefono'], $_POST['direccion'], $_POST['cp'], $_POST['ciudad'], $_POST['estado']);
-$respuesta = json_decode($envio_respuesta);
-
 $enviodatos  = R::findOne('datosenvio', 'direccion=?  AND user_id=?', [$_POST['direccion'], $_POST['usuariid']]);
 
-if (empty($enviodatos)) {
+if ($enviodatos == null) {
     $datos = R::dispense('datosenvio');
     $datos->user_id = $_POST['usuariid'];
     $datos->ciudad = $_POST['ciudad'];
@@ -223,25 +220,17 @@ if (empty($enviodatos)) {
     $datos->estado = $_POST['estado'];
     $envio_id = R::store($datos);
 
-    $envio = R::dispense('envios');
-    $envio->venta_id = $id_venta;
-    $envio->numero_seguimiento = $respuesta->carrier_shipment_number;
-    $envio->usuario_id = $_POST['usuariid'];
-    $envio->datos_envio_id = $envio_id;
-    $envio->status = $respuesta->shipment_status;
-    $envio->estado = 0;
-    $envio->etiqueta = $respuesta->label_share_link;
-    R::store($envio);
+    $datosReferencia = R::dispense('referenciaenvios');
+    $datosReferencia->user_id = $_POST['usuariid'];
+    $datosReferencia->enviodatos_id = $envio_id;
+    $datosReferencia->venta_id = $id_venta;
+    R::store($datosReferencia);
 } else {
     $var_id = $enviodatos->id;
 
-    $envio = R::dispense('envios');
-    $envio->venta_id = $id_venta;
-    $envio->numero_seguimiento = $respuesta->carrier_shipment_number;
-    $envio->usuario_id = $_POST['usuariid'];
-    $envio->datos_envio_id = $var_id;
-    $envio->status = $respuesta->shipment_status;
-    $envio->estado = 0;
-    $envio->etiqueta = $respuesta->label_share_link;
-    R::store($envio);
+    $datosReferencia = R::dispense('referenciaenvios');
+    $datosReferencia->user_id = $_POST['usuariid'];
+    $datosReferencia->enviodatos_id = $var_id;
+    $datosReferencia->venta_id = $id_venta;
+    R::store($datosReferencia);
 }
