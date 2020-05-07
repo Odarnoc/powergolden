@@ -6,7 +6,7 @@
 
     foreach ($listaMenuShow as $item4) {
         $menuTemp = array();
-        $query = 'SELECT sm.label,sm.ruta FROM privilegios as p LEFT JOIN submenu as sm ON p.menu_id = sm.id WHERE sm.menu_id = '.$item['id'].' AND p.rol_id = '.$_SESSION["rol"];
+        $query = 'SELECT sm.label,sm.ruta FROM privilegios as p LEFT JOIN submenu as sm ON p.menu_id = sm.id WHERE sm.menu_id = '.$item4['id'].' AND p.rol_id = '.$_SESSION["rol"];
         $subMenus = R::getAll($query);
         if(sizeof($subMenus)>0){
             $res['nombre'] = $item4['label'];
