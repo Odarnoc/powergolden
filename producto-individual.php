@@ -137,7 +137,7 @@ if(isset($prodIndividual['existencia'])){
                                                 </div>
 
                                                 <div class="col-lg-4 col-md-4">
-                                                    <p class="price-pro-ind">$<?php echo $prodIndividual['precio_mxn'] ?></p>
+                                                    <p class="price-pro-ind">$<?php if($dataArray->geoplugin_countryCode !== 'MX'){echo $prodIndividual['precio_usd'].' USD';}else{echo $prodIndividual['precio_mxn'].' MXN';} ?></p>
                                                 </div>
                                             </div>
 
