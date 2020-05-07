@@ -2,7 +2,7 @@
 
 require 'user_preferences/user-info.php';
 
-$clientes=R::find('usuarios','rol = 0');
+$clientes=R::getAll('SELECT u.id,u.nombre,u.apellidos,u.telefono,u.correo,r.nombre as rol FROM usuarios as u LEFT JOIN roles as r ON u.rol = r.id WHERE u.rol != 1 and u.rol != 2');
 
 ?>
 <!doctype html>
@@ -91,6 +91,7 @@ $clientes=R::find('usuarios','rol = 0');
                                 <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Rol</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Telefono</th>
                                 <th scope="col">Editar</th>
@@ -102,6 +103,7 @@ $clientes=R::find('usuarios','rol = 0');
                                         <td><?php echo $item['id'] ?></td>
                                         
                                         <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
+                                        <td><?php echo $item['rol'] ?></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
                                         <td><a href="editar-usuario.php?id=<?php echo $item['id']?>"><i class="fas fa-user-edit"></i></a></td>
