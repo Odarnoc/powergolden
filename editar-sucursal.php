@@ -86,7 +86,7 @@ $item=R::findOne('sucursales','id ='.$id );
 
                                             <div class="form-group">
                                                 <div class="floating-label-group">
-                                                    <input type="text" class="form-control input-form-underline" value="<?php echo $item['nombre'] ?>" />
+                                                    <input type="text" id="nombre" class="form-control input-form-underline" value="<?php echo $item['nombre'] ?>" />
                                                     <label class="floating-label-underline">Nombre</label>
                                                 </div>
                                             </div>

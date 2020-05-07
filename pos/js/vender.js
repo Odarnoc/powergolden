@@ -180,9 +180,13 @@ function quitar_kit(element) {
 function cambio_tipo_venta() {
   if ($("#tipo_venta").val() != "1") {
     $("#row_add_kits").hide();
+    $("#normal").show();
+    $("#independiente").hide();
     tipo_clientes = 0;
   } else {
     $("#row_add_kits").show();
+    $("#normal").hide();
+    $("#independiente").show();
     tipo_clientes = 1;
   }
   get_clientes_info();

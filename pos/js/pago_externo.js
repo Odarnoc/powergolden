@@ -32,7 +32,7 @@ $("#pago_externo").submit(function(event) {
         swal({
           title: "Cargando...",
           showConfirmButton: false,
-          imageUrl: "pos/resources/loader.gif"
+          imageUrl: "resources/loader.gif"
         });
       },
       success(data) {
@@ -45,7 +45,8 @@ $("#pago_externo").submit(function(event) {
             showCancelButton: false,
             cancelButtonText: "Cancelar"
           }).then(result => {
-           
+            $("#pago_externo")[0].reset();
+            $("#modalExternos").modal("hide");
           });
       },
       error(error) {
