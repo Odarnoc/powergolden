@@ -1,5 +1,10 @@
 <!-- Menu-bottom -->
 <?php include("menus/menu_bottom.php"); ?>
+<?php
+//$ip = '189.183.96.1';
+$ip = '66.249.64.176';
+$dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
+?>
 <!-- End Menu-bottom -->
 
 <nav class="navbar navbar-solid navbar-expand-lg bg-dark fixed-top" style="z-index: 1030;position: sticky;">
@@ -19,7 +24,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php">Inicio<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="sobre-power-golden.php">Sobre Power Golden</a>
@@ -59,6 +64,8 @@
 </nav>
 <div class="overlay"></div>
 <script type="text/javascript">
+var codigoPais="<?php echo $dataArray->geoplugin_countryCode; ?>";
+
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
 }

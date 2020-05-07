@@ -21,6 +21,10 @@ function pintarCarrito() {
     total = 0;
     var canprodp = 0;
     var descuento = 0;
+    var labelMoneda = 'MXN';
+    if (codigoPais !== 'MX') {
+        labelMoneda = 'USD'; 
+    }
     var sumatorio = parseInt(prodcantidad) + parseInt(prodcant);
     carrito.forEach(function(item, index) {
         var totalTemp = parseFloat(item.precio) * parseInt(item.cant);
@@ -35,7 +39,7 @@ function pintarCarrito() {
             '<div class="d-info-carrito">' +
             '<p class="t1 one-line">' + item.nombre + '</p>' +
             '<p class="t2 one-line">' + item.descripcion + '</p>' +
-            '<p class="t3">$' + item.precio + '</p>' +
+            '<p class="t3">$' + item.precio + ' '+ labelMoneda +'</p>' +
             '<div class="row">' +
             '<div class="col-lg-6 col-md-6 col-6 col-8">' +
             '<div class="input-group mb-3">' +

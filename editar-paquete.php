@@ -143,6 +143,12 @@
                                                     <label class="floating-label-underline">Precio</label>
                                                 </div>
                                             </div>
+                                            <div class="form-group col" >
+                                                <div class="floating-label-group">
+                                                    <input name="price_usd" id="precio_usd" type="number" value="<?php echo $item['precio_usd']; ?>" class="form-control input-form-underline"/>
+                                                    <label class="floating-label-underline">Precio USD</label>
+                                                </div>
+                                            </div>
                                         </div>
                                         
 

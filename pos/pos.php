@@ -202,9 +202,13 @@ if (!isset($_SESSION["user_id"])) {
 
 								</select>
 							</div>
-							<div class="col-lg-4 col-md-4 col-4">
+							<div class="col-lg-4 col-md-4 col-4" id="normal">
 								<button type="button" class="btn btn-lg-pos btn-bg-blue mt-3" data-toggle="modal"
 									data-target="#exampleModalCenter"><i class="fas fa-plus mr-2"></i>Nuevo</button>
+							</div>
+							<div class="col-lg-4 col-md-4 col-4" id="independiente" style="display:none;">
+								<button type="button" class="btn btn-lg-pos btn-bg-blue mt-3" data-toggle="modal"
+									data-target="#modalIndependientes"><i class="fas fa-plus mr-2"></i>Nuevo</button>
 							</div>
 						</div>
 
@@ -391,6 +395,107 @@ if (!isset($_SESSION["user_id"])) {
 
 	</section>
 	<!-- Modal -->
+	<div class="modal fade" id="modalIndependientes" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Agregar cliente</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				<form id="form-folleto" class="form-registro" method="post" enctype="multipart/form-data">
+
+<div class="form-group">
+	<div class="image-upload" id="image-upload2" style="background-image: url(../images/bg-image-upload.jpg?>);">
+	</div>
+	<p>Favor de anexar una fotografía de la parte frontal de su identificacion.</p>
+</div>
+
+<div class="form-group">
+	<div class="floating-label-group" style="text-align: right">
+		<label for="file-input" style="cursor: pointer;">
+			<i class="fas fa-plus"></i> Subir foto
+		</label>
+		<input name="img-producto" id="file-input" type="file" onchange="readURL2(this);" hidden />
+	</div>
+</div>
+
+<div class="form-group">
+	<div class="image-upload "  id="image-upload" style="background-image: url(../images/bg-image-upload.jpg?>);">
+	</div>
+	<p>Favor de anexar una fotografía de la parte reversa de su identificacion.</p>
+</div>
+
+<div class="form-group">
+	<div class="floating-label-group" style="text-align: right">
+		<label for="file-input2" style="cursor: pointer;">
+			<i class="fas fa-plus"></i> Subir foto
+		</label>
+		<input name="img-producto2" id="file-input2" type="file" onchange="readURL(this);" hidden />
+	</div>
+</div>
+
+<div class="form-group">
+	<div class="floating-label-group">
+		<input type="text" class="form-control input-form" name="name" required />
+		<label class="floating-label">Nombre</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="floating-label-group">
+		<input type="text" class="form-control input-form" name="paterno" required />
+		<label class="floating-label">Apellido paterno</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="floating-label-group">
+		<input type="text" class="form-control input-form" name="materno" required />
+		<label class="floating-label">Apellido materno</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="floating-label-group">
+		<input type="tel" class="form-control input-form" name="phone" required />
+		<label class="floating-label">Teléfono</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="floating-label-group">
+		<input type="email" class="form-control input-form" name="email" required />
+		<label class="floating-label">Correo electrónico</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="floating-label-group">
+		<input type="tel" class="form-control input-form" name="direccion" required />
+		<label class="floating-label">Direccion</label>
+	</div>
+</div>
+<div class="form-group">
+	<div class="floating-label-group">
+		<select name="ref" id="clienteInde" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+			<option value="0">Seleccionar cliente</option>
+		</select>
+	</div>
+</div>
+<div class="form-check">
+	<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
+	<label class="form-check-label" for="defaultCheck1">
+		Firmar contrato electronicamente. <a href="../docs/politicas.pdf">Contrato.</a>
+	</label>
+</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-cancelar-modal" data-dismiss="modal">Cancelar</button>
+					<button type="submit" id="registrar_us_ofice" class="btn btn-aceptar-modal">Guardar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
@@ -913,10 +1018,55 @@ if (!isset($_SESSION["user_id"])) {
 		data-sdk-integration-source="button-factory"></script>
 
 
+		<script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function(e) {
+                    $('#image-upload').attr("style", "background-image: url(" + e.target.result + ");");
+                    $('#image-upload').addClass("overlay-image-upload");
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#image-upload2').attr("style", "background-image: url(" + e.target.result + ");");
+                    $('#image-upload2').addClass("overlay-image-upload");
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 	<script>
+		var tipo_cambio=0;
 		$(document).ready(function () {
 			$('.owl-carousel').owlCarousel();
+			$.ajax({
+    url : "https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/oportuno?token=51b4eab80a4275f0578463aa5114f7f153e9236cf7a51d93f0af6142a07ed429",
+    jsonp : "callback",
+    dataType : "jsonp", //Se utiliza JSONP para realizar la consulta cross-site
+    success : function(response) {  //Handler de la respuesta
+      var series=response.bmx.series;
+
+      //Se carga una tabla con los registros obtenidos
+      for (var i in series) {
+          var serie=series[i];
+		  var reg=""+serie.titulo+""+serie.datos[0].fecha+" "+serie.datos[0].dato+"";
+		  tipo_cambio=serie.datos[0].dato;
+          console.log(reg);
+      }
+    }
+  });
 		});
 
 
@@ -968,6 +1118,7 @@ if (!isset($_SESSION["user_id"])) {
 
 	<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 	<script src="js/mercadopago.js"></script>
+	<script src="js/registro-independiente.js"></script>
 
 	<script async   src="https://pay.google.com/gp/p/js/pay.js"   onload="onGooglePayLoaded()"></script>
 
