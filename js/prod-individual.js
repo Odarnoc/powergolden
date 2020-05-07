@@ -6,7 +6,13 @@ $(document).ready(function() {
         type: 'GET',
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
-            json_mensaje.precio = json_mensaje.precio_mxn;
+            console.log(codigoPais);
+            
+            if (codigoPais !== 'MX') {
+                json_mensaje.precio = json_mensaje.precio_usd; 
+            }else{
+                json_mensaje.precio = json_mensaje.precio_mxn;
+            }
             console.log(json_mensaje);
             productoJson = json_mensaje;
         },
