@@ -3,6 +3,7 @@ session_start();
 require 'bd/conexion.php';
 
 $item = R::find('productos');
+$promociones = R::findOne('promociones','tipo=2');
 
 ?>
 
@@ -93,6 +94,7 @@ $item = R::find('productos');
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Carrito</p>
                                     <p class="small-text-cuenta">Productos en tu carrito de compras <b id="cantProds"></b></p>
+                                    <p class="small-text-cuenta">En la compra de <?php echo $promociones['desde']?> productos obtén de regalo <?php echo $promociones['cantidad']?> productos más.<b id="cantProds"></b></p>
                                 </div>
                             </div>
                         </div>
