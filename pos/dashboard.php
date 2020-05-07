@@ -78,9 +78,7 @@
                 <li onclick="show_modal(2)">
                     <a>Productos</a>
                 </li>
-                <li>
-                    <a>Configuración</a>
-                </li>
+                
             </ul>
 
         </nav>
@@ -162,12 +160,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-2 col-md-2">
-                        <div class="d-item-dashboard">
-                            <i class="fas fa-cog icon-dash"></i>
-                            <p class="t1"><a>Configuración</a></p>
-                        </div>
-                    </div>
+                   
 
                 </div>
 
