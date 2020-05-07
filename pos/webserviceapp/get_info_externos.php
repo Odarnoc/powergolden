@@ -1,7 +1,7 @@
 <?php
 session_start();
 require ('conexion.php');
-$where="";
+$where="sucursal_id=".$_SESSION["sucursal_id"];
 if(isset($_POST['inicio'])&&$_POST['inicio']!=""){
     if($where!=""){
         $where.=" AND ";

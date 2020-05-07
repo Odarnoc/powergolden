@@ -1,35 +1,24 @@
 $(document).ready(function () {
-    get_clientes_info();
+    get_clientes_info_inde();
 });
 
 $("#form-folleto").submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
     $.ajax({
-        url: 'ajax/registro-independiente.php',
+        url: '../ajax/registro-independiente.php',
         type: 'POST',
         data: formData,
         success: function(respuesta) {
-            var json_mensaje = JSON.parse(respuesta);
-            console.log(respuesta);
-        if (json_mensaje.error != undefined) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: json_mensaje.mensaje
-            }); 
-        } else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: json_mensaje.mensaje
-            }) 
-            .then((ok) => {
-                if (ok) {
-                    location.reload();
-                }
-            });
-        }
+            $("#modalIndependientes").modal("hide");
+            $("#form-folleto")[0].reset();
+            $('#image-upload').attr("style", "background-image: url(../images/bg-image-upload.jpg?>);");
+                    $('#image-upload').removeClass("overlay-image-upload");
+                    $('#image-upload2').attr("style", "background-image: url(../images/bg-image-upload.jpg?>);");
+                    $('#image-upload2').removeClass("overlay-image-upload");
+                    get_clientes_info_inde();
+                    get_clientes_info();
+
         },
 
         error: function(er) {
@@ -50,9 +39,9 @@ $("#form-folleto").submit(function(e) {
     });
 });
 
-function get_clientes_info() {
+function get_clientes_info_inde() {
     $.ajax({
-      url: "pos/webserviceapp/get_clientes.php",
+      url: "webserviceapp/get_clientes.php",
       type: "POST",
       data:{'tipo':1},
       dataType: "json",
@@ -62,7 +51,7 @@ function get_clientes_info() {
         console.log(clientes);
         
         //console.log(data.arreglo[2]);
-        $("#sector")
+        $("#clienteInde")
           .empty()
           .append(data.list);
         $(".selectpicker").selectpicker("refresh");
