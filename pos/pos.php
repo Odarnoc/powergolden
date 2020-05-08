@@ -637,7 +637,7 @@ if (!isset($_SESSION["user_id"])) {
 							<div id="paypal-button-container"></div>
 						</div>
 						<div class="col-lg-12 col-md-12 col-12">
-							<button type="button" onclick='$("#modalTarjeta").modal("toggle");'
+							<button type="button" onclick='$("#modalTarjeta").modal("toggle"); cambio_amount();'
 								class="btn btn-mercado-pago">Pago con Tarjeta</button>
 						</div>
 						<div class="col-lg-3 col-md-3 col-3" style="display:none;">

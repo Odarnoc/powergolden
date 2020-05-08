@@ -22,6 +22,7 @@ var deviceSessionId = "";
 var tipo_clientes = 0;
 var total_google = 0;
 var select_gratis = false;
+var moneda="";
 $(document).ready(function () {
   get_products_list();
   get_paquetes_info();
@@ -226,6 +227,11 @@ function get_paquetes_info() {
     beforeSend: function () {},
     success: function (data) {
       paquetes = data.arreglo;
+      if(data.pais=="eua"){
+      moneda="USD";
+      }else{
+        moneda="MXN";
+      }
       $("#frase").empty().append(data.frase);
       console.log(data.arreglo[2]);
       $("#tipo_kit").append(data.list);
@@ -1254,6 +1260,15 @@ function iniciodevoluciones() {
 function inicioinicio() {
   window.location.href =
     "inicio.html?id=" + userid + "&name=" + username + "&stock=" + stock;
+}
+function cambio_amount(){
+  console.log(moneda);
+  if(moneda=='USD'){
+    console.log("Aqui");
+    $("#transaction_amount").val(total_google*tipo_cambio);
+  }else{
+    $("#transaction_amount").val(total_google);
+  }
 }
 
 //Aqui empieza  google

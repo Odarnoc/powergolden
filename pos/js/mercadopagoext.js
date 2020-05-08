@@ -134,10 +134,16 @@ function enviar_pago_oxxo(){
 }else{
     cliente=cliente_external;
 }
+var total_oxxo=0;
+if(moneda=='USD'){
+  total_oxxo=parseFloat(total_google*tipo_cambio).toFixed(2);
+}else{
+  total_oxxo=total_google;
+}
     $.ajax({
         url: server + "webserviceapp/create_oxxo_pay_ext.php",
         type: "post",
-        data: {'transaction_amount':total_google,email:'odvillagrana@gmail.com','venta_id':$("#venta_id").val()},
+        data: {'transaction_amount':total_oxxo,email:'odvillagrana@gmail.com','venta_id':$("#venta_id").val()},
         dataType: "html",
         beforeSend() {
           swal({
