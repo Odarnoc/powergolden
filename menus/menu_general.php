@@ -1,9 +1,12 @@
 <!-- Menu-bottom -->
 <?php include("menus/menu_bottom.php"); ?>
 <?php
-//$ip = '189.183.96.1';
-$ip = '66.249.64.176';
-$dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$ip));
+$user_ip = $_SERVER['REMOTE_ADDR'];
+$ch = curl_init("http://www.geoplugin.net/json.gp?ip=$user_ip");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$dataArray = curl_exec($ch);
+$dataArray = json_decode($dataArray);
+$country_code = $dataArray->geoplugin_countryCode;
 ?>
 <!-- End Menu-bottom -->
 
@@ -64,7 +67,9 @@ $dataArray = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=
 </nav>
 <div class="overlay"></div>
 <script type="text/javascript">
-var codigoPais="<?php echo $dataArray->geoplugin_countryCode; ?>";
+var codigoPais="<?php echo $country_code; ?>";
+console.log(codigoPais);
+
 
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
