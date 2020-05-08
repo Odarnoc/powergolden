@@ -74,7 +74,7 @@
 					<div id="paypal-button-container"></div>
 					</div>
 					<div class="col-lg-12 col-md-12 col-12">
-							<button type="button" onclick='$("#modalTarjeta").modal("toggle");' class="btn btn-mercado-pago">Pago con Tarjeta</button>
+							<button type="button" onclick='$("#modalTarjeta").modal("toggle");cambio_amount();' class="btn btn-mercado-pago">Pago con Tarjeta</button>
 						</div>
 						</div>
 						<br><br>
@@ -301,9 +301,27 @@
 
 
 	<script>
-		$(document).ready(function() {
+		var tipo_cambio=0;
+		$(document).ready(function () {
 			$('.owl-carousel').owlCarousel();
+			$.ajax({
+    url : "https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/oportuno?token=51b4eab80a4275f0578463aa5114f7f153e9236cf7a51d93f0af6142a07ed429",
+    jsonp : "callback",
+    dataType : "jsonp", //Se utiliza JSONP para realizar la consulta cross-site
+    success : function(response) {  //Handler de la respuesta
+      var series=response.bmx.series;
+
+      //Se carga una tabla con los registros obtenidos
+      for (var i in series) {
+          var serie=series[i];
+		  var reg=""+serie.titulo+""+serie.datos[0].fecha+" "+serie.datos[0].dato+"";
+		  tipo_cambio=serie.datos[0].dato;
+          console.log(reg);
+      }
+    }
+  });
 		});
+		
 		
 
 

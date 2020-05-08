@@ -66,7 +66,6 @@ function pintarCarrito() {
         for (var i = canprodp; i > 0; i--) {
             conteop++;
             console.log(canprodp);
-            console.log("puto" + sumatorio);
             if (conteop == sumatorio) {
                 total -= parseInt(item.precio) * parseInt(prodcant);
                 restarc += sumatorio;

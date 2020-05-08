@@ -73,7 +73,6 @@ function sdkResponseHandler(status, response) {
     alert("Verifica los datos");
   } else {
     $("#token").val(response.id);
-    $("#transaction_amount").val(total_google);
     if($("#sector").length){
         cliente_sel = $("#sector").val();
         if (cliente_sel != "") {
@@ -132,10 +131,16 @@ function enviar_pago_oxxo(){
 }else{
     cliente=cliente_external;
 }
+var total_oxxo=0;
+if(moneda=='USD'){
+  total_oxxo=parseFloat(total_google*tipo_cambio).toFixed(2);
+}else{
+  total_oxxo=total_google;
+}
     $.ajax({
         url: server + "webserviceapp/create_oxxo_pay.php",
         type: "post",
-        data: {'transaction_amount':total_google,email:cliente.correo,'venta_id':$("#venta_id").val()},
+        data: {'transaction_amount':total_oxxo,email:cliente.correo,'venta_id':$("#venta_id").val()},
         dataType: "html",
         beforeSend() {
           swal({

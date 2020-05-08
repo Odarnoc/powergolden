@@ -205,28 +205,30 @@ if ($ventasreferecnia == null) {
   }
 }
 
-$enviodatos  = R::findOne('datosenvio', 'direccion=?  AND user_id=? AND cp=?', [$_POST['direccion'], $_POST['usuariid'], $_POST['cp']]);
+if ($_POST['sucursal'] == 0) {
+  $enviodatos  = R::findOne('datosenvio', 'direccion=?  AND user_id=? AND cp=?', [$_POST['direccion'], $_POST['usuariid'], $_POST['cp']]);
 
-if ($enviodatos == null) {
-  $datos = R::dispense('datosenvio');
-  $datos->user_id = $_POST['usuariid'];
-  $datos->ciudad = $_POST['ciudad'];
-  $datos->cp = $_POST['cp'];
-  $datos->direccion = $_POST['direccion'];
-  $datos->estado = $_POST['estado'];
-  $envio_id = R::store($datos);
+  if ($enviodatos == null) {
+    $datos = R::dispense('datosenvio');
+    $datos->user_id = $_POST['usuariid'];
+    $datos->ciudad = $_POST['ciudad'];
+    $datos->cp = $_POST['cp'];
+    $datos->direccion = $_POST['direccion'];
+    $datos->estado = $_POST['estado'];
+    $envio_id = R::store($datos);
 
-  $datosReferencia = R::dispense('referenciaenvios');
-  $datosReferencia->user_id = $_POST['usuariid'];
-  $datosReferencia->enviodatos_id = $envio_id;
-  $datosReferencia->venta_id = $id_venta;
-  R::store($datosReferencia);
-} else {
-  $var_id = $enviodatos->id;
+    $datosReferencia = R::dispense('referenciaenvios');
+    $datosReferencia->user_id = $_POST['usuariid'];
+    $datosReferencia->enviodatos_id = $envio_id;
+    $datosReferencia->venta_id = $id_venta;
+    R::store($datosReferencia);
+  } else {
+    $var_id = $enviodatos->id;
 
-  $datosReferencia = R::dispense('referenciaenvios');
-  $datosReferencia->user_id = $_POST['usuariid'];
-  $datosReferencia->enviodatos_id = $var_id;
-  $datosReferencia->venta_id = $id_venta;
-  R::store($datosReferencia);
+    $datosReferencia = R::dispense('referenciaenvios');
+    $datosReferencia->user_id = $_POST['usuariid'];
+    $datosReferencia->enviodatos_id = $var_id;
+    $datosReferencia->venta_id = $id_venta;
+    R::store($datosReferencia);
+  }
 }
