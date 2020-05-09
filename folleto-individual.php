@@ -59,8 +59,6 @@ $folletod = $res[0];
                 <?php include("menus/menu_general_admin.php"); ?>
                 <!-- End Admin Menu -->
 
-
-
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right" style="padding-top: 6rem">
                         <div class="row">
@@ -113,7 +111,6 @@ $folletod = $res[0];
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
-    <script src="js/dashboard.js"></script>
 
     <script src="js/bootstrap-input-spinner.js"></script>
 

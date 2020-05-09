@@ -14,20 +14,23 @@ function Header()
     // Arial bold 15
     $this->SetFont('Arial','B',15);
     // Movernos a la derecha
-    $this->Cell(60);
+    $this->Cell(1);
     // Título
     $this->Cell(70,10,utf8_decode('Reporte de Productos'),0,0,'C');
-    // Salto de línea
+    $this->Image('logo-navbar.png',110,10,80);
+    $this->Ln(20);
+    $this->SetFont('Arial','',10);
+    $this->Cell(12);
+    $this->Cell(29,10,'Fecha de reporte: ',0,0,'c',0); 
+    $this->SetFont('Arial','b',10);
+    $this->Cell(28,10,''.$fecha,0,0,'c',0); 
     $this->Ln(20);
 
-    $this->SetFont('Arial','',15);
-    $this->Cell(40,10,'Fecha de reporte: '.$fecha,0,0,'c',0); 
-    $this->Ln(10);
-
-    $this->SetFont('Arial','B',15);
-    $this->Cell(83,10,'Nombre de producto',1,0,'c',0); 
-    $this->Cell(52,10,'Categoria',1,0,'c',0); 
-    $this->Cell(52,10,'Stock',1,1,'c',0); 
+    $this->SetFont('Arial','B',11);
+    $this->Cell(30); 
+    $this->Cell(62,10,'Nombre de producto',0,0,'c',0); 
+    $this->Cell(45,10,'Categoria',0,0,'c',0); 
+    $this->Cell(52,10,'Stock',0,1,'c',0); 
 }
 
 // Pie de página
@@ -46,11 +49,12 @@ function Footer()
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
-$pdf->SetFont('Times','',18); 
+$pdf->SetFont('Times','',10); 
 foreach ($productos as $item) {
-    $pdf->Cell(83,10,utf8_decode($item['nombre']),1,0,'c',0); 
-    $pdf->Cell(52,10,utf8_decode($item['linea']),1,0,'c',0); 
-    $pdf->Cell(52,10, $item['inventario'],1,1,'c',0);  
+    $pdf->Cell(30); 
+    $pdf->Cell(62,10,utf8_decode($item['nombre']),0,0,'c',0); 
+    $pdf->Cell(50,10,utf8_decode($item['linea']),0,0,'c',0); 
+    $pdf->Cell(60,10, $item['inventario'],0,1,'c',0);  
 }  
 $pdf->Output(); 
 ?>
