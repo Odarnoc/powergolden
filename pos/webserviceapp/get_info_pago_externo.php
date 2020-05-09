@@ -15,5 +15,13 @@ $lista=R::getAll( "SELECT * from pagosexternos"
 
 
 $products=$lista[0];
+$auxiliar=R::getAll( "SELECT frase as frase,pais from sucursales
+WHERE id=".$_SESSION["sucursal_id"]);
+
+$products['frase']=$auxiliar[0]['frase'];
+$products['pais']=$auxiliar[0]['pais'];
+if($products['frase']==null){
+    $ventas['frase']="";
+}
 echo json_encode($products);
 ?>

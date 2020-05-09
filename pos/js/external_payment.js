@@ -21,6 +21,7 @@ var tipo_clientes=0;
 var total_google=0;
 var cliente_external=null;
 var referencia2="";
+var moneda="";
 $(document).ready(function() {
     $.ajax({
         url: server + "webserviceapp/get_info_pago_externo.php",
@@ -30,6 +31,11 @@ $(document).ready(function() {
         beforeSend: function() {},
         success: function(data) {
             if(data!=null){
+              if(data.pais=="eua"){
+                moneda="USD";
+                }else{
+                  moneda="MXN";
+                }
                 cliente_external=data.cliente;
                 if(data.is_payed==0){
                     $("#totalcarrito")
@@ -56,6 +62,15 @@ $(document).ready(function() {
         }
     });
 });
+function cambio_amount(){
+  console.log(moneda);
+  if(moneda=='USD'){
+    console.log("Aqui");
+    $("#transaction_amount").val(total_google*tipo_cambio);
+  }else{
+    $("#transaction_amount").val(total_google);
+  }
+}
 
 
 
