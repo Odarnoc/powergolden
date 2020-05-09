@@ -3,13 +3,7 @@ session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
-
 $response['mensaje'] = "Exito al guardar el folleto.";
-
-if(!isset($_POST['name'])&&!isset($_POST['description'])){
-    error_mensaje("Completar todos los campos.");
-    return;
-}
 
 if(empty($_POST['name'])){
     error_mensaje('Agregar nombre del folleto');
@@ -21,28 +15,45 @@ if(empty($_POST['description'])){
     return;
 }
 
+if(empty($_FILES["pdf_file"]["name"])){
+    error_mensaje('Agregar un archivo PDF');
+    return;
+}
+
+if(empty($_FILES['img-producto']['name'])){
+    error_mensaje('Agregar una imagen');
+    return;
+}
+
     $nombre = $_POST['name'];
     $descripcion = $_POST['description'];
 
-        
-            $registro = R::dispense('folletos');
+    $registro = R::dispense('folletos');
 
-            $dir_subida = '../images/folletos/';
-            $fichero_subido = $dir_subida . basename($_FILES['img-producto']['name']);
+    $dir_subida = '../images/folletos/';
+    $fichero_subido = $dir_subida . basename($_FILES['img-producto']['name']);
 
-        if (move_uploaded_file($_FILES['img-producto']['tmp_name'], $fichero_subido)) {
+    $dir_subida_pdf = '../images/folletos/documentos/';
+    $fichero_subido_pdf = $dir_subida_pdf . basename($_FILES["pdf_file"]["name"]);
 
-            $registro->nombre = $nombre;
-            $registro->descripcion = $descripcion;
-            $registro->imagen=basename($_FILES['img-producto']['name']);
+if (move_uploaded_file($_FILES['img-producto']['tmp_name'], $fichero_subido)) {
+    if (move_uploaded_file($_FILES["pdf_file"]["tmp_name"], $fichero_subido_pdf)) {
 
-            $id = R::store($registro);
+        $registro->nombre = $nombre;
+        $registro->descripcion = $descripcion;
+        $registro->pdf = basename($_FILES["pdf_file"]["name"]);
+        $registro->imagen = basename($_FILES['img-producto']['name']);
 
-            if(empty($id)){
-                error_mensaje("Error al crear el paquete");
-            }else{
-                echo json_encode($response);
-            }
+        $id = R::store($registro);
+
+        if(empty($id)){
+            error_mensaje("Error al crear el paquete");
+        }else{
+            echo json_encode($response);
         }
-        include 'registros-administrador.php';
+    }
+}
+
+include 'registros-administrador.php';
+
 ?>

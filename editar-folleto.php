@@ -107,7 +107,14 @@
                                                 </label>
                                                 <input name="img-producto" id="file-input" type="file" onchange="readURL(this);" hidden />
                                             </div>
-                                        </div>                          
+                                        </div>   
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <label>Archivo PDF</label>
+                                                <input type="file" name="pdf_file" id="pdf_file" accept="application/pdf" />
+                                            </div>
+                                        </div>
 
                                         <div class="form-group">
                                             <div class="floating-label-group">

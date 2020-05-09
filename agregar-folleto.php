@@ -1,8 +1,6 @@
 <?php
 require 'user_preferences/user-info.php';
 
-/*require 'bd/conexion.php';*/ //No se si es necesario //La imagen no se borra al subir el producto
-
 $productos = R::find('productos');
 ?>
 
@@ -110,6 +108,13 @@ $productos = R::find('productos');
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
+                                                <label>Archivo PDF</label>
+                                                <input type="file" name="pdf_file" id="pdf_file" accept="application/pdf" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
                                                 <input name="name" id="nombre" type="text" class="form-control input-form-underline" />
                                                 <label class="floating-label-underline">Nombre del folleto</label>
                                             </div>
@@ -122,21 +127,10 @@ $productos = R::find('productos');
                                             </div>
                                         </div>
 
-
-                                        <!--
-                                        <div class="form-group">
-                                            <button class="btn btn-primary" onclick="productos()" >Agregar</button>
-                                        </div>
-
-                                        <div id="select">
-
-                                        </div> -->
-
-                                        <button type="submit" class="btn btn-lg-blue mt-3">Guardar</button>
+                                        <button type="submit" id="send" class="btn btn-lg-blue mt-3">Guardar</button>
 
                                     </form>
                                 </div>
-
 
                             </div>
 
@@ -149,11 +143,9 @@ $productos = R::find('productos');
 
     </section>
 
-
     <!-- Footer-->
     <?php include("menus/footer_general.php"); ?>
     <!-- End Footer -->
-
 
     <!-- jQuery -->
     <script src="js/jquery-3.0.0.min.js"></script>
@@ -179,9 +171,6 @@ $productos = R::find('productos');
     <script src="js/sweetalert2.js"></script>
 
     <script src="js/nuevo-folleto.js"></script>
-
-
-
 
 </body>
 

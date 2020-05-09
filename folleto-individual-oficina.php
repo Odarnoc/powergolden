@@ -2,14 +2,14 @@
 session_start();
 require 'bd/conexion.php';
 
-$user_id=-1;
-if(isset($_SESSION["user_id"])){
-  $user_id=$_SESSION["user_id"];
+$user_id = -1;
+if (isset($_SESSION["user_id"])) {
+  $user_id = $_SESSION["user_id"];
 }
 
-$query = 'SELECT * FROM folletos where  id = "'.$_GET['id'].'"' ;
+$query = 'SELECT * FROM folletos where  id = "' . $_GET['id'] . '"';
 
-$res=R::getAll($query); 
+$res = R::getAll($query);
 
 $folletod = $res[0];
 
@@ -51,36 +51,42 @@ $folletod = $res[0];
 
 <body>
 
-            <!-- Menu -->
-            <?php include("menus/menu_general.php"); ?>
-            <!-- End Menu -->
+  <!-- Menu -->
+  <?php include("menus/menu_general.php"); ?>
+  <!-- End Menu -->
 
 
   <section class="sec-gray">
     <div class="container">
       <div class="row">
-        
+
         <?php include 'menus/lineas_asistencia.php'; ?>
 
-                    <div class="col-lg-8 col-md-8 bg-gray">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="d-folleto-ind">
-                                    <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $folletod['imagen'] ?>'); height: 350px;
+        <div class="col-lg-8 col-md-8 bg-gray">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div class="d-folleto-ind">
+                <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $folletod['imagen'] ?>'); height: 350px;
                                         background-size: cover;
                                         background-repeat: no-repeat; 
                                         ">
-                                    </div>
-                                    <div class="d-2">
-                                        <p class="t1"><?php echo $folletod['nombre'] ?></p>
-                                        <p class="t2"><?php echo $folletod['descripcion'] ?></p>
-                                        <a class="btn btn-blue" download href="images/folletos/<?php echo $folletod['imagen'] ?>" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="d-2">
+                  <p class="t1"><?php echo $folletod['nombre'] ?></p>
+                  <p class="t2"><?php echo $folletod['descripcion'] ?></p>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <a class="btn btn-blue" download href="/images/folletos/<?php echo $folletod['imagen'] ?>" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
                     </div>
-    
+                    <div class="col-md-6">
+                      <a class="btn btn-blue" download href="/images/folletos/documentos/<?php echo $folletod['pdf'] ?>" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
         </div>
 
@@ -121,9 +127,9 @@ $folletod = $res[0];
   </section>
 
 
-            <!-- Admin Menu -->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Admin Menu -->
+  <!-- Admin Menu -->
+  <?php include("menus/footer_general.php"); ?>
+  <!-- End Admin Menu -->
 
 
   <!-- jQuery -->
@@ -145,4 +151,6 @@ $folletod = $res[0];
   <!-- responseive menu -->
   <script src="js/menu-movil.js"></script>
 
-</body></html>
+</body>
+
+</html>
