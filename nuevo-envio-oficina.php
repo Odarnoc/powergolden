@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'bd/conexion.php';
-$suc = R::find('sucursales','WHERE id != 1');
+$suc = R::find('sucursales', 'WHERE id != 1');
 
 ?>
 
@@ -166,7 +166,7 @@ $suc = R::find('sucursales','WHERE id != 1');
                                         </div>
                                         <div class="row row-btns-checkout mt-60">
                                             <div class="col-lg-6 col-md-6 col-6">
-                                                <a href="paquete-individual.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
+                                                <a href=paquete-individual.php><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                             </div>
                                             <div class=" col-lg-6 col-md-6 col-6">
                                                 <a><button type="button" onclick="datosDireccion()" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button></a>
@@ -187,7 +187,7 @@ $suc = R::find('sucursales','WHERE id != 1');
                                 </div>
                                 <div class="row row-btns-checkout mt-60">
                                     <div class="col-lg-6 col-md-6 col-6">
-                                        <a href="paquete-individual.php"><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
+                                        <a href=paquete-individual.php><button type="button" class="btn btn-back-checkout"><i class="fas fa-chevron-left"></i> Regresar</button></a>
                                     </div>
                                     <div class=" col-lg-6 col-md-6 col-6">
                                         <a><button type="button" onclick="datosDireccionlocal()" class="btn btn-lg-blue">Continuar <i class="fas fa-chevron-right"></i></button></a>

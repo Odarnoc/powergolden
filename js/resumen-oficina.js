@@ -81,12 +81,12 @@ function pintarCarrito() {
     superior += sup;
     total -= descuento;
     localStorage.setItem('totalgen', total + envcos + cargo);
-    $('#totalgeneral').text(total + envcos + cargo + total);
+    $('#totalgeneral').text(total + envcos + cargo);
     $('#lista-productos').empty();
     $('#lista-superior').append(superior);
     $('#lista-productos').append(listaProds);
     $('#iva').append(total * 16 / 100);
-    $('#ton').text(totalOri);
+    $('#ton').text(totalOri - total * 16 / 100);
     $('#env').text(envcos);
 }
 

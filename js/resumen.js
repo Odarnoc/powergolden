@@ -50,7 +50,7 @@ function pintarCarrito() {
     $('#lista-productos').append(listaProds);
     $('#iva').append(total * 16 / 100);
     $('#tdesc').text(descuento);
-    $('#ton').text(totalOri);
+    $('#ton').text(totalOri - total * 16 / 100);
     $('#env').text(envcos);
 }
 

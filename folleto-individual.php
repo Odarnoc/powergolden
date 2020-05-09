@@ -2,9 +2,9 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT * FROM folletos where  id = "'.$_GET['id'].'"' ;
+$query = 'SELECT * FROM folletos where  id = "' . $_GET['id'] . '"';
 
-$res=R::getAll($query); 
+$res = R::getAll($query);
 
 $folletod = $res[0];
 
@@ -43,9 +43,9 @@ $folletod = $res[0];
 
 <body>
 
-            <!-- Top Menu -->
-            <?php include("menus/top_menu.php"); ?>
-            <!-- End Top Menu -->
+    <!-- Top Menu -->
+    <?php include("menus/top_menu.php"); ?>
+    <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -54,12 +54,14 @@ $folletod = $res[0];
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-                    <!-- Admin Menu -->
-                    <?php include("menus/menu_general_admin.php"); ?>
-                    <!-- End Admin Menu -->
+
+                <!-- Admin Menu -->
+                <?php include("menus/menu_general_admin.php"); ?>
+                <!-- End Admin Menu -->
+
                 <div class="col-lg-8 col-md-8 bg-gray">
-                    <div class="d-cont-right">
-                        <div class="row ">
+                    <div class="d-cont-right" style="padding-top: 6rem">
+                        <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-folleto-ind">
                                     <div class="d-img-pro-ind" style="background-image: url('images/folletos/<?php echo $folletod['imagen'] ?>'); height: 350px;
@@ -70,7 +72,14 @@ $folletod = $res[0];
                                     <div class="d-2">
                                         <p class="t1"><?php echo $folletod['nombre'] ?></p>
                                         <p class="t2"><?php echo $folletod['descripcion'] ?></p>
-                                        <a class="btn btn-blue" download href="/images/folletos/<?php echo $folletod['imagen'] ?>" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a class="btn btn-blue" download href="/images/folletos/<?php echo $folletod['imagen'] ?>" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a class="btn btn-blue" download href="/images/folletos/documentos/<?php echo $folletod['pdf'] ?>" role="button"><i class="fas fa-arrow-circle-down"></i> Descargar folleto</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -82,9 +91,9 @@ $folletod = $res[0];
     </section>
 
 
-            <!-- Footer-->
-            <?php include("menus/footer_general.php"); ?>
-            <!-- End Footer -->
+    <!-- Footer-->
+    <?php include("menus/footer_general.php"); ?>
+    <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -102,7 +111,6 @@ $folletod = $res[0];
 
     <!-- custom scripts -->
     <script src="js/scripts.js"></script>
-    <script src="js/dashboard.js"></script>
 
     <script src="js/bootstrap-input-spinner.js"></script>
 
@@ -110,4 +118,6 @@ $folletod = $res[0];
         $("input[type='number']").inputSpinner()
     </script>
 
-</body></html>
+</body>
+
+</html>

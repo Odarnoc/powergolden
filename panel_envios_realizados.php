@@ -1,7 +1,7 @@
 <?php
 require 'user_preferences/user-info.php';
 
-$querytabla = 'SELECT * FROM envios WHERE `status` != "Recolección pendiente"';
+$querytabla = 'SELECT u.nombre As nombre, u.apellidos As apellidos, e.venta_id AS venta, e.numero_seguimiento AS seguimiento, e.fecha_envio AS fecha FROM envios AS e LEFT JOIN usuarios AS u ON e.usuario_id = u.id WHERE `status` != "Recolección pendiente"';
 
 $envios = R::getAll($querytabla);
 
@@ -83,15 +83,19 @@ $envios = R::getAll($querytabla);
                                     <table id="ventas" class="table" style="text-align:center">
                                         <thead class="table-primary">
                                             <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Fecha de compra</th>
+                                                <th scope="col">Numero Guia</th>
+                                                <th scope="col">Fecha de envio</th>
+                                                <th scope="col">Venta</th>
+                                                <th scope="col">Cliente</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($envios as $item) { ?>
                                                 <tr>
-                                                    <td style="text-align:left"><?php echo $item['numero_seguimiento'] ?></td>
-                                                    <td><?php echo substr($item['fecha_envio'], 0, 10) ?></td>
+                                                    <td style="text-align:left"><?php echo $item['seguimiento'] ?></td>
+                                                    <td><?php echo substr($item['fecha'], 0, 10) ?></td>
+                                                    <td><?php echo $item['venta'] ?></td>
+                                                    <td><?php echo $item['nombre']." ".$item['apellidos'] ?></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
