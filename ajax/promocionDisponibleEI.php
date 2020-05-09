@@ -5,7 +5,7 @@ require '../utils/error.php';
 $response['promocion']=false;
 $user_id = $_GET['user_id'];
 $pack_id = $_GET['pack_id'];
-$tipo = 2;
+$tipo = 1;
 $promocion = R::findOne('promociones','tipo='.$tipo.' && paquete_id ='.$pack_id);
 
 $query = 'SELECT vp.* FROM ventaspaquetes as vp LEFT JOIN ventas as v ON vp.venta_id = v.id where v.fecha >= ( CURDATE() - INTERVAL 30 DAY ) && v.user_id = '.$user_id;

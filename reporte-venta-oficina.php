@@ -112,7 +112,7 @@ $productos=R::getAll($query);
                                     <div class="row row-tabla-ventas">
                                         <div class="col-lg-12 col-md-12">
                                             <div class="table-responsive">
-                                                <table class="table">
+                                                <table id="mis-ventas" class="table">
                                                     <thead>
                                                         <tr class="table-primary">
                                                             <th>Fecha</th>
@@ -176,5 +176,20 @@ $productos=R::getAll($query);
 
     <!-- registro scripts -->
     <script src="js/registro-oficina.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.css"/>
+ 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/b-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
+    <script >
+        $(document).ready(function() {
+            $('#mis-ventas').DataTable( {
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+                }
+            } );
+        } );
+    </script>
 
     </body></html>

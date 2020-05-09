@@ -10,15 +10,6 @@ require 'bd/conexion.php';
 
 $id = $_SESSION["user_id"];
 
-$usuario = R::getAll("select  id,
-        nombre,
-        referido 
-from    (select * from usuarios
-         order by referido, id) clientes_sorted,
-        (select @pv := '$id') initialisation
-where   find_in_set(referido, @pv)
-and     length(@pv := concat(@pv, ',', id))");
-
 ?>
 
 <!doctype html>
@@ -185,7 +176,7 @@ and     length(@pv := concat(@pv, ',', id))");
                                                 Firmar contrato electronicamente. <a href="docs/politicas.pdf">Contrato.</a>
                                             </label>
                                         </div>
-                                        <input name="ref" value="<?php echo $id; ?>">
+                                        <input name="ref" value="<?php echo $id; ?>" hidden>
                                         <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
                                     </form>
                                 </div>
