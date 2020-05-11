@@ -1,7 +1,3 @@
-$(document).ready(function () {
-    get_clientes_info();
-});
-
 $("#form-folleto").submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
@@ -49,23 +45,3 @@ $("#form-folleto").submit(function(e) {
         processData: false
     });
 });
-
-function get_clientes_info() {
-    $.ajax({
-      url: "pos/webserviceapp/get_clientes.php",
-      type: "POST",
-      data:{'tipo':1},
-      dataType: "json",
-      beforeSend: function() {},
-      success: function(data) {
-        clientes = data.arreglo;
-        console.log(clientes);
-        
-        //console.log(data.arreglo[2]);
-        $("#sector")
-          .empty()
-          .append(data.list);
-        $(".selectpicker").selectpicker("refresh");
-      }
-    });
-  }

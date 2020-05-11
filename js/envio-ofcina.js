@@ -1,3 +1,20 @@
+$(document).ready(function() {
+    $.ajax({
+        url: "ajax/sucursales-con-inventario.php",
+        type: "post",
+        data: { carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito },
+
+        success: function(respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
+            console.log(json_mensaje);
+            json_mensaje.forEach(function(item, index) {
+                $('#sucursal').append(`<option value="${item.id}"> ${item.nombre+", "+item.estado} </option>`); 
+            });
+            
+        },
+    });
+});
+
 function datosDireccion() {
     var dir = $("#direccion").val();
     var cp = $("#cp").val();

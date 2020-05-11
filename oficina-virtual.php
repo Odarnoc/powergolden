@@ -24,6 +24,7 @@ foreach ($colorescss1 as $co) {
     }
 }
 
+$porcientoActivos = floatval($res[0]['clientestotales'])*floatval($res[0]['clientesactivos']);
 ?>
 
 <!doctype html>
@@ -130,7 +131,7 @@ foreach ($colorescss1 as $co) {
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1"><?php echo 100/floatval($res[0]['clientestotales'])*floatval($res[0]['clientesactivos']); ?>%</p>
+                                    <p class="t1"><?php if($porcientoActivos == 0){echo '0';}else{echo 100/$porcientoActivos;} ?>%</p>
                                     <p class="t2">Personas activas</p>
                                 </div>
                             </div>
