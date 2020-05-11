@@ -72,7 +72,7 @@ $suc = R::find('sucursales','WHERE id != 1');
                         <div class="form-group" id="contlocal">
                             <div class="form-check">
                                 <input onclick="boxlocal()" class="form-check-input" type="checkbox" id="local" required>
-                                <label class="form-check-label" for="invalidCheck">
+                                <label class="form-check-label" for="local">
                                     Recoleccion en sucursal.
                                 </label>
                                 <div class="invalid-feedback">
@@ -86,7 +86,7 @@ $suc = R::find('sucursales','WHERE id != 1');
                         <div class="form-group" id="contdomi">
                             <div class="form-check">
                                 <input onclick="boxdomi()" class="form-check-input" type="checkbox" id="domicilio" required>
-                                <label class="form-check-label" for="invalidCheck">
+                                <label class="form-check-label" for="domicilio">
                                     Envio a domicilio.
                                 </label>
                                 <div class="invalid-feedback">
@@ -183,13 +183,6 @@ $suc = R::find('sucursales','WHERE id != 1');
                                     <label class="label-select">Seleccionar sucursal para recoleccion.</label>
                                     <select id="sucursal" class="form-control input-form-underline" onchange="sucursal">
                                         <option value="9" hidden>Seleccionar sucursal.</option>
-                                        <?php
-                                        foreach ($suc as $valor) {
-                                        ?>
-                                            <option value="<?php echo $valor->id; ?>"><?php echo $valor->nombre; ?>. <?php echo $valor->estado; ?></option>
-                                        <?php
-                                        }
-                                        ?>
                                     </select>
                                 </div>
                                 <div class="row row-btns-checkout mt-60">

@@ -7,6 +7,20 @@ var telefono;
 var id = 0;
 var idusuario = 0;
 $(document).ready(function() {
+    $.ajax({
+        url: "ajax/sucursales-con-inventario.php",
+        type: "post",
+        data: { carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito },
+
+        success: function(respuesta) {
+            var json_mensaje = JSON.parse(respuesta);
+            console.log(json_mensaje);
+            json_mensaje.forEach(function(item, index) {
+                $('#sucursal').append(`<option value="${item.id}"> ${item.nombre+", "+item.estado} </option>`); 
+            });
+            
+        },
+    });
     datosuser();
     mostrar();
     OpenPay.setId('m1ob7biidxpcjepkiqw1');
