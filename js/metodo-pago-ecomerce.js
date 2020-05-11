@@ -10,7 +10,7 @@ $(document).ready(function() {
     $.ajax({
         url: "ajax/sucursales-con-inventario.php",
         type: "post",
-        data: { carrito: JSON.parse(localStorage.getItem('carrito-oficina')).carrito },
+        data: { carrito: JSON.parse(localStorage.getItem('carrito')) },
 
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
