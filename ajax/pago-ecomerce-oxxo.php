@@ -58,11 +58,11 @@ $venta->total = $_POST['transaction_amount'];
 $venta->is_payed = 0;
 $id_venta = R::store($venta);
 
-$vpagos = R::dispense('ventaspagos');
-$vpagos->venta_id = $id_venta;
-$vpagos->tipo_pago = 'Referencia';
-$vpagos->cantidad = $_POST['transaction_amount'];
-R::store($vpagos);
+R::exec( "insert into referencias_oxxo (valor,venta_id,referencia) values
+(
+".$_POST['transaction_amount'].",
+".$id_venta.",
+'".$payment->id."')" );
 
 foreach ($carrito as $item) {
   $prod = R::dispense('productosxventas');

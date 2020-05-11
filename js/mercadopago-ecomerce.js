@@ -89,7 +89,7 @@ function sdkResponseHandler(status, response) {
             'usuariid': id,
             sucursal: localStorage.getItem('sucursal_id'),
             "email": localStorage.getItem('correo'),
-            "transaction_amount": localStorage.getItem('totalgen'),
+            "transaction_amount": 1 /*localStorage.getItem('totalgen')*/ ,
             "direccion": localStorage.getItem('direccion'),
             "estado": localStorage.getItem('estado'),
             "cp": localStorage.getItem('codigop'),
