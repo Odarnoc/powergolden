@@ -180,6 +180,11 @@ if (isset($_GET['ui'])) {
                                                 Firmar contrato electronicamente. <a href="docs/politicas.pdf">Contrato.</a>
                                             </label>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <label class="floating-label">La verificación y validación de la cuenta puede llegar a tardar hasta 24 horas. </label>
+                                            </div>
+                                        </div>
                                         <button class="btn btn-lg-blue mt-30" id="registrar_us_ofice">Aceptar</button>
                                     </form>
                                 </div>

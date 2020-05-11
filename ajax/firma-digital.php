@@ -44,7 +44,8 @@ use \Firebase\JWT\JWT;
         $pdf->AliasNbPages();
         $pdf->AddPage();
         $pdf->SetFont('Arial','',12);
-        $pdf->MultiCell(190,10,encriptarFirma($ip,$direccion,$nombre,$apellido_paterno,$apellido_materno,$telefono,$correo),1);
+        $pdf->Cell(10);
+        $pdf->MultiCell(160,10,encriptarFirma($ip,$direccion,$nombre,$apellido_paterno,$apellido_materno,$telefono,$correo),0);
         $pdf->Output($filename,'F');
     }
 
@@ -57,10 +58,16 @@ use \Firebase\JWT\JWT;
         // Arial bold 15
         $this->SetFont('Arial','B',15);
         // Movernos a la derecha
-        $this->Cell(60);
+        $this->Cell(1);
         // Título
         $this->Cell(70,10,utf8_decode('Firma digital'),0,0,'C');
-        // Salto de línea
+        $this->Image('../logo-navbar.png',110,10,80);
+        $this->Ln(20);
+        $this->SetFont('Arial','',10);
+        $this->Cell(12);
+        $this->Cell(33,10,utf8_decode('Fecha de creación: '),0,0,'c',0); 
+        $this->SetFont('Arial','b',10);
+        $this->Cell(28,10,date("d-M-Y"),0,0,'c',0); 
         $this->Ln(20);
     }
 
@@ -73,6 +80,7 @@ use \Firebase\JWT\JWT;
         $this->SetFont('Arial','I',8);
         // Número de página
         $this->Cell(0,10,utf8_decode('Pagina ').$this->PageNo().'/{nb}',0,0,'C');
+        
     }
     }
 

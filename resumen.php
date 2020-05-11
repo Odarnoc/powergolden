@@ -105,11 +105,11 @@ $user_id = $_SESSION["user_id"];
                                             <div class="">
                                                 <div class="form-group" style="margin-bottom: 1px">
                                                     <p id="nombreuser"></p>
-                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">Monto total: $<a id="ton"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">Subtotal: $<a id="ton"></a></h6>
                                                     <h6 style="padding-left: 3px " class="small-text-cuenta">Descuento: $<a id="tdesc"></a></h6>
-                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">IVA incluido: $<a id="iva"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">IVA: $<a id="iva"></a></h6>
                                                     <h6 id="txenv" name="recar" style="padding-left: 3px " class="small-text-cuenta">Envio: $<span id="env"></span></h6>
-                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">Monto total general: $<a id="totalgeneral"></a></h6>
+                                                    <h6 style="padding-left: 3px " class="small-text-cuenta">Total: $<a id="totalgeneral"></a></h6>
                                                 </div>
                                             </div>
                                         </div>
