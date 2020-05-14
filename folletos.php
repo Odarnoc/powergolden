@@ -11,7 +11,6 @@ if (!isset($_POST['busqueda'])) {
 }
 
 $paquetes = R::getAll($query);
-var_dump($paquetes);
 
 ?>
 

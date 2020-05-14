@@ -1,5 +1,7 @@
 <?php
 require 'user_preferences/user-info.php';
+
+
 ?>
 
 
@@ -130,6 +132,13 @@ require 'user_preferences/user-info.php';
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
+                                                <label>Archivo de contrato.</label>
+                                                <input type="file" name="pdf_file" id="pdf_file" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
                                                 <input type="text" class="form-control input-form-underline" name="name" required />
                                                 <label class="floating-label">Nombre</label>
                                             </div>
@@ -166,7 +175,7 @@ require 'user_preferences/user-info.php';
                                         </div>
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <select name="ref" id="sector" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+                                                <select name="ref" id="sector" data-live-search="true" class=" selectpicker form-control input-pos select-cliente-pos mt-3">
                                                     <option value="0">Seleccionar cliente</option>
                                                 </select>
                                             </div>
@@ -222,8 +231,32 @@ require 'user_preferences/user-info.php';
     <script src="js/registro-independiente.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
+
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "pos/webserviceapp/get_clientes.php",
+                type: "POST",
+                data: {
+                    tipo: 2
+                },
+                dataType: "json",
+                beforeSend: function() {},
+                success: function(data) {
+                    clientes = data.arreglo;
+                    console.log(clientes);
+
+                    //console.log(data.arreglo[2]);
+                    $("#sector")
+                        .empty()
+                        .append(data.list);
+                    $(".selectpicker").selectpicker("refresh");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

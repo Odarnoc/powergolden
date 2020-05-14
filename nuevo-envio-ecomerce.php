@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION["user_id"]) ){
+    header("Location: iniciar-sesion-cliente.php");
+}
+if($_SESSION["rol"]!=1){
+    header("Location: iniciar-sesion-cliente.php");
+}
 require 'bd/conexion.php';
 $suc = R::find('sucursales','WHERE id != 1');
 

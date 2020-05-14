@@ -3,9 +3,9 @@
 require 'user_preferences/user-info.php';
 
 if(!isset($_POST['fechauno'])&&!isset($_POST['fechados'])){
-    $query = 'SELECT ht.fecha,ht.cantidad,(SELECT nombre FROM productos as p WHERE ht.producto_id = p.id) as producto,(SELECT nombre FROM sucursales as s WHERE ht.origen = s.id) as origen, (SELECT nombre FROM sucursales as s WHERE ht.destino = s.id) as destino FROM historialtraspasos as ht';
+    $query = 'SELECT ht.fecha,(SELECT nombre FROM tiposmovimientosalmacen as tma WHERE ht.tipomovimiento_id = tma.id) as tipo,(SELECT nombre FROM sucursales as s WHERE ht.origen = s.id) as origen, (SELECT nombre FROM sucursales as s WHERE ht.destino = s.id) as destino FROM historialtraspasos as ht';
 }else{
-    $query = 'SELECT ht.fecha,ht.cantidad,(SELECT nombre FROM productos as p WHERE ht.producto_id = p.id) as producto,(SELECT nombre FROM sucursales as s WHERE ht.origen = s.id) as origen, (SELECT nombre FROM sucursales as s WHERE ht.destino = s.id) as destino FROM historialtraspasos as ht
+    $query = 'SELECT ht.fecha,(SELECT nombre FROM tiposmovimientosalmacen as tma WHERE ht.tipomovimiento_id = tma.id) as tipo,(SELECT nombre FROM sucursales as s WHERE ht.origen = s.id) as origen, (SELECT nombre FROM sucursales as s WHERE ht.destino = s.id) as destino FROM historialtraspasos as ht
     WHERE ht.fecha BETWEEN"'.$_POST['fechauno'].'" and "'.$_POST['fechados'].'"';
     $filtro = $_POST['fechauno'];
     $filtrodos = $_POST['fechados'];
@@ -109,10 +109,8 @@ $productos=R::getAll($query);
                                     <table id="reportetransferencia" class="table">
                                         <thead>
                                             <tr class="table-primary">
-                                                 <th>ID</th>
                                                 <th>Fecha</th>
-                                                <th>Cantidad</th>
-                                                <th>Producto</th>
+                                                <th>Tipo</th>
                                                 <th>Origen</th>
                                                 <th>Destino</th>
                                             </tr>
@@ -121,10 +119,8 @@ $productos=R::getAll($query);
                                         <tbody>
                                         <?php foreach ($productos as $item) { ?>
                                             <tr>
-                                                <td><?php echo $item['id'] ?></td>
                                                 <td><?php echo substr($item['fecha'], 0, 10); ?></td>
-                                                <td><?php echo $item['producto'] ?></td>
-                                                <td><?php echo $item['cantidad'] ?></td>
+                                                <td><?php echo substr($item['tipo'], 0, 10); ?></td>
                                                 <td><?php echo $item['origen'] ?></td>
                                                 <td><?php echo $item['destino'] ?></td>
                                             </tr>

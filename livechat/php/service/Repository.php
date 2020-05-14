@@ -1,7 +1,7 @@
-<?php
-
-class Repository extends Service
-{
-}
-
-?>
+<?php
+
+class Repository extends Service
+{
+}
+
+?>

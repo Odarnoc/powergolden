@@ -1,6 +1,7 @@
 <?php
+session_start();
 require_once '../pos/webserviceapp/vendor/autoload.php';
-require 'envios.php';
+require '../bd/conexion.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -11,6 +12,9 @@ require '../phpMailer/SMTP.php';
 
 $carrito = $_POST['carrito'];
 $errores = array();
+$sucursalnum = intval($_POST['sucursal']);
+
+$datousuario = R::findOne('usuarios', 'id=?', [$_POST["usuariid"]]);
 
 if (sizeof($carrito) < 0) {
     error_mensaje('El carrito no puede estar vacio.');
@@ -38,31 +42,33 @@ MercadoPago\SDK::setAccessToken("APP_USR-7698839841259331-040703-babc7d9c09e9869
 $payment = new MercadoPago\Payment();
 
 //$payment->transaction_amount = floatval($_POST['transaction_amount']);
-$payment->transaction_amount = floatval(20);
+$payment->transaction_amount = floatval(5);
 $payment->token = $_POST['token'];
 $payment->description = "Power Golden, el poder de la herbolaria.";
 $payment->installments = $_POST['installments'];
 $payment->payment_method_id = $_POST['payment_method_id'];
 $payment->payer = array(
-    "email" => $_POST['email']
+    "email" => $datousuario->correo
 );
 
 $payment->save();
-echo $payment->status;
+$response['status'] = $payment->status;
 
 $registro = R::dispense('ventas');
-
+if (isset($_SESSION["ui_referencia_venta"])) {
+  $registro->referencia = $_SESSION["ui_referencia_venta"];
+}
 $registro->user_id = $_POST["usuariid"];
 $registro->fecha = date('Y-m-d');
 $registro->total = $_POST['transaction_amount'];
 $registro->is_payed = 1;
-$id = R::store($registro);
+$id_venta = R::store($registro);
 
 $vpagos = R::dispense('ventaspagos');
-$vpagos->venta_id = $id;
+$vpagos->venta_id = $id_venta;
 $vpagos->tipo_pago = 'Tarjeta';
 $vpagos->cantidad = $_POST['transaction_amount'];
-$id_venta = R::store($vpagos);
+R::store($vpagos);
 
 foreach ($carrito as $item) {
     $prod = R::dispense('productosxventas');
@@ -86,10 +92,10 @@ if (isset($_POST['pack_id'])) {
 
 $randome = rand();
 $ventasreferecnia  = R::find('ventasentregas', 'referencia=?', [$randome]);
-$datousuario = R::find('usuarios', 'id=?', [$_POST["usuariid"]]);
+
 
 if ($ventasreferecnia == null) {
-    if ($_POST['sucursal'] != 0) {
+    if ($sucursalnum != 0) {
         $sucur = R::dispense('ventasentregas');
         $sucur->id_venta = $id_venta;
         $sucur->id_sucursal = $_POST['sucursal'];
@@ -114,7 +120,7 @@ if ($ventasreferecnia == null) {
 
             //Recipients
             $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
-            $mail->addAddress($_POST['email'], $datousuario['nombre'] . ' ' . $datousuario['apellido']);     // Add a recipient
+            $mail->addAddress($datousuario->correo, $datousuario->nombre . ' ' . $datousuario->apellidos);     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
@@ -174,7 +180,7 @@ if ($ventasreferecnia == null) {
 
             //Recipients
             $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
-            $mail->addAddress($_POST['email'], $datousuario['nombre'] . ' ' . $datousuario['apellido']);     // Add a recipient
+            $mail->addAddress($datousuario->correo, $datousuario->nombre . ' ' . $datousuario->apellidos);     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
@@ -209,10 +215,10 @@ if ($ventasreferecnia == null) {
     }
 }
 
-if ($_POST['sucursal'] == 0) {
+if ($sucursalnum == 0) {
     $enviodatos  = R::findOne('datosenvio', 'direccion=?  AND user_id=? AND cp=?', [$_POST['direccion'], $_POST['usuariid'], $_POST['cp']]);
 
-    if ($enviodatos == null) {
+    if (empty($enviodatos)) {
         $datos = R::dispense('datosenvio');
         $datos->user_id = $_POST['usuariid'];
         $datos->ciudad = $_POST['ciudad'];
@@ -236,3 +242,5 @@ if ($_POST['sucursal'] == 0) {
         R::store($datosReferencia);
     }
 }
+
+echo json_encode($response);

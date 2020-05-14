@@ -3,6 +3,7 @@ session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
+
 $response['mensaje'] = "Exito al guardar el folleto.";
 
 if(empty($_POST['name'])){

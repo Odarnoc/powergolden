@@ -129,14 +129,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <div class="floating-label-group">
-                                                        <input name="price_usd" id="precio_usd" type="number" class="form-control input-form-underline"/>
-                                                        <label class="floating-label-underline">Precio USD</label>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <!--
                                         <div class="form-group">

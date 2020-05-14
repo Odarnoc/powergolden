@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -14,6 +15,8 @@ require '../phpMailer/SMTP.php';
 
 $carrito = $_POST['carrito'];
 $errores = array();
+
+$datousuario = R::findOne('usuarios', 'id=?', [$_POST["usuariid"]]);
 
 if (sizeof($carrito) < 0) {
   error_mensaje('El carrito no puede estar vacio.');
@@ -45,24 +48,27 @@ $payment->transaction_amount = floatval($_POST['transaction_amount']);
 $payment->description = "Compra online Power Golden.";
 $payment->payment_method_id = "oxxo";
 $payment->payer = array(
-  "email" => $_POST['email']
+  "email" => $datousuario->correo
 );
 
 $payment->save();
 echo $payment->transaction_details->external_resource_url;
 
 $venta = R::dispense('ventas');
+if (isset($_SESSION["ui_referencia_venta"])) {
+  $venta->referencia = $_SESSION["ui_referencia_venta"];
+}
 $venta->user_id = $_POST['usuariid'];
 $venta->fecha = new DateTime();
 $venta->total = $_POST['transaction_amount'];
 $venta->is_payed = 0;
 $id_venta = R::store($venta);
 
-R::exec( "insert into referencias_oxxo (valor,venta_id,referencia) values
+R::exec("insert into referencias_oxxo (valor,venta_id,referencia) values
 (
-".$_POST['transaction_amount'].",
-".$id_venta.",
-'".$payment->id."')" );
+" . $_POST['transaction_amount'] . ",
+" . $id_venta . ",
+'" . $payment->id . "')");
 
 foreach ($carrito as $item) {
   $prod = R::dispense('productosxventas');
@@ -86,7 +92,7 @@ if (isset($_POST['pack_id'])) {
 
 $randome = rand();
 $ventasreferecnia  = R::find('ventasentregas', 'referencia=?', [$randome]);
-$datousuario = R::find('usuarios', 'id=?', [$_POST["usuariid"]]);
+
 
 if ($ventasreferecnia == null) {
   if ($_POST['sucursal'] != 0) {
@@ -114,7 +120,7 @@ if ($ventasreferecnia == null) {
 
       //Recipients
       $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
-      $mail->addAddress($_POST['email'], $datousuario['nombre'] . ' ' . $datousuario['apellido']);     // Add a recipient
+      $mail->addAddress($datousuario->correo, $datousuario->nombre . ' ' . $datousuario->apellidos);     // Add a recipient
 
       // Content
       $mail->isHTML(true);                                  // Set email format to HTML
@@ -172,7 +178,7 @@ if ($ventasreferecnia == null) {
 
       //Recipients
       $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
-      $mail->addAddress($_POST['email'], $datousuario['nombre'] . ' ' . $datousuario['apellido']);     // Add a recipient
+      $mail->addAddress($datousuario->correo, $datousuario->nombre . ' ' . $datousuario->apellidos);     // Add a recipient
 
       // Content
       $mail->isHTML(true);                                  // Set email format to HTML

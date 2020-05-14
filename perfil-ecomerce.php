@@ -84,12 +84,6 @@ $direccion=R::getAll($query);
                                         <div class="col">
                                             <a class="btn btn-editar-perfil" id="edit_button" href="#0" role="button">Editar</a>
                                         </div>
-                                        <div class="col">
-                                            <a class="btn btn-editar-perfil" id="edit_button" href="add-direccion.php" role="button">Direcciones</a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="btn btn-editar-perfil" id="edit_button" href="billetera-ecomerce.php" role="button">Tarjetas</a>
-                                        </div>
                                     </div> 
                                 </div>
                             </div>
@@ -101,7 +95,7 @@ $direccion=R::getAll($query);
                                     <form class="form-perfil">
 
                                         <div class="form-row">
-                                            <div class="col-lg-5 col-md-5">
+                                            <div class="col-lg-6 col-md-6">
 
                                                 <p style="font-size: larger; font-weight: 600;" class="sub-title-cuenta">Datos personales</p>
 
@@ -144,48 +138,8 @@ $direccion=R::getAll($query);
                                                     <button type="button" id="editar_perf" style="width: 50%" class="btn btn-lg-blue">Guardar</button>
                                                 </div>
 
-
                                             </div>
 
-                                            <div class="col-lg-5 col-md-5 offset-lg-2 offset-md-2">
-                                                <p style="font-size: larger; font-weight: 600;" class="sub-title-cuenta">Direcciónes de envio.</p>
-                                                <?php foreach ($direccion as $item) { ?>
-                                                <div class="row">
-                                                    <div class="form-group">
-                                                        <div class="form-check">
-                                                            <label class="form-check-label" for="exampleRadios1">
-                                                                <?php echo ($item['direccion'])?>
-                                                            </label>
-                                                        </div>
-                                                        <p class="small-text-cuenta ml-4"><?php echo ($item['colonia'])?>, <?php echo ($item['ciudad'])?>, <?php echo ($item['estado'])?>, <?php echo ($item['codigo'])?></p>
-                                                    </div>
-                                                    <div class="col" style="text-align: right">
-                                                        <a style="" class="btn btn-blue mt-2"  href="editar-direccion.php?id=<?php echo $item['id']?>" role="button" ><i style="color: white" class="far fa-edit"></i></a>
-                                                        <a style="background-color: #e4605e" class="btn btn-blue mt-2"  href="" role="button" data-toggle="modal" onclick="eliminar('<?php echo $item['id'] ?>')" data-target="#exampleModalCenter"><i style="color: white" class="far fa-trash-alt"></i></a>
-                                                    </div>
-                                                </div>
-                                                <?php } ?> 
-
-                                                <p style="font-size: larger; font-weight: 600;" class="sub-title-cuenta">Tarjetas</p>
-                                                <?php foreach ($tarjeta as $item) { ?>
-                                                <div class="row d-item-tarjeta visa" style="margin: 0.5px">
-                                                    <div class="form-group" style="margin-bottom: 1px">
-                                                        <div class="form-check">
-                                                            <label class="form-check-label" for="exampleRadios1">
-                                                                <p class="t2">XXXX - XXXX - XXXX - <?php echo substr ($item['numerotar'],12,15) ?></p>
-                                                            </label>
-                                                        </div>
-                                                        <p class="small-text-cuenta ml-4"><?php echo $item['propietario'] ?></p>
-                                                        <p class="ml-4">Expiracion:  <a class="small-text-cuenta ml-4"><?php echo $item['fecha'] ?></a></p>
-                                                    </div>
-                                                    <div class="col" style="text-align: right; padding: 1px;">
-                                                        <a style="" class="btn btn-blue mt-2"  href="editar-tarjeta.php?id=<?php echo $item['id']?>" role="button" ><i style="color: white" class="far fa-edit"></i></a>
-                                                        <a style="background-color: #e4605e" class="btn btn-blue mt-2"  href="" role="button" data-toggle="modal" onclick="eliminart('<?php echo $item['id'] ?>')" data-target="#tarjetaModal"><i style="color: white" class="far fa-trash-alt"></i></a>
-                                                    </div>
-                                                </div>
-                                                <?php } ?> 
-
-                                            </div>
                                         </div>
                                     </form>
                                 </div>

@@ -20,10 +20,6 @@ if(empty($_POST['price'])){
     error_mensaje('Agregar un precio correspondiente.');
     return;
 }
-if(empty($_POST['price_usd'])){
-    error_mensaje('Agregar un precio en dolares correspondiente.');
-    return;
-}
 
 if(empty($_POST['cantidad'])){
     error_mensaje('Seleccionar la cantidad de productos.');
@@ -33,7 +29,6 @@ if(empty($_POST['cantidad'])){
 
     $nombre = $_POST['nombre'];
     $precio = $_POST['price'];
-    $precio_usd = $_POST['price_usd'];
     $cantidad = $_POST['cantidad'];
 
         
@@ -46,7 +41,6 @@ if(empty($_POST['cantidad'])){
 
             $registro->nombre = $nombre;
             $registro->precio = $precio;
-            $registro->precio_usd = $precio_usd;
             $registro->productos = $cantidad;
             $registro->imagen=basename($_FILES['img-producto']['name']);
 

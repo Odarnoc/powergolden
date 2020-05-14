@@ -1,7 +1,7 @@
 <?php
 $user_id = 0;
 if (isset($_GET['ui'])) {
-  $user_id = $_GET['ui'];
+    $user_id = $_GET['ui'];
 }
 ?>
 <!doctype html>
@@ -81,17 +81,17 @@ if (isset($_GET['ui'])) {
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-            
+
                 <div class="col-lg-3 col-md-3 bg-white">
-                    <div style="margin-top: 100px" >
-                        
+                    <div style="margin-top: 100px">
+
                     </div>
                 </div>
 
                 <div class="col-lg-9 col-md-9 bg-gray">
                     <div class="d-cont-right">
 
-                    <div class="row">
+                        <div class="row">
                             <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
                                 <div class="d-form">
                                     <p class="title-cuenta">Registro independiente.</p>
@@ -124,6 +124,13 @@ if (isset($_GET['ui'])) {
                                                     <i class="fas fa-plus"></i> Subir foto
                                                 </label>
                                                 <input name="img-producto2" id="file-input2" type="file" onchange="readURL(this);" hidden />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <label>Archivo de contrato.</label>
+                                                <input type="file" name="pdf_file" id="pdf_file" />
                                             </div>
                                         </div>
 
@@ -165,10 +172,10 @@ if (isset($_GET['ui'])) {
                                         </div>
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <?php if($user_id != 0){ ?>
-                                                    <input value="<?php echo $user_id ?>" type="tel" class="form-control input-form-underline" name="ref" hidden/>
-                                                <?php }else{ ?>
-                                                    <select name="ref" id="sector" data-live-search="true"class=" selectpicker form-control input-pos select-cliente-pos mt-3">
+                                                <?php if ($user_id != 0) { ?>
+                                                    <input value="<?php echo $user_id ?>" type="tel" class="form-control input-form-underline" name="ref" hidden />
+                                                <?php } else { ?>
+                                                    <select name="ref" id="sector" data-live-search="true" class=" selectpicker form-control input-pos select-cliente-pos mt-3">
                                                         <option value="0">Seleccionar cliente</option>
                                                     </select>
                                                 <?php } ?>
@@ -198,10 +205,6 @@ if (isset($_GET['ui'])) {
 
     </section>
 
-
-
-
-
     <!-- jQuery -->
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/jquery-migrate-3.0.0.min.js"></script>
@@ -223,7 +226,30 @@ if (isset($_GET['ui'])) {
     <!-- registro scripts -->
     <script src="js/registro-independiente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-</body></html>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "pos/webserviceapp/get_clientes.php",
+                type: "POST",
+                data:{tipo:2},
+                dataType: "json",
+                beforeSend: function() {},
+                success: function(data) {
+                    clientes = data.arreglo;
+                    console.log(clientes);
+
+                    //console.log(data.arreglo[2]);
+                    $("#sector")
+                        .empty()
+                        .append(data.list);
+                    $(".selectpicker").selectpicker("refresh");
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

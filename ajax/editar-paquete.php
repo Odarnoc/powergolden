@@ -15,11 +15,6 @@ if(empty($_POST['nombre'])){
     error_mensaje('Agregar un nombre al paquete.');
     return;
 }
-if(empty($_POST['price_usd'])){
-    error_mensaje('Agregar un precio en dolares correspondiente.');
-    return;
-}
-
 
 if(empty($_POST['description'])){
     error_mensaje('Agregar una descripcion del paquete.');
@@ -39,7 +34,6 @@ if(empty($_POST['cantidad'])){
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['description'];
     $precio = $_POST['price'];
-    $precio_usd = $_POST['price_usd'];
     $cantidad = $_POST['cantidad'];
 if(!file_exists($_FILES['img-producto']['tmp_name']) || !is_uploaded_file($_FILES['img-producto']['tmp_name'])){
     $registro = R::load('paquetes',$_POST['id']);
@@ -47,7 +41,6 @@ if(!file_exists($_FILES['img-producto']['tmp_name']) || !is_uploaded_file($_FILE
     $registro->nombre = $nombre;
     $registro->descripcion = $descripcion;
     $registro->precio = $precio;
-    $registro->precio_usd = $precio_usd;
     $registro->productos = $cantidad;
 
     $id = R::store($registro);

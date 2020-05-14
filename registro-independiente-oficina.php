@@ -136,6 +136,13 @@ $id = $_SESSION["user_id"];
 
                                         <div class="form-group">
                                             <div class="floating-label-group">
+                                                <label>Archivo de contrato.</label>
+                                                <input type="file" name="pdf_file" id="pdf_file" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
                                                 <input type="text" class="form-control input-form-underline" name="name" required />
                                                 <label class="floating-label">Nombre</label>
                                             </div>

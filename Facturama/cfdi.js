@@ -157,7 +157,7 @@ var con="";
 		+n.Folio+"</td><td>"+n.Serie+"</td><td>"+
 		n.TaxName+"</td><td>"+n.Rfc+"</td><td>"+n.Date+"</td><td>"+
 		n.Subtotal+"</td><td>"+n.Total+"</td><td>"+n.Email+"</td><td>"+
-		n.PaymentMethod+"</td><td><button type='button' class='btn btn-default' aria-label='Left Align' onclick=\"imprimirFactura(\'"+n.Id+"\');\"><i class='fas fa-file-download'></i></button></td><td></td></tr>";
+		n.PaymentMethod+"</td><td><button type='button' class='btn btn-default' aria-label='Left Align' onclick=\"imprimirFactura(\'"+n.Id+"\');\"><span class='glyphicon glyphicon-save-file' aria-hidden='true' ></span></button></td><td></td></tr>";
 		}
 		
 		$("#contenido").html("");	
@@ -186,7 +186,7 @@ var con="";
 		+n.Folio+"</td><td>"+n.Serie+"</td><td>"+
 		n.TaxName+"</td><td>"+n.Rfc+"</td><td>"+n.Date+"</td><td>"+
 		n.Subtotal+"</td><td>"+n.Total+"</td><td>"+n.Email+"</td><td>"+
-		n.PaymentMethod+"</td><td><button type='button' class='btn btn-default' aria-label='Left Align' onclick=\"imprimirFactura(\'"+n.Id+"\');\"><i class='fas fa-file-download'></i></button></td><td></td></tr>";
+		n.PaymentMethod+"</td><td><button type='button' class='btn btn-default' aria-label='Left Align' onclick=\"imprimirFactura(\'"+n.Id+"\');\"><span class='glyphicon glyphicon-save-file' aria-hidden='true' ></span></button></td><td></td></tr>";
 		}
 		
 		$("#contenido").html("");	
@@ -349,15 +349,297 @@ console.log(newClient);
 
 
 	
-	
-	
-	
-	
-	
-	
-	
 return false;	
 }
+
+
+
+//englobado todo en un solo concepto
+function newFactura(rfc,nombre,email,domicilio,numero,municipio,estado,pais,descripcion,preciounitario,cantidad,subtotal,total,ivacobrado){
+var tipoCFDI="I";
+var formaPago="99";
+var metodoPago="PUE";
+
+console.log(tipoCFDI+".."+formaPago+".."+metodoPago);
+
+var rfc=$('#rfc').val();
+var nombre=$('#nombre').val();
+var email=$('#email').val();
+var domicilio=$('#domicilio').val();
+var numero=$('#numero').val();
+var municipio=$('#municipio').val();
+var estado=$('#estado').val();
+var pais=$('#pais').val();
+var usoCFDI="P01";
+
+console.log(rfc+".."+nombre+".."+email+".."+domicilio+".."+numero+".."+estado+".."+pais+".."+usoCFDI);
+
+var descripcion=descripcion;
+var precio=preciounitario;
+var cantidad=cantidad;
+var subtotal=subtotal;
+var total=total;
+
+
+console.log(descripcion+".."+precio+".."+cantidad);
+
+newCfdi["CfdiType"]=tipoCFDI;
+newCfdi["PaymentForm"]=formaPago;
+newCfdi["PaymentMethod"]=metodoPago;
+
+newCfdi["Receiver"].Rfc=rfc;
+newCfdi["Receiver"].Name=nombre;
+newCfdi["Receiver"].CfdiUse=usoCFDI;
+
+
+
+newCfdi["Items"][0].UnitPrice=parseFloat(precio);
+newCfdi["Items"][0].Quantity=parseFloat(cantidad);
+newCfdi["Items"][0].Subtotal=parseFloat(subtotal);
+newCfdi["Items"][0].Total=parseFloat(total);
+newCfdi["Items"][0].Description=descripcion;
+
+newCfdi["Items"][0].Taxes[0].Total=parseFloat(ivacobrado);
+newCfdi["Items"][0].Taxes[0].Base=parseFloat(subtotal);
+newCfdi["Items"][0].Taxes[0].Rate=0.16;
+
+
+console.log(newCfdi);
+
+newClient["Email"]=email;
+newClient["Address"].Street=domicilio;
+newClient["Address"].ExteriorNumber=numero;
+newClient["Address"].Neighborhood=domicilio;
+newClient["Address"].Municipality=municipio;
+newClient["Address"].State=estado;
+newClient["Rfc"]=rfc;
+newClient["Name"]=nombre;
+newClient["CfdiUse"]=usoCFDI;
+
+
+
+
+console.log(newClient);
+
+
+
+
+	var client;
+	//creacion de un cliente
+	Facturama.Clients.Create(newClient, function(result){ 
+		client = result;
+		console.log("creacion",result);
+    
+	  
+	//creacion de un cfdi
+	newCfdi.ExpeditionPlace = "45900";
+	Facturama.Cfdi.Create(newCfdi, function(result){ 
+		cfdi = result;
+		console.log("creacion",result);
+    
+	    
+	    var type = "issued";
+	    Facturama.Cfdi.Send("?cfdiType=" + type + "&cfdiId=" + cfdi.Id + "&email=" + email, function(result){ 
+			console.log("envio", result);
+		});
+
+		//descargar el PDF del cfdi
+		Facturama.Cfdi.Download("pdf", "issued", cfdi.Id, function(result){
+			console.log("descarga",result);
+
+			blob = converBase64toBlob(result.Content, 'application/pdf');
+
+			var blobURL = URL.createObjectURL(blob);
+			window.open(blobURL);
+			$('#exampleModal').modal('hide');
+		});
+
+		//descargar el XML del cfdi
+		Facturama.Cfdi.Download("xml", "issued", cfdi.Id, function(result){
+			console.log("descarga",result);
+
+			blob = converBase64toBlob(result.Content, 'application/xml');
+
+			var blobURL = URL.createObjectURL(blob);
+			window.open(blobURL);
+			location.reload();
+			
+		});
+
+
+	}, function(error) {
+		if (error && error.responseJSON) {
+			
+			 $("#error").show();
+            console.log("errores", error.responseJSON);
+        }
+		
+	});
+
+//aqui termina crear cliente
+	}, function(error) {
+		if (error && error.responseJSON) {
+			$("#error").show();
+            console.log("errores", error.responseJSON);
+        }
+		
+	});
+
+return false;	
+}
+
+
+
+//englobado todo en varios conceptos
+function newFacturaMulti(rfc,nombre,email,domicilio,numero,municipio,estado,pais,conceptos){
+var tipoCFDI="I";
+var formaPago="99";
+var metodoPago="PUE";
+
+console.log(tipoCFDI+".."+formaPago+".."+metodoPago);
+
+var rfc=$('#rfc').val();
+var nombre=$('#nombre').val();
+var email=$('#email').val();
+var domicilio=$('#domicilio').val();
+var numero=$('#numero').val();
+var municipio=$('#municipio').val();
+var estado=$('#estado').val();
+var pais=$('#pais').val();
+var usoCFDI="P01";
+
+console.log(rfc+".."+nombre+".."+email+".."+domicilio+".."+numero+".."+estado+".."+pais+".."+usoCFDI);
+
+var descripcion=descripcion;
+var precio=preciounitario;
+var cantidad=cantidad;
+var subtotal=subtotal;
+var total=total;
+
+
+console.log(descripcion+".."+precio+".."+cantidad);
+
+newCfdi["CfdiType"]=tipoCFDI;
+newCfdi["PaymentForm"]=formaPago;
+newCfdi["PaymentMethod"]=metodoPago;
+
+newCfdi["Receiver"].Rfc=rfc;
+newCfdi["Receiver"].Name=nombre;
+newCfdi["Receiver"].CfdiUse=usoCFDI;
+
+
+descripcion,preciounitario,cantidad,subtotal,total,ivacobrado
+
+
+
+for(var n1=0;n1<conceptos.length;n1++){
+ 
+newCfdi["Items"][n1].UnitPrice=parseFloat(conceptos[n1].preciounitario);
+newCfdi["Items"][n1].Quantity=parseFloat(conceptos[n1].cantidad);
+newCfdi["Items"][n1].Subtotal=parseFloat(conceptos[n1].subtotal);
+newCfdi["Items"][n1].Total=parseFloat(conceptos[n1].total);
+newCfdi["Items"][n1].Description=conceptos[n1].descripcion;
+
+newCfdi["Items"][n1].Taxes[0].Total=parseFloat(conceptos[n1].ivacobrado);
+newCfdi["Items"][n1].Taxes[0].Base=parseFloat(conceptos[n1].subtotal);
+newCfdi["Items"][n1].Taxes[0].Rate=0.16;
+
+}
+
+
+
+
+
+console.log(newCfdi);
+
+newClient["Email"]=email;
+newClient["Address"].Street=domicilio;
+newClient["Address"].ExteriorNumber=numero;
+newClient["Address"].Neighborhood=domicilio;
+newClient["Address"].Municipality=municipio;
+newClient["Address"].State=estado;
+newClient["Rfc"]=rfc;
+newClient["Name"]=nombre;
+newClient["CfdiUse"]=usoCFDI;
+
+
+
+
+console.log(newClient);
+
+
+
+
+	var client;
+	//creacion de un cliente
+	Facturama.Clients.Create(newClient, function(result){ 
+		client = result;
+		console.log("creacion",result);
+    
+	  
+	//creacion de un cfdi
+	newCfdi.ExpeditionPlace = "45900";
+	Facturama.Cfdi.Create(newCfdi, function(result){ 
+		cfdi = result;
+		console.log("creacion",result);
+    
+	    
+	    var type = "issued";
+	    Facturama.Cfdi.Send("?cfdiType=" + type + "&cfdiId=" + cfdi.Id + "&email=" + email, function(result){ 
+			console.log("envio", result);
+		});
+
+		//descargar el PDF del cfdi
+		Facturama.Cfdi.Download("pdf", "issued", cfdi.Id, function(result){
+			console.log("descarga",result);
+
+			blob = converBase64toBlob(result.Content, 'application/pdf');
+
+			var blobURL = URL.createObjectURL(blob);
+			window.open(blobURL);
+			$('#exampleModal').modal('hide');
+		});
+
+		//descargar el XML del cfdi
+		Facturama.Cfdi.Download("xml", "issued", cfdi.Id, function(result){
+			console.log("descarga",result);
+
+			blob = converBase64toBlob(result.Content, 'application/xml');
+
+			var blobURL = URL.createObjectURL(blob);
+			window.open(blobURL);
+			location.reload();
+			
+		});
+
+
+	}, function(error) {
+		if (error && error.responseJSON) {
+			
+			 $("#error").show();
+            console.log("errores", error.responseJSON);
+        }
+		
+	});
+
+//aqui termina crear cliente
+	}, function(error) {
+		if (error && error.responseJSON) {
+			$("#error").show();
+            console.log("errores", error.responseJSON);
+        }
+		
+	});
+
+return false;	
+}
+
+
+
+
+
+
+
 
 function cambiarCantidades(){
 var precio=parseFloat($('#precio').val());

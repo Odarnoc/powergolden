@@ -83,46 +83,53 @@ function sdkResponseHandler(status, response) {
     } else {
         $("#token").val(response.id);
         $("#transaction_amount").val(10);
-        var data = $("#pay").serializeArray();
-        data.push({
+        console.log(localStorage.getItem('carrito'));
+        console.log(iduser);
+        var datados = {
             'carrito': JSON.parse(localStorage.getItem('carrito')),
-            'usuariid': id,
-            sucursal: localStorage.getItem('sucursal_id'),
-            "email": localStorage.getItem('correo'),
+            'usuariid': iduser,
+            "sucursal": localStorage.getItem('sucursal_id'),
+            "email": "luis.edgar89@gmail.com",
             "transaction_amount": 1 /*localStorage.getItem('totalgen')*/ ,
             "direccion": localStorage.getItem('direccion'),
             "estado": localStorage.getItem('estado'),
             "cp": localStorage.getItem('codigop'),
             "ciudad": localStorage.getItem('municipio'),
             "colonia": localStorage.getItem('colonia')
-        });
+        };
+        $("#pay").serializeArray().forEach((value, key) => { datados[value['name']] = value['value'] });
         $.ajax({
             url: "ajax/mercado-pago.php",
             type: "post",
-            data: data,
-            dataType: "html",
+            data: datados,
+            dataType: "json",
             success(data) {
+                var datatres = data;
                 console.log(data);
-                Mercadopago.clearSession();
-                Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: 'Compra exitosa!'
-                    })
-                    .then((ok) => {
-                        if (ok) {
-                            localStorage.clear();
-                            localStorage.setItem('carrito', JSON.stringify([]));
-                            location.href = "index.php";
-                        }
+                if (datatres['status'] == "approved") {
+                    Mercadopago.clearSession();
+                    Swal.fire({
+                            icon: 'success',
+                            title: 'Éxito',
+                            text: 'Compra exitosa!'
+                        })
+                        .then((ok) => {
+                            if (ok) {
+                                localStorage.clear();
+                                localStorage.setItem('carrito', JSON.stringify([]));
+                                location.href = "index.php";
+                            }
+                        });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Error al realizar la compra!'
                     });
+                }
             },
             error(error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Error al realizar la compra!'
-                });
+
             }
         });
     }

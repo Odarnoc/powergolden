@@ -3,11 +3,11 @@
 require 'user_preferences/user-info.php';
 
 if(!isset($_POST['fechauno'])&&!isset($_POST['fechados'])){
-    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre FROM productosxventas AS pxv 
-    LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha ="'.date('Y-m-d').'"';
+    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre, r.nombre AS rol FROM productosxventas AS pxv 
+    LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id LEFT JOIN roles AS r ON u.rol = r.id WHERE v.fecha ="'.date('Y-m-d').'"';
 }else{
-    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre FROM productosxventas AS pxv 
-    LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha BETWEEN "'.$_POST['fechauno'].'" and "'.$_POST['fechados'].'"';
+    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre, r.nombre AS rol FROM productosxventas AS pxv 
+    LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id LEFT JOIN roles AS r ON u.rol = r.id WHERE v.fecha BETWEEN "'.$_POST['fechauno'].'" and "'.$_POST['fechados'].'"';
     $filtro = $_POST['fechauno'];
     $filtrodos = $_POST['fechados'];
 }
@@ -110,7 +110,7 @@ $productos=R::getAll($query);
                                     <table id="reporteventas" class="table">
                                         <thead>
                                             <tr class="table-primary">
-                                                <th>ID</th>
+                                                <th>Tipo</th>
                                                 <th>Fecha</th>
                                                 <th>ID</th>
                                                 <th>Cliente</th>
@@ -121,8 +121,7 @@ $productos=R::getAll($query);
                                         <tbody>
                                         <?php foreach ($productos as $item) { ?>
                                             <tr>
-                                                <td><?php echo $item['id'] ?></td>
-                                                
+                                                <td><?php echo $item['rol'] ?></td>
                                                 <td><?php echo date_format(date_create($item['fecha']),"d/m/Y H:i:s");?></td>
                                                 <td><?php echo $item['venta'] ?></td>
                                                 <td><?php echo $item['nombre'] ?></td>

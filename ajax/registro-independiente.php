@@ -43,6 +43,10 @@ if (empty($_POST['email'])) {
     return;
 }
 
+if (empty($_FILES["pdf_file"]["name"])) {
+    error_mensaje('agregar archivo de contrato.');
+    return;
+}
 
 $pass = rand(1000, 9999);
 
@@ -63,59 +67,65 @@ if (sizeof($registros_in) == 0) {
 
     $registro = R::dispense('usuarios');
 
+    $dir_subida_pdf = '../firmas/Documentos/';
+    $fichero_subido_pdf = $dir_subida_pdf . basename($_FILES["pdf_file"]["name"]);
+
     $dir_subida = '../images/ine/';
     $fichero_subido = $dir_subida . basename($_FILES['img-producto']['name']);
     $fichero_subido2 = $dir_subida . basename($_FILES['img-producto2']['name']);
 
     if (move_uploaded_file($_FILES['img-producto']['tmp_name'], $fichero_subido)) {
         if (move_uploaded_file($_FILES['img-producto2']['tmp_name'], $fichero_subido2)) {
-
-            $registro->nombre = $nombre;
-            $registro->telefono = $telefono;
-            $registro->pass = $pass;
-            $registro->correo = $correo;
-            $registro->rol = 2;
-            $registro->apellidos = $paterno.' '.$materno;
-            $registro->referido = $ref;
-            $id = R::store($registro);
-            
-            $registro2 = R::dispense('independientes');
-            $registro2->usuario_id = $id;
-            $registro2->direccion = $direccion;
-            $registro2->imagen = basename($_FILES['img-producto']['name']);
-            $registro2->imagen2 = basename($_FILES['img-producto2']['name']);
-            $registro2->status = 0;
-
-            $id2 = R::store($registro2);
+            if (move_uploaded_file($_FILES["pdf_file"]["tmp_name"], $fichero_subido_pdf)) {
 
 
-            if (empty($id2)) {
-                error_mensaje("Error al crear el usuario.");
-            } else {
-                echo json_encode($response);
-                generarPDFFirma(getRealIP(),$direccion,$nombre,$paterno,$materno,$telefono,$correo,$id);
+                $registro->nombre = $nombre;
+                $registro->telefono = $telefono;
+                $registro->pass = $pass;
+                $registro->correo = $correo;
+                $registro->rol = 2;
+                $registro->apellidos = $paterno . ' ' . $materno;
+                $registro->referido = $ref;
+                $id = R::store($registro);
 
-                $mail = new PHPMailer(true);
+                $registro2 = R::dispense('independientes');
+                $registro2->usuario_id = $id;
+                $registro2->direccion = $direccion;
+                $registro2->imagen = basename($_FILES['img-producto']['name']);
+                $registro2->imagen2 = basename($_FILES['img-producto2']['name']);
+                $registro2->archivo = basename($_FILES["pdf_file"]["name"]);
+                $registro2->status = 0;
 
-                try {
-                    $mail->SMTPDebug = 0;                      // Enable verbose debug output
-                    $mail->isSMTP();
-                    //$mail->SMTPAuth   = true;  
+                $id2 = R::store($registro2);
 
-                    $mail->SMTPSecure = 'ssl';                                             // Send using SMTP
-                    $mail->Host       = 'mail.powergolden.com.mx';
-                    $mail->Port       = 465;
-                    $mail->Username   = 'golden1@powergolden.com.mx';                     // SMTP username
-                    $mail->Password   = '1f4IRMiugdr#';        // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
 
-                    //Recipients
-                    $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
-                    $mail->addAddress($correo, $nombre);     // Add a recipient
+                if (empty($id2)) {
+                    error_mensaje("Error al crear el usuario.");
+                } else {
+                    echo json_encode($response);
+                    generarPDFFirma(getRealIP(), $direccion, $nombre, $paterno, $materno, $telefono, $correo, $id);
 
-                    // Content
-                    $mail->isHTML(true);                                  // Set email format to HTML
-                    $mail->Subject = 'Soporte PowerGolden';
-                    $mail->Body    = '<!DOCTYPE html>
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        $mail->SMTPDebug = 0;                      // Enable verbose debug output
+                        $mail->isSMTP();
+                        //$mail->SMTPAuth   = true;  
+
+                        $mail->SMTPSecure = 'ssl';                                             // Send using SMTP
+                        $mail->Host       = 'mail.powergolden.com.mx';
+                        $mail->Port       = 465;
+                        $mail->Username   = 'golden1@powergolden.com.mx';                     // SMTP username
+                        $mail->Password   = '1f4IRMiugdr#';        // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+
+                        //Recipients
+                        $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
+                        $mail->addAddress($correo, $nombre);     // Add a recipient
+
+                        // Content
+                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->Subject = 'Soporte PowerGolden';
+                        $mail->Body    = '<!DOCTYPE html>
                                             <html lang="en">
                                             <head>
                                                 <meta charset="UTF-8">
@@ -136,11 +146,12 @@ if (sizeof($registros_in) == 0) {
                                             </body>
                                         </html>';
 
-                    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-                    $mail->send(); 
-                } catch (Exception $e) {
-                    echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
+                        $mail->send();
+                    } catch (Exception $e) {
+                        echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
+                    }
                 }
             }
         }
@@ -148,5 +159,3 @@ if (sizeof($registros_in) == 0) {
 } else {
     error_mensaje("El correo ya esta registrado.");
 }
-
-?>

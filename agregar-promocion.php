@@ -26,7 +26,7 @@ require 'user_preferences/user-info.php';
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/helper.css">
     <!-- responseive menu -->
-    <link rel="stylesheet" href="css/menu-movil.css">
+  <link rel="stylesheet" href="css/menu-movil.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -56,9 +56,9 @@ require 'user_preferences/user-info.php';
 <body>
 
 
-    <!-- Top Menu -->
-    <?php include "menus/top_menu.php"; ?>
-    <!-- End Top Menu -->
+            <!-- Top Menu -->
+            <?php include "menus/top_menu.php";?>
+            <!-- End Top Menu -->
 
 
     <!-- End Navbar ====
@@ -68,7 +68,7 @@ require 'user_preferences/user-info.php';
         <div class="container">
             <div class="row">
                 <!-- Admin Menu -->
-                <?php include "menus/menu_general_admin.php"; ?>
+                <?php include "menus/menu_general_admin.php";?>
                 <!-- End Admin Menu -->
 
                 <div class="col-lg-8 col-md-8 bg-gray">
@@ -105,83 +105,83 @@ require 'user_preferences/user-info.php';
                                         </div>
 
 
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
-                                                <label class="">Tipo de promoción</label>
-                                                <select name="tipo" id="tipo" class="form-control input-form-underline" required>
-                                                    <option value="1">Productos por kits</option>
-                                                    <option value="2">Productos por venta</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div id="kits" style="display:">
-                                            <div class="form-group" id="kit_div">
-                                                <div class="floating-label-group">
-                                                    <label class="">Tipo de Kit</label>
-                                                    <select name="paquete_id" class="form-control input-form-underline">
-                                                        <?php
-                                                        $lista = R::findAll("paquetes");
-                                                        foreach ($lista as $key) {
-                                                            echo '<option value="' . $key['id'] . '">' . $key['nombre'] . '</option>';
-                                                        }
-                                                        ?>
-
-                                                    </select>
+                                                <div class="form-group">
+                                                    <div class="floating-label-group">
+                                                        <label class="">Tipo de promoción</label>
+                                                        <select name="tipo" id="tipo" class="form-control input-form-underline" required >
+                                                             <option value="1">Productos por kits</option>
+                                                             <option value="2">Productos por venta</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="floating-label-group">
+                                                <div id="kits" style="display:">
+                                                <div class="form-group" id="kit_div">
+                                                    <div class="floating-label-group">
+                                                        <label class="">Tipo de Kit</label>
+                                                        <select name="paquete_id" class="form-control input-form-underline"  >
+                                                            <?php
+$lista = R::findAll("paquetes");
+foreach ($lista as $key) {
+    echo '<option value="' . $key['id'] . '">' . $key['nombre'] . '</option>';
+}
+?>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" >
+                                                    <div class="floating-label-group">
                                                     <label class="">Desde primera compra</label>
-                                                    <input type="checkbox" name="primera" class="form-control input-form-underline" <?php echo $item['reinscripcion'] == 1 ? 'checked' : '' ?> />
+                                                        <input type="checkbox" name="primera" class="form-control input-form-underline"  <?php echo $item['reinscripcion'] == 1 ? 'checked' : '' ?>  />
 
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                        </div>
-                                        <div id="productos" style="display:none">
-                                            <div class="form-group">
-                                                <div class="floating-label-group">
-                                                    <input name="desde" type="number" class="form-control input-form-underline" />
-                                                    <label class="floating-label-underline">A partir de la compra de </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="form-group">
+                                                
+                                                        </div>
+                                                        <div id="productos" style="display:none">
+                                                        <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input name="cantidad" type="number" class="form-control input-form-underline" />
+                                                <input name="desde" type="number" class="form-control input-form-underline"  />
+                                                <label class="floating-label-underline">A partir de la compra de </label>
+                                            </div>
+                                        </div>
+                                        
+                                                        </div>
+                                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input name="cantidad" type="number" class="form-control input-form-underline"  />
                                                 <label class="floating-label-underline">Cantidad de productos incluidos </label>
                                             </div>
                                         </div>
-                                </div>
-                                <!--<div class="form-group">
+                                            </div>
+                                    <!--<div class="form-group">
                                             <div class="floating-label-group">
                                                 <input name="precio" type="text" class="form-control input-form-underline" required />
                                                 <label class="floating-label-underline">Precio </label>
                                             </div>
                                         </div> -->
 
-                                <button type="submit" class="btn btn-lg-blue mt-3">Guardar</button>
+                                        <button type="submit"  class="btn btn-lg-blue mt-3">Guardar</button>
 
-                                </form>
+                                    </form>
+                                </div>
+
+
                             </div>
-
 
                         </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
         </div>
 
     </section>
 
 
-    <!-- Footer-->
-    <?php include "menus/footer_general.php"; ?>
-    <!-- End Footer -->
+            <!-- Footer-->
+            <?php include "menus/footer_general.php";?>
+            <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -211,6 +211,5 @@ require 'user_preferences/user-info.php';
 
 
 
-</body>
+</body></html>
 
-</html>

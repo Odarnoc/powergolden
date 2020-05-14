@@ -161,8 +161,8 @@ $sucursal = R::getAll($querytabla);
         </div>
     </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="modaltabla" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="modaltabla" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -197,7 +197,6 @@ $sucursal = R::getAll($querytabla);
     <!-- custom scripts -->
     <script src="js/main-perfil.js"></script>
 
-    <script src="js/scripts.js"></script>
     <!-- responseive menu -->
     <script src="js/menu-movil.js"></script>
 

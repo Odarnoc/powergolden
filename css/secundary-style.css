@@ -42,10 +42,6 @@
     display: none;
 }
 
-.botonGooglePay button {
+.botonGooglePay button{
     width: 100% !important;
-}
-
-goog-te-gadget-icon {
-    display: none !important;
 }

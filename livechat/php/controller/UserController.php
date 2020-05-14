@@ -1,7 +1,7 @@
-<?php
-
-class UserController extends Controller
-{
-}
-
-?>
+<?php
+
+class UserController extends Controller
+{
+}
+
+?>
