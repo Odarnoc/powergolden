@@ -97,6 +97,15 @@ require 'bd/conexion.php';
                                                 <label class="floating-label">Correo electrónico</label>
                                             </div>
                                         </div>
+                                        <div class="form-group col-lg-6 col-md-6">
+                                            <div class="floating-label-group">
+                                                <label class="label">País de registro</label>
+                                                <select autocomplete="false" style="height:60%;" class="form-control" id="pais" name="pais" required>
+                                                    <option value="MX">Mexico</option>
+                                                    <option value="US">Estados Unidos</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <div class="floating-label-group">
                                                 <input type="text" class="form-control input-form-underline" name="contrasena" required />

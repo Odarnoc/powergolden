@@ -86,6 +86,7 @@ if (sizeof($registros_in) == 0) {
                 $registro->rol = 2;
                 $registro->apellidos = $paterno . ' ' . $materno;
                 $registro->referido = $ref;
+                $registro->pais = $_POST['pais'];
                 $id = R::store($registro);
 
                 $registro2 = R::dispense('independientes');

@@ -69,6 +69,7 @@ if (sizeof($registros_in) == 0) {
             $registro->rol = 1;
             $registro->apellidos = $paterno.' '.$materno;
             $registro->referido = null;
+            $registro->pais = $_POST['pais'];
             $id = R::store($registro);
 
             if (empty($id)) {

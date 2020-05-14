@@ -2,7 +2,7 @@
 
 session_start();
 
-if(!isset($_SESSION["user_id"])){
+if (!isset($_SESSION["user_id"])) {
     header("Location: iniciar-sesion.php");
 }
 
@@ -88,9 +88,9 @@ $id = $_SESSION["user_id"];
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-            
+
                 <div class="col-lg-3 col-md-3 bg-white">
-                    <div style="margin-top: 100px" >
+                    <div style="margin-top: 100px">
                         <?php include("componentes/menu-oficina.php"); ?>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ $id = $_SESSION["user_id"];
                 <div class="col-lg-9 col-md-9 bg-gray">
                     <div class="d-cont-right">
 
-                    <div class="row">
+                        <div class="row">
                             <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
                                 <div class="d-form">
                                     <p class="title-cuenta">Registro independiente.</p>
@@ -171,6 +171,15 @@ $id = $_SESSION["user_id"];
                                                 <label class="floating-label">Correo electrónico</label>
                                             </div>
                                         </div>
+                                        <div class="form-group col-lg-6 col-md-6">
+                                            <div class="floating-label-group">
+                                                <label class="label">País de registro</label>
+                                                <select autocomplete="false" style="height:60%;" class="form-control" id="pais" name="pais" required>
+                                                    <option value="MX">Mexico</option>
+                                                    <option value="US">Estados Unidos</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <div class="floating-label-group">
                                                 <input type="tel" class="form-control input-form-underline" name="direccion" required />
@@ -231,6 +240,8 @@ $id = $_SESSION["user_id"];
     <script src="js/sweetalert2.js"></script>
     <!-- registro scripts -->
     <script src="js/registro-independiente.js"></script>
-    
 
-</body></html>
+
+</body>
+
+</html>
