@@ -585,7 +585,7 @@ function create_ticket(
 
       //doc.save('web.pdf');
       if (cliente != null) {
-        var pdf = btoa(doc.output()); 
+        var pdf = doc.output("blob");
         var data = new FormData();
         data.append("data", pdf);
 
