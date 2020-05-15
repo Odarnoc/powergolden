@@ -17,6 +17,14 @@ if($lista){
 		$_SESSION['username'] = $key['nombre'].' '.$key['apellidos'];
 		$_SESSION['user_id']=$key['id'] ;
 		$_SESSION['rol']=$key['rol'] ;
+		$aux=R::find( 'sucursales', "id= ".$key['sucursal_id'] );
+		
+		if($aux){
+			$_SESSION['sucursal']=$aux[$key['sucursal_id']]['nombre'];
+		}else{
+			$_SESSION['sucursal']="";
+		}
+	
 		$_SESSION['sucursal_id']=$key['sucursal_id'] ;
 		$usuario=$key;
 		break;

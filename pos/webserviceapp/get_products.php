@@ -6,7 +6,7 @@ $url = "application/storage/products/";
 $where="";
 if ($_POST['product'] != '' OR $_POST['category']!=0) {
 	if($_POST['product']!=''){
-		$where.=" (nombre like '%{$_POST['product']}%' OR descripcion like '%{$_POST['product']}%' )";
+		$where.=" (productos.nombre like '%{$_POST['product']}%' OR descripcion like '%{$_POST['product']}%' )";
 	}
 	if($_POST['category']!=0){
 		if($where!=""){

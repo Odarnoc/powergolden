@@ -362,14 +362,6 @@ var metodoPago="PUE";
 
 console.log(tipoCFDI+".."+formaPago+".."+metodoPago);
 
-var rfc=$('#rfc').val();
-var nombre=$('#nombre').val();
-var email=$('#email').val();
-var domicilio=$('#domicilio').val();
-var numero=$('#numero').val();
-var municipio=$('#municipio').val();
-var estado=$('#estado').val();
-var pais=$('#pais').val();
 var usoCFDI="P01";
 
 console.log(rfc+".."+nombre+".."+email+".."+domicilio+".."+numero+".."+estado+".."+pais+".."+usoCFDI);
@@ -400,7 +392,7 @@ newCfdi["Items"][0].Total=parseFloat(total);
 newCfdi["Items"][0].Description=descripcion;
 
 newCfdi["Items"][0].Taxes[0].Total=parseFloat(ivacobrado);
-newCfdi["Items"][0].Taxes[0].Base=parseFloat(subtotal);
+newCfdi["Items"][0].Taxes[0].Base=parseFloat(total);
 newCfdi["Items"][0].Taxes[0].Rate=0.16;
 
 
@@ -462,7 +454,7 @@ console.log(newClient);
 
 			var blobURL = URL.createObjectURL(blob);
 			window.open(blobURL);
-			location.reload();
+			//location.reload();
 			
 		});
 
@@ -498,14 +490,6 @@ var metodoPago="PUE";
 
 console.log(tipoCFDI+".."+formaPago+".."+metodoPago);
 
-var rfc=$('#rfc').val();
-var nombre=$('#nombre').val();
-var email=$('#email').val();
-var domicilio=$('#domicilio').val();
-var numero=$('#numero').val();
-var municipio=$('#municipio').val();
-var estado=$('#estado').val();
-var pais=$('#pais').val();
 var usoCFDI="P01";
 
 console.log(rfc+".."+nombre+".."+email+".."+domicilio+".."+numero+".."+estado+".."+pais+".."+usoCFDI);
@@ -528,9 +512,12 @@ newCfdi["Receiver"].Name=nombre;
 newCfdi["Receiver"].CfdiUse=usoCFDI;
 
 
+<<<<<<< HEAD
+=======
 descripcion,preciounitario,cantidad,subtotal,total,ivacobrado
 
 
+>>>>>>> 48f02c733cba8cd21a2821000aec2720cbbf195c
 
 for(var n1=0;n1<conceptos.length;n1++){
  
