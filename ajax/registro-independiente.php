@@ -33,19 +33,65 @@ if (empty($_POST['phone'])) {
     error_mensaje('Llenar el campo teléfono.');
     return;
 }
-if (empty($_POST['direccion'])) {
-    error_mensaje('Llenar el campo direccion.');
-    return;
-}
 
 if (empty($_POST['email'])) {
     error_mensaje('Llenar el campo correo.');
     return;
 }
 
-if (empty($_FILES["pdf_file"]["name"])) {
-    error_mensaje('agregar archivo de contrato.');
+if (empty($_POST['banco'])) {
+    error_mensaje('Llenar el campo banco.');
     return;
+}
+
+if (empty($_POST['c_interbancaria'])) {
+    error_mensaje('Llenar el campo clabe interbancaria.');
+    return;
+}
+
+if (empty($_FILES["pdf_file"]["name"])) {
+    error_mensaje('Agregar archivo de contrato.');
+    return;
+}
+
+
+if (isset($_POST['factura']) && $_POST['factura'] == 1) {
+
+    if (empty($_POST['rfc'])) {
+        error_mensaje('Llenar el campo RFC.');
+        return;
+    }
+
+    if (empty($_POST['n_comercial'])) {
+        error_mensaje('Llenar el campo nombre comercial.');
+        return;
+    }
+
+    if (empty($_POST['n_exterior'])) {
+        error_mensaje('Llenar el campo numero exterior.');
+        return;
+    }
+
+    if (empty($_POST['municipio'])) {
+        error_mensaje('Llenar el campo numero municipio.');
+        return;
+    }
+
+    if (empty($_POST['estado'])) {
+        error_mensaje('Llenar el campo numero estado.');
+        return;
+    }
+
+    if (empty($_POST['pais'])) {
+        error_mensaje('Llenar el campo numero pais.');
+        return;
+    }
+
+    if (empty($_POST['direccion'])) {
+        error_mensaje('Llenar el campo numero direccion.');
+        return;
+    }
+
 }
 
 $pass = rand(1000, 9999);
@@ -89,13 +135,35 @@ if (sizeof($registros_in) == 0) {
                 $registro->pais = $_POST['pais'];
                 $id = R::store($registro);
 
-                $registro2 = R::dispense('independientes');
-                $registro2->usuario_id = $id;
-                $registro2->direccion = $direccion;
-                $registro2->imagen = basename($_FILES['img-producto']['name']);
-                $registro2->imagen2 = basename($_FILES['img-producto2']['name']);
-                $registro2->archivo = basename($_FILES["pdf_file"]["name"]);
-                $registro2->status = 0;
+                if (isset($_POST['factura']) && $_POST['factura'] == 1) {
+                    $registro2 = R::dispense('independientes');
+                    $registro2->usuario_id = $id;
+                    $registro2->direccion = $direccion;
+                    $registro2->interbancaria = $_POST['c_interbancaria'];
+                    $registro2->banco = $_POST['banco'];
+                    $registro2->facturacion = $_POST['factura'];
+                    $registro2->rfc = $_POST['rfc'];
+                    $registro2->nombrecomercial = $_POST['n_comercial'];
+                    $registro2->numeroexterior = $_POST['n_exterior'];
+                    $registro2->municipio = $_POST['municipio'];
+                    $registro2->estado = $_POST['estado'];
+                    $registro2->pais = $_POST['pais'];
+                    $registro2->imagen = basename($_FILES['img-producto']['name']);
+                    $registro2->imagen2 = basename($_FILES['img-producto2']['name']);
+                    $registro2->archivo = basename($_FILES["pdf_file"]["name"]);
+                    $registro2->status = 0;
+                } else {
+                    $registro2 = R::dispense('independientes');
+                    $registro2->usuario_id = $id;
+                    $registro2->direccion = $direccion;
+                    $registro2->interbancaria = $_POST['c_interbancaria'];
+                    $registro2->banco = $_POST['banco'];
+                    $registro2->imagen = basename($_FILES['img-producto']['name']);
+                    $registro2->imagen2 = basename($_FILES['img-producto2']['name']);
+                    $registro2->archivo = basename($_FILES["pdf_file"]["name"]);
+                    $registro2->status = 0;
+                }
+
 
                 $id2 = R::store($registro2);
 
@@ -106,7 +174,7 @@ if (sizeof($registros_in) == 0) {
                     echo json_encode($response);
                     generarPDFFirma(getRealIP(), $direccion, $nombre, $paterno, $materno, $telefono, $correo, $id);
 
-                    $mail = new PHPMailer(true);
+                    /*$mail = new PHPMailer(true);
 
                     try {
                         $mail->SMTPDebug = 0;                      // Enable verbose debug output
@@ -152,7 +220,7 @@ if (sizeof($registros_in) == 0) {
                         $mail->send();
                     } catch (Exception $e) {
                         echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
-                    }
+                    }*/
                 }
             }
         }

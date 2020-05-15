@@ -164,6 +164,18 @@ if (isset($_GET['ui'])) {
                                                 <label class="floating-label">Correo electrónico</label>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input type="number" class="form-control input-form-underline" name="c_interbancaria" required />
+                                                <label class="floating-label">Clabe interbancaria</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="floating-label-group">
+                                                <input type="text" class="form-control input-form-underline" name="banco" required />
+                                                <label class="floating-label">Banco</label>
+                                            </div>
+                                        </div>
                                         <div class="form-group col-lg-6 col-md-6">
                                             <div class="floating-label-group">
                                                 <label class="label">País de registro</label>
@@ -175,12 +187,6 @@ if (isset($_GET['ui'])) {
                                         </div>
                                         <div class="form-group">
                                             <div class="floating-label-group">
-                                                <input type="tel" class="form-control input-form-underline" name="direccion" required />
-                                                <label class="floating-label">Direccion</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="floating-label-group">
                                                 <?php if ($user_id != 0) { ?>
                                                     <input value="<?php echo $user_id ?>" type="tel" class="form-control input-form-underline" name="ref" hidden />
                                                 <?php } else { ?>
@@ -188,6 +194,61 @@ if (isset($_GET['ui'])) {
                                                         <option value="0">Seleccionar cliente</option>
                                                     </select>
                                                 <?php } ?>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check">
+                                                <input onclick="boxfactura()" class="form-check-input" value="0" type="checkbox" name="factura" id="factura" >
+                                                <label class="form-check-label">
+                                                    Facturación automática.
+                                                </label>
+                                                <div class="invalid-feedback">
+                                                    You must agree before submitting.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="facturama" style="display: none">
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="rfc" id="rfc"/>
+                                                    <label class="floating-label">RFC</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="n_comercial" id="n_comercial"/>
+                                                    <label class="floating-label">Nombre Comercial</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="direccion" id="direccion"/>
+                                                    <label class="floating-label">Direccion</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="n_exterior" id="n_exterior" />
+                                                    <label class="floating-label">Numero Exterior</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="municipio" id="municipio" />
+                                                    <label class="floating-label">Municipio</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="estado" id="estado" />
+                                                    <label class="floating-label">Estado</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="pais" id="pais" />
+                                                    <label class="floating-label">Pais</label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-check">
