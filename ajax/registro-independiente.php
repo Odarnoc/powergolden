@@ -77,6 +77,11 @@ if (isset($_POST['factura']) && $_POST['factura'] == 1) {
         return;
     }
 
+    if (empty($_POST['colonia'])) {
+        error_mensaje('Llenar el campo numero colonia.');
+        return;
+    }
+
     if (empty($_POST['estado'])) {
         error_mensaje('Llenar el campo numero estado.');
         return;
@@ -146,6 +151,7 @@ if (sizeof($registros_in) == 0) {
                     $registro2->nombrecomercial = $_POST['n_comercial'];
                     $registro2->numeroexterior = $_POST['n_exterior'];
                     $registro2->municipio = $_POST['municipio'];
+                    $registro2->colonia = $_POST['colonia'];
                     $registro2->estado = $_POST['estado'];
                     $registro2->pais = $_POST['pais'];
                     $registro2->imagen = basename($_FILES['img-producto']['name']);
@@ -174,7 +180,7 @@ if (sizeof($registros_in) == 0) {
                     echo json_encode($response);
                     generarPDFFirma(getRealIP(), $direccion, $nombre, $paterno, $materno, $telefono, $correo, $id);
 
-                    /*$mail = new PHPMailer(true);
+                    $mail = new PHPMailer(true);
 
                     try {
                         $mail->SMTPDebug = 0;                      // Enable verbose debug output
@@ -220,7 +226,7 @@ if (sizeof($registros_in) == 0) {
                         $mail->send();
                     } catch (Exception $e) {
                         echo "No se pudo enviar el correo. {$mail->ErrorInfo}";
-                    }*/
+                    }
                 }
             }
         }

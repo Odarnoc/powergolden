@@ -197,7 +197,7 @@ require 'user_preferences/user-info.php';
                                         </div>
                                         <div class="form-group">
                                             <div class="form-check">
-                                                <input onclick="boxfactura()" class="form-check-input" value="0" type="checkbox" name="factura" id="factura" >
+                                                <input onclick="boxfactura()" class="form-check-input" value="0" type="checkbox" name="factura" id="factura">
                                                 <label class="form-check-label">
                                                     Facturación automática.
                                                 </label>
@@ -209,19 +209,19 @@ require 'user_preferences/user-info.php';
                                         <div id="facturama" style="display: none">
                                             <div class="form-group">
                                                 <div class="floating-label-group">
-                                                    <input type="text" class="form-control input-form-underline" name="rfc" id="rfc"/>
+                                                    <input type="text" class="form-control input-form-underline" name="rfc" id="rfc" />
                                                     <label class="floating-label">RFC</label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="floating-label-group">
-                                                    <input type="text" class="form-control input-form-underline" name="n_comercial" id="n_comercial"/>
+                                                    <input type="text" class="form-control input-form-underline" name="n_comercial" id="n_comercial" />
                                                     <label class="floating-label">Nombre Comercial</label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="floating-label-group">
-                                                    <input type="text" class="form-control input-form-underline" name="direccion" id="direccion"/>
+                                                    <input type="text" class="form-control input-form-underline" name="direccion" id="direccion" />
                                                     <label class="floating-label">Direccion</label>
                                                 </div>
                                             </div>
@@ -235,6 +235,12 @@ require 'user_preferences/user-info.php';
                                                 <div class="floating-label-group">
                                                     <input type="text" class="form-control input-form-underline" name="municipio" id="municipio" />
                                                     <label class="floating-label">Municipio</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="floating-label-group">
+                                                    <input type="text" class="form-control input-form-underline" name="colonia" id="colonia" />
+                                                    <label class="floating-label">Colonia</label>
                                                 </div>
                                             </div>
                                             <div class="form-group">
