@@ -9,6 +9,7 @@ var gratis = 0;
 var type = 0;
 var descuento = 0;
 var arreglo = [];
+var gratuito = [];
 var arreglo2 = [];
 var p_arre = [];
 var paquetes = null;
@@ -22,7 +23,7 @@ var deviceSessionId = "";
 var tipo_clientes = 0;
 var total_google = 0;
 var select_gratis = false;
-var moneda="";
+var moneda = "";
 $(document).ready(function () {
   get_products_list();
   get_paquetes_info();
@@ -37,6 +38,7 @@ $(document).ready(function () {
     "card_payment",
     "deviceIdHiddenFieldName"
   );
+  //newFactura('OIAL890916QC6','LUIS EDGAR OLIVA','luis.edgar89@gmail.com','privada degollado','451','chapala','jalisco','Mexico','Compra de Kit 1, Kit 2, Kit 1, zuleyka','5000','1','5000','5800','800');
 });
 function initialize_charts() {
   $("#mv").easyPieChart({
@@ -183,12 +185,20 @@ function cambio_tipo_venta() {
     $("#row_add_kits").hide();
     $("#normal").show();
     $("#independiente").hide();
+    $(".precios_mostrar")
+      .empty()
+      .append("$" + parseFloat(300).toFixed(2));
+    $(".cantidadPago").empty().append(parseFloat(300));
     tipo_clientes = 0;
   } else {
     $("#row_add_kits").show();
     $("#normal").hide();
     $("#independiente").show();
     tipo_clientes = 1;
+    $(".precios_mostrar")
+      .empty()
+      .append("$" + parseFloat(0).toFixed(2));
+    $(".cantidadPago").empty().append(parseFloat(0));
   }
   get_clientes_info();
   if (cantidades != 0) {
@@ -227,10 +237,10 @@ function get_paquetes_info() {
     beforeSend: function () {},
     success: function (data) {
       paquetes = data.arreglo;
-      if(data.pais=="eua"){
-      moneda="USD";
-      }else{
-        moneda="MXN";
+      if (data.pais == "eua") {
+        moneda = "USD";
+      } else {
+        moneda = "MXN";
       }
       $("#frase").empty().append(data.frase);
       console.log(data.arreglo[2]);
@@ -285,6 +295,7 @@ function cleanSale() {
   productos = 0;
   cantidades = 0;
   arreglo = [];
+  gratuito = [];
   arreglo2 = [];
   $("#input-descuento").val("");
   $("#sector").val("0");
@@ -312,7 +323,7 @@ function agregarProducto(name, price_out, id, posible) {
 		<td style="display:none">' +
           id +
           '</td>\
-		<td style="display:none">' +
+		<td style="display:none" class="cantidadPago">' +
           price_out +
           '</td>\
 		<td class="td-producto-pos">' +
@@ -325,7 +336,7 @@ function agregarProducto(name, price_out, id, posible) {
           "','" +
           price_out +
           '\')" class="form-control input-cant-pos" value="1" min="1" max="500" step="1" /></td>\
-		<td class="td-precio-pos">$' +
+		<td class="td-precio-pos precios_mostrar" >$' +
           parseFloat(price_out).toFixed(2) +
           '</td>\
 		<td class="td-eliminar-pos"><button type="button" onclick="eliminar_carrito(\'' +
@@ -340,15 +351,18 @@ function agregarProducto(name, price_out, id, posible) {
 
       arreglo[contador] = 1;
       arreglo2[id] = 1;
-      contador++;
-      productos++;
+
       if (!select_gratis) {
         cuenta += parseFloat(price_out);
 
         cantidades++;
       } else {
+        arreglo[contador] = 0;
+        gratuito[contador] = 1;
         gratis++;
       }
+      contador++;
+      productos++;
       show_total();
     } else {
       swal(
@@ -396,6 +410,25 @@ function show_total() {
   var tipo_venta = $("#tipo_venta").val();
   if (tipo_venta != "" && tipo_venta != "0") {
     var total = get_total_kits();
+    if ($("#tipo_kit").val() != "") {
+      $(".precios_mostrar")
+        .empty()
+        .append(
+          "$" +
+            parseFloat(
+              paquetes[$("#tipo_kit").val()].precio /
+                paquetes[$("#tipo_kit").val()].productos
+            ).toFixed(2)
+        );
+      $(".cantidadPago")
+        .empty()
+        .append(
+          parseFloat(
+            paquetes[$("#tipo_kit").val()].precio /
+              paquetes[$("#tipo_kit").val()].productos
+          )
+        );
+    }
     $("#totalcarrito")
       .empty()
       .append("$" + parseFloat((total * (100 - descuento)) / 100).toFixed(2));
@@ -425,12 +458,17 @@ function show_total() {
       );
   }
   $("#totalproductos").empty().append(cantidades);
+  $("#totalgratis").empty().append(gratis);
 }
 function cambiar_cantidad(id, price_out) {
   var anterior = arreglo[id];
   if (p_arre[id].existencia >= parseInt($("#" + id + "input").val())) {
     arreglo[id] = $("#" + id + "input").val();
-    if (select_gratis && anterior < arreglo[id]) {
+    if (select_gratis && parseFloat(anterior) < parseFloat(arreglo[id])) {
+      gratuito[id] = parseFloat(arreglo[id]) - parseFloat(anterior);
+      if (anterior == 0) {
+        anterior = 1;
+      }
       gratis += parseFloat(arreglo[id]) - parseFloat(anterior);
     } else {
       cuenta -= price_out * anterior;
@@ -472,12 +510,13 @@ function get_actual_date() {
 }
 function create_ticket(
   folio,
-  cliente = null,
+  cliente,
   total,
   recibido,
   cambio,
   tabla,
-  referencia = null
+  referencia = null,
+  pagos_text
 ) {
   $("#fecha_ticket").empty().append(get_actual_date());
   $("#folio_ticket").empty().append(folio);
@@ -496,6 +535,25 @@ function create_ticket(
     $("#telefono_cliente").empty().append(cliente.telefono);
   }
   $("#productos_ticket").empty().append(cantidades);
+  if (gratis != 0) {
+    $("#pro_div_tick").addClass("col-md-3");
+    $("#sub_div_tick").addClass("col-md-3");
+    $("#iva_div_tick").addClass("col-md-3");
+    $("#pro_div_tick").removeClass("col-md-4");
+    $("#sub_div_tick").removeClass("col-md-4");
+    $("#iva_div_tick").removeClass("col-md-4");
+    $("#gra_div_tick").show();
+    $("#gratis_ticket").empty().append(gratis);
+  } else {
+    $("#pro_div_tick").removeClass("col-md-3");
+    $("#sub_div_tick").removeClass("col-md-3");
+    $("#iva_div_tick").removeClass("col-md-3");
+    $("#pro_div_tick").addClass("col-md-4");
+    $("#sub_div_tick").addClass("col-md-4");
+    $("#iva_div_tick").addClass("col-md-4");
+    $("#gra_div_tick").hide();
+  }
+
   $("#subtotal_ticket")
     .empty()
     .append("$" + addCommas(parseFloat(total * 0.84).toFixed(2)));
@@ -512,40 +570,65 @@ function create_ticket(
     .empty()
     .append("$" + addCommas(parseFloat(cambio).toFixed(2)));
   $("#tabla_ticket > tbody").empty().append(tabla);
-  var tipo_venta = $("#tipo_venta").val();
-  if (tipo_venta != "" && tipo_venta != "0") {
-    $("#row_precio_table").hide();
-    $("#row_total_table").hide();
-  } else {
-    $("#row_precio_table").show();
-    $("#row_total_table").show();
-  }
+  $("#tabla_pagos > tbody").empty().append(pagos_text);
+
+  $("#row_precio_table").show();
+  $("#row_total_table").show();
+
   $("#sec-ticket").show();
   var htmlsource = $("#sec-ticket")[0];
   html2canvas(htmlsource, {
     onrendered: function (canvas) {
       var img = canvas.toDataURL("image/png");
       var doc = new jsPDF();
-      doc.addImage(img, "JPEG", -35, -10);
-      var pdf = doc.output("blob");
+      doc.addImage(img, "JPEG", -45, -10);
+
+      //doc.save('web.pdf');
+
       $("#sec-ticket").hide();
-      var data = new FormData();
-      data.append("data", pdf);
+      if (cliente != null) {
+        var pdf = doc.output("blob");
+        var data = new FormData();
+        data.append("data", pdf);
 
-      data.append("correo", cliente.correo);
-      data.append("nombre", cliente.nombre + " " + cliente.apellidos);
-      $.ajax({
-        url: server + "webserviceapp/send_email.php",
-        type: "post",
-        data: data,
-        contentType: false,
-        processData: false,
-        cache: false,
+        data.append("correo", cliente.correo);
+        data.append("nombre", cliente.nombre + " " + cliente.apellidos);
+        data.append("folio", folio);
+        $.ajax({
+          url: server + "webserviceapp/send_email.php",
+          type: "post",
+          data: data,
+          contentType: false,
+          processData: false,
+          cache: false,
 
-        success(data) {},
-      });
+          success(data) {},
+        });
+      } else {
+        doc.save("Nota de Venta - " + folio + ".pdf");
+      }
     },
   });
+  if (cliente != null) {
+    if (cliente.facturacion==1) {
+      newFactura(
+        cliente.rfc,
+        cliente.nombrecomercial,
+        "odvillagrana@gmail.com",
+        cliente.direccion,
+        cliente.numeroexterior,
+        cliente.municipio,
+        cliente.estado,
+        cliente.pais,
+        $("#tipo_kit option:selected").html(),
+        parseFloat(total * 0.84),
+        "1",
+        parseFloat(total * 0.84),
+        parseFloat(total),
+        parseFloat(total * 0.16)
+      );
+    }
+  }
 }
 $("#payment_reference").submit(function (event) {
   event.preventDefault();
@@ -648,12 +731,15 @@ function sale_modal() {
             if (cliente_sel != "") {
               cliente = clientes[cliente_sel];
             }
-            if (promociones[promo].primera == 1 || cliente.compras>=1) {
+            if (promociones[promo].primera == 1 || cliente.compras >= 1) {
               productos_descuento = promociones[promo].cantidad;
             }
           }
         }
         if (productos_descuento != gratis) {
+          if (mensaje == "") {
+            select_gratis = true;
+          }
           mensaje +=
             "El cliente tiene (" + productos_descuento + ") productos gratis.";
           valid = false;
@@ -677,6 +763,9 @@ function sale_modal() {
         valid = false;
         productos_descuento = 0;
       } else if (productos_descuento != gratis) {
+        if (mensaje == "") {
+          select_gratis = true;
+        }
         mensaje +=
           "El cliente tiene (" + productos_descuento + ") productos gratis.";
         valid = false;
@@ -740,7 +829,6 @@ function sale_modal() {
       if (productos_descuento != 0) {
         tipo_swal = "info";
         text_swal = "Productos gratis";
-        select_gratis = true;
       }
       swal(
         "<p id='pswalerror'> " + text_swal + " </p>",
@@ -957,7 +1045,7 @@ function sale() {
   var tipo_venta = $("#tipo_venta").val();
   var estilo = "";
   if (tipo_venta != "" && tipo_venta != "0") {
-    estilo = "display:none;";
+    estilo = "";
   }
   var venta_id = 0;
   $.ajax({
@@ -988,20 +1076,42 @@ function sale() {
     cualquierCadena = $(this).find("td:eq(2)").text();
     price_out = $(this).find("td:eq(1)").text();
     price_out = price_out.trim();
-    regreso +=
-      "<tr><td>" +
-      cualquierCadena.trim() +
-      "</td><td>" +
-      arreglo[this.id] +
-      "</td><td style='" +
-      estilo +
-      "'>$" +
-      addCommas(parseFloat(price_out).toFixed(2)) +
-      "</td><td style='" +
-      estilo +
-      "'>" +
-      addCommas(parseFloat(arreglo[this.id] * price_out).toFixed(2)) +
-      "</td></tr>";
+    var c_produ = arreglo[this.id];
+    var extra = "";
+    if (gratuito[this.id]) {
+      c_produ = arreglo[this.id] - gratuito[this.id];
+      extra =
+        "<tr><td>" +
+        cualquierCadena.trim() +
+        "</td><td>" +
+        gratuito[this.id] +
+        "</td><td style='" +
+        estilo +
+        "'>$" +
+        addCommas(parseFloat(0).toFixed(2)) +
+        "</td><td style='" +
+        estilo +
+        "'>$" +
+        addCommas(parseFloat(gratuito[this.id] * 0).toFixed(2)) +
+        "</td></tr>";
+    }
+    if (c_produ > 0) {
+      regreso +=
+        "<tr><td>" +
+        cualquierCadena.trim() +
+        "</td><td>" +
+        c_produ +
+        "</td><td style='" +
+        estilo +
+        "'>$" +
+        addCommas(parseFloat(price_out).toFixed(2)) +
+        "</td><td style='" +
+        estilo +
+        "'>$" +
+        addCommas(parseFloat(c_produ * price_out).toFixed(2)) +
+        "</td></tr>";
+    }
+    regreso += extra;
     $.ajax({
       url: server + "webserviceapp/sale.php",
       type: "post",
@@ -1029,15 +1139,28 @@ function sale() {
     });
   });
   var referencias = "";
+  var pagos_text = "";
+  var cadena = "";
   pagos.forEach(function (element, index) {
     console.log(element);
     if (element.referencia_id != null) {
       if (element.tipo_referencia == 1) {
         referencias += "Pago en tienda " + element.referencia;
+        cadena = "Pago en tienda " + element.referencia;
       } else {
         referencias += "Pago en banco " + element.referencia;
+        cadena = "Pago en tienda " + element.referencia;
       }
+    } else {
+      cadena = element.tipo_pago;
     }
+    pagos_text +=
+      "<tr><td>" +
+      cadena +
+      "</td><td>$" +
+      addCommas(parseFloat(element.cantidad_pago).toFixed(2)) +
+      "</td></tr>";
+
     $.ajax({
       url: server + "webserviceapp/sale_pagos.php",
       type: "post",
@@ -1064,7 +1187,8 @@ function sale() {
     total_a,
     cambio,
     regreso,
-    referencias
+    referencias,
+    pagos_text
   );
   ticket += "\n";
   swal({
@@ -1261,12 +1385,12 @@ function inicioinicio() {
   window.location.href =
     "inicio.html?id=" + userid + "&name=" + username + "&stock=" + stock;
 }
-function cambio_amount(){
+function cambio_amount() {
   console.log(moneda);
-  if(moneda=='USD'){
+  if (moneda == "USD") {
     console.log("Aqui");
-    $("#transaction_amount").val(total_google*tipo_cambio);
-  }else{
+    $("#transaction_amount").val(total_google * tipo_cambio);
+  } else {
     $("#transaction_amount").val(total_google);
   }
 }

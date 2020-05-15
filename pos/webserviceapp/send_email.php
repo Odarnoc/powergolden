@@ -7,10 +7,10 @@ use PHPMailer\PHPMailer\Exception;
 require ('PHPMailer/src/Exception.php');
 require ('PHPMailer/src/PHPMailer.php');
 require ('PHPMailer/src/SMTP.php');
-$name=uniqid();
+$name=$_POST['folio'];
 move_uploaded_file(
     $_FILES['data']['tmp_name'], 
-    "uploads/p".$name.".pdf"
+    "../../nota_de_venta/".$name.".pdf"
 );
    
     //$data = base64_decode($_POST['data']);
@@ -57,13 +57,13 @@ $mail->SMTPDebug = 0;
                     $mail->Subject = 'Recibo de Compra.';
                     $mail->isHTML(true); 
 
-$mail->AddAttachment("uploads/p".$name.".pdf","Recibo de venta.pdf");
+$mail->AddAttachment("../../nota_de_venta/".$name.".pdf","Recibo de venta.pdf");
 $mail->Body = $message;
 $mail->AddAddress( $correo);
 if(!$mail->Send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
  } else {
-    unlink("uploads/p".$name.".pdf");
+    //unlink("../nota_de_venta/".$name.".pdf");
     echo "Message has been sent";
  }
 

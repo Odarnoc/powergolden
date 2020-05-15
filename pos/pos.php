@@ -89,9 +89,9 @@ if (!isset($_SESSION["user_id"])) {
 						<li class="nav-item">
 							<a class="nav-link" href="dashboard.php"><i class="fas fa-chart-line mr-2"></i>Dashboard</a>
 						</li>
-						<li class="nav-item">
+						<!--<li class="nav-item">
                             <a class="nav-link" target="_blank" href="entregas.php">Entregas </a>
-                        </li>
+                        </li>-->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
 								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -246,16 +246,7 @@ if (!isset($_SESSION["user_id"])) {
 								</div>
 
 								<div class="col-lg-6 col-md-6 col-6">
-									<div class="form-group row mb-0" style="display:none">
-										<label for="input-descuento"
-											class="col-sm-7 col-7 col-form-label">Descuento(%):</label>
-										<div class="col-sm-5 pl-0 pr-0 col-5">
-											<input type="number" id="input-descuento" class="form-control"
-												placeholder="%">
-											<label id="alerta" style="color:red; display:none;">Solo números entre 0 y
-												100</label>
-										</div>
-									</div>
+								<p class="t1">Gratuito: <b id="totalgratis">0</b></p>
 								</div>
 								<div class="col-lg-6 col-md-6 col-6 text-right">
 									<p class="t1">IVA: <b id="totaliva">$0.00</b></p>
@@ -298,7 +289,7 @@ if (!isset($_SESSION["user_id"])) {
 			</div>
 		</div>
 	</section>
-	<section class="sec-ticket" style="width:1440px !important; display:none;" id="sec-ticket">
+	<section class="sec-ticket" style="width:1500px !important; display:none;" id="sec-ticket">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-10">
@@ -306,7 +297,7 @@ if (!isset($_SESSION["user_id"])) {
 
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-6">
-								<p class="title-ticket">Ticket</p>
+								<p class="title-ticket">Nota de Venta</p>
 							</div>
 							<div class="col-lg-6 col-md-6 col-6">
 								<img class="img-ticket" src="../images/logo-navbar.png" alt="">
@@ -314,16 +305,15 @@ if (!isset($_SESSION["user_id"])) {
 						</div>
 
 						<div class="d-info-top">
-
+							<p class="t1">Atendido por: <b ><?php echo $_SESSION['username'] ?></b> </p>
+							<p class="t1">Sucursal: <b><?php echo $_SESSION['sucursal'] ?></b> </p>
 							<p class="t1">Fecha: <b id="fecha_ticket">30/11/2020 13:12 PM</b> </p>
 							<p class="t1">Folio: <b id="folio_ticket">0357</b></p>
 							<div id="cliente_ticket">
 								<p class="t1">Cliente: <b id="nombre_cliente">Brayam Morando</b></p>
 								<p class="t1">Teléfono cliente: <b id="telefono_cliente">33 2269 2108</b></p>
 							</div>
-							<div id="referencia_ticket">
-								<p class="t1">Referencia: <b id="referencia_cliente">Brayam Morando</b></p>
-							</div>
+							
 
 						</div>
 
@@ -349,13 +339,16 @@ if (!isset($_SESSION["user_id"])) {
 
 						<div class="d-footer-ticket">
 							<div class="row">
-								<div class="col-lg-4 col-md-6 col-4 pr-0">
+								<div class="col-lg-3 col-md-6 col-3 pr-0" id="pro_div_tick">
 									<p class="t1 text-center">Productos: <b id="productos_ticket"></b></p>
 								</div>
-								<div class="col-lg-4 col-md-6 col-4 pl-0 pr-0">
+								<div class="col-lg-3 col-md-6 col-3 pr-0" id="gra_div_tick">
+								<p class="t1 text-center">Gratuito: <b id="gratis_ticket"></b></p>
+								</div>
+								<div class="col-lg-3 col-md-6 col-3 pr-0" id="sub_div_tick">
 									<p class="t1 text-center">Subtotal: <b id="subtotal_ticket"></b></p>
 								</div>
-								<div class="col-lg-4 col-md-6 col-4 pl-0">
+								<div class="col-lg-3 col-md-6 col-3 pr-0" id="iva_div_tick">
 									<p class="t1 text-center">IVA: <b id="iva_ticket"> </b></p>
 								</div>
 							</div>
@@ -364,11 +357,30 @@ if (!isset($_SESSION["user_id"])) {
 									<p class="t2">Total: <span id="total_ticket"></span></p>
 								</div>
 							</div>
+							<div class="d-table-ticket">
+							<div class="table-responsive">
+								<table class="table table-borderless table-ticket" id="tabla_pagos">
+									<thead>
+										<tr>
+											<th>Metodo de Pago</th>
+											<th>Cantidad Recibida</th>
+										</tr>
+									</thead>
+									<tbody>
+
+
+									</tbody>
+								</table>
+							</div>
+
+						</div>
 							<div class="row">
-								<div class="col-lg-4 col-md-6 col-4 pr-0">
+							<div class="col-lg-3 col-md-3 col-4 pr-0">
+							</div>
+								<div class="col-lg-3 col-md-3 col-4 pr-0">
 									<p class="t1 text-center">Pago: <b id="recibido_ticket"></b></p>
 								</div>
-								<div class="col-lg-4 col-md-6 col-4 pl-0 pr-0">
+								<div class="col-lg-3 col-md-6 col-3 pl-0 pr-0">
 									<p class="t1 text-center">Cambio: <b id="cambio_ticket"></b></p>
 								</div>
 
@@ -1121,6 +1133,13 @@ if (!isset($_SESSION["user_id"])) {
 	<script src="js/registro-independiente.js"></script>
 
 	<script async   src="https://pay.google.com/gp/p/js/pay.js"   onload="onGooglePayLoaded()"></script>
+	<script src="../Facturama/facturama.api.js"></script>
+    <script src="../Facturama/clients.js"></script>
+    <script src="../Facturama/products.js"></script>
+    <script src="../Facturama/branchoffice.js"></script>
+    <script src="../Facturama/cfdi.js"></script>
+    <script src="../Facturama/taxentity.js"></script>
+    <script src="../Facturama/complemento_pago.js"></script>
 
 
 </html>
