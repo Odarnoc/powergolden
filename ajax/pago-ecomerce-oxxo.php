@@ -15,6 +15,7 @@ require '../phpMailer/SMTP.php';
 
 $carrito = $_POST['carrito'];
 $errores = array();
+$concepto = "";
 
 $datousuario = R::findOne('usuarios', 'id=?', [$_POST["usuariid"]]);
 
@@ -27,6 +28,8 @@ foreach ($carrito as $valor) {
   $almacen = R::findOne('inventarios', 'sucursal_id = 1 && existencia >= ? && producto_id = ?', [$valor['cant'], $valor['id']]);
   if (empty($almacen)) {
     array_push($errores, $valor);
+  }else{
+    $concepto .= $valor['nombre'] . ', ';
   }
 }
 
@@ -52,7 +55,39 @@ $payment->payer = array(
 );
 
 $payment->save();
-echo $payment->transaction_details->external_resource_url;
+
+$response=array();
+$userInfo = R::findOne('usuarios', 'id = ?', [$_POST["usuariid"]]);
+
+if($userInfo->rol == 2){
+  $userInfoFacturacion = R::findOne('independientes', 'usuario_id = ?', [$_POST["usuariid"]]);
+  if($userInfoFacturacion->facturacion == 1){
+    $packInfo = R::findOne('paquetes', 'id = ?', [$_POST['pack_id']]);
+
+    $response['facturacion'] = true;
+    $response['url'] = $payment->transaction_details->external_resource_url;
+    $response['descripcion'] = $packInfo->nombre;
+    $response['rfc'] = $userInfoFacturacion->rfc;
+    $response['nombre'] = $userInfoFacturacion->nombrecomercial;
+    $response['correo'] = $userInfo->correo;
+    $response['domicilio'] = $userInfoFacturacion->direccion;
+    $response['numero'] = $userInfoFacturacion->numeroexterior;
+    $response['municipio'] = $userInfoFacturacion->municipio;
+    $response['estado'] = $userInfoFacturacion->estado;
+    $response['pais'] = $userInfoFacturacion->pais;
+    $response['preciounitario'] = $packInfo->precio;
+    $response['cantidad'] = 1;
+    $response['subtotal'] = $packInfo->precio;
+    $response['total'] = $packInfo->precio;
+    $response['ivacobrado'] = floatval($packInfo->precio)*.16;
+  }else{
+    $response['facturacion'] = false;
+    $response['url'] = $payment->transaction_details->external_resource_url;
+  }
+  echo json_encode($response);
+}else{
+  echo $payment->transaction_details->external_resource_url;
+}
 
 $venta = R::dispense('ventas');
 if (isset($_SESSION["ui_referencia_venta"])) {

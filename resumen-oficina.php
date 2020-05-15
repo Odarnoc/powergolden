@@ -342,13 +342,25 @@ $user_id = $_SESSION["user_id"];
             </div>
         </div>
     </section>
-
+    
 
     <!-- Admin Menu -->
     <?php include("menus/footer_general.php"); ?>
     <!-- End Admin Menu -->
 
+    
+    <!-- facturacion -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
+    <script src="Facturama/facturama.api.js"></script>
+    <script src="Facturama/clients.js"></script>
+    <script src="Facturama/products.js"></script>
+    <script src="Facturama/branchoffice.js"></script>
+    <script src="Facturama/cfdi.js"></script>
+    <script src="Facturama/taxentity.js"></script>
+    <script src="Facturama/complemento_pago.js"></script>
+
+    
     <!-- jQuery -->
     <script src="js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>

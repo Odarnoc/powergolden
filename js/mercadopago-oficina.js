@@ -154,8 +154,9 @@ function enviar_pago_oxxo() {
         },
         success(data) {
             console.log(data);
+            var json_data = JSON.parse(data);
             swal.close();
-            window.open(data, '_blank');
+            window.open(json_data.url, '_blank');
             Mercadopago.clearSession();
             Swal.fire({
                     icon: 'success',
@@ -164,9 +165,12 @@ function enviar_pago_oxxo() {
                 })
                 .then((ok) => {
                     if (ok) {
-                        localStorage.clear();
-                        localStorage.setItem('carrito-oficina', JSON.stringify([]));
-                        location.href = "oficina-virtual.php";
+                        if(json_data.facturacion){
+                            newFactura(json_data.rfc,json_data.nombre,json_data.email,json_data.domicilio,json_data.numero,json_data.municipio,json_data.estado,json_data.pais,json_data.descripcion,json_data.preciounitario,json_data.cantidad,json_data.subtotal,json_data.total,json_data.ivacobrado);
+                        }
+                        //localStorage.clear();
+                        //localStorage.setItem('carrito-oficina', JSON.stringify([]));
+                        //location.href = "oficina-virtual.php";
                     }
                 });
         },
