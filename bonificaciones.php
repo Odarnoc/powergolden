@@ -336,13 +336,11 @@ $rango="Sin liderazgo";
                     <tr>
                                          <td><?php echo $item['id']; ?></td>
                                         <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
-                                        <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
-                                        <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['telefono'] ?>" href="tel:<?php echo $item['telefono'] ?>"><i class="fas fa-phone"></i></a></td>
+                                        <td><?php echo $item['correo'] ?>></td>
+                                        <td><?php echo $item['telefono'] ?></td>
+                                        <td><?php echo $rango;?></td>
                                         
                                         
-                                        <td><a href="matriz.php?id=<?php echo $item['id']?>" target="_blank"><i class="fas fa-sitemap"></i></a></td>
-                                        
-                                        <td><img data-toggle="tooltip" data-placement="top" title="<?php echo $rango;?>" src="images/<?php echo $rango;?>.png" width="30px" height="30px" /></td>
                                         <td><?php echo $row['aviones']?></td>
                                         <td><?php echo strval($puntos1)."|".strval($puntos2)."|".strval($puntos3)."|".strval($puntos4)."|".strval($puntos5)."-Total=(".($puntos1+$puntos2+$puntos3+$puntos4+$puntos5).")";?></td>
                                        

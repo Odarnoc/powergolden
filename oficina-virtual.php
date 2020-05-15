@@ -1,30 +1,38 @@
 <?php
 session_start();
 
-if(!isset($_SESSION["user_id"])){
+if (!isset($_SESSION["user_id"])) {
     header("Location: iniciar-sesion.php");
 }
 
 require 'bd/conexion.php';
 
 $id = $_SESSION["user_id"];
+file_get_contents('http://powergolden.com.mx/matriz_api.php?id='.$id);
 
-$res=R::getAll( 'select id,idusuario,colorescss,liderazgos,clientestotales,ventasmatriz,mes,puntospersonales,puntosgrupales5nivel,clientesactivos,rollover,porcentajered,fecha,aviones,compensacionn1,compensacionn2,compensacionn3,compensacionn4,compensacionn5,puntos1,puntos2,puntos3,puntos4,puntos5 
-    from matrizvalores where idusuario= :idusuario  order by fecha DESC limit 1' ,
-    array(':idusuario'=>$_SESSION["user_id"]));
-$colorescss1=json_decode($res[0]['colorescss']);
-$rango="Sin liderazgo";
-foreach ($colorescss1 as $co) {
-    foreach ($co as $key => $value) {
-    //echo "$('#".$key."').addClass('".$value."');";
-    if($key== $_SESSION["user_id"] && !empty($value)){
-        $rango=$value;
-        break;
-    }
+$res = R::getAll(
+    'select id,idusuario,colorescss,liderazgos,clientestotales,ventasmatriz,mes,puntospersonales,puntosgrupales5nivel,clientesactivos,rollover,porcentajered,fecha,aviones,compensacionn1,compensacionn2,compensacionn3,compensacionn4,compensacionn5,puntos1,puntos2,puntos3,puntos4,puntos5 
+    from matrizvalores where idusuario= :idusuario  order by fecha DESC limit 1',
+    array(':idusuario' => $_SESSION["user_id"])
+);
+$colorescss1 = json_decode($res[0]['colorescss']);
+if (empty($colorescss)) {
+    $rango = "Sin liderazgo";
+} else {
+    foreach ($colorescss1 as $co) {
+        foreach ($co as $key => $value) {
+            //echo "$('#".$key."').addClass('".$value."');";
+            if ($key == $_SESSION["user_id"] && !empty($value)) {
+                $rango = $value;
+                break;
+            }
+        }
     }
 }
 
-$porcientoActivos = floatval($res[0]['clientestotales'])*floatval($res[0]['clientesactivos']);
+
+
+$porcientoActivos = floatval($res[0]['clientestotales']) * floatval($res[0]['clientesactivos']);
 ?>
 
 <!doctype html>
@@ -72,9 +80,9 @@ $porcientoActivos = floatval($res[0]['clientestotales'])*floatval($res[0]['clien
     <section class="sec-cuenta">
         <div class="container">
             <div class="row">
-            
+
                 <div class="col-lg-3 col-md-3 bg-white">
-                    <div style="margin-top: 100px" >
+                    <div style="margin-top: 100px">
                         <?php include("componentes/menu-oficina.php"); ?>
                     </div>
                 </div>
@@ -124,14 +132,22 @@ $porcientoActivos = floatval($res[0]['clientestotales'])*floatval($res[0]['clien
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1"><?php if($res[0]['rollover']=='1'){echo 'SI';}else{echo 'NO';}  ?></p>
+                                    <p class="t1"><?php if ($res[0]['rollover'] == '1') {
+                                                        echo 'SI';
+                                                    } else {
+                                                        echo 'NO';
+                                                    }  ?></p>
                                     <p class="t2">Roll over</p>
                                 </div>
                             </div>
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="clearfix d-item-num-oficina">
-                                    <p class="t1"><?php if($porcientoActivos == 0){echo '0';}else{echo 100/$porcientoActivos;} ?>%</p>
+                                    <p class="t1"><?php if ($porcientoActivos == 0) {
+                                                        echo '0';
+                                                    } else {
+                                                        echo 100 / $porcientoActivos;
+                                                    } ?>%</p>
                                     <p class="t2">Personas activas</p>
                                 </div>
                             </div>
@@ -250,12 +266,12 @@ $porcientoActivos = floatval($res[0]['clientestotales'])*floatval($res[0]['clien
 
                                 </div>
                             </div>
-                            
+
                             <div class="col-lg-6 col-md-6 col-12 mb-30">
                                 <div class="d-grafica-oficina">
-                                    <a class="btn btn-afiliado-primary mt-10 mb-30" style="color:white" href="<?php echo "http://" .$_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?>" role="button">Ver página personal</a>
+                                    <a class="btn btn-afiliado-primary mt-10 mb-30" style="color:white" href="<?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?>" role="button">Ver página personal</a>
                                     <p class="t2">Tu página personal</p>
-                                    <a href="<?php echo "http://" .$_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?>"><?php echo "http://" .$_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?></a>
+                                    <a href="<?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?>"><?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>/landing-afiliado.php?ui=<?php echo $id; ?></a>
 
                                 </div>
                             </div>
@@ -355,4 +371,6 @@ $porcientoActivos = floatval($res[0]['clientestotales'])*floatval($res[0]['clien
         };
     </script>
 
-</body></html>
+</body>
+
+</html>

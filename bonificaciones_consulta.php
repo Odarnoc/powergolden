@@ -538,7 +538,7 @@ $rango="Sin liderazgo";
                           
                          // echo strval($puntos1)."|".strval($puntos2)."|".strval($puntos3)."|".strval($puntos4)."|".strval($puntos5)."-Total=(".($puntos1+$puntos2+$puntos3+$puntos4+$puntos5).")";
                                         ?>
-                                        <tr style="<?php echo $stilo; ?> !important;">
+                                        <tr style="<?php //echo $stilo; ?> !important;">
                                              <td><?php echo $item['id'];?></td>
                                         <td><?php echo $item['nombre'].' '.$item['apellidos'] ?></td>
                                         <td><a data-toggle="tooltip" data-placement="top" title="<?php echo $item['correo'] ?>" href="mailto:<?php echo $item['correo'] ?>"><i class="fas fa-envelope"></i></a></td>
@@ -662,7 +662,7 @@ $rango="Sin liderazgo";
         $('[data-toggle="tooltip"]').tooltip();
         
          $('#pdf').on('click',function(){
-    $("#bonificaciones2").tableHTMLExport({type:'pdf',filename:'bonificaciones.pdf',orientation:'l',exclude_img:false
+    $("#bonificaciones2").tableHTMLExport({type:'pdf',filename:'bonificaciones_consulta.pdf',orientation:'l',exclude_img:false
 
 });
   });

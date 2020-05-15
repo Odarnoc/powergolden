@@ -225,7 +225,7 @@ form.example::after {
                                             </form>
                                             
 
-                                            <table id="tabla" class="table" style="text-align:center; margin-top: 20px;">
+                                            <table id="tabla" class="table" style="text-align:center; margin-top: 20px;display: block;overflow-x: scroll;">
                                                 <thead class="table-primary">
                                                     <tr>
                                                         <th>Id</th>

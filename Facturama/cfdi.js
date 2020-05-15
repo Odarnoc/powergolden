@@ -512,6 +512,12 @@ newCfdi["Receiver"].Name=nombre;
 newCfdi["Receiver"].CfdiUse=usoCFDI;
 
 
+<<<<<<< HEAD
+=======
+descripcion,preciounitario,cantidad,subtotal,total,ivacobrado
+
+
+>>>>>>> 48f02c733cba8cd21a2821000aec2720cbbf195c
 
 for(var n1=0;n1<conceptos.length;n1++){
  

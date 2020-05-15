@@ -2,7 +2,7 @@
 
 require 'user_preferences/user-info.php';
 
-$query = 'SELECT u.*,i.status,i.direccion,i.imagen,i.imagen2 FROM usuarios as u LEFT JOIN independientes as i on u.id = i.usuario_id WHERE u.rol=2 && u.id = "' . $_GET['id'] . '"';
+$query = 'SELECT u.*,i.status,i.direccion,i.imagen,i.imagen2,i.archivo AS archivo FROM usuarios as u LEFT JOIN independientes as i on u.id = i.usuario_id WHERE u.rol=2 && u.id = "' . $_GET['id'] . '"';
 
 $res = R::getAll($query);
 
@@ -88,7 +88,10 @@ $cliente = $res[0];
                                                 <button class="btn btn-blue"  onclick="rechazar()"style="background-color: #e4605e; color:white"><i class="fas fa-ban"></i> Rechazar</button>
                                             </div>
                                             <div class="col-sm-3">
-                                                <a class="btn btn-blue" href="firmas/firma-<?php echo $cliente['id'] ?>.pdf" style="color: white" role="button"><i class="fas fa-check"></i> Ver firma</a>
+                                                <a class="btn btn-blue" href="firmas/firma-<?php echo $cliente['id'] ?>.pdf" style="color: white" role="button"> Ver firma</a>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <a class="btn btn-blue" download href="/firmas/Documentos/<?php echo $cliente['archivo'] ?>" style="color: white" role="button">Contrato</a>
                                             </div>
                                         </div>
 

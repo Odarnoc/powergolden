@@ -10,7 +10,7 @@ require 'bd/conexion.php';
 
 $user_id = $_SESSION["user_id"];
 
-$query="SELECT p.*,pxv.cantidad,v.fecha FROM productosxventas as pxv LEFT JOIN ventas as v ON pxv.venta_id = v.id LEFT JOIN productos as p ON pxv.producto_id = p.id WHERE v.user_id=".$_SESSION["user_id"];
+$query="SELECT p.*,pxv.cantidad,v.fecha FROM productosxventas as pxv LEFT JOIN ventas as v ON pxv.venta_id = v.id LEFT JOIN productos as p ON pxv.producto_id = p.id WHERE v.user_id=".$_SESSION["user_id"]." order by v.fecha desc";
 
 $historial=R::getAll($query);
 
@@ -98,6 +98,7 @@ $historial=R::getAll($query);
                                                                                 <p class="t1 one-line"><?php echo $item['nombre'] ?></p>
                                                                                 <p class="t2 one-line"><?php echo $item['descripcion'] ?></p>
                                                                                 <p class="t2 one-line">Cantidad: <?php echo $item['cantidad'] ?></p>
+                                                                                <p class="t2 one-line">Fecha: <?php echo substr($item['fecha'], 0, 11); ?></p>
                                                                                 <p class="t3">$<?php echo $item['precio'] ?></p>
                                                                             </div>
                                                                         </div>

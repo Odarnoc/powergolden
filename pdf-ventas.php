@@ -6,13 +6,13 @@ $ffin;
 $ftotal = 0;
 
 if (isset($_GET['inicio']) && isset($_GET['inicio'])) {
-    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha,  v.total AS tottal, u.nombre AS nombre, u.apellidos AS apellido FROM productosxventas AS pxv 
-LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha BETWEEN "' . $_GET['inicio'] . '" and "' . $_GET['fin'] . '"';
+    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha,  v.total AS tottal, u.nombre AS nombre, u.apellidos AS apellido, r.nombre AS rol FROM productosxventas AS pxv 
+LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id LEFT JOIN roles AS r ON u.rol = r.id WHERE v.fecha BETWEEN "' . $_GET['inicio'] . '" and "' . $_GET['fin'] . '"';
     $finicio = $_GET['inicio'];
     $ffin = $_GET['fin'];
 } else {
-    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre FROM productosxventas AS pxv 
-    LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id WHERE v.fecha ="' . date('Y-m-d') . '"';
+    $query = 'SELECT DISTINCT pxv.venta_id AS venta, v.fecha AS fecha, v.total AS tottal, u.nombre AS nombre, r.nombre AS rol FROM productosxventas AS pxv 
+    LEFT JOIN ventas AS v ON v.id = pxv.venta_id LEFT JOIN usuarios AS u ON u.id = v.user_id LEFT JOIN roles AS r ON u.rol = r.id WHERE v.fecha ="' . date('Y-m-d') . '"';
     $finicio = date('Y-m-d');
     $ffin = date('Y-m-d');
 }
@@ -52,9 +52,10 @@ class PDF extends FPDF
         $this->SetFont('Arial', 'B', 11);
         $this->SetFillColor(100, 200, 15);
         $this->Cell(25);
-        $this->Cell(40, 10, 'Fecha', 4, 0, 'c', 0);
+        $this->Cell(25, 10, 'Tipo', 4, 0, 'c', 0);
+        $this->Cell(30, 10, 'Fecha', 4, 0, 'c', 0);
         $this->Cell(15, 10, 'ID', 0, 0, 'c', 0);
-        $this->Cell(70, 10, 'Cliente', 0, 0, 'c', 0);
+        $this->Cell(65, 10, 'Cliente', 0, 0, 'c', 0);
         $this->Cell(25, 10, 'Total', 0, 0, 'c', 0);
         $this->Line(100, 10, 100, 10);
         $this->Ln(10);
@@ -79,9 +80,10 @@ $pdf->AddPage();
 $pdf->SetFont('Times', '', 10);
 foreach ($productos as $item) {
     $pdf->Cell(25);
-    $pdf->Cell(40, 10, substr($item['fecha'], 0, 10), 0, 0, 'b', 0);
+    $pdf->Cell(25, 10, substr($item['rol'], 0, 10), 0, 0, 'b', 0);
+    $pdf->Cell(30, 10, substr($item['fecha'], 0, 10), 0, 0, 'b', 0);
     $pdf->Cell(15, 10, utf8_decode($item['venta']), 0, 0, 'c', 0);
-    $pdf->Cell(70, 10, utf8_decode($item['nombre'] . ' ' . $item['apellido']), 0, 0, 'c', 0);
+    $pdf->Cell(65, 10, utf8_decode($item['nombre'] . ' ' . $item['apellido']), 0, 0, 'c', 0);
     $pdf->Cell(25, 10, utf8_decode('$' . $item['tottal']), 0, 1, 'c', 0);
     
     $ftotal+=$item['tottal'];

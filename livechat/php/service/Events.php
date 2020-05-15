@@ -1,7 +1,7 @@
-<?php
-
-class Events extends Service
-{
-}
-
-?>
+<?php
+
+class Events extends Service
+{
+}
+
+?>

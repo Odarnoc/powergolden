@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION["user_id"]) ){
+    header("Location: iniciar-sesion-cliente.php");
+}
+if($_SESSION["rol"]!=1){
+    header("Location: iniciar-sesion-cliente.php");
+}
 require 'bd/conexion.php';
 $suc = R::find('sucursales','WHERE id != 1');
 
@@ -64,12 +70,12 @@ $suc = R::find('sucursales','WHERE id != 1');
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Direccion de envío</p>
-                                    <p class="small-text-cuenta">Seleccionar metodo de envio </p>
+                                   <!-- <p class="small-text-cuenta">Seleccionar metodo de envio </p> -->
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group" id="contlocal">
+                       <!-- <div class="form-group" id="contlocal">
                             <div class="form-check">
                                 <input onclick="boxlocal()" class="form-check-input" type="checkbox" id="local" required>
                                 <label class="form-check-label" for="local">
@@ -93,9 +99,9 @@ $suc = R::find('sucursales','WHERE id != 1');
                                     You must agree before submitting.
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
-                        <div id="particular" style="display: none">
+                        <div id="particular"  >
                             <div class="row row-form-perfil footer-movil">
                                 <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
                                     <form class="form-delivery-checkout" name="formulario" method="POST">

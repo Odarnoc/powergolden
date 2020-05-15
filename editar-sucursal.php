@@ -2,9 +2,9 @@
 
 require 'user_preferences/user-info.php';
 
-$id = $_GET['id'];
+$id=$_GET['id'];
 
-$item = R::findOne('sucursales', 'id =' . $id);
+$item=R::findOne('sucursales','id ='.$id );
 
 ?>
 
@@ -44,15 +44,15 @@ $item = R::findOne('sucursales', 'id =' . $id);
 
 <body>
 
-    <!-- Top Menu -->
-    <?php include("menus/top_menu.php"); ?>
-    <!-- End Top Menu -->
+            <!-- Top Menu -->
+            <?php include("menus/top_menu.php"); ?>
+            <!-- End Top Menu -->
 
 
-    <!-- End Navbar ====
+<!-- End Navbar ====
     	======================================= -->
 
-    <section class="sec-cuenta">
+        <section class="sec-cuenta">
         <div class="container">
             <div class="row">
 
@@ -62,8 +62,8 @@ $item = R::findOne('sucursales', 'id =' . $id);
 
                 <div class="col-lg-8 col-md-8 bg-gray">
                     <div class="d-cont-right">
-
-                        <div class="row">
+                        
+                    <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Nueva Sucursal.</p>
@@ -79,8 +79,8 @@ $item = R::findOne('sucursales', 'id =' . $id);
                         <div class="row row-form-perfil">
                             <div class="col-lg-12 col-md-12" style="text-align">
 
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12" style="margin-left: auto; margin-right: auto">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12" style="margin-left: auto; margin-right: auto">
 
                                         <form action="" class="form-tarjetas">
 
@@ -110,7 +110,7 @@ $item = R::findOne('sucursales', 'id =' . $id);
                                                 <div class="form-group col-lg-6 col-md-6">
                                                     <div class="floating-label-group">
                                                         <input type="text" id="id" class="form-control input-form-underline" value="<?php echo $item['id'] ?>" hidden />
-                                                        <input type="text" id="colo" class="form-control input-form-underline" value="<?php echo $item['colonia'] ?>" />
+                                                        <input type="text" id="colo" class="form-control input-form-underline" value="<?php echo $item['colonia'] ?>"  />
                                                         <label class="floating-label-underline">Colonia</label>
                                                     </div>
                                                 </div>
@@ -127,12 +127,12 @@ $item = R::findOne('sucursales', 'id =' . $id);
                                                         <select autocomplete="false" style="height:60%;" class="form-control" id="pais" name="pais">
                                                             <option value="mex">México</option>
                                                             <option value="eua">Estados Unidos</option>
-
+                                                           
                                                         </select>
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group col-lg-6 col-md-6">
+                                            
+                                            <div class="form-group col-lg-6 col-md-6">
                                                     <div class="floating-label-group">
                                                         <select autocomplete="false" style="height:60%;" class="form-control" id="estado" name="estado">
                                                             <option value="Aguascalientes">Aguascalientes</option>
@@ -172,43 +172,43 @@ $item = R::findOne('sucursales', 'id =' . $id);
                                                 </div>
                                                 <div class="form-group col-lg-6 col-md-6">
                                                     <div class="floating-label-group">
-                                                        <input type="number" id="meta" class="form-control input-form-underline" value="<?php echo $item['meta'] ?>" required />
+                                                        <input type="number" id="meta" class="form-control input-form-underline"  value="<?php echo $item['meta'] ?>" required />
                                                         <label class="floating-label-underline">Meta de venta Mensual</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-6 col-md-6">
                                                     <div class="floating-label-group">
-                                                        <input type="number" id="metad" class="form-control input-form-underline" value="<?php echo $item['metad'] ?>" required />
+                                                        <input type="number" id="metad" class="form-control input-form-underline"  value="<?php echo $item['metad'] ?>" required />
                                                         <label class="floating-label-underline">Meta de venta Diaria</label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-6 col-md-6" style="display:none;">
                                                     <div class="floating-label-group">
-                                                        <label class="">Pago de reinscripción</label>
-                                                        <input type="checkbox" id="reinscripcion" class="form-control input-form-underline" <?php echo $item['reinscripcion'] == 1 ? 'checked' : '' ?> required />
-
+                                                    <label class="">Pago de reinscripción</label>
+                                                        <input type="checkbox" id="reinscripcion" class="form-control input-form-underline"  <?php echo $item['reinscripcion']==1?'checked':'' ?> required />
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
-
+                                           
                                             <div class="form-group">
                                                 <div class="floating-label-group">
                                                     <input type="text" id="motivacion" class="form-control input-form-underline" required value="<?php echo $item['frase'] ?>" />
                                                     <label class="floating-label-underline">Mensaje de motivación</label>
                                                 </div>
                                             </div>
-
+                                            
 
                                             <div class="form-group" style="text-align: right;">
                                                 <button type="button" id="editar_suc" style="width: 50%" class="btn btn-lg-blue">Guardar</button>
                                             </div>
-                                        </form>
+                                            </form>
 
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
-
+                        
                     </div>
                 </div>
             </div>
@@ -217,9 +217,9 @@ $item = R::findOne('sucursales', 'id =' . $id);
     </section>
 
 
-    <!-- Footer-->
-    <?php include("menus/footer_general.php"); ?>
-    <!-- End Footer -->
+            <!-- Footer-->
+            <?php include("menus/footer_general.php"); ?>
+            <!-- End Footer -->
 
 
     <!-- jQuery -->
@@ -247,15 +247,13 @@ $item = R::findOne('sucursales', 'id =' . $id);
 
     <script>
         $(function() {
-            var temp = "<?php echo $item['estado']; ?>";
-            console.log(temp);
+            var temp="<?php echo $item['estado']; ?>"; 
+                console.log(temp);
             $("#estado").val(temp);
-            temp = "<?php echo $item['pais']; ?>";
-            console.log(temp);
+            temp="<?php echo $item['pais']; ?>"; 
+                console.log(temp);
             $("#pais").val(temp);
         });
     </script>
 
-</body>
-
-</html>
+</body></html>

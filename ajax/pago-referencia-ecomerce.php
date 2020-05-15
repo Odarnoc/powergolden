@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -14,6 +15,8 @@ require '../phpMailer/SMTP.php';
 
 $carrito = $_POST['carrito'];
 $errores = array();
+
+$datousuario = R::findOne('usuarios', 'id=?', [$_POST["usuariid"]]);
 
 if (sizeof($carrito) < 0) {
     error_mensaje('El carrito no puede estar vacio.');
@@ -48,7 +51,7 @@ $customer = array(
     'name' => $_POST['nombre'],
     'last_name' => $_POST['apellido'],
     'phone_number' => $_POST['telefono'],
-    'email' => $_POST['correo']
+    'email' => $datousuario->correo
 );
 
 $chargeData = array(
@@ -65,6 +68,9 @@ $data['url_recibo'] = $server . "/" . $identificador . "/" . $charge->payment_me
 $referencia = $charge->payment_method->reference;
 
 $venta = R::dispense('ventas');
+if (isset($_SESSION["ui_referencia_venta"])) {
+  $venta->referencia = $_SESSION["ui_referencia_venta"];
+}
 $venta->user_id = $_POST['usuariid'];
 $venta->fecha = new DateTime();
 $venta->total = $_POST['total'];
@@ -135,7 +141,7 @@ if ($ventasreferecnia == null) {
 
             //Recipients
             $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
-            $mail->addAddress($_POST['correo'], $_POST['nombre'] . ' ' . $_POST['apellido']);     // Add a recipient
+            $mail->addAddress($datousuario->correo, $datousuario->nombre . ' ' . $datousuario->apellidos);     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
@@ -195,7 +201,7 @@ if ($ventasreferecnia == null) {
 
             //Recipients
             $mail->setFrom('golden1@powergolden.com.mx', 'PowerGolden');
-            $mail->addAddress($_POST['correo'], $_POST['nombre'] . ' ' . $_POST['apellido']);     // Add a recipient
+            $mail->addAddress($datousuario->correo, $datousuario->nombre . ' ' . $datousuario->apellidos);     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML

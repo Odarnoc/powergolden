@@ -21,10 +21,6 @@ function pintarCarrito() {
     total = 0;
     var canprodp = 0;
     var descuento = 0;
-    var labelMoneda = 'MXN';
-    if (codigoPais !== 'MX') {
-        labelMoneda = 'USD'; 
-    }
     var sumatorio = parseInt(prodcantidad) + parseInt(prodcant);
     carrito.forEach(function(item, index) {
         var totalTemp = parseFloat(item.precio) * parseInt(item.cant);
@@ -39,7 +35,7 @@ function pintarCarrito() {
             '<div class="d-info-carrito">' +
             '<p class="t1 one-line">' + item.nombre + '</p>' +
             '<p class="t2 one-line">' + item.descripcion + '</p>' +
-            '<p class="t3">$' + item.precio + ' '+ labelMoneda +'</p>' +
+            '<p class="t3">$' + item.precio + '</p>' +
             '<div class="row">' +
             '<div class="col-lg-6 col-md-6 col-6 col-8">' +
             '<div class="input-group mb-3">' +
@@ -175,35 +171,43 @@ function res(index) {
 
 function comrpaslindas() {
     console.log(promociones);
-
-    var productos_descuento = 0;
-    for (promo in promociones) {
-        if (promociones[promo].tipo == 2) {
-            if (can_prod_final / promociones[promo].desde >= 1) {
-                productos_descuento =
-                    parseInt(can_prod_final / promociones[promo].desde) *
-                    promociones[promo].cantidad;
+    if(carrito.length>0){
+        var productos_descuento = 0;
+        for (promo in promociones) {
+            if (promociones[promo].tipo == 2) {
+                if (can_prod_final / promociones[promo].desde >= 1) {
+                    productos_descuento =
+                        parseInt(can_prod_final / promociones[promo].desde) *
+                        promociones[promo].cantidad;
+                }
             }
         }
-    }
 
-    if (productos_descuento != gratis) {
-        mensaje +=
-            "El cliente tiene (" + productos_descuento + ") productos gratis.";
-        console.log(mensaje);
+        if (productos_descuento != gratis) {
+            mensaje +=
+                "El cliente tiene (" + productos_descuento + ") productos gratis.";
+            console.log(mensaje);
 
-        valid = false;
-    }
+            valid = false;
+        }
 
-    if (iduser == undefined) {
+        if (iduser == undefined) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Iniciar secion para continuar la compra."
+            });
+        } else {
+            location.href = "nuevo-envio-ecomerce.php";
+        }
+    }else{
         Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: "Iniciar secion para continuar la compra."
-        });
-    } else {
-        location.href = "nuevo-envio-ecomerce.php";
+                icon: 'error',
+                title: 'Oops...',
+                text: "Agrega productos al carrito de compras."
+            });
     }
+    
 }
 
 function get_promociones_info() {

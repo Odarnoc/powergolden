@@ -1,15 +1,14 @@
 <!-- Menu-bottom -->
-<?php include("menus/menu_bottom.php"); ?>
 <?php
 $user_ip = $_SERVER['REMOTE_ADDR'];
-$ch = curl_init("http://www.geoplugin.net/json.gp?ip=$user_ip");
+$ch = curl_init("http://www.geoplugin.net/json.gp?ip=".$user_ip);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $dataArray = curl_exec($ch);
 $dataArray = json_decode($dataArray);
 $country_code = $dataArray->geoplugin_countryCode;
 ?>
 <!-- End Menu-bottom -->
-
+<?php include("menus/menu_bottom.php"); ?>
 <nav class="navbar navbar-solid navbar-expand-lg bg-dark fixed-top" style="z-index: 1030;position: sticky;">
 
 <div class="container">
@@ -58,7 +57,13 @@ $country_code = $dataArray->geoplugin_countryCode;
             </li>
             <?php } ?>
             <li>
-            <div id="google_translate_element"></div>
+               
+		  <a href="#googtrans(en|en)" class="lang-en lang-select" data-lang="en"><img src="images/usa.png" alt="USA" width="45px" height="35px"></a>
+		  <a href="#googtrans(en|es)" class="lang-es lang-select" data-lang="es"><img src="images/mexico.png" width="35px" height="35px" alt="MEXICO"></a>
+		 
+	
+                
+            <div id="google_translate_element" style="display:none !important;"></div> 
             </li>
         </ul>
     </div>
@@ -66,15 +71,40 @@ $country_code = $dataArray->geoplugin_countryCode;
 
 </nav>
 <div class="overlay"></div>
+<style type="text/css">iframe.goog-te-banner-frame{ display: none !important;}</style>
+<style type="text/css">body {position: static !important; top:0px !important;}</style>
 <script type="text/javascript">
 var codigoPais="<?php echo $country_code; ?>";
 console.log(codigoPais);
-
-
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
-}
-
 </script>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE,autoDisplay: false}, 'google_translate_element');
+    }
 
+	function triggerHtmlEvent(element, eventName) {
+	  var event;
+	  if (document.createEvent) {
+		event = document.createEvent('HTMLEvents');
+		event.initEvent(eventName, true, true);
+		element.dispatchEvent(event);
+	  } else {
+		event = document.createEventObject();
+		event.eventType = eventName;
+		element.fireEvent('on' + event.eventType, event);
+	  }
+	}
+
+	$('.lang-select').click(function() {
+	  var theLang = $(this).attr('data-lang');
+	  $('.goog-te-combo').val(theLang);
+
+	  //alert(jQuery(this).attr('href'));
+	  window.location = $(this).attr('href');
+	  location.reload();
+
+	});
+  </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
