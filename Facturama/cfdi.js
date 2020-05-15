@@ -359,12 +359,9 @@ function newFactura(rfc,nombre,email,domicilio,numero,municipio,estado,pais,desc
 var tipoCFDI="I";
 var formaPago="99";
 var metodoPago="PUE";
-
-console.log(tipoCFDI+".."+formaPago+".."+metodoPago);
-
 var usoCFDI="P01";
 
-console.log(rfc+".."+nombre+".."+email+".."+domicilio+".."+numero+".."+estado+".."+pais+".."+usoCFDI);
+console.log(rfc+".."+nombre+".."+email+".."+domicilio+".."+numero+".."+municipio+".."+estado+".."+pais+".."+usoCFDI);
 
 var descripcion=descripcion;
 var precio=preciounitario;
@@ -512,12 +509,6 @@ newCfdi["Receiver"].Name=nombre;
 newCfdi["Receiver"].CfdiUse=usoCFDI;
 
 
-<<<<<<< HEAD
-=======
-descripcion,preciounitario,cantidad,subtotal,total,ivacobrado
-
-
->>>>>>> 48f02c733cba8cd21a2821000aec2720cbbf195c
 
 for(var n1=0;n1<conceptos.length;n1++){
  

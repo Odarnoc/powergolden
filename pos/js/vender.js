@@ -584,10 +584,8 @@ function create_ticket(
       doc.addImage(img, "JPEG", -45, -10);
 
       //doc.save('web.pdf');
-
-      $("#sec-ticket").hide();
       if (cliente != null) {
-        var pdf = doc.output("blob");
+        var pdf = btoa(doc.output()); 
         var data = new FormData();
         data.append("data", pdf);
 
@@ -607,6 +605,7 @@ function create_ticket(
       } else {
         doc.save("Nota de Venta - " + folio + ".pdf");
       }
+      $("#sec-ticket").hide();
     },
   });
   if (cliente != null) {

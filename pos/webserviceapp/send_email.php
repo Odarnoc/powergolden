@@ -8,14 +8,8 @@ require ('PHPMailer/src/Exception.php');
 require ('PHPMailer/src/PHPMailer.php');
 require ('PHPMailer/src/SMTP.php');
 $name=$_POST['folio'];
-move_uploaded_file(
-    $_FILES['data']['tmp_name'], 
-    "../../nota_de_venta/".$name.".pdf"
-);
-   
-    //$data = base64_decode($_POST['data']);
-    // print_r($data);
-    //file_put_contents( "uploads/p".$name.".pdf", $data );
+$data = base64_decode($_POST['data']);
+file_put_contents( "../../nota_de_venta/".$name.".pdf", $data );
 
 $nombre = $_POST['nombre'];
 $correo = $_POST['correo'];
@@ -59,7 +53,8 @@ $mail->SMTPDebug = 0;
 
 $mail->AddAttachment("../../nota_de_venta/".$name.".pdf","Recibo de venta.pdf");
 $mail->Body = $message;
-$mail->AddAddress( $correo);
+//$mail->AddAddress( $correo);
+$mail->AddAddress("odvillagrana@gmail.com");
 if(!$mail->Send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;
  } else {
