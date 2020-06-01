@@ -60,7 +60,7 @@ $prods=R::getAll($query);
   
 
 
-            <section class="sec-cuenta">
+      <section class="sec-cuenta">
         <div class="container">
             <div class="row">
             

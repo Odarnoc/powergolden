@@ -5,7 +5,14 @@
 
     $monthsnames = ['NA', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    $information  = R::getAll('SELECT YEAR(fecha) as anio, MONTH(fecha) as mes, COUNT(*) as ventas FROM ventas WHERE user_id ='.$_SESSION["user_id"].' GROUP BY YEAR(fecha), MONTH(fecha) LIMIT 4');
+    $user;
+    if(isset($_SESSION["user_id"])){
+        $user=  $_SESSION["user_id"];
+    }else{
+        $user = $_GET['user_id'];
+    }
+
+    $information  = R::getAll('SELECT YEAR(fecha) as anio, MONTH(fecha) as mes, COUNT(*) as ventas FROM ventas WHERE user_id ='.$user.' GROUP BY YEAR(fecha), MONTH(fecha) LIMIT 4');
     $ordered_info = array_reverse($information);
 
     $labels = array();

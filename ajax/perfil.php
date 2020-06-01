@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require '../bd/conexion.php';
 require '../utils/error.php';
 
@@ -31,25 +29,18 @@ if(!is_numeric($_POST['phone'])){
     error_mensaje('Llenar el campo "Telefono", de forma correcta.');
     return;
 }
-
-if(!is_numeric($_POST['cp']) || strlen($_POST['cp']) != 5){
-    error_mensaje('Codigo postal incorrecto');
-    return;
-} 
+ 
 
     $nombre = $_POST['name'];
     $apellido = $_POST['last_name'];
     $telefono = $_POST['phone'];
-    $nacimiento = $_POST['date'];
 
         
-    $registro = R::load('usuarios',$user_id);
+    $registro = R::load('usuarios',$_POST['user_id']);
 
             $registro->nombre = $nombre;
             $registro->telefono = $telefono;
             $registro->apellidos = $apellido;
-            $registro->nacimiento = $nacimiento;
-
 
             $id = R::store($registro);
 

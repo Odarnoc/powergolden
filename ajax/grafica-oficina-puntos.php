@@ -3,9 +3,16 @@
     require '../bd/conexion.php';
     require '../utils/error.php';
 
+    $user;
+    if(isset($_SESSION["user_id"])){
+        $user=  $_SESSION["user_id"];
+    }else{
+        $user = $_GET['user_id'];
+    }
+
     $information  = R::getAll( 'select puntos1,puntos2,puntos3,puntos4,puntos5 
     from matrizvalores where idusuario= :idusuario  order by fecha DESC limit 1' ,
-    array(':idusuario'=>$_SESSION["user_id"]));
+    array(':idusuario'=>$user));
 
     $labels = array();
     $cantidades = array();

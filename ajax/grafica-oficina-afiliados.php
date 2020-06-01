@@ -3,9 +3,16 @@
     require '../bd/conexion.php';
     require '../utils/error.php';
 
+    $user;
+    if(isset($_SESSION["user_id"])){
+        $user=  $_SESSION["user_id"];
+    }else{
+        $user = $_GET['user_id'];
+    }
+
     $monthsnames = ['NA', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    $information  = R::getAll('SELECT YEAR(creado) as anio, MONTH(creado) as mes, COUNT(*) as usuarios FROM usuarios WHERE referido ='.$_SESSION["user_id"].' GROUP BY YEAR(creado), MONTH(creado) LIMIT 4');
+    $information  = R::getAll('SELECT YEAR(creado) as anio, MONTH(creado) as mes, COUNT(*) as usuarios FROM usuarios WHERE referido ='.$user.' GROUP BY YEAR(creado), MONTH(creado) LIMIT 4');
     $ordered_info = array_reverse($information);
 
     $labels = array();

@@ -32,7 +32,13 @@ if(empty($_POST['total'])){
     $registro->venta = $descripcion;
     $registro->total = $total;
     $registro->cobrado = $cobrado;
-    $registro->user_id = $_SESSION["user_id"];
+    if(isset($_SESSION["user_id"])){
+        $registro->user_id = $_SESSION["user_id"];
+    }else{
+        $registro->user_id = $_POST['user_id'];
+    }
+    
+    
 
     $id = R::store($registro);
     if(empty($id)){
