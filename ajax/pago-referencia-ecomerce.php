@@ -264,4 +264,8 @@ if ($_POST['sucursal'] == 0) {
         $datosReferencia->venta_id = $id_venta;
         R::store($datosReferencia);
     }
+    $registro = R::dispense('envioshistorico');
+    $registro->venta_id = $id_venta;
+    $registro->status = "Preparando envio";
+    $id = R::store($registro);
 }

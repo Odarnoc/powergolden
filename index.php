@@ -3,11 +3,11 @@ session_start();
 require 'bd/conexion.php';
 $user_id = -1;
 if (isset($_SESSION["user_id"])) {
-  $user_id = $_SESSION["user_id"];
+    $user_id = $_SESSION["user_id"];
 }
 
 if (isset($_GET['ui'])) {
-  $_SESSION["ui_referencia_venta"] = $_GET['ui'];
+    $_SESSION["ui_referencia_venta"] = $_GET['ui'];
 }
 
 $query = 'SELECT p.*,l.nombre as linea,l.color FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 6';
@@ -20,8 +20,8 @@ $promos = R::getAll($query3);
 $packs = R::getAll($query4);
 $prodRelevante = R::getAll($query2);
 if (empty($prodRelevante)) {
-  $query3 = 'SELECT p.*,l.imagenlinea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 1';
-  $prodRelevante = R::getAll($query3);
+    $query3 = 'SELECT p.*,l.imagenlinea FROM productos as p LEFT JOIN lineas as l ON p.categoria = l.id ORDER BY RAND() LIMIT 1';
+    $prodRelevante = R::getAll($query3);
 }
 
 $datetime = new DateTime();
@@ -56,6 +56,7 @@ R::store($visita);
   <link rel="stylesheet" href="css/helper.css">
   <!-- responseive menu -->
   <link rel="stylesheet" href="css/menu-movil.css">
+  <link rel="stylesheet" type="text/css" href="css/progress-tracker.css">
   <style>
     #sec-busqueda {
       margin-top: 0px;
@@ -74,7 +75,7 @@ R::store($visita);
 <body>
 
   <!-- Menu -->
-  <?php include("menus/menu_general.php"); ?>
+  <?php include "menus/menu_general.php";?>
   <!-- End Menu -->
 
 
@@ -99,14 +100,14 @@ R::store($visita);
   </header>
 
 
-  <?php include("menus/search.php"); ?>
+  <?php include "menus/search.php";?>
 
 
   <section class="sec-gray">
     <div class="container">
       <div class="row">
 
-        <?php include 'menus/lineas_asistencia.php'; ?>
+        <?php include 'menus/lineas_asistencia.php';?>
 
         <div class="col-lg-9 col-md-6">
 
@@ -144,7 +145,7 @@ R::store($visita);
             </div>
 
 
-            <?php foreach ($prods as $item) { ?>
+            <?php foreach ($prods as $item) {?>
               <div class="col-lg-6 d-all-item-pro">
                 <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
                   <div class="row">
@@ -167,7 +168,7 @@ R::store($visita);
                   </div>
                 </div>
               </div>
-            <?php } ?>
+            <?php }?>
 
 
 
@@ -182,7 +183,7 @@ R::store($visita);
             </div>
 
 
-            <?php foreach ($promos as $item) { ?>
+            <?php foreach ($promos as $item) {?>
               <div class="col-lg-6 d-all-item-pro">
                 <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
                   <div class="row">
@@ -205,7 +206,7 @@ R::store($visita);
                   </div>
                 </div>
               </div>
-            <?php } ?>
+            <?php }?>
 
 
 
@@ -218,7 +219,7 @@ R::store($visita);
             </div>
 
 
-            <?php foreach ($packs as $item) { ?>
+            <?php foreach ($packs as $item) {?>
               <div class="col-lg-6 d-all-item-pro">
                 <div class="d-item-pro h-100" style="padding-bottom: 1rem;">
                   <div class="row">
@@ -241,7 +242,7 @@ R::store($visita);
                   </div>
                 </div>
               </div>
-            <?php } ?>
+            <?php }?>
 
 
 
@@ -318,10 +319,67 @@ R::store($visita);
       </div>
     </div>
   </div>
+  <div class="modal fade" id="modalRastrear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Rastrea tu pedido</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+					<div class="modal-body pt-5 pb-5">
+          <br>
+						<input type="text" class="form-control input-pos-modal" id="track"
+							placeholder="Numero de pedido" required>
+
+						<button type="button"  id="revisar_orden" class="btn btn-lg-blue mt-4">Rastrear</button>
+            <div class="fullwidth" style="display:" id="trackeo">
+							<div class="container separator">
+							  <h3 id="id_orden"> </h3>
+
+							  <ul class="progress-tracker progress-tracker--text progress-tracker--center" id="lista_tracking">
+          <li class="progress-step is-complete">
+            <div class="progress-marker"></div>
+            <div class="progress-text">
+              <h4 class="progress-title">Preparación Envio</h4>
+               27-05-2020
+            </div>
+          </li>
+
+          <li class="progress-step is-active" aria-current="step">
+            <div class="progress-marker"></div>
+            <div class="progress-text">
+              <h4 class="progress-title">Envio En transito</h4>
+              31-05-2020
+              
+            </div>
+          </li>
+
+          <li class="progress-step" >
+            <div class="progress-marker"></div>
+            <div class="progress-text">
+              <h4 class="progress-title">Paquete Entregado</h4>
+             
+            </div>
+          </li>
+							  </ul>
+
+							</div>
+						  </div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-cancelar-modal"
+							data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+	</div>
 
 
   <!-- Admin Menu -->
-  <?php include("menus/footer_general.php"); ?>
+  <?php include "menus/footer_general.php";?>
   <!-- End Admin Menu -->
 
 
@@ -340,7 +398,7 @@ R::store($visita);
 
   <script>
     var id = <?php echo $user_id ?>;
-    
+
   </script>
 
   <!-- custom scripts -->
@@ -348,11 +406,47 @@ R::store($visita);
 
   <!-- responseive menu -->
   <script src="js/menu-movil.js"></script>
+  <script src="js/sweetalert2.all.js"></script>
 
   <script>
     $(document).ready(function() {
       $('#inicio-active').addClass("active");
     });
+    function rastrear_pedido(){
+      $("#modalRastrear").modal("toggle");
+
+    }
+    $('#revisar_orden').on('click', function (e) {
+
+    if($("#track").val()!=""){
+        if($("#track").val().length<8){
+            swal({
+                title: 'Aviso',
+                html: 'Los numero de orden deben tener 8 digitos.',
+                type: 'warning'
+            });
+        }else{
+    $.ajax({
+        url:  host + '/mobile/get_oportunidad_track',
+        type: 'post',
+        data: {'oportunidad_id':$("#track").val()},
+        success: function(data) {
+            $("#trackeo").show();
+            $("#id_orden").empty().append($("#track").val());
+            $("#lista_tracking").empty().append(data);
+
+        }
+    });
+}
+}else{
+    swal({
+        title: 'Aviso',
+        html: 'Numero de orden no puede estar vacio.',
+        type: 'warning'
+    });
+    $("#trackeo").hide();
+}
+});
   </script>
   <script type="text/javascript" src="https://powergolden.com.mx/livechat/php/app.php?widget-init.js"></script>
 </body>

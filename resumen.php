@@ -198,7 +198,7 @@ $user_id = $_SESSION["user_id"];
                         </div>
 
                         <br>
-                        <div class="row" hidden>
+                        <div class="row">
                             <div class="col-lg-12 col-md-12 col-12">
                                 <div id="paypal-button-container"></div>
                             </div>
