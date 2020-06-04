@@ -19,6 +19,7 @@ function mostrar() {
     $('#ciudad').text(localStorage.getItem('municipio'));
     $('#psotal').text(localStorage.getItem('codigop'));
     $('#estados').text(localStorage.getItem('estado'));
+    $('#country').text(localStorage.getItem('pais'));
     $('#nombreuser').text(nombre);
 }
 

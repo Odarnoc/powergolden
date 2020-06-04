@@ -95,7 +95,8 @@ function sdkResponseHandler(status, response) {
             "estado": localStorage.getItem('estado'),
             "cp": localStorage.getItem('codigop'),
             "ciudad": localStorage.getItem('municipio'),
-            "colonia": localStorage.getItem('colonia')
+            "colonia": localStorage.getItem('colonia'),
+            "pais": localStorage.getItem('pais')
         };
         $("#pay").serializeArray().forEach((value, key) => { datados[value['name']] = value['value'] });
         $.ajax({
@@ -150,7 +151,8 @@ function enviar_pago_oxxo() {
             estado: localStorage.getItem('estado'),
             cp: localStorage.getItem('codigop'),
             ciudad: localStorage.getItem('municipio'),
-            colonia: localStorage.getItem('colonia')
+            colonia: localStorage.getItem('colonia'),
+            pais: localStorage.getItem('pais')
         },
         success(data) {
             console.log(data);

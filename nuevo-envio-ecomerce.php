@@ -1,13 +1,13 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"]) ){
+if (!isset($_SESSION["user_id"])) {
     header("Location: iniciar-sesion-cliente.php");
 }
-if($_SESSION["rol"]!=1){
+if ($_SESSION["rol"] != 1) {
     header("Location: iniciar-sesion-cliente.php");
 }
 require 'bd/conexion.php';
-$suc = R::find('sucursales','WHERE id != 1');
+$suc = R::find('sucursales', 'WHERE id != 1');
 
 ?>
 
@@ -70,12 +70,12 @@ $suc = R::find('sucursales','WHERE id != 1');
                             <div class="col-lg-12 col-md-12">
                                 <div class="d-title-cuenta">
                                     <p class="title-cuenta">Direccion de envío</p>
-                                   <!-- <p class="small-text-cuenta">Seleccionar metodo de envio </p> -->
+                                    <!-- <p class="small-text-cuenta">Seleccionar metodo de envio </p> -->
                                 </div>
                             </div>
                         </div>
 
-                       <!-- <div class="form-group" id="contlocal">
+                        <!-- <div class="form-group" id="contlocal">
                             <div class="form-check">
                                 <input onclick="boxlocal()" class="form-check-input" type="checkbox" id="local" required>
                                 <label class="form-check-label" for="local">
@@ -101,7 +101,7 @@ $suc = R::find('sucursales','WHERE id != 1');
                             </div>
                         </div>-->
 
-                        <div id="particular"  >
+                        <div id="particular">
                             <div class="row row-form-perfil footer-movil">
                                 <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
                                     <form class="form-delivery-checkout" name="formulario" method="POST">
@@ -132,6 +132,14 @@ $suc = R::find('sucursales','WHERE id != 1');
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-6 col-md-6">
+                                                <div class="floating-label-group">
+                                                    <select autocomplete="false" value="'BC'" onchange="pais()" style="height:60%;" class="form-control" id="country" name="country" required>
+                                                        <option value="MX">Mexico</option>
+                                                        <option value="EUA">Estados Unidos</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-lg-6 col-md-6" id="selectMX">
                                                 <div class="floating-label-group">
                                                     <select autocomplete="false" value="'BC'" style="height:60%;" class="form-control" id="estado" name="estado" required>
                                                         <option value="AG">Aguascalientes</option>
@@ -166,6 +174,63 @@ $suc = R::find('sucursales','WHERE id != 1');
                                                         <option value="VE">Veracruz</option>
                                                         <option value="YU">Yucatan</option>
                                                         <option value="ZA">Zacatecas</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-lg-6 col-md-6" id="selectEU">
+                                                <div class="floating-label-group">
+                                                    <select autocomplete="false" value="'BC'" style="height:60%;" class="form-control" id="estadousa" name="estadousa" required>
+                                                        <option value="AL">Alabama</option>
+                                                        <option value="AK">Alaska</option>
+                                                        <option value="AZ">Arizona</option>
+                                                        <option value="AR">Arkansas</option>
+                                                        <option value="CA">California</option>
+                                                        <option value="CO">Colorado</option>
+                                                        <option value="CT">Connecticut</option>
+                                                        <option value="DE">Delaware</option>
+                                                        <option value="DC">District Of Columbia</option>
+                                                        <option value="FL">Florida</option>
+                                                        <option value="GA">Georgia</option>
+                                                        <option value="HI">Hawaii</option>
+                                                        <option value="ID">Idaho</option>
+                                                        <option value="IL">Illinois</option>
+                                                        <option value="IN">Indiana</option>
+                                                        <option value="IA">Iowa</option>
+                                                        <option value="KS">Kansas</option>
+                                                        <option value="KY">Kentucky</option>
+                                                        <option value="LA">Louisiana</option>
+                                                        <option value="ME">Maine</option>
+                                                        <option value="MD">Maryland</option>
+                                                        <option value="MA">Massachusetts</option>
+                                                        <option value="MI">Michigan</option>
+                                                        <option value="MN">Minnesota</option>
+                                                        <option value="MS">Mississippi</option>
+                                                        <option value="MO">Missouri</option>
+                                                        <option value="MT">Montana</option>
+                                                        <option value="NE">Nebraska</option>
+                                                        <option value="NV">Nevada</option>
+                                                        <option value="NH">New Hampshire</option>
+                                                        <option value="NJ">New Jersey</option>
+                                                        <option value="NM">New Mexico</option>
+                                                        <option value="NY">New York</option>
+                                                        <option value="NC">North Carolina</option>
+                                                        <option value="ND">North Dakota</option>
+                                                        <option value="OH">Ohio</option>
+                                                        <option value="OK">Oklahoma</option>
+                                                        <option value="OR">Oregon</option>
+                                                        <option value="PA">Pennsylvania</option>
+                                                        <option value="RI">Rhode Island</option>
+                                                        <option value="SC">South Carolina</option>
+                                                        <option value="SD">South Dakota</option>
+                                                        <option value="TN">Tennessee</option>
+                                                        <option value="TX">Texas</option>
+                                                        <option value="UT">Utah</option>
+                                                        <option value="VT">Vermont</option>
+                                                        <option value="VA">Virginia</option>
+                                                        <option value="WA">Washington</option>
+                                                        <option value="WV">West Virginia</option>
+                                                        <option value="WI">Wisconsin</option>
+                                                        <option value="WY">Wyoming</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -236,6 +301,11 @@ $suc = R::find('sucursales','WHERE id != 1');
     <script src="js/perfil.js"></script>
     <!-- billetera js -->
     <script src="js/metodo-pago-ecomerce.js"></script>
+    <script>
+        $(document).ready(function() {
+            document.getElementById("selectEU").style.display = "none";
+        });
+    </script>
 
 </body>
 

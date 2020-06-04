@@ -95,7 +95,8 @@ function sdkResponseHandler(status, response) {
             "estado": localStorage.getItem('estado'),
             "cp": localStorage.getItem('codigop'),
             "ciudad": localStorage.getItem('municipio'),
-            "colonia": localStorage.getItem('colonia')
+            "colonia": localStorage.getItem('colonia'),
+            "pais": localStorage.getItem('pais')
         };
         $("#pay").serializeArray().forEach((value, key) => { datados[value['name']] = value['value'] });
         $.ajax({
@@ -150,7 +151,8 @@ function enviar_pago_oxxo() {
             estado: localStorage.getItem('estado'),
             cp: localStorage.getItem('codigop'),
             ciudad: localStorage.getItem('municipio'),
-            colonia: localStorage.getItem('colonia')
+            colonia: localStorage.getItem('colonia'),
+            pais: localStorage.getItem('pais')
         },
         success(data) {
             console.log(data);
@@ -165,8 +167,8 @@ function enviar_pago_oxxo() {
                 })
                 .then((ok) => {
                     if (ok) {
-                        if(json_data.facturacion){
-                            newFactura(json_data.rfc,json_data.nombre,json_data.email,json_data.domicilio,json_data.numero,json_data.municipio,json_data.estado,json_data.pais,json_data.descripcion,json_data.preciounitario,json_data.cantidad,json_data.subtotal,json_data.total,json_data.ivacobrado);
+                        if (json_data.facturacion) {
+                            newFactura(json_data.rfc, json_data.nombre, json_data.email, json_data.domicilio, json_data.numero, json_data.municipio, json_data.estado, json_data.pais, json_data.descripcion, json_data.preciounitario, json_data.cantidad, json_data.subtotal, json_data.total, json_data.ivacobrado);
                         }
                         //localStorage.clear();
                         //localStorage.setItem('carrito-oficina', JSON.stringify([]));
