@@ -15,3 +15,34 @@
 [05-May-2020 01:43:55 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'mysqlnd_mysql.so' (tried: /opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysql.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysql.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysql.so.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysql.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
 [05-May-2020 01:43:55 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'mysqlnd_mysqli.so' (tried: /opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysqli.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysqli.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysqli.so.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/mysqlnd_mysqli.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
 [05-May-2020 01:43:55 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo_mysqlnd.so' (tried: /opt/cpanel/ea-php72/root/usr/lib64/php/modules/pdo_mysqlnd.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/pdo_mysqlnd.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php72/root/usr/lib64/php/modules/pdo_mysqlnd.so.so (/opt/cpanel/ea-php72/root/usr/lib64/php/modules/pdo_mysqlnd.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+[02-Jun-2020 21:46:58 America/New_York] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function generarEnvio(), 8 passed in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16 and exactly 13 expected in /Users/oswaldo/Desktop/powergolden/ajax/envios.php:3
+Stack trace:
+#0 /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php(16): generarEnvio('472', '348', 'Agustin Sandova...', '3331667321', '', '', '', 'AG')
+#1 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/ajax/envios.php on line 3
+[02-Jun-2020 22:02:59 America/New_York] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 15
+[02-Jun-2020 22:26:15 America/New_York] PHP Fatal error:  Uncaught [23000] - SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'status' cannot be null
+trace: #0 /Users/oswaldo/Desktop/powergolden/bd/rb.php(1041): RedBeanPHP\Driver\RPDO->runQuery('INSERT INTO `en...', Array)
+#1 /Users/oswaldo/Desktop/powergolden/bd/rb.php(1081): RedBeanPHP\Driver\RPDO->GetAll('INSERT INTO `en...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/bd/rb.php(4250): RedBeanPHP\Driver\RPDO->GetOne('INSERT INTO `en...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/bd/rb.php(5855): RedBeanPHP\Adapter\DBAdapter->getCell('INSERT INTO `en...', Array, 0)
+#4 /Users/oswaldo/Desktop/powergolden/bd/rb.php(5982): RedBeanPHP\QueryWriter\AQueryWriter->insertRecord('envioshistorico', Array, Array)
+#5 /Users/oswaldo/Desktop/powergolden/bd/rb.php(9241): RedBeanPHP\QueryWriter\AQueryWriter->updateRecord('envioshistorico', Array, 0)
+#6 /Users/oswaldo/Desktop/powergolden/bd/rb.php(8812): RedBeanPHP\Repository\Fluid->storeBean(Object(RedBeanPHP\OODBBean))
+#7 /Users/oswaldo/Desktop/powergolden/bd/rb.ph in /Users/oswaldo/Desktop/powergolden/bd/rb.php on line 774
+[02-Jun-2020 22:26:31 America/New_York] PHP Warning:  Illegal string offset 'shipment_status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 20
+[02-Jun-2020 22:26:32 America/New_York] PHP Warning:  Illegal string offset 'shipment_status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 20
+[02-Jun-2020 22:26:33 America/New_York] PHP Warning:  Illegal string offset 'shipment_status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 20
+[02-Jun-2020 22:26:34 America/New_York] PHP Warning:  Illegal string offset 'shipment_status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 20
+[02-Jun-2020 22:28:31 America/New_York] PHP Warning:  Illegal string offset 'shipment_status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16
+[02-Jun-2020 22:28:32 America/New_York] PHP Warning:  Illegal string offset 'shipment_status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16
+[02-Jun-2020 22:28:33 America/New_York] PHP Warning:  Illegal string offset 'shipment_status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16
+[02-Jun-2020 22:28:34 America/New_York] PHP Warning:  Illegal string offset 'shipment_status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16
+[02-Jun-2020 22:31:10 America/New_York] PHP Warning:  Illegal string offset 'status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16
+[02-Jun-2020 22:31:11 America/New_York] PHP Warning:  Illegal string offset 'status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16
+[02-Jun-2020 22:31:12 America/New_York] PHP Warning:  Illegal string offset 'status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16
+[02-Jun-2020 22:31:13 America/New_York] PHP Warning:  Illegal string offset 'status' in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16
+[02-Jun-2020 22:31:26 America/New_York] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php:16
+Stack trace:
+#0 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/cron/job-estado-envio.php on line 16

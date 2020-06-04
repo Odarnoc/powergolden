@@ -1,0 +1,20 @@
+[01-Jun-2020 11:26:57 America/New_York] PHP Fatal error:  Uncaught PDOException: Could not connect to database (pgolden_nueva_web). in /Users/oswaldo/Desktop/powergolden/bd/rb.php:1017
+Stack trace:
+#0 /Users/oswaldo/Desktop/powergolden/bd/rb.php(741): RedBeanPHP\Driver\RPDO->connect()
+#1 /Users/oswaldo/Desktop/powergolden/bd/rb.php(1041): RedBeanPHP\Driver\RPDO->runQuery('SELECT p.*,l.no...', Array)
+#2 /Users/oswaldo/Desktop/powergolden/bd/rb.php(4167): RedBeanPHP\Driver\RPDO->GetAll('SELECT p.*,l.no...', Array)
+#3 /Users/oswaldo/Desktop/powergolden/bd/rb.php(12222): RedBeanPHP\Adapter\DBAdapter->get('SELECT p.*,l.no...', Array)
+#4 /Users/oswaldo/Desktop/powergolden/bd/rb.php(13154): RedBeanPHP\Facade::query('get', 'SELECT p.*,l.no...', Array)
+#5 /Users/oswaldo/Desktop/powergolden/index.php(18): RedBeanPHP\Facade::getAll('SELECT p.*,l.no...')
+#6 {main}
+  thrown in /Users/oswaldo/Desktop/powergolden/bd/rb.php on line 1017
+[01-Jun-2020 13:00:59 America/New_York] PHP Warning:  file_get_contents(http://powergolden.com.mx/matriz_api.php?id=348): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /Users/oswaldo/Desktop/powergolden/oficina-virtual.php on line 11
+[01-Jun-2020 13:01:45 America/New_York] PHP Warning:  file_get_contents(http://powergolden.com.mx/matriz_api.php?id=348): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /Users/oswaldo/Desktop/powergolden/oficina-virtual.php on line 11
+[02-Jun-2020 22:07:15 America/New_York] PHP Warning:  file_get_contents(http://powergolden.com.mx/matriz_api.php?id=513): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /Users/oswaldo/Desktop/powergolden/oficina-virtual.php on line 11
+[02-Jun-2020 22:10:12 America/New_York] PHP Warning:  file_get_contents(http://powergolden.com.mx/matriz_api.php?id=348): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /Users/oswaldo/Desktop/powergolden/oficina-virtual.php on line 11
+[02-Jun-2020 22:13:53 America/New_York] PHP Warning:  file_get_contents(http://powergolden.com.mx/matriz_api.php?id=348): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+ in /Users/oswaldo/Desktop/powergolden/oficina-virtual.php on line 11

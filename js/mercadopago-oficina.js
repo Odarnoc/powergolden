@@ -187,38 +187,60 @@ function enviar_pago_oxxo() {
 }
 
 
-/*paypal.Buttons({
-    locale: 'es-MX',
+paypal
+  .Buttons({
+    locale: "es-MX",
     style: {
-        shape: 'rect',
-        color: 'gold',
-        layout: 'vertical',
-        label: 'paypal',
+      shape: "rect",
+      color: "gold",
+      layout: "vertical",
+      label: "paypal",
     },
 
     createOrder: function (data, actions) {
-        return actions.order.create({
-            purchase_units: [{
-                amount: {
-                    value: total
-                }
-            }]
-        });
+      return actions.order.create({
+        purchase_units: [
+          {
+            amount: {
+              value: total,
+            },
+          },
+        ],
+      });
     },
     onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: 'Compra exitosa!'
-            })
-                .then((ok) => {
-                    if (ok) {
-                        //localStorage.clear();
-                        //localStorage.setItem('carrito-oficina', JSON.stringify([]));
-                        //location.href = "oficina-virtual.php";
-                    }
-                });
+      return actions.order.capture().then(function (details) {
+        Swal.fire({
+          icon: "success",
+          title: "Éxito",
+          text: "Compra exitosa!",
+        }).then((ok) => {
+          if (ok) {
+            datosuser();
+            $.ajax({
+              url: "ajax/pago-paypal.php",
+              type: "post",
+              data: {
+                transaction_amount: localStorage.getItem("totalgen"),
+                sucursal: localStorage.getItem("sucursal_id"),
+                email: correo,
+                usuariid: id,
+                carrito: JSON.parse(localStorage.getItem("carrito")),
+                direccion: localStorage.getItem("direccion"),
+                estado: localStorage.getItem("estado"),
+                cp: localStorage.getItem("codigop"),
+                ciudad: localStorage.getItem("municipio"),
+                colonia: localStorage.getItem("colonia"),
+              },
+              success(data) {
+                localStorage.clear();
+                localStorage.setItem("carrito", JSON.stringify([]));
+                location.href = "index.php";
+              },
+            });
+          }
         });
-    }
-}).render('#paypal-button-container');*/
+      });
+    },
+  })
+  .render("#paypal-button-container");

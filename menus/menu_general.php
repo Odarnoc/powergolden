@@ -56,6 +56,9 @@ $country_code = $dataArray->geoplugin_countryCode;
                 <a class="nav-link btn-socios" href="iniciar-sesion.php">Socios</a>
             </li>
             <?php } ?>
+            <li class="nav-item">
+                <a class="nav-link" onclick="rastrear_pedido()">Rastrear Pedido</a>
+            </li>
             <li>
                
 		  <a href="#googtrans(en|en)" class="lang-en lang-select" data-lang="en"><img src="images/usa.png" alt="USA" width="45px" height="35px"></a>
