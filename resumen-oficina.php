@@ -91,7 +91,7 @@ $user_id = $_SESSION["user_id"];
                                             <p id="nombreuser"></p>
                                             <a class="small-text-cuenta" id="direccion"></a>
                                             <div><a class="small-text-cuenta" id="col"></a>, <a class="small-text-cuenta" id="ciudad"></a></div>
-                                            <div><a class="small-text-cuenta" id="psotal"></a>,<a class="small-text-cuenta" id="estados"></a> </div>
+                                            <div><a class="small-text-cuenta" id="psotal"></a>,<a class="small-text-cuenta" id="estados"></a>,<a class="small-text-cuenta" id="country"></a> </div>
                                             <p class="small-text-cuenta ml-4 margend"></p>
                                         </div>
                                     </div>

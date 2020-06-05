@@ -6,6 +6,7 @@ var correo;
 var telefono;
 var id = 0;
 var idusuario = 0;
+var country;
 $(document).ready(function() {
     $.ajax({
         url: "ajax/sucursales-con-inventario.php",
@@ -16,9 +17,9 @@ $(document).ready(function() {
             var json_mensaje = JSON.parse(respuesta);
             console.log(json_mensaje);
             json_mensaje.forEach(function(item, index) {
-                $('#sucursal').append(`<option value="${item.id}"> ${item.nombre+", "+item.estado} </option>`); 
+                $('#sucursal').append(`<option value="${item.id}"> ${item.nombre+", "+item.estado} </option>`);
             });
-            
+
         },
     });
     datosuser();
@@ -40,6 +41,18 @@ $("#payment-formfinal").submit(function(event) {
         error_callbak
     );
 });
+
+function pais() {
+    var country = $("#country").val();
+    console.log(country);
+    if (country == "MX") {
+        document.getElementById("selectEU").style.display = "none";
+        document.getElementById("selectMX").style.display = "block";
+    } else {
+        document.getElementById("selectMX").style.display = "none";
+        document.getElementById("selectEU").style.display = "block";
+    }
+}
 
 function datosuser() {
     $.ajax({
@@ -66,13 +79,25 @@ function datosDireccion() {
     var cp = $("#cp").val();
     var col = $("#colo").val();
     var mun = $("#muni").val();
-    var est = $("#estado").val();
+    var est;
+    var pais;
 
     localStorage.setItem('direccion', dir);
     localStorage.setItem('codigop', cp);
     localStorage.setItem('colonia', col);
     localStorage.setItem('municipio', mun);
+    if (country == "MX") {
+        est = $("#estado").val();
+    } else {
+        est = $("#estadousa").val();
+    }
     localStorage.setItem('estado', est);
+    if (country == "MX") {
+        pais = "Mexico";
+    } else {
+        pais = "Estados Unidos de America";
+    }
+    localStorage.setItem('pais', pais);
     localStorage.setItem('sucursal_id', 0);
 
     location.href = "resumen.php"
@@ -85,6 +110,7 @@ function mostrar() {
     $('#ciudad').text(localStorage.getItem('municipio'));
     $('#psotal').text(localStorage.getItem('codigop'));
     $('#estados').text(localStorage.getItem('estado'));
+    $('#country').text(localStorage.getItem('pais'));
     $('#nombreuser').text(nombre);
 }
 
@@ -223,7 +249,8 @@ function referencia() {
             estado: localStorage.getItem('estado'),
             cp: localStorage.getItem('codigop'),
             ciudad: localStorage.getItem('municipio'),
-            colonia: localStorage.getItem('colonia')
+            colonia: localStorage.getItem('colonia'),
+            pais: localStorage.getItem('pais')
 
         },
         success(data) {

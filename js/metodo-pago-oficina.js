@@ -42,7 +42,8 @@ function referencia() {
             estado: localStorage.getItem('estado'),
             cp: localStorage.getItem('codigop'),
             ciudad: localStorage.getItem('municipio'),
-            colonia: localStorage.getItem('colonia')
+            colonia: localStorage.getItem('colonia'),
+            pais: localStorage.getItem('pais')
         },
         success: function(respuesta) {
             var json_mensaje = JSON.parse(respuesta);
