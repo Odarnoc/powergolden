@@ -12,12 +12,23 @@ foreach ($datos as $item) {
     if(!empty($comparar)){
         $status = checkStatus($comparar->numero_seguimiento);
         $status = json_decode($status);
-        $historico = R::findAll( 'envioshistorico' , 'venta_id=?', [$item['venta']],' ORDER BY id DESC LIMIT 12 ' );
+        $historico = R::findAll( 'envioshistorico' , 'venta_id=?', [$item['venta']],' ORDER BY id DESC LIMIT 1 ' );
         if(!$historico){
                 $registro = R::dispense('envioshistorico');
                 $registro->venta_id = $item['venta'];
                 $registro->status = $status->shipment_status;
                 $id = R::store($registro);
+        }else{
+            foreach ($historico as $key) {
+                $historico=$key;
+            }
+            if($historico['status']!=$status->shipment_status){
+            
+            $registro = R::dispense('envioshistorico');
+            $registro->venta_id = $item['venta'];
+            $registro->status = $status->shipment_status;
+            $id = R::store($registro);
+        }
         }
         echo $status2;
     }

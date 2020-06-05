@@ -334,35 +334,11 @@ R::store($visita);
 							placeholder="Numero de pedido" required>
 
 						<button type="button"  id="revisar_orden" class="btn btn-lg-blue mt-4">Rastrear</button>
-            <div class="fullwidth" style="display:" id="trackeo">
+            <div class="fullwidth" style="display:show" id="trackeo">
 							<div class="container separator">
 							  <h3 id="id_orden"> </h3>
 
 							  <ul class="progress-tracker progress-tracker--text progress-tracker--center" id="lista_tracking">
-          <li class="progress-step is-complete">
-            <div class="progress-marker"></div>
-            <div class="progress-text">
-              <h4 class="progress-title">Preparación Envio</h4>
-               27-05-2020
-            </div>
-          </li>
-
-          <li class="progress-step is-active" aria-current="step">
-            <div class="progress-marker"></div>
-            <div class="progress-text">
-              <h4 class="progress-title">Envio En transito</h4>
-              31-05-2020
-              
-            </div>
-          </li>
-
-          <li class="progress-step" >
-            <div class="progress-marker"></div>
-            <div class="progress-text">
-              <h4 class="progress-title">Paquete Entregado</h4>
-             
-            </div>
-          </li>
 							  </ul>
 
 							</div>
@@ -419,25 +395,18 @@ R::store($visita);
     $('#revisar_orden').on('click', function (e) {
 
     if($("#track").val()!=""){
-        if($("#track").val().length<8){
-            swal({
-                title: 'Aviso',
-                html: 'Los numero de orden deben tener 8 digitos.',
-                type: 'warning'
-            });
-        }else{
     $.ajax({
-        url:  host + '/mobile/get_oportunidad_track',
+        url:  'webserviceapp/get_track.php',
         type: 'post',
-        data: {'oportunidad_id':$("#track").val()},
+        data: {'venta_id':$("#track").val()},
         success: function(data) {
             $("#trackeo").show();
-            $("#id_orden").empty().append($("#track").val());
+            //$("#id_orden").empty().append($("#track").val());
             $("#lista_tracking").empty().append(data);
 
         }
     });
-}
+
 }else{
     swal({
         title: 'Aviso',
